@@ -107,11 +107,19 @@ if($line =~ m/\#class remove/){
     #$out .=",\n";
     }
 }
-$out =~ s/,+$//m;
 
 $out .="\n\n";
+#print @nouns;
+
+$out .='var nouns=[';
+foreach my $noun (@nouns) {
+	$out .= '"'.$noun.'",';
+}
+$out =~ s/,+$//m;
+
+$out .= "];\n\n";
 print $out;
-print @nouns;
+
 
 #    # finally, write the files
 #    open(O, '>dic.js');
