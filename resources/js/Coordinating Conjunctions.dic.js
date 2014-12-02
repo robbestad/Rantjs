@@ -1,0 +1,1 @@
+var coordinating_conjunctions=["and","or","but","nor","for","yet","so"];

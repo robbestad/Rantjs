@@ -1,0 +1,16 @@
+{
+  "name": "simple-rant",
+  "version": "0.0.0",
+  "description": "A simple implementation of Rant, the procedural text generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sven Anders Robbestad <anders@robbestad.com>",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^3.8.10",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.0.1"
+  }
+}

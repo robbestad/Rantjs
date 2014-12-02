@@ -1,0 +1,1 @@
+var emphasis=["very","rather","quite","extremely","incredibly","really","thoroughly","most","absolutely","positively","unbelievably","super","majorly","oh so"];

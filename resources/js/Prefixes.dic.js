@@ -1,0 +1,1 @@
+var prefixes=["pre","post","extra","intra","mega","exo","endo","bi","tri","quad","octo","a","anti","un","in","pseudo","penta","micro","macro","cardio","neuro","pyro","super","mini","psycho","trans","fore","semi","mid","under","over","mis","non","auto","circum","contra","homo","hyper","mono","sub","omni","uni"];
