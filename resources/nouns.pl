@@ -12,6 +12,7 @@ my $content = <>;    #Whole file content in a single scalar variable
 my $out="";
 my $group="";
 my $i=0;
+my @nouns;
 my $currentOp=0;
 foreach my $line ( split /\n/, $content ) {
     $i++;
@@ -98,6 +99,9 @@ if($line =~ m/\#class remove/){
     if (! $group eq "" ){
         $out .="\"".$line."\",";
     }
+    else {
+        push(@nouns, $line);
+    }
 
     if(++$i < $n){
     #$out .=",\n";
@@ -107,7 +111,7 @@ $out =~ s/,+$//m;
 
 $out .="\n\n";
 print $out;
-
+print @nouns;
 
 #    # finally, write the files
 #    open(O, '>dic.js');
