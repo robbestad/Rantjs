@@ -1,19 +1,184 @@
+(function () {
+
+    var arrayMethods = {
+//        /**
+//         * Returns a shallow copy of this array
+//         */
+//        copy: function () {
+//            return this.slice(0);
+//        },
+//
+//        /**
+//         * Returns true if this array contains 'element', returns false otherwise
+//         */
+//        contains: function (element) {
+//            return this.indexOf(element) >= 0;
+//        },
+//
+//
+//        /**
+//         * Returns a copy of this array, removing the elements
+//         *         'from' index 'to' index within it
+//         */
+//        remove: function (from, to) {
+//            var res = [];
+//            var i = 0, j = 0;
+//            for (i = 0; i < from; i++) {
+//                res[i] = this[i];
+//            }
+//            j = i;
+//            for (i = to; i < this.length; i++) {
+//                res[j++] = this[i];
+//            }
+//            return res;
+//        },
+//
+//        /**
+//         * Returns a copy of this array, rotated 'n' places,
+//         *     counterclockwise if 'n' is positive, clockwise otherwise
+//         */
+//        rotate: function (n) {
+//            if (!n) return this.slice(0);
+//            var length = this.length;
+//            var res = new Array(length);
+//            var thisIndex = (n > 0) ? n : length + n, i = 0, j = 0;
+//            for (i = thisIndex; i < length; i++) {
+//                res[j++] = this[i];
+//            }
+//            for (i = 0; i < thisIndex; i++) {
+//                res[j++] = this[i];
+//            }
+//            return res;
+//        },
+//
+//        /**
+//         * Returns a copy of this array, removing but
+//         *         the first 'n' elements from it
+//         *         assumes n=1 when called with no arguments.
+//         */
+//        skipFirst: function (n) {
+//            if (n === 'undefined') n = 1;
+//            return this.slice(n);
+//        },
+//
+//        /**
+//         * Returns a copy of this array, removing
+//         *         but the last 'n' elements from it
+//         *         assumes n=1 when called with no arguments.
+//         */
+//        skipLast: function (n) {
+//            if (n === 'undefined') n = 1;
+//            if (n > this.length) return [];
+//            return this.slice(0, this.length - n);
+//        },
+//
+//        /**
+//         * Returns a copy of this array,
+//         *         sorting its elements randomly
+//         */
+//
+        shuffle: function () {
+            array = this.splice(0);
+            var m = array.length, t, i;
+
+            // While there remain elements to shuffle…
+            while (m) {
+
+                // Pick a remaining element…
+                i = Math.floor(Math.random() * m--);
+
+                // And swap it with the current element.
+                t = array[m];
+                array[m] = array[i];
+                array[i] = t;
+            }
+
+            return array;
+        },
+
+        /**
+         * Returns this associative array length
+         */
+        getAssociativeArrayLength: function () {
+            return this.length;
+        },
+
+        /**
+         * Returns a copy of this array that contains the difference
+         *         between source array and 'array'
+         */
+        difference: function (array) {
+            var filterFunc = filterOnOtherArray_diff.bind(array);
+            return this.filter(filterFunc);
+        },
+
+        /**
+         * Returns a copy of this array that contains the
+         *         intersection between source array and 'array'
+         */
+        intersection: function (array) {
+            var filterFunc = filterOnOtherArray_inter.bind(array);
+            return this.filter(filterFunc);
+        },
+
+        /**
+         * Returns a copy of this array that contains the union
+         *   between source array with 'array', removing duplicates
+         *    ! fails with a sparse array !
+         */
+        union: function (array) {
+            var obj = {}, res = [], i = 0, k = 0;
+            for (i = 0; i < this.length; i++) {
+                obj[this[i]] = this[i];
+            }
+            for (i = 0; i < array.length; i++) {
+                obj[array[i]] = array[i];
+            }
+            for (k in obj) {
+                res.push(obj[k]);
+            }
+            return res;
+        }
+    };
+
+    // let's install those methods on the prototype
+    for (var newMethodName in arrayMethods) {
+        installFunction(newMethodName, arrayMethods[newMethodName]);
+    }
+
+    function installFunction(name, fn) {
+        if (Array.prototype[name]) throw ('Array method ' + name + '() already defined.');
+        Object.defineProperty(Array.prototype, name, {
+            value: fn
+        });
+    }
+
+    function filterOnOtherArray_diff(arr, i) {
+        return (arr.indexOf(i) < 0);
+    }
+
+    function filterOnOtherArray_inter(arr, i) {
+        return (arr.indexOf(i) >= 0);
+    }
+})();
+
 function simpleRant() {
     var titles = ['Dr.', 'Honorable', 'Master', 'Mayor', 'Governor'];
     var titles_f = titles.concat(['Madam', 'Queen', 'Princess', 'Countess', 'Granny', 'Mama', 'Ms', 'Mrs', 'Mistress']);
     var titles_m = titles.concat(['Sir', 'King', 'Prince', 'Count', 'Daddy', 'Papa', 'Mr']);
     var yes = ["yes", "yayaya", "yep", "yeppers", "definitely", "absolutely", "without a doubt", "indeed", "affirmative", "undoubtedly", "undeniably", "yes/yes", "hell yes", "ya", "certainly", "obviously", "oh yes", "I couldn't agree more"];
     var no = ["no", "definitely not", "absolutely not", "no way", "impossible", "negative", "nope", "hell no", "nooooo", "not at all", "certainly not", "obviously not", "oh no", "most certainly not", "there's no way", "that can't be"];
-    var adjectives = ["sensible/sensibility", "headless/headlessness", "charitable/charitability", "sociopathic/sociopathicness", "ergonomic/ergonomicness", "organic/organicness", "regal/regalness", "constitutional/constitutionalness", "unconstitutional/unconstitutionalness", "all-natural/all-naturalness", "whole-grain/whole-graininess", "Victorian/Victorianness", "rustic/rusticness", "luxurious/luxuriousness", "invigorating/invigoratingness", "tangy/tanginess", "jazzy/jazziness", "retro/retroness", "ductile/ductileness", "old-fashioned/old-fashionedness", "flexible/flexibility", "tender/tenderness", "fabulous/fabulousness", "fatherly/fatherliness", "toasty/toastiness", "mellow/mellowness", "historical/historicalness", "fragrant/fragrance", "superfluous/superfluousness", "squishy/squishiness", "flappy/flappiness", "slippy/slippiness", "Confederate/Confederateness", "slow/slowness", "messy/messiness", "holy/holiness", "organized/order", "nifty/niftiness", "athletic/athleticness", "juvenile/juvenileness", "gallant/gallantness", "corny/corniness", "groovy/grooviness", "weightless/weightlessness", "rough/roughness", "gourmet/gourmetness", "deluxe/deluxeness", "wholesome/wholesomeness", "sweaty/sweatiness", "soapy/soapiness", "buttery/butteriness", "religious/religiousness", "righteous/righteousness", "patriotic/patrioticness", "spine-tingling/tingliness", "waddly/waddliness", "wobbly/wobbliness", "traditional/tradition", "appetizing/appetizingness", "strict/strictness", "dreadful/dreadfulness", "mythical/mythicalness", "philosophical/philosophy", "enticing/enticingness", "offensive/offensiveness", "luscious/lusciousness", "bouncy/bounciness", "plentiful/plentifulness", "major-league/major-leagueness", "significant/significance", "expressive/expression", "cuddly/cuddliness", "nude/nudity", "rude/rudeness", "political/politicalness", "creative/creativity", "sinful/sin", "glorious/gloriousness", "merciful/mercy", "forgiving/forgiveness", "smart/smartness", "salty/saltiness", "peppery/pepperiness", "slurpee/slurpiness", "criminal/criminality", "domestic/domesticness", "meaningful/meaning", "manly/manliness", "barbeque/barbequeness", "casual/casualness", "standard/standardness", "nasty/nastiness", "exquisite/exquisiteness", "bold/boldness", "fresh/freshness", "informative/informativeness", "jiggly/jiggliness", "rebellious/rebelliousness", "direful/direfulness", "soothing/soothingness", "disloyal/disloyalty", "loyal/loyalty", "victorious/victory", "deep/depth", "zen/zenness", "royal/royalty", "delightful/delightfulness", "yummy/yumminess", "refreshing/refreshingness", "pleasurable/pleasurability", "delectable/delectableness", "intense/intensity", "ghetto/ghettoness", "strange/strangeness", "odd/oddness", "wasted/wastedness", "eccentric/eccentricity", "satisfactory/satisfaction", "pharmaceutical/pharmaceuticalness", "fishy/fishiness", "jelly-belly/jelly-bellyness", "exotic/exoticness", "queer/queerness", "outlandish/outlandishness", "alien/alienness", "seductive/seductiveness", "superb/superbness", "divine/divinity", "celestial/celestial power", "vibrating/vibration", "wet/moisture", "silly/silliness", "spidery/spideriness", "legitimate/legitimacy", "flavorful/flavor", "savory/flavor", "silky/silkiness", "slammin/worth", "slimy/sliminess", "impressive/impressiveness", "appealing/appeal", "revolting/revoltingness", "captivating/captivation", "amazing/amazingness", "masculine/masculinity", "gelatinous/gelatinous goodness", "disjointed/disjointedness", "veiny/veininess", "tropical/tropicalness", "rock-hard/rock-hardness", "steamy/steaminess", "lumpy/lumpiness", "swift/lightning speed", "long/longness", "large/largeness", "small/smallness", "frosty/frostiness", "glassy/glassiness", "hard/hardness", "formal/formality", "blue/blueness", "soft/softness", "moist/moisture", "| weight 10", "smooth/smoothness", "torturous/torturousness", "well-used/thoroughness", "well-loved/sweet love", "shiny/shininess", "sleek/sleekness", "greasy/grasiness", "hairy/hairiness", "splintered/splinters", "dreamy/dreaminess", "spicy/spiciness", "terrible/terror", "throbbing/throbbing pleasure", "fluttering/light-weightedness", "mysterious/mystery", "velvety/velvety goodness", "dangerous/danger", "metallic/luster", "skinny/skininess", "fat/fatness", "painful/pain", "oozing/excretory wetness", "flaming/fire", "exploding/explosiveness", "wild/wildness", "rambunctious/wildness", "sizzling/fizzly shizzliness", "perfect/perfection", "raunchy/raunchiness", "romantic/romance", "young/youth", "old/age", "bloodthirsty/bloodthirstiness", "fleshy/fleshiness", "warm/warmth", "cold/coldness", "icy/iciness", "electric/electricity", "sharp/sharpness", "deadly/deadliness", "pulsating/pumpiness", "bloody/bloodiness", "pregnant/pregnancy", "bulging/bulges", "stretchy/stretchiness", "creamy/creaminess", "lovely/loveliness", "grainy/graininess", "rocky/rockiness", "grassy/grassiness", "musical/music", "outstanding/amazement", "identical/identity", "famous/fame", "cheerful/cheer", "livid/anger", "obstinate/stubbornness", "exhausted/fatigue", "graceful/grace", "outrageous/outrage", "radical/radishes", "childish/immaturity", "snobbish/snobbishness", "miserly/misery", "amiable/phallus", "disgusting/disgust", "awful/terror", "humorous/humor", "fanciful/fancy", "pathetic/lameness", "bashful/bashfulness", "freaky/freakiness", "chilly/chill", "stormy/storminess", "humid/humidity", "bountiful/bountifulness", "jubilant/happiness", "irritated/anger", "patient/patience", "dizzy/dizziness", "skeptical/skepticism", "puzzled/confusion", "light-hearted/light-heartedness", "perplexed/confusion", "over-whelmed/domination", "jovial/cheer", "hyper/energy", "squirrely/furriness", "jittery/jitteriness", "sensational/sensationalism", "elegant/elegance", "flabbergasted/confusion", "dreary/dreariness", "impish/impishness", "sneaky/sneakiness", "horrid/horridness", "monsterous/largeness", "acidic/acidity", "acoustic/loudness", "active/activity", "adaptable/adaptability", "aggressive/agressiveness", "additional/extra cheese", "adequate/adequacy", "administrative/domination", "advantageous/advantage", "advisable/wisdom", "extreme/extremity", "hardcore/hardcoreness", "snappy/snappiness", "scary/scariness", "immense/immensity", "woody/woodiness", "dominant/dominance", "submissive/submissiveness", "pitiful/pity", "sickening/sickness", "questionable/questionability", "intriguing/interest", "fantastic/fantasticness", "thrilling/thrill", "tactical/tacticalness", "drooling/sliminess", "epic/epicness", "succulant/deliciousness", "slick/slickness", "damp/dampness", "explosive/explosiveness", "flammable/flammability", "water-tight/virginity", "watery/wateriness", "heavy/heaviness", "disagreeable/disagreement", "keen/keenness", "fertile/fertility", "sterile/sterility", "distorted/distortion", "itchy/itchiness", "fruity/fruitiness", "hazardous/hazardousness", "troubling/trouble", "critical/criticalness", "treacherous/treachery", "speculative/speculation", "menacing/menace", "threatening/intimidation", "ticklish/ticklishness", "vulnerable/vulnerability", "wicked/wickedness", "formidable/formidableness", "brave/bravery", "supple/softness", "splendid/splendidness", "nutritious/nutrition", "melodic/melodicness", "infectious/infectiousness", "sticky/stickiness", "magnificent/magnificence", "fantastical/fantasticness", "incredible/incredibility", "unbelievable/falseness", "shocking/shock", "horrifying/horror", "unstable/instability", "funny/humorousness", "delicious/deliciousness", "tasty/tastiness", "finger-licking/finger-lickingness", "super/superness", "juicy/juiciness", "drippy/drippiness", "dripping/drippingness", "defiant/defiance", "resonant/resonance", "crackly/crackliness", "high-flying/aerodynamics", "wavy/waviness", "nutty/nuttiness", "insane/insanity", "unpleasant/unpleasant nature", "inadvisable/inadvisable nature", "pleasant/pleasant nature", "sandy/sandiness", "stinky/stinkiness", "dead/deadness", "honest/honesty", "trustworthy/trustworthiness", "essential/essentialness", "courageous/courage", "charming/charm", "beloved/belovedness", "marvelous/marvelousness", "breathtaking/breathtakingness", "surprising/surprise", "awesome/awesomeness", "zesty/zestiness", "astounding/astoundingness", "lubricated/lubrication", "stimulating/stimulus", "clever/cleverness", "magical/magic", "harmless/harmlessness", "gentle/gentleness", "raging/rage", "noisy/noisiness", "passionate/passion", "interracial/interracialness", "chrome-plated/chrome-platedness", "ripped/wear", "tattered/wear", "heinous/heinousness", "shady/shadiness", "corrugated/corrugation", "hulking/hulkingness", "jagged/jaggedness", "ratty/rattiness", "stout/stoutness", "whopping/whoppingness", "humongous/humongousness", "mammoth/mammothness", "enormous/enormousness", "colossal/colossality", "monochromatic/monochromaticness", "grimy/griminess", "funny-looking/funny looks", "gigantic/impressive size", "limp/limpness", "naked/nakedness", "revealing/nakedness", "pretty/prettiness", "grey/greyness", "microscopic/microscopicness", "bearded/beardedness", "floppy/floppiness", "fluffy/fluffiness", "dirty/dirt", "petite/petiteness", "sloppy/sloppiness", "wide/wideness", "slippery/slipperiness", "sopping/wetness", "slender/slenderness", "dry/dryness", "lickable/lickability", "wooly/wooliness", "colorful/color", "mossy/mossiness", "transparent/transparence", "narrow/narrowness", "glossy/glossiness", "ancient/ancience", "wrinkly/raisins", "shriveled/raisins", "plump/plumpness", "green/greenness", "brown/brownness", "red/redness", "white/whiteness", "black/blackness", "spiky/spikiness", "thick/thickness", "furry/furriness", "fuzzy/fuzziness", "wooden/woodness", "bubbly/bubbliness", "foamy/foaminess", "smoky/smokiness", "battered/batteredness", "ugly/ugliness", "glamourous/glamour", "attractive/attractiveness", "smoggy/smogginess", "sparkling/sparkle", "spotless/cleanliness", "wide-eyed/wideness", "cubic/cubic shape", "symmetrical/symmetry", "orbital/roundness", "exposed/exposure", "red-hot/glowing-red heat", "bent/deformation", "crooked/crookedness", "uneven/unevenness", "delicate/delicateness", "moldy/moldiness", "crusty/crustiness", "filthy/filth", "muscular/beefiness", "glittery/glitter", "purple/purpleness", "ragged/raggedness", "weedy/weediness", "papery/paperiness", "dazzling/sparkle", "blinding/brightness", "beautiful/beauty", "windy/windiness", "dusty/dustiness", "short/shortness", "tall/height", "menthol/menthol goodness", "Spanish/Spanish heritage", "French/French heritage", "German/German heritage", "Italian/Italian heritage", "Japanese/Japanese heritage", "Chinese/Chinese heritage", "Korean/Korean heritage", "British/British heritage", "African/African heritage", "American/American heritage", "Norwegian/Norwegian heritage", "Russian/Russian heritage", "Irish/Irish heritage", "Mexican/Mexican heritage", "Canadian/Canadian heritage", "Australian/Australian heritage", "severe/severity", "sullen/sullenness", "naughty/naughtiness", "devilish/devilishness", "arrogant/arrogance", "indifferent/indifference", "cranky/crankiness", "bittersweet/bittersweetness", "jealous/envy", "gay/gayness", "thankful/thankfulness", "groggy/grogginess", "flirty/flirtiness", "frightened/fright", "evil/evil", "cheeky/cheekiness", "emo/emo-ness", "gleeful/glee", "joyful/joy", "happy/happiness", "bored/boredom", "sorrowful/sorrow", "sad/sadness", "angry/anger", "rageing/rage", "guilty/guilt", "envious/envy", "blissful/bliss", "interested/interest", "smug/smugness", "hungry/hunger", "ashamed/shame", "loving/love", "mad/madness", "hateful/hate", "humiliated/humility", "impatient/impatience", "surprised/surprise", "optimistic/optimism", "disappointed/disappointment", "remorseful/remorse", "contemptuous/contempt", "awed/awe", "lustful/lust", "longing/longing", "content/contentfulness", "pleasured/pleasure", "tormented/torment", "horrified/horror", "shocked/shock", "furious/fury", "sly/slyness", "sunny/sunniness", "rainy/raininess", "cloudy/cloudiness", "snowy/snowiness", "moonlit/moonlight", "starry/starriness", "foggy/fogginess", "crapulous/crapulousness", "feckless/fecklessness", "peckish/peckishness", "comely/comeliness", "bilious/biliousness", "serene/serenity", "emaciated/emaciation", "African-American/African-Americanness", "delinquent/delinquency", "aggravated/aggression", "dashing/dashingness", "considerate/consideration", "busted/bustedness", "iridescent/iridescence", "golden/golden luster", "spontaneous/spontaneity", "daring/dare", "radioactive/radioactivity", "poisonous/toxicity", "savage/savageness", "terrifying/scariness", "unlikely/unlikelihood", "speedy/speediness", "indestructible/involunurability", "invisible/invisibility", "odorous/odor", "penetrative/penetrative power", "immaculate/immaculateness", "rowdy/rowdiness", "rational/rationality", "irrational/irrationality", "blasphemous/blasphemy", "cooperative/cooperation", "punctual/punctuality", "festive/festiveness", "polluted/pollution", "potent/potency", "powdery/powderiness", "powerful/power", "piggy/pigginess", "assertive/assetiveness", "ethical/ethicalness", "tight-lipped/tight lips", "firm/firmness", "unethical/unethicalness", "highbrow/highbrowness", "scholarly/scholarliness", "academic/academicness", "sophisticated/sophistication", "intelligent/intelligence", "intellectual/intellect", "cultural/culture", "popular/popularity", "furrowed/furrowedness", "illiterate/illiteracy", "educated/education", "durable/durability", "sublime/sublimeness", "ambitious/ambition", "family-friendly/family-friendliness", "contaminated/contamination", "unfortunate/misfortune", "fortunate/fortune", "absolute/absoluteness", "logical/logical", "frictional/friction", "cream-filled/creaminess", "malleable/malleability", "fast/speed", "squeamish/squeamishness", "unlimited/unlimitedness", "gassy/gassiness", "edgy/edginess", "artsy/artsiness", "feasible/feasibility", "infeasible/infeasibility", "possible/possibility", "potential/potential", "intentional/intention", "dumb/dumbness", "disorganized/disorder", "irregular/irregularity", "certified/certification", "sure/sureness", "complimentary/complimentariness", "supplementary/supplementariness", "derogatory/derogatoriness", "scornful/scorn", "gross/grossness", "erect/erectness", "flaccid/flaccidness", "sexy/sex appeal", "ravishing/rock-solid arousal", "horny/horniness", "kinky/kinkiness", "trashy/trashiness", "sexual/sexuality"];
+    var the_adjectives = ["sensible/sensibility", "headless/headlessness", "charitable/charitability", "sociopathic/sociopathicness", "ergonomic/ergonomicness", "organic/organicness", "regal/regalness", "constitutional/constitutionalness", "unconstitutional/unconstitutionalness", "all-natural/all-naturalness", "whole-grain/whole-graininess", "Victorian/Victorianness", "rustic/rusticness", "luxurious/luxuriousness", "invigorating/invigoratingness", "tangy/tanginess", "jazzy/jazziness", "retro/retroness", "ductile/ductileness", "old-fashioned/old-fashionedness", "flexible/flexibility", "tender/tenderness", "fabulous/fabulousness", "fatherly/fatherliness", "toasty/toastiness", "mellow/mellowness", "historical/historicalness", "fragrant/fragrance", "superfluous/superfluousness", "squishy/squishiness", "flappy/flappiness", "slippy/slippiness", "Confederate/Confederateness", "slow/slowness", "messy/messiness", "holy/holiness", "organized/order", "nifty/niftiness", "athletic/athleticness", "juvenile/juvenileness", "gallant/gallantness", "corny/corniness", "groovy/grooviness", "weightless/weightlessness", "rough/roughness", "gourmet/gourmetness", "deluxe/deluxeness", "wholesome/wholesomeness", "sweaty/sweatiness", "soapy/soapiness", "buttery/butteriness", "religious/religiousness", "righteous/righteousness", "patriotic/patrioticness", "spine-tingling/tingliness", "waddly/waddliness", "wobbly/wobbliness", "traditional/tradition", "appetizing/appetizingness", "strict/strictness", "dreadful/dreadfulness", "mythical/mythicalness", "philosophical/philosophy", "enticing/enticingness", "offensive/offensiveness", "luscious/lusciousness", "bouncy/bounciness", "plentiful/plentifulness", "major-league/major-leagueness", "significant/significance", "expressive/expression", "cuddly/cuddliness", "nude/nudity", "rude/rudeness", "political/politicalness", "creative/creativity", "sinful/sin", "glorious/gloriousness", "merciful/mercy", "forgiving/forgiveness", "smart/smartness", "salty/saltiness", "peppery/pepperiness", "slurpee/slurpiness", "criminal/criminality", "domestic/domesticness", "meaningful/meaning", "manly/manliness", "barbeque/barbequeness", "casual/casualness", "standard/standardness", "nasty/nastiness", "exquisite/exquisiteness", "bold/boldness", "fresh/freshness", "informative/informativeness", "jiggly/jiggliness", "rebellious/rebelliousness", "direful/direfulness", "soothing/soothingness", "disloyal/disloyalty", "loyal/loyalty", "victorious/victory", "deep/depth", "zen/zenness", "royal/royalty", "delightful/delightfulness", "yummy/yumminess", "refreshing/refreshingness", "pleasurable/pleasurability", "delectable/delectableness", "intense/intensity", "ghetto/ghettoness", "strange/strangeness", "odd/oddness", "wasted/wastedness", "eccentric/eccentricity", "satisfactory/satisfaction", "pharmaceutical/pharmaceuticalness", "fishy/fishiness", "jelly-belly/jelly-bellyness", "exotic/exoticness", "queer/queerness", "outlandish/outlandishness", "alien/alienness", "seductive/seductiveness", "superb/superbness", "divine/divinity", "celestial/celestial power", "vibrating/vibration", "wet/moisture", "silly/silliness", "spidery/spideriness", "legitimate/legitimacy", "flavorful/flavor", "savory/flavor", "silky/silkiness", "slammin/worth", "slimy/sliminess", "impressive/impressiveness", "appealing/appeal", "revolting/revoltingness", "captivating/captivation", "amazing/amazingness", "masculine/masculinity", "gelatinous/gelatinous goodness", "disjointed/disjointedness", "veiny/veininess", "tropical/tropicalness", "rock-hard/rock-hardness", "steamy/steaminess", "lumpy/lumpiness", "swift/lightning speed", "long/longness", "large/largeness", "small/smallness", "frosty/frostiness", "glassy/glassiness", "hard/hardness", "formal/formality", "blue/blueness", "soft/softness", "moist/moisture", "| weight 10", "smooth/smoothness", "torturous/torturousness", "well-used/thoroughness", "well-loved/sweet love", "shiny/shininess", "sleek/sleekness", "greasy/grasiness", "hairy/hairiness", "splintered/splinters", "dreamy/dreaminess", "spicy/spiciness", "terrible/terror", "throbbing/throbbing pleasure", "fluttering/light-weightedness", "mysterious/mystery", "velvety/velvety goodness", "dangerous/danger", "metallic/luster", "skinny/skininess", "fat/fatness", "painful/pain", "oozing/excretory wetness", "flaming/fire", "exploding/explosiveness", "wild/wildness", "rambunctious/wildness", "sizzling/fizzly shizzliness", "perfect/perfection", "raunchy/raunchiness", "romantic/romance", "young/youth", "old/age", "bloodthirsty/bloodthirstiness", "fleshy/fleshiness", "warm/warmth", "cold/coldness", "icy/iciness", "electric/electricity", "sharp/sharpness", "deadly/deadliness", "pulsating/pumpiness", "bloody/bloodiness", "pregnant/pregnancy", "bulging/bulges", "stretchy/stretchiness", "creamy/creaminess", "lovely/loveliness", "grainy/graininess", "rocky/rockiness", "grassy/grassiness", "musical/music", "outstanding/amazement", "identical/identity", "famous/fame", "cheerful/cheer", "livid/anger", "obstinate/stubbornness", "exhausted/fatigue", "graceful/grace", "outrageous/outrage", "radical/radishes", "childish/immaturity", "snobbish/snobbishness", "miserly/misery", "amiable/phallus", "disgusting/disgust", "awful/terror", "humorous/humor", "fanciful/fancy", "pathetic/lameness", "bashful/bashfulness", "freaky/freakiness", "chilly/chill", "stormy/storminess", "humid/humidity", "bountiful/bountifulness", "jubilant/happiness", "irritated/anger", "patient/patience", "dizzy/dizziness", "skeptical/skepticism", "puzzled/confusion", "light-hearted/light-heartedness", "perplexed/confusion", "over-whelmed/domination", "jovial/cheer", "hyper/energy", "squirrely/furriness", "jittery/jitteriness", "sensational/sensationalism", "elegant/elegance", "flabbergasted/confusion", "dreary/dreariness", "impish/impishness", "sneaky/sneakiness", "horrid/horridness", "monsterous/largeness", "acidic/acidity", "acoustic/loudness", "active/activity", "adaptable/adaptability", "aggressive/agressiveness", "additional/extra cheese", "adequate/adequacy", "administrative/domination", "advantageous/advantage", "advisable/wisdom", "extreme/extremity", "hardcore/hardcoreness", "snappy/snappiness", "scary/scariness", "immense/immensity", "woody/woodiness", "dominant/dominance", "submissive/submissiveness", "pitiful/pity", "sickening/sickness", "questionable/questionability", "intriguing/interest", "fantastic/fantasticness", "thrilling/thrill", "tactical/tacticalness", "drooling/sliminess", "epic/epicness", "succulant/deliciousness", "slick/slickness", "damp/dampness", "explosive/explosiveness", "flammable/flammability", "water-tight/virginity", "watery/wateriness", "heavy/heaviness", "disagreeable/disagreement", "keen/keenness", "fertile/fertility", "sterile/sterility", "distorted/distortion", "itchy/itchiness", "fruity/fruitiness", "hazardous/hazardousness", "troubling/trouble", "critical/criticalness", "treacherous/treachery", "speculative/speculation", "menacing/menace", "threatening/intimidation", "ticklish/ticklishness", "vulnerable/vulnerability", "wicked/wickedness", "formidable/formidableness", "brave/bravery", "supple/softness", "splendid/splendidness", "nutritious/nutrition", "melodic/melodicness", "infectious/infectiousness", "sticky/stickiness", "magnificent/magnificence", "fantastical/fantasticness", "incredible/incredibility", "unbelievable/falseness", "shocking/shock", "horrifying/horror", "unstable/instability", "funny/humorousness", "delicious/deliciousness", "tasty/tastiness", "finger-licking/finger-lickingness", "super/superness", "juicy/juiciness", "drippy/drippiness", "dripping/drippingness", "defiant/defiance", "resonant/resonance", "crackly/crackliness", "high-flying/aerodynamics", "wavy/waviness", "nutty/nuttiness", "insane/insanity", "unpleasant/unpleasant nature", "inadvisable/inadvisable nature", "pleasant/pleasant nature", "sandy/sandiness", "stinky/stinkiness", "dead/deadness", "honest/honesty", "trustworthy/trustworthiness", "essential/essentialness", "courageous/courage", "charming/charm", "beloved/belovedness", "marvelous/marvelousness", "breathtaking/breathtakingness", "surprising/surprise", "awesome/awesomeness", "zesty/zestiness", "astounding/astoundingness", "lubricated/lubrication", "stimulating/stimulus", "clever/cleverness", "magical/magic", "harmless/harmlessness", "gentle/gentleness", "raging/rage", "noisy/noisiness", "passionate/passion", "interracial/interracialness", "chrome-plated/chrome-platedness", "ripped/wear", "tattered/wear", "heinous/heinousness", "shady/shadiness", "corrugated/corrugation", "hulking/hulkingness", "jagged/jaggedness", "ratty/rattiness", "stout/stoutness", "whopping/whoppingness", "humongous/humongousness", "mammoth/mammothness", "enormous/enormousness", "colossal/colossality", "monochromatic/monochromaticness", "grimy/griminess", "funny-looking/funny looks", "gigantic/impressive size", "limp/limpness", "naked/nakedness", "revealing/nakedness", "pretty/prettiness", "grey/greyness", "microscopic/microscopicness", "bearded/beardedness", "floppy/floppiness", "fluffy/fluffiness", "dirty/dirt", "petite/petiteness", "sloppy/sloppiness", "wide/wideness", "slippery/slipperiness", "sopping/wetness", "slender/slenderness", "dry/dryness", "lickable/lickability", "wooly/wooliness", "colorful/color", "mossy/mossiness", "transparent/transparence", "narrow/narrowness", "glossy/glossiness", "ancient/ancience", "wrinkly/raisins", "shriveled/raisins", "plump/plumpness", "green/greenness", "brown/brownness", "red/redness", "white/whiteness", "black/blackness", "spiky/spikiness", "thick/thickness", "furry/furriness", "fuzzy/fuzziness", "wooden/woodness", "bubbly/bubbliness", "foamy/foaminess", "smoky/smokiness", "battered/batteredness", "ugly/ugliness", "glamourous/glamour", "attractive/attractiveness", "smoggy/smogginess", "sparkling/sparkle", "spotless/cleanliness", "wide-eyed/wideness", "cubic/cubic shape", "symmetrical/symmetry", "orbital/roundness", "exposed/exposure", "red-hot/glowing-red heat", "bent/deformation", "crooked/crookedness", "uneven/unevenness", "delicate/delicateness", "moldy/moldiness", "crusty/crustiness", "filthy/filth", "muscular/beefiness", "glittery/glitter", "purple/purpleness", "ragged/raggedness", "weedy/weediness", "papery/paperiness", "dazzling/sparkle", "blinding/brightness", "beautiful/beauty", "windy/windiness", "dusty/dustiness", "short/shortness", "tall/height", "menthol/menthol goodness", "Spanish/Spanish heritage", "French/French heritage", "German/German heritage", "Italian/Italian heritage", "Japanese/Japanese heritage", "Chinese/Chinese heritage", "Korean/Korean heritage", "British/British heritage", "African/African heritage", "American/American heritage", "Norwegian/Norwegian heritage", "Russian/Russian heritage", "Irish/Irish heritage", "Mexican/Mexican heritage", "Canadian/Canadian heritage", "Australian/Australian heritage", "severe/severity", "sullen/sullenness", "naughty/naughtiness", "devilish/devilishness", "arrogant/arrogance", "indifferent/indifference", "cranky/crankiness", "bittersweet/bittersweetness", "jealous/envy", "gay/gayness", "thankful/thankfulness", "groggy/grogginess", "flirty/flirtiness", "frightened/fright", "evil/evil", "cheeky/cheekiness", "emo/emo-ness", "gleeful/glee", "joyful/joy", "happy/happiness", "bored/boredom", "sorrowful/sorrow", "sad/sadness", "angry/anger", "rageing/rage", "guilty/guilt", "envious/envy", "blissful/bliss", "interested/interest", "smug/smugness", "hungry/hunger", "ashamed/shame", "loving/love", "mad/madness", "hateful/hate", "humiliated/humility", "impatient/impatience", "surprised/surprise", "optimistic/optimism", "disappointed/disappointment", "remorseful/remorse", "contemptuous/contempt", "awed/awe", "lustful/lust", "longing/longing", "content/contentfulness", "pleasured/pleasure", "tormented/torment", "horrified/horror", "shocked/shock", "furious/fury", "sly/slyness", "sunny/sunniness", "rainy/raininess", "cloudy/cloudiness", "snowy/snowiness", "moonlit/moonlight", "starry/starriness", "foggy/fogginess", "crapulous/crapulousness", "feckless/fecklessness", "peckish/peckishness", "comely/comeliness", "bilious/biliousness", "serene/serenity", "emaciated/emaciation", "African-American/African-Americanness", "delinquent/delinquency", "aggravated/aggression", "dashing/dashingness", "considerate/consideration", "busted/bustedness", "iridescent/iridescence", "golden/golden luster", "spontaneous/spontaneity", "daring/dare", "radioactive/radioactivity", "poisonous/toxicity", "savage/savageness", "terrifying/scariness", "unlikely/unlikelihood", "speedy/speediness", "indestructible/involunurability", "invisible/invisibility", "odorous/odor", "penetrative/penetrative power", "immaculate/immaculateness", "rowdy/rowdiness", "rational/rationality", "irrational/irrationality", "blasphemous/blasphemy", "cooperative/cooperation", "punctual/punctuality", "festive/festiveness", "polluted/pollution", "potent/potency", "powdery/powderiness", "powerful/power", "piggy/pigginess", "assertive/assetiveness", "ethical/ethicalness", "tight-lipped/tight lips", "firm/firmness", "unethical/unethicalness", "highbrow/highbrowness", "scholarly/scholarliness", "academic/academicness", "sophisticated/sophistication", "intelligent/intelligence", "intellectual/intellect", "cultural/culture", "popular/popularity", "furrowed/furrowedness", "illiterate/illiteracy", "educated/education", "durable/durability", "sublime/sublimeness", "ambitious/ambition", "family-friendly/family-friendliness", "contaminated/contamination", "unfortunate/misfortune", "fortunate/fortune", "absolute/absoluteness", "logical/logical", "frictional/friction", "cream-filled/creaminess", "malleable/malleability", "fast/speed", "squeamish/squeamishness", "unlimited/unlimitedness", "gassy/gassiness", "edgy/edginess", "artsy/artsiness", "feasible/feasibility", "infeasible/infeasibility", "possible/possibility", "potential/potential", "intentional/intention", "dumb/dumbness", "disorganized/disorder", "irregular/irregularity", "certified/certification", "sure/sureness", "complimentary/complimentariness", "supplementary/supplementariness", "derogatory/derogatoriness", "scornful/scorn", "gross/grossness", "erect/erectness", "flaccid/flaccidness", "sexy/sex appeal", "ravishing/rock-solid arousal", "horny/horniness", "kinky/kinkiness", "trashy/trashiness", "sexual/sexuality"];
     var adverbs = ["gloriously", "majestically", "sarcastically", "obscenely", "unbelievably", "royally", "buoyantly", "comfortably", "justly", "continually", "bitterly", "accidentally", "absentmindedly", "generously", "coaxingly", "faithfully", "explosively", "spontaneously", "magestically", "kindly", "fiercely", "strongly", "fervently", "genuinely", "wholeheartedly", "honestly", "truly", "keenly", "rashly", "stubbornly", "persistently", "firmly", "purposefully", "strictly", "weakly", "sharply", "intensively", "solemnly", "determinedly", "lightly", "gravely", "deeply", "earnestly", "animatedly", "ardently", "carefully", "diligently", "hastily", "laboriously", "restlessly", "speedily", "spiritedly", "strenuously", "vigilantly", "fearlessly", "sluggishly", "densely", "closely", "rebelliously", "thirstily", "meekly", "mildly", "modestly", "calmly", "discreetly", "silently", "greatly", "intently", "nimbly", "vigorously", "actively", "readily", "rapidly", "efficiently", "merrily", "briskly", "stealthily", "forgivingly", "mercifully", "awkwardly", "coldly", "joyfully", "urgently", "adventurously", "indubitably", "beautifully", "hatefully", "wisely", "blissfully", "terribly", "bravely", "sympathetically", "suspiciously", "intensely", "crossly", "mysteriously", "single-handedly", "naturally", "ferociously", "heavily", "dreamily", "loudly", "effortlessly", "wetly", "peacefully", "daintily", "snugly", "crunchily", "ticklishly", "pointedly", "noisily", "wildly", "enthusiastically", "elegantly", "energetically", "busily", "quickly", "slickly", "saggingly", "quietly", "defiantly", "inappropriately", "immediately", "torturously", "hurriedly", "formally", "courageously", "with haste", "excitedly", "thickly", "boldly", "deliciously", "fleetingly", "secretly", "violently", "appreciatively", "thoughtlessly", "carelessly", "smartly", "delicately", "sloppily", "slimily", "anally", "eagerly", "brightly", "correctly", "smoothly", "slowly", "lovingly", "forcibly", "up and down", "side to side", "romantically", "hungrily", "sweetly", "roughly", "delightedly", "happily", "gladly", "grudgingly", "arrogantly", "sadly", "frantically", "greedily", "cautiously", "hollowly", "enviously", "angrily", "warily", "shamefully", "gleefully", "grumpily", "anxiously", "regretfully", "patiently", "evilly", "terrifyingly", "curiously", "intentionally", "deliberately", "magically", "necessarily", "unnecessarily", "fluidly", "expertly", "partially", "intuitively", "artfully", "thoroughly", "illegally", "mortally", "harmonically", "objectively", "cooly", "casually", "perfectly", "imperfectly", "victoriously", "grandly", "richly", "heartily", "musically", "to kingdom come", "methodically", "nonchalantly", "systematically", "recklessly", "neatly"];
     var colors = ["red/reddish", "green/greenish", "blue/bluish", "cyan/cyan-ish", "magenta/magenta-ish", "yellow/yellowish", "orange/orangish", "purple/purplish", "turquoise/turquoise-ish", "pink/pinkish", "grey/greyish", "black/blackish", "white/whitish", "brown/brownish", "lime green/lime-green-ish", "lavender/lavenderish", "maroon/maroonish", "gold/goldish", "silver/silverish", "crimson/crimsonish"];
-    var coordinating_conjunctions = ["and", "or", "but", "nor", "for", "yet", "so"];
+    var conjunctions = ["and", "or", "but", "nor", "for", "yet", "so"];
+    var amount = ["a few", "a bunch of", "some", "many more"];
     var countries = ["Afghanistan", "Akrotiri", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Ashmore and Cartier Islands", "Australia", "Austria", "Azerbaijan", "The Bahamas", "Bahrain", "Bangladesh", "Barbados", "Bassas da India", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Clipperton Island", "Cocos Islands", "Colombia", "Comoros", "Democratic Republic of the Congo", "Republic of the Congo", "Cook Islands", "Coral Sea Islands", "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Dhekelia", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Europa Island", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Guiana", "French Polynesia", "French Southern and Antarctic Lands", "Gabon", "The Gambia", "Gaza Strip", "Georgia", "Germany", "Ghana", "Gibraltar", "Glorioso Islands", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard Island and McDonald Islands", "Holy See", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Jan Mayen", "Japan", "Jersey", "Jordan", "Juan de Nova Island", "Kazakhstan", "Kenya", "Kiribati", "North Korea", "South Korea", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Federated States of Micronesia", "Moldova", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Namibia", "Nauru", "Navassa Island", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paracel Islands", "Paraguay", "Peru", "Philippines", "Pitcairn Islands", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Helena", "Saint Kitts and Nevis", "Saint Lucia", "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia and Montenegro", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "Spain", "Spratly Islands", "Sri Lanka", "Sudan", "Suriname", "Svalbard", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tromelin Island", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands", "Wake Island", "Wallis and Futuna", "West Bank", "Western Sahara", "Yemen", "Zambia", "Zimbabwe"];
     var emotion = ["joy", "fright", "happiness", "boredom", "sorrow", "sadness", "anger", "rage", "guilt", "envy", "passion", "bliss", "pain", "interest", "smugness", "pride", "hunger", "despair", "shame", "love", "madness", "hatred", "pity", "humility", "anticipation", "surprise", "optimism", "disappointment", "remorse", "contempt", "awe", "lust", "longing", "contentment", "pleasure", "irritation", "torment", "horror", "shock", "terror", "ecstasy", "satisfaction", "gratitude", "melancholy", "fury", "excitement", "confusion", "bewilderment"];
     var emphasis = ["very", "rather", "quite", "extremely", "incredibly", "really", "thoroughly", "most", "absolutely", "positively", "unbelievably", "super", "majorly", "oh so"];
     var exclamations = ["I'll be damned", "bravo", "geez", "holy cow", "good heavens", "holy moley", "ermahgerd", "LOL", "Bingo", "ROFL", "WTF", "good lord", "awesome", "excellent", "jolly good", "this is the end", "run for your lives", "wicked", "epic", "damn", "oh boy", "boy oh boy oh boy", "what in the world", "what the hell", "oh joy", "woot", "omgomgomg", "no way", "this can't be", "mine eyes are deceiving me", "gasp", "oh my goodness", "oh dear", "oh my", "dear me", "dear dear", "my my", "my oh my", "aw shucks", "whoa", "wow", "oh wow", "trololol", "oho", "oh glorious day", "disgraceful", "oh hell yes", "hella good", "hurrah", "what", "beautiful", "ahhhhh mahh gahh", "by golly", "this is delicious", "oh gog", "K.O.", "finish him", "my leg", "I'm gonna faint", "alas", "rats"];
     var facial_expressions = ["smile", "frown", "grimace", "evil grin", "cheeky grin", "sneer", "pucker", "smirk", "grin", "snarl", "trollface", "visage", "snicker", "pout", "poker face", "toothy grin", "blank face", "pout lip"];
-    var bent_facial_expressions = ["smiled", "frowned", "grimaced", "grinned evilly", "grinned cheekily", "sneered", "puckered", "smirked", "snarled","snickered", "pouted"];
+    var facial_expressions_verbed = ["smiled", "frowned", "grimaced", "grinned evilly", "grinned cheekily", "sneered", "puckered", "smirked", "snarled", "snickered", "pouted"];
     var first_names = ["Billybob/B", "Moses/M", "Barack/B", "Vijay/V", "Rex/R", "Sasquatch/S", "Elvis/E", "Zachy/Z", "John/J", "Mickey/M", "Jake/J", "Stan/S", "Jamier/J", "Sean/S", "Snuggles/S", "Max/M", "Mitchell/M", "Collin/C", "Nick/N", "Danny/D", "Ronald/R", "Tim/T", "Timmy/T", "Scott/S", "Cody/C", "Louie/L", "Keith/K", "Luke/L", "Nicholas", "Todd", "Barney", "Brandon", "Victor", "William", "Alex", "Ken", "Gordon", "Grover", "Steve", "Kyle", "George", "Rick", "Craig", "Greg", "Andy", "Kevin", "Dick", "Tom", "Harry", "Bill", "Brian", "Francis", "Corbin", "Gilbert", "Jeff", "Bruce", "Benny", "Justin", "Tony", "Robin", "Roger", "Parker", "Vanshay", "Lee", "Ian", "Joshua", "Michael", "Shonuff", "Tristan", "Kermit", "Wilbur", "Malcolm", "Akbar", "Ambar", "Athumani", "Jela", "Jengo", "Kabili", "Kanaifu", "Kandoro", "Keto", "Khalfan", "Kiango", "Kijani", "Kondo", "Nuru", "Penda", "Penha", "Safari", "Thimba", "Adish", "Arash", "Ariabod", "Arwan", "Arya", "Asho", "Atish", "Baback", "Baraz", "Barbod", "Bardia", "Barid", "Bast", "Benham", "Bian", "Dareh", "Darius", "Darrius", "Dastan", "Gul", "Jahan", "Kamran", "Kaveh", "Kaysar", "Menelin", "Masih", "Meghdad", "Milad", "Nasha", "Naveed", "Navid", "Parham", "Pouria", "Radwan", "Roshan", "Saman", "Sardar", "Sarmad", "Shadan", "Shahan", "Shahin", "Shahryar", "Shapur", "Sher", "Abeeku", "Abu", "Addae", "Ade", "Adeben", "Adjatay", "Adjo", "Adwin", "Agu", "Ajamu", "Ajani", "Akello", "Akia", "Akins", "Akintunde", "Anane", "Ande", "Andwele", "Armani", "Asante", "Ashanti", "Ayele", "Ayinde", "Ayzize", "Azibo", "Badru", "Bahari", "Bandele", "Banji", "Barke", "Belay", "Bem", "Berta", "Birungi", "Braima", "Camara", "Chiazam", "Chincha", "Chikezie", "Chimelu", "Chinelo", "Chinua", "Davu", "Deka", "Akuna", "Binda", "Euroa", "Thor", "Gidja", "Kaawa", "Kinta", "Kumba", "Mani", "Omeo", "Onyx", "Paratyl", "Ponto", "Quoba", "Taworri", "Teangi", "Thono", "Tyipa", "Yamparti", "Yarran", "Yoyko", "Abbot", "Abe", "Acton", "Adair", "Aidric", "Alan", "Alastair", "Albert", "Albion", "Aldan", "Alden", "Aldis", "Alfred", "Algernon", "Alick", "Allard", "Alvar", "Ansley", "Anson", "Aragorn", "Arathorn", "Arden", "Argyle", "Art", "Ash", "Ashford", "Ashton", "Atherton", "Atticus", "Aubrey", "August", "Austin", "Axton", "Bailey", "Baker", "Baldwin", "Balthasar", "Bardolf", "Barnaby", "Baron", "Barrett", "Barrington", "Barton", "Baxter", "Beauchamp", "Beauregard", "Beck", "Beckett", "Beckham", "Benjamin", "Benson", "Bently", "Benton", "Berke", "Beverly", "Bevis", "Bringham", "Birch", "Bishop", "Blake", "Blaze", "Boniface", "Bono", "Booker", "Boston", "Brad", "Bradley", "Bradshaw", "Brantley", "Brenton", "Brett", "Brewster", "Breyson", "Briar", "Brice", "Bridger", "Brighton", "Bristol", "Brock", "Bronson", "Brook", "Bryan", "Buckley", "Burgess", "Burris", "Burton", "Byron", "Caldwell", "Caledon", "Calico", "Camden", "Canon", "Carlton", "Carrington", "Carter", "Carver", "Cash", "Caspian", "Cecil", "Celtic", "Chad", "Chadwick", "Chainey", "Chandler", "Charleston", "Charlie", "Charlton", "Chauncey", "Chay", "Chester", "Chet", "Chip", "Clarence", "Clark", "Clayton", "Cleavon", "Clement", "Cleaveland", "Clifford", "Clifton", "Clint", "Clinton", "Clive", "Colby", "Coleman", "Colton", "Conrad", "Conroy", "Cornell", "Cosmo", "Cotton", "Crawford", "Creighton", "Crimson", "Crosby", "Dalton", "Darrel", "Darryl", "Darwin", "Dash", "Daughtry", "Dawson", "Deacon", "Dennis", "Derek", "Derring", "Devon", "Dexter", "Dexton", "Diamond", "Dixon", "Don", "Donnie", "Dorsey", "Doug", "Dracen", "Drake", "Dryden", "Dudley", "Duke", "Dustin", "Dwayne", "Dwight", "Dyson", "Earl", "Easton", "Eastwood", "Ed", "Edd", "Eddy", "Edgar", "Edgerton", "Edison", "Edmund", "Edric", "Edward", "Edwin", "Egbert", "Elden", "Elias", "Elliot", "Ellis", "Elmer", "Elmo", "Elton", "Elvin", "Elwood", "Emerson", "Emmet", "Ernie", "Errol", "Erv", "Ervin", "Erwin", "Eugene", "Fairfax", "Falcon", "Farley", "Ferguson", "Ferris", "Filbert", "Fisher", "Fitzwilliam", "Fletcher", "Floyd", "Forbes", "Ford", "Forrest", "Foster", "Fraley", "Frank", "Frederick", "Frenchie", "Fulbright", "Gage", "Galahad", "Gale", "Gardner", "Garland", "Garrison", "Garth", "Gary", "Gavin", "Gaylord", "Godfrey", "Graham", "Graydon", "Griff", "Gulliver", "Gus", "Karen", "Heidi", "Jessie", "Gabrielle", "Jessica", "Laura", "Sara", "Linda", "Britney", "Kristin", "Kate", "Amanda", "Renae", "Ruth", "Betty", "Lindsey", "Saralyn", "Alice", "Stacey", "Sadie", "Kat", "Marge", "Mary", "Michelle", "Kimberly", "Debbie", "Megan", "Susan", "Maria", "Jennifer", "Helen", "Sandra", "Rebecca", "Martha", "Stephanie", "Gloria", "Jane", "Tina", "Tracy", "Tiffany", "Valerie", "Lauren", "Bertha", "Vicki", "Delores", "Jacki", "Varlerie", "Scarlett", "Christina", "Maggie", "Crystal", "Ember", "Fluffy", "Papa"];
     var greetings = ["hello", "greetings", "hola", "hey", "what's up", "whazzup", "yo", "good day", "good morning", "good afternoon", "good evening", "good night", "hey buddy", "ahoy", "sup", "salutations", "aloha", "konichi wa", "what's happening", "how's it hanging", "how's it going", "what's new", "guten Tag"];
     var last_names = ["Pollock", "Washington", "Hayne", "Machler", "Kaye", "Murdock", "Dick", "Johnson", "Jackson", "Anderson", "Smith", "Bingley", "Presley", "Olson", "Pederson", "Clark", "Stark", "Lee", "Meyer", "Palin", "Shaw", "Andrews", "Sampson", "Mueller", "Allan", "Underwood", "Cyrus", "Harris", "Lewis", "Phillips", "Thompson", "Miller", "Pratt", "Griff", "Wright", "Jones", "Brown", "Davis", "Wilson", "Moore", "Taylor", "Thomas", "White", "Martin", "Garcia", "Martinez", "Robinson", "Rodriguez", "Walker", "Hall", "Allen", "Young", "Hernandez", "Underthun", "Werdal", "King", "Lopez", "Hill", "Green", "Adams", "Baker", "Gonzalez", "Nelson", "Carter", "Mitchell", "Roberts", "Turner", "Campbell", "Parker", "Evans", "Edwards", "Collins", "Stewart", "Sanchez", "Morris", "Rogers", "Reed", "Cook", "Morgan", "Bell", "Murphy", "Bailey", "Rivera", "Cooper", "Richardson", "Sterling", "Cox", "Howard", "Ward", "Torres", "Gray", "Watson", "Brooks", "Kelly", "Sanders", "Price", "Bennett", "Wood", "Ross", "Jenkins", "Perry", "Long", "Butler", "Simmons", "Russell", "Bryant", "McDonald", "Little", "Jacobs", "Wang", "Schroeder", "Hartman", "Woodard", "Kemp", "Glenn", "Baxter", "Bond", "Nixon", "Strong", "Hurst", "Farrell", "Roth", "Prince", "Serrano", "Glass", "Knox", "Randolph", "Maynard", "Foley", "Chang", "Bauer", "Rivers", "Walls", "Sexton", "Gentry", "Leon", "Barron", "Estes", "Middleton", "Best", "Dudley", "Herman", "Pennington", "Solomon", "Kerr", "Chen", "Blackburn", "Gay", "Avery", "Hendricks", "Barry", "Horne", "Meadows", "Velentine", "Church", "Russo", "Benton", "Howe", "Hinton", "Tillman", "Key", "Peck", "Morin", "Gamble", "Bentley", "Stout", "Petty", "Osborn", "Joyner", "Rosario", "Stein", "Huber", "Vanyo", "Guthrie", "Noel", "Vang", "Cooke", "Wooten", "Forbes", "Hewitt"];
@@ -38,73 +203,85 @@ function simpleRant() {
     var with_prepositions = ["with", "without", "alongside", "inside of", "using", "with the help of"];
 
 
+
+    // <name-male> likes to <verb-transitive> <noun.plural> with <pron.poss-male> pet <noun-animal> on <time_noun.plural-dayofweek>.
+
+
     this.sentence = function () {
         return 'instance method';
     };
     this.capitalize = function (s) {
         return s[0].toUpperCase() + s.slice(1);
     };
-
     this.getTitle = function () {
-        var num = Math.floor(Math.random() * titles.length);
-        return titles[num];
+        return titles.shuffle()[0];
     };
+    this.getPossMale = function () {
+        return pronouns_in_the_third_person[0].split("/")[3];
+    };
+    this.getNounAnimal = function () {
+        return pronouns_in_the_third_person[0].split("/")[3];
+    };
+
     this.getAdjective = function (plural) {
-        var num = Math.floor(Math.random() * adjectives.length);
-        return adjectives[num].split("/")[plural];
+        var num = Math.floor(Math.random() * the_adjectives.length);
+        return the_adjectives[num].split("/")[plural];
+    };
+    this.getVerb = function (plural) {
+        var num = Math.floor(Math.random() * verbs.length);
+        return verbs[num].split("/")[plural];
     };
     this.getColor = function (plural) {
-        var num = Math.floor(Math.random() * colors.length);
-        return colors[num].split("/")[plural];
+        return colors.shuffle()[0].split("/")[plural];
     };
     this.getNoun = function (plural) {
         var num = Math.floor(Math.random() * nouns.length);
         return nouns[num].split("/")[plural];
     };
+    this.getAmount = function () {
+        return amount.shuffle()[0];
+    };
     this.getRelationship = function (plural) {
-        var num = Math.floor(Math.random() * relationships.length);
-        return relationships[num].split("/")[plural];
+        return relationships.shuffle()[0].split("/")[plural];
     };
     this.getTitleMale = function () {
-        var num = Math.floor(Math.random() * titles_m.length);
-        return titles_m[num];
+        return titles_m.shuffle()[0];
     };
     this.getTitleFemale = function () {
-        var num = Math.floor(Math.random() * titles_f.length);
-        return titles_f[num];
+        return titles_f.shuffle()[0];
     };
 
+    this.getNameMale = function () {
+        return first_names.shuffle()[0];
+    };
+    this.getNameFemale = function () {
+        return first_names.shuffle()[0];
+    };
+
+
     this.getYes = function () {
-        var num = Math.floor(Math.random() * yes.length);
-        return yes[num];
+        return yes.shuffle()[0];
     };
     this.getNo = function () {
-        var num = Math.floor(Math.random() * no.length);
-        return no[num];
+        return no.shuffle()[0];
     };
     this.getExclamation = function () {
-        var num = Math.floor(Math.random() * exclamations.length);
-        return exclamations[num];
+        return exclamations.shuffle()[0];
     };
-    this.getFirstname = function () {
-        var num = Math.floor(Math.random() * first_names.length);
-        return first_names[num].split("/")[0];
+    this.getFirstName = function () {
+        return first_names.shuffle()[0].split("/")[plural];
     };
-    this.getLastname = function () {
-        var num = Math.floor(Math.random() * last_names.length);
-        return last_names[num];
+    this.getLastName = function () {
+        return last_names.shuffle()[0];
     };
     this.getFacialExpression = function () {
-        var num = Math.floor(Math.random() * facial_expressions.length);
-        return facial_expressions[num];
+        return facial_expressions.shuffle()[0];
     };
-    this.getFacialExpressionBent = function () {
-        var num = Math.floor(Math.random() * bent_facial_expressions.length);
-        return bent_facial_expressions[num];
+    this.getFacialExpressionVerbed = function () {
+        return facial_expressions_verbed.shuffle()[0];
     };
     this.getCoordinatingConjunction = function () {
-        var num = Math.floor(Math.random() * coordinating_conjunctions.length);
-        return coordinating_conjunctions[num];
+        return conjunctions.shuffle()[0];
     };
 
 
@@ -112,62 +289,422 @@ function simpleRant() {
         var result = input;
         var regex = /\<(.*?)\>/g;
         var matches;
+        var replacement = [], i=0;
+
+        var adj_matched=adjplural_matched=noun_matched = nounplural_matched = firstname_matched = lastname_matched =
+            title_matched = titlem_matched = titlef_matched = exclamation_matched = yes_matched = no_matched =
+                amount_matched = colorplural_matched = color_matched = relationship_matched=
+                    relationshipplural_matched=facialexpression_matched=facialexpressioned_matched=
+                        conjunction_matched=verb1m=verb2m=namemm=namefm=verb3m=possm=false;
 
         while (matches = regex.exec(input)) {
-            if (matches[1] == "title") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getTitle());
+            //console.log(matches.length);
+            //console.log(matches);
+
+            if (matches[1] == "pron.poss-male") {
+                if(!possm) {
+                    replacement = [];
+                    i = result.match(/\<pron.poss-male\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getPossMale());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<pron.poss-male>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                possm = true;
             }
-            if (matches[1] == "title:female") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getTitleFemale());
+            if (matches[1] == "verb") {
+                if(!verb1m) {
+                    replacement = [];
+                    i = result.match(/\<verb\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getVerb(0));
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<verb>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                verb1m = true;
+            }
+            if (matches[1] == "verb-transitive") {
+                if(!verb3m) {
+                    replacement = [];
+                    i = result.match(/\<verb-transitive\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getVerb(0));
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<verb-transitive>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                verb3m = true;
+            }
+            if (matches[1] == "verb.ed") {
+                if(!verb2m) {
+                    replacement = [];
+                    i = result.match(/\<verb.ed\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getVerb(2));
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<verb.ed>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                verb2m = true;
+            }
+            if (matches[1] == "title") {
+                if(!title_matched) {
+                    replacement = [];
+                    i = result.match(/\<title\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getTitle());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<title>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                title_matched = true;
+            }
+            if (matches[1] == "name-female") {
+                if(!namefm) {
+                    replacement = [];
+                    i = result.match(/\<name-female\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getNameFemale());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<name-female>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                namefm = true;
+            }
+            if (matches[1] == "name-male") {
+                if(!namemm) {
+                    replacement = [];
+                    i = result.match(/\<name-male\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getNameMale());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<name-male>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                namemm = true;
             }
             if (matches[1] == "title:male") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getTitleMale());
+                if(!titlem_matched) {
+                    replacement = [];
+                    i = result.match(/\<title.male\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getTitleMale());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<title.male>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                titlem_matched = true;
             }
             if (matches[1] == "yes") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getYes());
+                if(!yes_matched) {
+                    replacement = [];
+                    i = result.match(/\<yes\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getYes());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<yes>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                yes_matched = true;
             }
-            if((matches[1] == "adjective") || (matches[1] == "adj") ) {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getAdjective(0));
+            if (matches[1] == "no") {
+                if(!no_matched) {
+                    replacement = [];
+                    i = result.match(/\<no\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getNo());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<no>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                no_matched = true;
             }
-            if((matches[1] == "adjective.plural") || (matches[1] == "adj.plural") ) {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getAdjective(1));
+            if (matches[1] == "amount") {
+                if(!amount_matched) {
+                    replacement = [];
+                    i = result.match(/\<amount\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getAmount());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<amount>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                no_matched = true;
+
+            }
+            if ((matches[1] == "adj")) {
+                if(!adj_matched) {
+                    replacement = [];
+                    i = result.match(/\<adj\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getAdjective(0));
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<adj>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                adj_matched = true;
+            }
+            if ((matches[1] == "adj.plural") || (matches[1] == "adj.plural")) {
+                if(!adjplural_matched) {
+                    replacement = [];
+                    i = result.match(/\<adj.plural\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getAdjective(1));
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<adj.plural>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                adjplural_matched = true;
             }
             if (matches[1] == "noun") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getNoun(0));
+                if(!noun_matched) {
+                    replacement = [];
+                    i = result.match(/\<noun\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getNoun(0));
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<noun>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                noun_matched = true;
             }
             if (matches[1] == "noun.plural") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getNoun(1));
+                if(!nounplural_matched) {
+                    replacement = [];
+                    i = result.match(/\<noun.plural\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getNoun(1));
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<noun.plural>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                nounplural_matched = true;
             }
             if (matches[1] == "exclamation") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getExclamation());
+                if(!exclamation_matched) {
+                    replacement = [];
+                    i = result.match(/\<exclamation\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getExclamation());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<exclamation>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                exclamation_matched = true;
             }
             if (matches[1] == "firstname") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getFirstname());
+                if(!firstname_matched) {
+                    replacement = [];
+                    i = result.match(/\<firstname\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getFirstName());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<firstname>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                firstname_matched = true;
             }
             if (matches[1] == "lastname") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getLastname());
+                if(!lastname_matched) {
+                    replacement = [];
+                    i = result.match(/\<lastname\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getLastName());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<lastname>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                lastname_matched = true;
             }
             if (matches[1] == "color") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getColor(0));
+                if(!color_matched) {
+                    replacement = [];
+                    i = result.match(/\<color\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getColor(0));
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<color>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                color_matched = true;
             }
             if (matches[1] == "color.plural") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getColor(1));
+                if(!colorplural_matched) {
+                    replacement = [];
+                    i = result.match(/\<color.plural\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getColor(1));
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<color.plural>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                colorplural_matched = true;
             }
             if (matches[1] == "relationship") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getRelationship(0));
+                if(!relationship_matched) {
+                    replacement = [];
+                    i = result.match(/\<relationship\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getRelationship(0));
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<relationship>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                relationship_matched = true;
             }
             if (matches[1] == "relationship.plural") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getRelationship(1));
+                if(!relationshipplural_matched) {
+                    replacement = [];
+                    i = result.match(/\<relationship.plural\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getRelationship(1));
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<relationship.plural>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                relationshipplural_matched = true;
             }
             if (matches[1] == "facialexpression") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getFacialExpression);
+                if(!facialexpression_matched) {
+                    replacement = [];
+                    i = result.match(/\<facialexpression\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getFacialExpression());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<facialexpression>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                facialexpression_matched = true;
             }
-            if (matches[1] == "coordinating_conjunction") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getCoordinatingConjunction);
+            if (matches[1] == "conjunction") {
+                if(!conjunction_matched) {
+                    replacement = [];
+                    i = result.match(/\<conjunction\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getCoordinatingConjunction());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<conjunction>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                conjunction_matched = true;
             }
-            if (matches[1] == "bent_facial_expression") {
-                result = result.replace(new RegExp("" + matches[0] + "", 'gi'), this.getFacialExpressionBent);
+
+
+            if (matches[1] == "facial_expression.ed") {
+                if(!facialexpressioned_matched) {
+                    replacement = [];
+                    i = result.match(/\<facial_expression.ed\>/g).length;
+                    while (i > 0) {
+                        replacement.push(this.getFacialExpressionVerbed());
+                        i--;
+                    }
+
+                    i = 0;
+                    result = result.replace(/\<facial_expression.ed>/g, function () {
+                        return replacement[i++];
+                    });
+                }
+                facialexpressioned_matched = true;
             }
+            //console.log(matches[1]);
         }
         return this.capitalize(result);
     };
@@ -177,26 +714,26 @@ function simpleRant() {
     }
 }
 // a first class functional object
-
-simpleRant.prototype.sentence = function () {
-    return 'prototype method';
-};
-
-// Test
-rant = new simpleRant;
-var result = rant.rantConstructor('<yes>, I need a bunch of <adjective> <noun.plural>');
-console.log(result);
-var result = rant.rantConstructor('<exclamation>, <adjective> <noun.plural>');
-console.log(result);
-var result = rant.rantConstructor('<title> <firstname> <lastname>, <relationship> of <firstname>');
-var result = rant.rantConstructor('<firstname> said with a wry <facialexpression> and <bent_facial_expression>');
-console.log(result);
-var result = rant.rantConstructor('<color> <color.plural>');
-console.log(result);
+//
+//simpleRant.prototype.sentence = function () {
+//    return 'prototype method';
+//};
+//
+//// Test
+//rant = new simpleRant;
+//var result = rant.rantConstructor('<yes>, I need a bunch of <adjective> <noun.plural>');
+//console.log(result);
+//var result = rant.rantConstructor('<exclamation>, <adjective> <noun.plural>');
+//console.log(result);
+//var result = rant.rantConstructor('<title> <firstname> <lastname>, <relationship> of <firstname>');
+//var result = rant.rantConstructor('<firstname> said with a wry <facialexpression> and <bent_facial_expression>');
+//console.log(result);
+//var result = rant.rantConstructor('<color> <color.plural>');
+//console.log(result);
 
 /*
 
-API:
+ API:
  <yes> <no>
 
 
