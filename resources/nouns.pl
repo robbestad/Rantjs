@@ -8,8 +8,8 @@ use strict;
 #use warnings;
 my $content = <>;    #Whole file content in a single scalar variable
 
-#my $out="{\"nouns\": {";
 my $out="";
+my $wordsout="";
 my $group="";
 my @keywords;
 my $keyword;
@@ -56,7 +56,7 @@ foreach my $line ( split /\n/, $content ) {
         chomp($keyword);
 
 
-        print($keyword."\n");
+#        print($keyword."\n");
 #        exit;
     } else {
        # $keyword='';
@@ -137,13 +137,9 @@ if($line =~ m/\#class remove/){
         push(@nouns, $line);
     }
 
-    #if(++$i < $n){
-    #   $out .=",\n";
-    #}
 }
 
-$out .="\n\n";
-#print @nouns;
+$out .="\n";
 
 $out .="var ".$name."=[";
 foreach my $noun (@nouns) {
@@ -151,29 +147,49 @@ foreach my $noun (@nouns) {
 }
 $out =~ s/,+$//m;
 $out .= "];\n\n";
-print $out;
+#print $out;
 
+## unique array
+my @uniqueKeywords;
+foreach my $kw(@keywords) {
+    my @kwords = split / /, $kw;
+    foreach my $uq(@kwords){
+        $uq =~ s/^\s*//; #remove leading whitespace
+        $uq =~ s/\s*$//; #remove trailing whitespace
+        $uq =~ s/\ {2,}/ /g; #remove multiple literal spaces
+        $uq =~ s/\t{2,}/\t/g; #remove excess tabs
+        $uq =~ s/(?<=\t)\ *//g; #remove any spaces after a tab
+        push(@uniqueKeywords, $uq);
+    }
+}
+
+my %seen=();
+my @unique = grep { ! $seen{$_} ++ } @uniqueKeywords;
+
+foreach my $kw(@unique) {
+    if($kw eq ''){ next;}
+    $wordsout .= "var verb_".$kw."=[];\n";
+#    print "var verb_".$kw."=[];\n";
+}
+
+
+
+## array_push
 my $num=scalar(@keywords);
+my @coll;
 $i=0;
 while($i<$num){
-print "\n";
-print @keywords[$i]."\n";
-print @collection[$i]."\n";
+my @tokens = split / /, @keywords[$i];
 
+foreach my $token(@tokens) {
+    $wordsout .= "array_push(verb_".$token.", \"".@collection[$i]."\")\n";
+#	print "array_push(verb_".$token.", \"".@collection[$i]."\")\n";
+}
 $i++;
 }
-print scalar(@keywords)."\n";
-print scalar(@collection)."\n";
-$out .="var ".$name."=[";
-foreach my $noun (@keywords) {
-	$out .= '"'.$noun.'",';
-}
-$out =~ s/,+$//m;
-$out .= "];\n\n";
 
 
-#
 ## finally, write the files
 open(O, '>out/'.$name.'.js');
-print O $out;
+print O $out.$wordsout;
 close(O);
