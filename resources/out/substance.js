@@ -1,4 +1,4 @@
 
-var dic_substance=["water","vomit","orange juice","sweat","blood","lava","gasoline","sand","oil","molten iron","grease","tears","ketchup","mustard","mayonnaise","soy sauce","beer","wine","vodka","olive oil","extravirgin olive oil","earwax","vinegar","paint","liquid nitrogen","tomato sauce","ink","lemonade","oatmeal","spaghetti","flour","sap","plasma","dark matter","antimatter","corn","snow","acid","magma","happiness","dick cheese","cum","lube","crotch juice","pee","piss","pisswater","diarrhea","jizz","urine"];
+var dic_substance=[];
 var dic_substance_liquid = ["water", "vomit", "orange juice", "sweat", "blood", "lava", "gasoline", "sand", "oil", "molten iron", "grease", "tears", "ketchup", "mustard", "mayonnaise", "soy sauce", "beer", "wine", "vodka", "olive oil", "extravirgin olive oil", "earwax", "vinegar", "paint", "liquid nitrogen", "tomato sauce", "ink", "lemonade", "oatmeal", "spaghetti", "flour", "sap", "plasma", "dark matter", "antimatter", "corn", "snow", "acid", "magma", "happiness", "dick cheese", "cum", "lube", "crotch juice", "pee", "piss", "pisswater", "diarrhea", "jizz"];
 dic_substance = dic_substance.concat(dic_substance_liquid);
