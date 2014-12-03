@@ -6,13 +6,16 @@ undef $/;
 $n = 0;
 use strict;
 use warnings;
-my $directory = "./RantVocab";
+
+use File::Basename;
+my $dirname = dirname(__FILE__);
+
+my $directory = "$dirname/RantVocab";
 opendir( DH, $directory );
 my @files = readdir(DH);
 closedir(DH);
 
 my $allVars = "";
-
 foreach my $file (@files) {
     next if ( $file =~ /^\.$/ ); # skip . and ..
     next if ( $file =~ /^\.git$/ ); # skip .git
@@ -20,6 +23,6 @@ foreach my $file (@files) {
     next if ( $file =~ /^\.\.$/ );
     $file =~ s/\s/\\ /g;
     #print `ls ./RantVocab/$file`;
-    print `perl parse.pl < ./RantVocab/$file`;
+    print `perl $dirname/parse.pl < $dirname/RantVocab/$file`;
 }
-print `cat out/*.js > all.dic.js`;
+print `cat $dirname/out/*.js > $dirname/../dic.js`;
