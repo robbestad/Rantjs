@@ -174,6 +174,30 @@ foreach my $kw(@unique) {
 
 
 
+## try to group keywords and collection together
+my $num=scalar(@keywords);
+my %collection_keywords;
+$i=0;
+while($i<$num){
+my @tokens = split / /, @keywords[$i];
+
+foreach my $token(@tokens) {
+
+
+    foreach(my $kw(@unique)){
+    if($kw == $token)
+        %collection_keywords{$kw}[]=$kw;
+    }
+
+
+    $wordsout .= "array_push(verb_".$token.", \"".@collection[$i]."\")\n";
+#	print "array_push(verb_".$token.", \"".@collection[$i]."\")\n";
+}
+$i++;
+}
+
+
+
 ## array_push
 my $num=scalar(@keywords);
 my @coll;
