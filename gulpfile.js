@@ -20,7 +20,7 @@ var gulp = require("gulp"),
     });
 
     gulp.task("scripts", function(){
-         gulp.src(["./dic.js","./index.js", "./simpleRant.js"])
+         gulp.src(["./simpleRant.js"])
          .pipe(maps.init())
          .pipe(uglify())
          .pipe(maps.write())

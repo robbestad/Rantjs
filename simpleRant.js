@@ -1023,7 +1023,12 @@ simpleRant.extend=function(input){
     }
 };
 
-if('undefined' !== module){
+
+//simpleRant.prototype.sentence = function () {
+//    return 'prototype method';
+//};
+
+if('undefined' != typeof module){
     module.exports.simpleRant = simpleRant;
 }
 //

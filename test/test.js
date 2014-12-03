@@ -9,15 +9,17 @@ describe('GetSingleMonth', function () {
     it('should return a string when calling a month', function () {
         var r = new rant.simpleRant();
         var result = r.rantConstructor('<time_noun-month> <time_noun-month>');
+        console.log(result);
         return result;
     })
 });
 
 
-describe('GetMonth', function () {
-    it('should return a string when calling a month', function () {
+describe('GetFacialExpression(ed)', function () {
+    it('should return a string when calling a facial expresson', function () {
         var r = new rant.simpleRant();
-        var result = r.rantConstructor('<time_noun-month> <time_noun-month>');
+        var result = r.rantConstructor('<facialexpression.ed> <facialexpression>');
+    console.log(result);
         return result;
     })
 });
