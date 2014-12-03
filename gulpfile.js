@@ -14,7 +14,7 @@ var gulp = require("gulp"),
 
     gulp.task("copy", function(){
        gulp.src("index.js")
-           .pipe.(rename("index.min.js"))
+           .pipe(rename("index.min.js"))
            .pipe(gulp.dest("dist"));
     });
 
