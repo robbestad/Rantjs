@@ -1,2 +1,3 @@
 dist
+del
 node_modules

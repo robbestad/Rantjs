@@ -1,191 +1,5 @@
-(function () {
-
-    var arrayMethods = {
-        /**
-         * Returns a shallow copy of this array
-         */
-        copy: function () {
-            return this.slice(0);
-        },
-
-        /**
-         * Returns true if this array contains 'element', returns false otherwise
-         */
-        contains: function (element) {
-            return this.indexOf(element) >= 0;
-        },
-
-
-        /**
-         * Returns a copy of this array, removing the elements
-         *         'from' index 'to' index within it
-         */
-        remove: function (from, to) {
-            var res = [];
-            var i = 0, j = 0;
-            for (i = 0; i < from; i++) {
-                res[i] = this[i];
-            }
-            j = i;
-            for (i = to; i < this.length; i++) {
-                res[j++] = this[i];
-            }
-            return res;
-        },
-
-        /**
-         * Returns a copy of this array, rotated 'n' places,
-         *     counterclockwise if 'n' is positive, clockwise otherwise
-         */
-        rotate: function (n) {
-            if (!n) return this.slice(0);
-            var length = this.length;
-            var res = new Array(length);
-            var thisIndex = (n > 0) ? n : length + n, i = 0, j = 0;
-            for (i = thisIndex; i < length; i++) {
-                res[j++] = this[i];
-            }
-            for (i = 0; i < thisIndex; i++) {
-                res[j++] = this[i];
-            }
-            return res;
-        },
-
-        /**
-         * Returns a copy of this array, removing but
-         *         the first 'n' elements from it
-         *         assumes n=1 when called with no arguments.
-         */
-        skipFirst: function (n) {
-            if (n === 'undefined') n = 1;
-            return this.slice(n);
-        },
-
-        /**
-         * Returns a copy of this array, removing
-         *         but the last 'n' elements from it
-         *         assumes n=1 when called with no arguments.
-         */
-        skipLast: function (n) {
-            if (n === 'undefined') n = 1;
-            if (n > this.length) return [];
-            return this.slice(0, this.length - n);
-        },
-
-        /**
-         * Returns a copy of this array,
-         *         sorting its elements randomly
-         */
-
-        shuffle: function () {
-            array = this.splice(0);
-            var m = array.length, t, i;
-
-            // While there remain elements to shuffle…
-            while (m) {
-
-                // Pick a remaining element…
-                i = Math.floor(Math.random() * m--);
-
-                // And swap it with the current element.
-                t = array[m];
-                array[m] = array[i];
-                array[i] = t;
-            }
-
-            return array;
-        },
-
-        /**
-         * Returns an unique array
-         */
-        makeUnique: function(){
-        var u = {}, a = [];
-        for(var i = 0, l = this.length; i < l; ++i){
-            if(u.hasOwnProperty(this[i])) {
-                continue;
-            }
-            a.push(this[i]);
-            u[this[i]] = 1;
-        }
-        return a;
-        },
-
-        /**
-         * Returns this associative array length
-         */
-        getAssociativeArrayLength: function () {
-            return this.length;
-        },
-
-        /**
-         * Returns a copy of this array that contains the difference
-         *         between source array and 'array'
-         */
-        difference: function (array) {
-            var filterFunc = filterOnOtherArray_diff.bind(array);
-            return this.filter(filterFunc);
-        },
-
-        /**
-         * Returns a copy of this array that contains the
-         *         intersection between source array and 'array'
-         */
-        intersection: function (array) {
-            var filterFunc = filterOnOtherArray_inter.bind(array);
-            return this.filter(filterFunc);
-        },
-
-        /**
-         * Returns a copy of this array that contains the union
-         *   between source array with 'array', removing duplicates
-         *    ! fails with a sparse array !
-         */
-        union: function (array) {
-            var obj = {}, res = [], i = 0, k = 0;
-            for (i = 0; i < this.length; i++) {
-                obj[this[i]] = this[i];
-            }
-            for (i = 0; i < array.length; i++) {
-                obj[array[i]] = array[i];
-            }
-            for (k in obj) {
-                res.push(obj[k]);
-            }
-            return res;
-        }
-    };
-
-    // let's install those methods on the prototype
-    for (var newMethodName in arrayMethods) {
-        installFunction(newMethodName, arrayMethods[newMethodName]);
-    }
-
-    function installFunction(name, fn) {
-        if (Array.prototype[name]) throw ('Array method ' + name + '() already defined.');
-        Object.defineProperty(Array.prototype, name, {
-            value: fn
-        });
-    }
-
-    function filterOnOtherArray_diff(arr, i) {
-        return (arr.indexOf(i) < 0);
-    }
-
-    function filterOnOtherArray_inter(arr, i) {
-        return (arr.indexOf(i) >= 0);
-    }
-})();
-
-//var simpleRant= function() {
 function simpleRant() {
 
-    var amount = ["a few", "a bunch of", "some", "many more"];
-    var dic_faced = ["smiled", "frowned", "grimaced", "grinned evilly", "grinned cheekily", "sneered", "puckered", "smirked", "snarled", "snickered", "pouted"];
-
-    // <name-male> likes to <verb-transitive> <noun.plural> with <pron.poss-male> pet <noun-animal> on <time_noun.plural-dayofweek>.
-    <!-- inject:js -->
-    <!-- endinject -->
 
     this.sentence = function () {
         return 'instance method';
@@ -259,7 +73,7 @@ function simpleRant() {
     this.getAmount = function () {
         var num = Math.floor(Math.random() * amount.length);
         return amount[num];
-   };
+    };
     this.getRelationship = function (plural) {
         var num = Math.floor(Math.random() * dic_rel.length);
         return dic_rel[num].split("/")[plural];
@@ -307,10 +121,7 @@ function simpleRant() {
         var num = Math.floor(Math.random() * dic_face.length);
         return dic_face[num];
     };
-    this.getFacialExpressionVerbed = function () {
-        var num = Math.floor(Math.random() * dic_faced.length);
-        return dic_faced[num];
-    };
+
     this.getCoordinatingConjunction = function () {
         var num = Math.floor(Math.random() * dic_conj.length);
         return dic_conj[num];
@@ -632,7 +443,7 @@ function simpleRant() {
                         if(matches[1].match('dayofweek','g')){
                             replacement.push(this.getTimeDayOfWeek(plural));
                         } else {
-                        replacement.push(this.getTimeNoun(plural));
+                            replacement.push(this.getTimeNoun(plural));
                         }
                         i--;
                     }
@@ -811,21 +622,21 @@ function simpleRant() {
             }
 
 
-            if (matches[1] == "facial_expression.ed") {
-                if(!facialexpressioned_matched) {
-                    replacement = [];
-                    i = result.match(/\<facial_expression.ed\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getFacialExpressionVerbed());
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<facial_expression.ed>/g, function () {
-                        return replacement[i++];
-                    });
+            if (matches[1] == "facialexpression.ed") {
+                //if(!facialexpressioned_matched) {
+                replacement = [];
+                i = result.match(/\<facialexpression.ed\>/g).length;
+                while (i > 0) {
+                    replacement.push(this.getFacialExpressionVerbed());
+                    i--;
                 }
-                facialexpressioned_matched = true;
+
+                i = 0;
+                result = result.replace(/\<facialexpression.ed>/g, function () {
+                    return replacement[i++];
+                });
+                //}
+                //facialexpressioned_matched = true;
             }
             //console.log(matches[1]);
         }
@@ -836,72 +647,8 @@ function simpleRant() {
     this.vowel = function () {
     }
 }
-// a first class functional object
-//
-//simpleRant.prototype.sentence = function () {
-//    return 'prototype method';
-//};
-//
-//
-//simpleRant.prototype.sentence = function () {
 
 
-simpleRant.extend=function(input){
-    if(matches[1].match('time_noun(|.plural)(|month)')) {
-        if("undefined" == timenounplural) var timenounplural=false;
-        if(!timenounplural) {
-            timenounplural = true;
-            replacement = [];
-            var re = new RegExp( matches[1], 'g');
-            i = result.match(re).length;
-            var plural=0;
-            if(matches[1].match('plural','g')){
-                plural=1;
-            }
-
-            while (i > 0) {
-                if(matches[1].match('timeofday','g')){
-                    replacement.push(this.getTimeOfDay(plural));
-                } else
-                if(matches[1].match('month','g')){
-                    replacement.push(this.getTimeOfMonth(plural));
-                } else
-                if(matches[1].match('dayofweek','g')){
-                    replacement.push(this.getTimeDayOfWeek(plural));
-                } else {
-                    replacement.push(this.getTimeNoun(plural));
-                }
-                i--;
-            }
-
-            var re = new RegExp('<'+matches[1]+'>', 'g');
-            result = result.replace(re, function () {
-                return replacement[i++];
-            });
-        }
-    }
-};
-module.exports.simpleRant = simpleRant;
-//
-//// Test
-//rant = new simpleRant;
-//var result = rant.rantConstructor('<yes>, I need a bunch of <adjective> <noun.plural>');
-//console.log(result);
-//var result = rant.rantConstructor('<exclamation>, <adjective> <noun.plural>');
-//console.log(result);
-//var result = rant.rantConstructor('<title> <firstname> <lastname>, <relationship> of <firstname>');
-//var result = rant.rantConstructor('<firstname> said with a wry <facialexpression> and <bent_facial_expression>');
-//console.log(result);
-//var result = rant.rantConstructor('<color> <color.plural>');
-//console.log(result);
-
-/*
-
- API:
- <yes> <no>
-
-
- */
-
-
-
+if('undefined' != typeof module){
+    module.exports.simpleRant = simpleRant;
+}

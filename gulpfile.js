@@ -7,16 +7,21 @@ var gulp = require("gulp"),
     rename = require("gulp-rename"),
     csso = require("gulp-csso"),
     autoprefixer = require('gulp-autoprefixer'),
+    handleErrors = require('./util/handleErrors'),
+    streamqueue  = require('streamqueue'),
+    concat = require("gulp-concat"),
     config = require("./config").nodemon.development;
 
     gulp.task("concatjs", function(){
-        gulp.src(
-            [
-                "./source/arrayMethods.js",
-                "./source/arrayMethods.js"
-            ])
-            .pipe(rename("rant.js"))
-            .pipe(gulp.dest("./"));
+        return streamqueue({ objectMode: true },
+            gulp.src('./source/arrayMethods.js'),
+            gulp.src('./source/dic/**/*'),
+            gulp.src('./source/core/simpleRant.js'),
+            gulp.src('./source/extensions/**/*')
+        )
+            .pipe(concat('simpleRant.js'))
+            .pipe(gulp.dest('./'))
+            .on('error', handleErrors);
     });
 
     gulp.task("scripts", function(){
@@ -39,11 +44,16 @@ var gulp = require("gulp"),
         'perl resources/parseAll.pl'
     ]));
 
+    gulp.task("test", shell.task([
+        'npm run-script coverage'
+    ]));
+
     gulp.task("default", ["nodemon"], function(){
         gulp.watch(["resources/"], ["parse"]);
         gulp.watch(["./style.scss"], ["sass"]);
         gulp.watch(["./index.js"], ["scripts"]);
-    })
+        gulp.watch(["./test"], ["test"]);
+    });
 
     gulp.task('nodemon', function() {
         nodemon(config)

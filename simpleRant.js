@@ -84,15 +84,15 @@
          * Returns an unique array
          */
         makeUnique: function(){
-        var u = {}, a = [];
-        for(var i = 0, l = this.length; i < l; ++i){
-            if(u.hasOwnProperty(this[i])) {
-                continue;
+            var u = {}, a = [];
+            for(var i = 0, l = this.length; i < l; ++i){
+                if(u.hasOwnProperty(this[i])) {
+                    continue;
+                }
+                a.push(this[i]);
+                u[this[i]] = 1;
             }
-            a.push(this[i]);
-            u[this[i]] = 1;
-        }
-        return a;
+            return a;
         },
 
         /**
@@ -163,6 +163,7 @@
 
 var amount = ["a few", "a bunch of", "some", "many more"];
 var dic_faced = ["smiled", "frowned", "grimaced", "grinned evilly", "grinned cheekily", "sneered", "puckered", "smirked", "snarled", "snickered", "pouted"];
+
 
 var dic_adj=["informative/informativeness","infectious/infectiousness","infeasible/infeasibility"];
 var dic_adj_weather = ["sunny/sunniness", "rainy/raininess", "cloudy/cloudiness", "snowy/snowiness", "moonlit/moonlight", "starry/starriness", "foggy/fogginess"];
@@ -326,8 +327,6 @@ var dic_yn=[];
 var dic_yn_yes = ["", "yes", "yayaya", "yep", "yeppers", "definitely", "absolutely", "without a doubt", "indeed", "affirmative", "undoubtedly", "undeniably", "yes/yes", "hell yes", "ya", "certainly", "obviously", "oh yes"];
 var dic_yn_no = ["I couldn't agree more", "no", "definitely not", "absolutely not", "no way", "impossible", "negative", "nope", "hell no", "nooooo", "not at all", "certainly not", "obviously not", "oh no", "most certainly not", "there's no way"];
 dic_yn = dic_yn.concat(dic_yn_yes,dic_yn_no);
-// <name-male> likes to <verb-transitive> <noun.plural> with <pron.poss-male> pet <noun-animal> on <time_noun.plural-dayofweek>.
-
 function simpleRant() {
 
 
@@ -403,7 +402,7 @@ function simpleRant() {
     this.getAmount = function () {
         var num = Math.floor(Math.random() * amount.length);
         return amount[num];
-   };
+    };
     this.getRelationship = function (plural) {
         var num = Math.floor(Math.random() * dic_rel.length);
         return dic_rel[num].split("/")[plural];
@@ -773,7 +772,7 @@ function simpleRant() {
                         if(matches[1].match('dayofweek','g')){
                             replacement.push(this.getTimeDayOfWeek(plural));
                         } else {
-                        replacement.push(this.getTimeNoun(plural));
+                            replacement.push(this.getTimeNoun(plural));
                         }
                         i--;
                     }
@@ -954,17 +953,17 @@ function simpleRant() {
 
             if (matches[1] == "facialexpression.ed") {
                 //if(!facialexpressioned_matched) {
-                    replacement = [];
-                    i = result.match(/\<facialexpression.ed\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getFacialExpressionVerbed());
-                        i--;
-                    }
+                replacement = [];
+                i = result.match(/\<facialexpression.ed\>/g).length;
+                while (i > 0) {
+                    replacement.push(this.getFacialExpressionVerbed());
+                    i--;
+                }
 
-                    i = 0;
-                    result = result.replace(/\<facialexpression.ed>/g, function () {
-                        return replacement[i++];
-                    });
+                i = 0;
+                result = result.replace(/\<facialexpression.ed>/g, function () {
+                    return replacement[i++];
+                });
                 //}
                 //facialexpressioned_matched = true;
             }
@@ -977,14 +976,17 @@ function simpleRant() {
     this.vowel = function () {
     }
 }
-// a first class functional object
-//
-//simpleRant.prototype.sentence = function () {
-//    return 'prototype method';
-//};
-//
-//
-//simpleRant.prototype.sentence = function () {
+
+
+if('undefined' != typeof module){
+    module.exports.simpleRant = simpleRant;
+}
+
+simpleRant.prototype.getFacialExpressionVerbed = function () {
+    var num = Math.floor(Math.random() * dic_faced.length);
+    return dic_faced[num];
+};
+
 simpleRant.extend=function(input){
     if(matches[1].match('time_noun(|.plural)(|month)')) {
         if("undefined" == timenounplural) var timenounplural=false;
@@ -1020,36 +1022,3 @@ simpleRant.extend=function(input){
         }
     }
 };
-
-
-simpleRant.prototype.getFacialExpressionVerbed = function () {
-        var num = Math.floor(Math.random() * dic_faced.length);
-        return dic_faced[num];
-};
-
-if('undefined' != typeof module){
-    module.exports.simpleRant = simpleRant;
-}
-//
-//// Test
-//rant = new simpleRant;
-//var result = rant.rantConstructor('<yes>, I need a bunch of <adjective> <noun.plural>');
-//console.log(result);
-//var result = rant.rantConstructor('<exclamation>, <adjective> <noun.plural>');
-//console.log(result);
-//var result = rant.rantConstructor('<title> <firstname> <lastname>, <relationship> of <firstname>');
-//var result = rant.rantConstructor('<firstname> said with a wry <facialexpression> and <bent_facial_expression>');
-//console.log(result);
-//var result = rant.rantConstructor('<color> <color.plural>');
-//console.log(result);
-
-/*
-
- API:
- <yes> <no>
-
-
- */
-
-
-
