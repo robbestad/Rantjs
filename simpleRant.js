@@ -163,6 +163,7 @@
 
 var amount = ["a few", "a bunch of", "some", "many more"];
 var dic_faced = ["smiled", "frowned", "grimaced", "grinned evilly", "grinned cheekily", "sneered", "puckered", "smirked", "snarled", "snickered", "pouted"];
+var dic_pron_female = ["her/she/herself/her/hers"];
 
 
 var dic_adj=["informative/informativeness","infectious/infectiousness","infeasible/infeasibility"];
@@ -327,135 +328,7 @@ var dic_yn=[];
 var dic_yn_yes = ["", "yes", "yayaya", "yep", "yeppers", "definitely", "absolutely", "without a doubt", "indeed", "affirmative", "undoubtedly", "undeniably", "yes/yes", "hell yes", "ya", "certainly", "obviously", "oh yes"];
 var dic_yn_no = ["I couldn't agree more", "no", "definitely not", "absolutely not", "no way", "impossible", "negative", "nope", "hell no", "nooooo", "not at all", "certainly not", "obviously not", "oh no", "most certainly not", "there's no way"];
 dic_yn = dic_yn.concat(dic_yn_yes,dic_yn_no);
-function simpleRant() {
-
-
-    this.sentence = function () {
-        return 'instance method';
-    };
-    this.capitalize = function (s) {
-        return s[0].toUpperCase() + s.slice(1);
-    };
-    this.getTitle = function () {
-        var num = Math.floor(Math.random() * dic_title.length);
-        return dic_title[num];
-    };
-    this.getPossMale = function () {
-        return dic_pron_male[0].split("/")[3];
-    };
-    this.getNounAnimal = function () {
-        var num = Math.floor(Math.random() * dic_noun_animal.length);
-        return dic_noun_animal[num].split("/")[3];
-    };
-    this.getCountry = function() {
-        var num = Math.floor(Math.random() * dic_country.length);
-        return dic_country[num];
-    };
-
-    this.getAdjective = function (plural) {
-        var num = Math.floor(Math.random() * dic_adj.length);
-        return dic_adj[num].split("/")[plural];
-    };
-
-    this.getTimeNoun = function (plural) {
-        var num = Math.floor(Math.random() * dic_timenoun.length);
-        return dic_timenoun[num].split("/")[plural];
-    };
-
-    this.getTimeDayOfWeek = function (plural) {
-        var num = Math.floor(Math.random() * dic_timenoun_dayofweek.length);
-        return dic_timenoun_dayofweek[num].split("/")[plural];
-    };
-    this.getTimeOfDay = function (plural) {
-        var num = Math.floor(Math.random() * dic_timenoun_timeofday.length);
-        return dic_timenoun_timeofday[num].split("/")[plural];
-    };
-    this.getTimeOfMonth = function (plural) {
-        var num = Math.floor(Math.random() * dic_timenoun_month.length);
-        return dic_timenoun_month[num].split("/")[plural];
-    };
-
-
-
-
-
-    this.getVerb = function (plural) {
-        var num = Math.floor(Math.random() * dic_verb.length);
-        return dic_verb[num].split("/")[plural];
-    };
-    this.getColor = function (plural) {
-        var num = Math.floor(Math.random() * dic_color.length);
-        return dic_color[num].split("/")[plural];
-    };
-    this.getNoun = function (plural) {
-        var num = Math.floor(Math.random() * dic_noun.length);
-        return dic_noun[num].split("/")[plural];
-    };
-    this.getNounByType = function (nountype,plural) {
-        if(nountype == "animal"){
-            var num = Math.floor(Math.random() * dic_noun_animal.length);
-            return dic_noun_animal[num].split("/")[plural];
-        }
-
-        return "";
-    };
-    this.getAmount = function () {
-        var num = Math.floor(Math.random() * amount.length);
-        return amount[num];
-    };
-    this.getRelationship = function (plural) {
-        var num = Math.floor(Math.random() * dic_rel.length);
-        return dic_rel[num].split("/")[plural];
-    };
-    this.getTitleMale = function () {
-        var num = Math.floor(Math.random() * dic_title.length);
-        return dic_title[num];
-    };
-    this.getTitleFemale = function () {
-        var num = Math.floor(Math.random() * dic_title.length);
-        return dic_title[num];
-    };
-
-    this.getNameMale = function () {
-        var num = Math.floor(Math.random() * dic_name_male.length);
-        return dic_name_male[num];
-    };
-    this.getNameFemale = function () {
-        var num = Math.floor(Math.random() * dic_name_female.length);
-        return dic_name_female[num];
-    };
-
-
-    this.getYes = function () {
-        var num = Math.floor(Math.random() * dic_yn_yes.length);
-        return dic_yn_yes[num];
-    };
-    this.getNo = function () {
-        var num = Math.floor(Math.random() * dic_yn_no.length);
-        return dic_yn_no[num];
-    };
-    this.getExclamation = function () {
-        var num = Math.floor(Math.random() * dic_emo.length);
-        return dic_emo[num];
-    };
-    this.getFirstName = function () {
-        var num = Math.floor(Math.random() * dic_name.length);
-        return dic_name[num].split("/")[plural];
-    };
-    this.getLastName = function () {
-        var num = Math.floor(Math.random() * dic_name.length);
-        return dic_name[num];
-    };
-    this.getFacialExpression = function () {
-        var num = Math.floor(Math.random() * dic_face.length);
-        return dic_face[num];
-    };
-
-    this.getCoordinatingConjunction = function () {
-        var num = Math.floor(Math.random() * dic_conj.length);
-        return dic_conj[num];
-    };
-
+function SimpleRant() {
 
     this.rantConstructor = function (input) {
         var result = input;
@@ -463,562 +336,772 @@ function simpleRant() {
         var matches;
         var replacement = [], i=0;
 
-        var adj_matched=adj1m=noun0m = noun1m = firstnm = lastnm =
-            title_matched = titlem_matched = titlef_matched = exclamation_matched = yes_matched = no_matched =
-                amount_matched = colorplural_matched = color_matched = mtch_rel=noun3m=adj2m=
-                    relationshipplural_matched=facialexpression_matched=facialexpressioned_matched=
-                        conjunction_matched=verb1m=verb2m=namemm=namefm=verb3m=possm=time1m=false;
-
         while (matches = regex.exec(input)) {
-            //console.log(matches.length);
-            //console.log(matches);
 
+            if (matches[1] == "adv") {
+                if('undefined' == typeof adv1match) var adv1match=false;
+                if(!adv1match) { adv1match = true; result = parseAdverb(this, matches[1], input, result); } }
 
+            if (matches[1].match('^adv-sexy')) {
+                if('undefined' == typeof adv2match) var adv2match=false;
+                if(!adv2match) { adv2match = true; result = parseAdverb(this, matches[1], input, result); } }
+
+            if (matches[1].match('^adv-emotion')) {
+                if('undefined' == typeof advmatch) var advmatch=false;
+                if(!advmatch) { advmatch = true; result = parseAdverb(this, matches[1], input, result); } }
+
+            if (matches[1] == "verb") {
+                if('undefined' == typeof vmatch) var vmatch=false;
+                if(!vmatch) { vmatch = true; result = parseVerb(this, input, result); } }
+
+            if (matches[1] == "yes") {
+                if('undefined' == typeof ymatch) var ymatch=false;
+                if(!ymatch) { ymatch = true; result = parseYes(this, input, result); } }
+
+            if (matches[1] == "no") {
+                if('undefined' == typeof nomatch) var nomatch=false;
+                if(!nomatch) { nomatch = true; result = parseNo(this, input, result); } }
 
             if (matches[1] == "pron.poss-male") {
-                if(!possm) {
-                    replacement = [];
-                    i = result.match(/\<pron.poss-male\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getPossMale());
-                        i--;
-                    }
+                if('undefined' == typeof possmatch) var possmatch=false;
+                if(!possmatch) { possmatch = true; result = parsePronMale(this, input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<pron.poss-male>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                possm = true;
-            }
-            if (matches[1] == "verb") {
-                if(!verb1m) {
-                    replacement = [];
-                    i = result.match(/\<verb\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getVerb(0));
-                        i--;
-                    }
+            if (matches[1] == "pron.poss-female") {
+                if('undefined' == typeof possfmatch) var possfmatch=false;
+                if(!possfmatch) { possfmatch = true; result = parsePronFemale(this, input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<verb>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                verb1m = true;
-            }
             if (matches[1] == "verb-transitive") {
-                if(!verb3m) {
-                    replacement = [];
-                    i = result.match(/\<verb-transitive\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getVerb(0));
-                        i--;
-                    }
+                if('undefined' == typeof vtmatch) var vtmatch=false;
+                if(!vtmatch) { vtmatch = true; result = parseVerbTransitive(this, input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<verb-transitive>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                verb3m = true;
-            }
             if (matches[1] == "verb.ed") {
-                if(!verb2m) {
-                    replacement = [];
-                    i = result.match(/\<verb.ed\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getVerb(2));
-                        i--;
-                    }
+                if('undefined' == typeof vematch) var vematch=false;
+                if(!vematch) { vematch = true; result = parseVerbed(this, input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<verb.ed>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                verb2m = true;
-            }
             if (matches[1] == "title") {
-                if(!title_matched) {
-                    replacement = [];
-                    i = result.match(/\<title\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getTitle());
-                        i--;
-                    }
+                if('undefined' == typeof tmatch) var tmatch=false;
+                if(!tmatch) { tmatch = true; result = parseTitle(this, input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<title>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                title_matched = true;
-            }
-            if (matches[1] == "name-female") {
-                if(!namefm) {
-                    replacement = [];
-                    i = result.match(/\<name-female\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getNameFemale());
-                        i--;
-                    }
+            if (matches[1] == "title-male") {
+                if('undefined' == typeof tmmatch) var tmmatch=false;
+                if(!tmmatch) { tmmatch = true; result = parseTitleMale(this, input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<name-female>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                namefm = true;
-            }
             if (matches[1] == "name-male") {
-                if(!namemm) {
-                    replacement = [];
-                    i = result.match(/\<name-male\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getNameMale());
-                        i--;
-                    }
+                if('undefined' == typeof mmmatch) var mmmatch=false;
+                if(!mmmatch) { mmmatch = true; result = parseNameMale(this, input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<name-male>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                namemm = true;
-            }
-            if (matches[1] == "title:male") {
-                if(!titlem_matched) {
-                    replacement = [];
-                    i = result.match(/\<title.male\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getTitleMale());
-                        i--;
-                    }
+            if (matches[1] == "name-female") {
+                if('undefined' == typeof tmfatch) var tmfatch=false;
+                if(!tmfatch) { tmfatch = true; result = parseNameFemale(this, input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<title.male>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                titlem_matched = true;
-            }
-            if (matches[1] == "yes") {
-                if(!yes_matched) {
-                    replacement = [];
-                    i = result.match(/\<yes\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getYes());
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<yes>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                yes_matched = true;
-            }
-            if (matches[1] == "no") {
-                if(!no_matched) {
-                    replacement = [];
-                    i = result.match(/\<no\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getNo());
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<no>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                no_matched = true;
-            }
             if (matches[1] == "amount") {
-                if(!amount_matched) {
-                    replacement = [];
-                    i = result.match(/\<amount\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getAmount());
-                        i--;
-                    }
+                if('undefined' == typeof amatch) var amatch=false;
+                if(!amatch) { amatch = true; result = parseAmount(this, input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<amount>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                no_matched = true;
+            if (matches[1] == "adj") {
+                if('undefined' == typeof adjmatch) var adjmatch=false;
+                if(!adjmatch) { adjmatch = true; result = parseAdjective(this, matches[1], input, result); } }
 
-            }
-            if ((matches[1] == "adj")) {
-                if(!adj_matched) {
-                    replacement = [];
-                    i = result.match(/\<adj\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getAdjective(0));
-                        i--;
-                    }
+            if (matches[1] == "adj.plural") {
+                if('undefined' == typeof adjpmatch) var adjpmatch=false;
+                if(!adjpmatch) { adjpmatch = true; result = parseAdjective(this, matches[1], input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<adj>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                adj_matched = true;
-            }
-            if ((matches[1] == "adj.plural") || (matches[1] == "adj.plural")) {
-                if(!adj1m) {
-                    replacement = [];
-                    i = result.match(/\<adj.plural\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getAdjective(1));
-                        i--;
-                    }
+            if (matches[1].match('^noun$')) {
+                if('undefined' == typeof nmatch) var nmatch=false;
+                if(!nmatch) { nmatch = true; result = parseNouns(this, matches[1], input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<adj.plural>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                adj1m = true;
-            }
+            if (matches[1].match('^noun.plural$')) {
+                if('undefined' == typeof nplmatch) var nplmatch=false;
+                if(!nplmatch) { nplmatch = true; result = parseNouns(this, matches[1], input, result); } }
 
+            if (matches[1].match('^noun-animal$')) {
+                if('undefined' == typeof nanmmatch) var nanmmatch=false;
+                if(!nanmmatch) { nanmmatch = true; result = parseNouns(this, matches[1], input, result); } }
 
-            if (matches[1] == "noun") {
-                if(!noun0m) {
-                    replacement = [];
-                    i = result.match(/\<noun\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getNoun(0));
-                        i--;
-                    }
+            if (matches[1].match('^time$')) {
+                if('undefined' == typeof tn1match) var tn1match=false;
+                if(!tn1match) { tn1match = true; result = parseTimeNoun(this, matches[1], input, result); } }
 
-                    i = 0;
-                    result = result.replace(/\<noun>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                noun0m = true;
-            }
+            if (matches[1].match('^time-month$')) {
+                if('undefined' == typeof tn3match) var tn3match=false;
+                if(!tn3match) { tn3match = true; result = parseTimeNoun(this, matches[1], input, result); } }
 
-            if(matches[1].match('noun-animal')) {
-                if(!noun3m) {
-                    replacement = [];
-                    var re = new RegExp( matches[1], 'g');
-                    i = result.match(re).length;
-                    var plural=0;
-                    if(matches[1].match('plural','g')){
-                        plural=1;
-                    }
+            if (matches[1].match('^time-dayofweek(|.plural)')) {
+                if('undefined' == typeof tn5match) var tn5match=false;
+                if(!tn5match) { tn5match = true; result = parseTimeNoun(this, matches[1], input, result); } }
 
-                    while (i > 0) {
-                        replacement.push(this.getNounByType('animal',plural));
-                        i--;
-                    }
+            if (matches[1].match('^time-month.plural$')) {
+                if('undefined' == typeof tn4match) var tn4match=false;
+                if(!tn4match) { tn4match = true; result = parseTimeNoun(this, matches[1], input, result); } }
 
-                    var re = new RegExp('<'+matches[1]+'>', 'g');
-                    result = result.replace(re, function () {
-                        return replacement[i++];
-                    });
-                }
-                noun3m = true;
-            }
+            if (matches[1].match('^time.plural$')) {
+                if('undefined' == typeof tn2match) var tn2match=false;
+                if(!tn2match) { tn2match = true; result = parseTimeNoun(this, matches[1], input, result); } }
 
-            if(matches[1].match('adj(|.plural)$')) {
-                if(!adj2m) {
-                    replacement = [];
-                    var re = new RegExp( matches[1], 'g');
-                    i = result.match(re).length;
-                    var plural=0;
-                    if(matches[1].match('plural','g')){
-                        plural=1;
-                    }
+            if (matches[1].match('^exclamation')) {
+                if('undefined' == typeof exmatch) var exmatch=false;
+                if(!exmatch) { exmatch = true; result = parseExclamation(this, matches[1], input, result); } }
 
-                    while (i > 0) {
-                        replacement.push(this.getAdjective(plural));
-                        i--;
-                    }
+            if (matches[1].match('^color(|.plural)')) {
+                if('undefined' == typeof clmatch) var clmatch=false;
+                if(!clmatch) { clmatch = true; result = parseColor(this, matches[1], input, result); } }
 
-                    var re = new RegExp('<'+matches[1]+'>', 'g');
-                    result = result.replace(re, function () {
-                        return replacement[i++];
-                    });
-                }
-                adj2m = true;
-            }
+            if (matches[1].match('^conjunction$')) {
+                if('undefined' == typeof conjmatch) var conjmatch=false;
+                if(!conjmatch) { conjmatch = true; result = parseConjunction(this, matches[1], input, result); } }
 
+            if (matches[1].match('^relationship(|.plural)')) {
+                if('undefined' == typeof relmatch) var relmatch=false;
+                if(!relmatch) { relmatch = true; result = parseRelationship(this, matches[1], input, result); } }
 
-            if(matches[1].match('time_noun(|.plural)(|dayofweek)')) {
-                if(undefined == timenounplural) var timenounplural=false;
-                if(!timenounplural) {
-                    timenounplural = true;
-                    replacement = [];
-                    var re = new RegExp( matches[1], 'g');
-                    i = result.match(re).length;
-                    var plural=0;
-                    if(matches[1].match('plural','g')){
-                        plural=1;
-                    }
+            if (matches[1].match('^face(|.d)')) {
+                if('undefined' == typeof fcmatch) var fcmatch=false;
+                if(!fcmatch) { fcmatch = true; result = parseFace(this, matches[1], input, result); } }
 
-                    while (i > 0) {
-                        if(matches[1].match('timeofday','g')){
-                            replacement.push(this.getTimeOfDay(plural));
-                        } else
-                        if(matches[1].match('month','g')){
-                            replacement.push(this.getTimeOfMonth(plural));
-                        } else
-                        if(matches[1].match('dayofweek','g')){
-                            replacement.push(this.getTimeDayOfWeek(plural));
-                        } else {
-                            replacement.push(this.getTimeNoun(plural));
-                        }
-                        i--;
-                    }
-
-                    var re = new RegExp('<'+matches[1]+'>', 'g');
-                    result = result.replace(re, function () {
-                        return replacement[i++];
-                    });
-                }
-            }
-
-
-
-
-
-
-            if (matches[1] == "noun.plural") {
-                if(!noun1m) {
-                    replacement = [];
-                    i = result.match(/\<noun.plural\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getNoun(1));
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<noun.plural>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                noun1m = true;
-            }
-            if (matches[1] == "exclamation") {
-                if(!exclamation_matched) {
-                    replacement = [];
-                    i = result.match(/\<exclamation\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getExclamation());
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<exclamation>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                exclamation_matched = true;
-            }
-            if (matches[1] == "firstname") {
-                if(!firstnm) {
-                    replacement = [];
-                    i = result.match(/\<firstname\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getFirstName());
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<firstname>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                firstnm = true;
-            }
-            if (matches[1] == "lastname") {
-                if(!lastnm) {
-                    replacement = [];
-                    i = result.match(/\<lastname\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getLastName());
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<lastname>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                lastnm = true;
-            }
-            if (matches[1] == "color") {
-                if(!color_matched) {
-                    replacement = [];
-                    i = result.match(/\<color\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getColor(0));
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<color>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                color_matched = true;
-            }
-            if (matches[1] == "color.plural") {
-                if(!colorplural_matched) {
-                    replacement = [];
-                    i = result.match(/\<color.plural\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getColor(1));
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<color.plural>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                colorplural_matched = true;
-            }
-            if (matches[1] == "relationship") {
-                if(!mtch_rel) {
-                    replacement = [];
-                    i = result.match(/\<relationship\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getRelationship(0));
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<relationship>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                mtch_rel = true;
-            }
-            if (matches[1] == "relationship.plural") {
-                if(!relationshipplural_matched) {
-                    replacement = [];
-                    i = result.match(/\<relationship.plural\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getRelationship(1));
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<relationship.plural>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                relationshipplural_matched = true;
-            }
-            if (matches[1] == "facialexpression") {
-                if(!facialexpression_matched) {
-                    replacement = [];
-                    i = result.match(/\<facialexpression\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getFacialExpression());
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<facialexpression>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                facialexpression_matched = true;
-            }
-            if (matches[1] == "conjunction") {
-                if(!conjunction_matched) {
-                    replacement = [];
-                    i = result.match(/\<conjunction\>/g).length;
-                    while (i > 0) {
-                        replacement.push(this.getCoordinatingConjunction());
-                        i--;
-                    }
-
-                    i = 0;
-                    result = result.replace(/\<conjunction>/g, function () {
-                        return replacement[i++];
-                    });
-                }
-                conjunction_matched = true;
-            }
-
-
-            if (matches[1] == "facialexpression.ed") {
-                //if(!facialexpressioned_matched) {
-                replacement = [];
-                i = result.match(/\<facialexpression.ed\>/g).length;
-                while (i > 0) {
-                    replacement.push(this.getFacialExpressionVerbed());
-                    i--;
-                }
-
-                i = 0;
-                result = result.replace(/\<facialexpression.ed>/g, function () {
-                    return replacement[i++];
-                });
-                //}
-                //facialexpressioned_matched = true;
-            }
-            //console.log(matches[1]);
         }
         return this.capitalize(result);
     };
 
 
-    this.vowel = function () {
-    }
 }
 
 
 if('undefined' != typeof module){
-    module.exports.simpleRant = simpleRant;
+    module.exports.SimpleRant = SimpleRant;
 }
+var parseAdjective = function (rant, matched, input, result) {
+    if(matched.match('adj(|.plural)$')) {
+        replacement = [];
+        var re = new RegExp( matched, 'g');
+        i = result.match(re).length;
+        var plural=0;
+        if(matched.match('plural','g')){
+            plural=1;
+        }
 
-simpleRant.prototype.getFacialExpressionVerbed = function () {
+        while (i > 0) {
+            replacement.push(rant.getAdjective(plural));
+            i--;
+        }
+
+        var re = new RegExp('<'+matched+'>', 'g');
+        result = result.replace(re, function () {
+            return replacement[i++];
+        });
+    }
+    return result;
+};
+
+
+
+var parseAdverb = function (rant, matched, input, result) {
+    if (matched.match('adv(|-emotion)(|-sexy)')) {
+        replacement = [];
+        var re;
+
+        re = new RegExp(matched, 'g');
+        i = result.match(re).length;
+
+        while (i > 0) {
+            if (matched.match('sexy', 'g')) {
+                replacement.push(rant.getAdverbByType('sexy'));
+            }
+            else
+            if (matched.match('emotion', 'g')) {
+                replacement.push(rant.getAdverbByType('emotion'));
+
+            } else {
+                replacement.push(rant.getAdverb());
+            }
+            i--;
+        }
+
+        re = new RegExp('<' + matched + '>', 'g');
+        result = result.replace(re, function () {
+            return replacement[i++];
+        });
+    }
+    return result;
+};
+
+
+var parseColor = function (rant, matched, input, result) {
+    if (matched.match('color(|.plural)')) {
+        replacement = [];
+        var re = new RegExp(matched, 'g');
+        i = result.match(re).length;
+        var plural = 0;
+        if (matched.match('plural', 'g')) {
+            plural = 1;
+        }
+
+        while (i > 0) {
+            replacement.push(rant.getColor(plural));
+            i--;
+        }
+
+        var re = new RegExp('<' + matched + '>', 'g');
+        result = result.replace(re, function () {
+            return replacement[i++];
+        });
+    }
+    return result;
+};
+
+var parseConjunction = function (rant, matched, input, result) {
+    if (matched.match('conjunction$')) {
+        replacement = [];
+        var re = new RegExp(matched, 'g');
+        i = result.match(re).length;
+
+        while (i > 0) {
+            replacement.push(rant.getCoordinatingConjunction());
+            i--;
+        }
+
+        var re = new RegExp('<' + matched + '>', 'g');
+        result = result.replace(re, function () {
+            return replacement[i++];
+        });
+    }
+    return result;
+};
+
+var parseExclamation = function (rant, matched, input, result) {
+    if (matched.match('exclamation')) {
+        replacement = [];
+        var re = new RegExp(matched, 'g');
+        i = result.match(re).length;
+        //var plural = 0;
+        //if (matched.match('plural', 'g')) {
+        //    plural = 1;
+        //}
+
+        while (i > 0) {
+            replacement.push(rant.getExclamation());
+            i--;
+        }
+
+        var re = new RegExp('<' + matched + '>', 'g');
+        result = result.replace(re, function () {
+            return replacement[i++];
+        });
+    }
+    return result;
+};
+var parseFace = function (rant, matched, input, result) {
+    if (matched.match('face(|.d)')) {
+        replacement = [];
+        var re = new RegExp(matched, 'g');
+        i = result.match(re).length;
+        //var plural = 0;
+
+
+        while (i > 0) {
+            if (matched.match('face.d', 'g')) {
+                replacement.push(rant.getFacialExpressionVerbed());
+            } else {
+                replacement.push(rant.getFacialExpression());
+            }
+            i--;
+        }
+
+        var re = new RegExp('<' + matched + '>', 'g');
+        result = result.replace(re, function () {
+            return replacement[i++];
+        });
+    }
+    return result;
+};
+
+var parseAmount = function (rant, input, result) {
+    var result;
+    replacement = [];
+    i = result.match(/\<amount\>/g).length;
+    while (i > 0) {
+        var str = rant.getAmount();
+        if (str.match(/\//)) str.split("/")[0];
+        replacement.push(str);
+        i--;
+    }
+
+    i = 0;
+    result = result.replace(/\<amount>/g, function () {
+        return replacement[i++];
+    });
+    return result;
+};
+
+var parseNameMale = function(rant, input, result) {
+    var result;
+    replacement = [];
+    i = result.match(/\<name-male\>/g).length;
+    while (i > 0) {
+        var str=rant.getNameMale();
+        if(str.match(/\//)) str.split("/")[0];
+        replacement.push(str);
+        i--;
+    }
+
+    i = 0;
+    result = result.replace(/\<name-male>/g, function () {
+        return replacement[i++];
+    });
+    return result;
+
+};
+
+var parseNameFemale = function(rant, input, result) {
+    var result;
+    replacement = [];
+    i = result.match(/\<name-female\>/g).length;
+    while (i > 0) {
+        var str=rant.getNameFemale();
+        if(str.match(/\//)) str.split("/")[0];
+        replacement.push(str);
+        i--;
+    }
+
+    i = 0;
+    result = result.replace(/\<name-female>/g, function () {
+        return replacement[i++];
+    });
+    return result;
+
+};
+var parseNouns = function (rant, matched, input, result) {
+    if (matched.match('noun(|animal)(|.plural)')) {
+        replacement = [];
+        var re = new RegExp(matched, 'g');
+        i = result.match(re).length;
+        var plural = 0;
+        if (matched.match('plural', 'g')) {
+            plural = 1;
+        }
+
+        while (i > 0) {
+            if (matched.match('animal', 'g')) {
+                var str=rant.getNounByType('animal', plural);
+                if(str.match(/\//)) str.split("/")[0];
+                replacement.push(str);
+
+            } else {
+                var str=rant.getNoun(plural);
+                if(str.match(/\//)) str.split("/")[0];
+                replacement.push(str);
+            }
+
+            i--;
+        }
+
+
+        var re = new RegExp('<' + matched + '>', 'g');
+        result = result.replace(re, function () {
+            return replacement[i++];
+        });
+    }
+    return result;
+};
+
+
+var parsePronMale = function(rant, input, result) {
+    var result;
+    replacement = [];
+    i = result.match(/\<pron.poss-male\>/g).length;
+    while (i > 0) {
+        var str=rant.getPossMale();
+        if(str.match(/\//)) str.split("/")[0];
+        replacement.push(str);
+        i--;
+    }
+
+    i = 0;
+    result = result.replace(/\<pron.poss-male>/g, function () {
+        return replacement[i++];
+    });
+
+    return result;
+
+};
+
+var parsePronFemale = function(rant, input, result) {
+    var result;
+    replacement = [];
+    i = result.match(/\<pron.poss-female\>/g).length;
+    while (i > 0) {
+        var str=rant.getPossFemale();
+        if(str.match(/\//)) str.split("/")[0];
+        replacement.push(str);
+        i--;
+    }
+
+    i = 0;
+    result = result.replace(/\<pron.poss-female>/g, function () {
+        return replacement[i++];
+    });
+
+    return result;
+
+};
+
+var parseRelationship = function (rant, matched, input, result) {
+    if (matched.match('rel(|.plural)')) {
+        replacement = [];
+        var re = new RegExp(matched, 'g');
+        i = result.match(re).length;
+        var plural = 0;
+        if (matched.match('plural', 'g')) {
+            plural = 1;
+        }
+
+        while (i > 0) {
+            replacement.push(rant.getRelationship(plural));
+            i--;
+        }
+
+        var re = new RegExp('<' + matched + '>', 'g');
+        result = result.replace(re, function () {
+            return replacement[i++];
+        });
+    }
+    return result;
+};
+var parseTimeNoun = function (rant, matched, input, result) {
+    if (matched.match('time(|-month)(|.plural)')) {
+        replacement = [];
+        var re = new RegExp(matched, 'g');
+        i = result.match(re).length;
+        var plural = 0;
+        if (matched.match('plural', 'g')) {
+            plural = 1;
+        }
+
+        while (i > 0) {
+            if(matched == "time-month.plural"){
+            replacement.push(rant.getTimeOfMonth(plural));
+            }
+            if(matched == "time-month"){
+            replacement.push(rant.getTimeOfMonth(0));
+            }
+            if(matched == "time-dayofweek"){
+            replacement.push(rant.getTimeDayOfWeek(plural));
+            }
+            if(matched == "time-dayofweek.plural"){
+            replacement.push(rant.getTimeDayOfWeek(plural));
+            }
+            if(matched == "time"){
+                replacement.push(rant.getTimeNoun(0));
+            }
+            if(matched == "time.plural"){
+                replacement.push(rant.getTimeNoun(1));
+            }
+
+            i--;
+        }
+
+        var re = new RegExp('<' + matched + '>', 'g');
+        result = result.replace(re, function () {
+            return replacement[i++];
+        });
+    }
+    return result;
+};
+
+
+var parseTitle = function(rant, input, result) {
+    var result;
+    replacement = [];
+    i = result.match(/\<title\>/g).length;
+    while (i > 0) {
+        var str=rant.getTitle();
+        if(str.match(/\//)) str.split("/")[0];
+        replacement.push(str);
+        i--;
+    }
+
+    i = 0;
+    result = result.replace(/\<title>/g, function () {
+        return replacement[i++];
+    });
+    return result;
+
+};
+
+var parseTitleMale = function(rant, input, result) {
+    var result;
+    replacement = [];
+    i = result.match(/\<title.male\>/g).length;
+    while (i > 0) {
+        var str=rant.getTitleMale();
+        if(str.match(/\//)) str.split("/")[0];
+        replacement.push(str);
+        i--;
+    }
+
+    i = 0;
+    result = result.replace(/\<title.male>/g, function () {
+        return replacement[i++];
+    });
+    return result;
+
+};
+var parseVerb = function(rant, input, result) {
+        if('undefined' == typeof matched) var matched=false;
+        if(!matched) {
+            var result;
+            matched=true;
+            replacement = [];
+            i = result.match(/\<verb\>/g).length;
+            while (i > 0) {
+                replacement.push(rant.getVerb(0));
+                i--;
+            }
+
+            i = 0;
+            result = result.replace(/\<verb>/g, function () {
+                return replacement[i++];
+            });
+            return result;
+        }
+};
+
+var parseVerbTransitive = function(rant, input, result) {
+    if('undefined' == typeof matched) var matched=false;
+    if(!matched) {
+        var result;
+        matched=true;
+        replacement = [];
+        i = result.match(/\<verb-transitive\>/g).length;
+        while (i > 0) {
+            replacement.push(rant.getVerb(0));
+            i--;
+        }
+
+        i = 0;
+        result = result.replace(/\<verb-transitive>/g, function () {
+            return replacement[i++];
+        });
+        return result;
+    }
+};
+
+var parseVerbed= function(rant, input, result) {
+    if('undefined' == typeof matched) var matched=false;
+    if(!matched) {
+        var result;
+        matched=true;
+        replacement = [];
+        i = result.match(/\<verb.ed\>/g).length;
+        while (i > 0) {
+            replacement.push(rant.getVerb(5));
+            i--;
+        }
+
+        i = 0;
+        result = result.replace(/\<verb.ed>/g, function () {
+            return replacement[i++];
+        });
+        return result;
+    }
+};
+
+var parseYes = function(rant, input, result) {
+        var result;
+        replacement = [];
+        i = result.match(/\<yes\>/g).length;
+        while (i > 0) {
+            var strYes=rant.getYes();
+            if(strYes.match(/\//)) strYes.split("/")[0];
+            replacement.push(strYes);
+            i--;
+        }
+
+        i = 0;
+        result = result.replace(/\<yes>/g, function () {
+            return replacement[i++];
+        });
+        return result;
+
+};
+
+var parseNo = function(rant, input, result) {
+    if('undefined' == typeof matched) var matched=false;
+    if(!matched) {
+        var result;
+        matched=true;
+        replacement = [];
+        i = result.match(/\<no\>/g).length;
+        while (i > 0) {
+            var strNo=rant.getNo();
+            if(strNo.match(/\//)) strNo.split("/")[0];
+            replacement.push(strNo);
+            i--;
+        }
+
+        i = 0;
+        result = result.replace(/\<no>/g, function () {
+            return replacement[i++];
+        });
+        return result;
+    }
+};
+
+
+
+
+SimpleRant.prototype.getFacialExpressionVerbed = function () {
     var num = Math.floor(Math.random() * dic_faced.length);
     return dic_faced[num];
 };
 
-simpleRant.extend=function(input){
-    if(matches[1].match('time_noun(|.plural)(|month)')) {
-        if("undefined" == timenounplural) var timenounplural=false;
-        if(!timenounplural) {
-            timenounplural = true;
-            replacement = [];
-            var re = new RegExp( matches[1], 'g');
-            i = result.match(re).length;
-            var plural=0;
-            if(matches[1].match('plural','g')){
-                plural=1;
-            }
 
-            while (i > 0) {
-                if(matches[1].match('timeofday','g')){
-                    replacement.push(this.getTimeOfDay(plural));
-                } else
-                if(matches[1].match('month','g')){
-                    replacement.push(this.getTimeOfMonth(plural));
-                } else
-                if(matches[1].match('dayofweek','g')){
-                    replacement.push(this.getTimeDayOfWeek(plural));
-                } else {
-                    replacement.push(this.getTimeNoun(plural));
-                }
-                i--;
-            }
+SimpleRant.prototype.capitalize = function (s) {
+    return s[0].toUpperCase() + s.slice(1);
+};
 
-            var re = new RegExp('<'+matches[1]+'>', 'g');
-            result = result.replace(re, function () {
-                return replacement[i++];
-            });
-        }
+
+
+SimpleRant.prototype.getTitle = function () {
+    var num = Math.floor(Math.random() * dic_title.length);
+    return dic_title[num];
+};
+SimpleRant.prototype.getPossMale = function () {
+    return dic_pron_male[0].split("/")[3];
+};
+
+SimpleRant.prototype.getPossFemale = function () {
+    return dic_pron_female[0].split("/")[3];
+};
+
+
+SimpleRant.prototype.getNounAnimal = function () {
+    var num = Math.floor(Math.random() * dic_noun_animal.length);
+    return dic_noun_animal[num].split("/")[3];
+};
+SimpleRant.prototype.getCountry = function() {
+    var num = Math.floor(Math.random() * dic_country.length);
+    return dic_country[num];
+};
+
+SimpleRant.prototype.getAdjective = function (plural) {
+    var num = Math.floor(Math.random() * dic_adj.length);
+    return dic_adj[num].split("/")[plural];
+};
+
+
+SimpleRant.prototype.getAdverb = function() {
+    var num = Math.floor(Math.random() * dic_adv.length);
+    return dic_adv[num];
+};
+
+
+SimpleRant.prototype.getAdverbByType = function (type) {
+    var num;
+    if(type=="emotion"){
+        num = Math.floor(Math.random() * dic_adv_emotion.length);
+        return dic_adv_emotion[num];
+    }
+    if(type=="sexy"){
+        num = Math.floor(Math.random() * dic_adv_sexy.length);
+        return dic_adv_sexy[num];
     }
 };
+
+
+SimpleRant.prototype.getVerb = function (plural) {
+    var num = Math.floor(Math.random() * dic_verb.length);
+    return dic_verb[num].split("/")[plural];
+};
+SimpleRant.prototype.getColor = function (plural) {
+    var num = Math.floor(Math.random() * dic_color.length);
+    return dic_color[num].split("/")[plural];
+};
+SimpleRant.prototype.getNoun = function (plural) {
+    var num = Math.floor(Math.random() * dic_noun.length);
+    return dic_noun[num].split("/")[plural];
+};
+SimpleRant.prototype.getNounByType = function (nountype,plural) {
+    if(nountype == "animal"){
+        var num = Math.floor(Math.random() * dic_noun_animal.length);
+        return dic_noun_animal[num].split("/")[plural];
+    }
+
+    return "";
+};
+SimpleRant.prototype.getAmount = function () {
+    var num = Math.floor(Math.random() * amount.length);
+    return amount[num];
+};
+SimpleRant.prototype.getRelationship = function (plural) {
+    var num = Math.floor(Math.random() * dic_rel.length);
+    return dic_rel[num].split("/")[plural];
+};
+SimpleRant.prototype.getTitleMale = function () {
+    var num = Math.floor(Math.random() * dic_title.length);
+    return dic_title[num];
+};
+SimpleRant.prototype.getTitleFemale = function () {
+    var num = Math.floor(Math.random() * dic_title.length);
+    return dic_title[num];
+};
+
+SimpleRant.prototype.getNameMale = function () {
+    var num = Math.floor(Math.random() * dic_name_male.length);
+    return dic_name_male[num];
+};
+SimpleRant.prototype.getNameFemale = function () {
+    var num = Math.floor(Math.random() * dic_name_female.length);
+    return dic_name_female[num];
+};
+
+
+SimpleRant.prototype.getYes = function () {
+    var num = Math.floor(Math.random() * dic_yn_yes.length);
+    return dic_yn_yes[num];
+};
+SimpleRant.prototype.getNo = function () {
+    var num = Math.floor(Math.random() * dic_yn_no.length);
+    return dic_yn_no[num];
+};
+SimpleRant.prototype.getExclamation = function () {
+    var num = Math.floor(Math.random() * dic_emo.length);
+    return dic_emo[num];
+};
+SimpleRant.prototype.getFirstName = function () {
+    var num = Math.floor(Math.random() * dic_name.length);
+    return dic_name[num].split("/")[plural];
+};
+SimpleRant.prototype.getLastName = function () {
+    var num = Math.floor(Math.random() * dic_name.length);
+    return dic_name[num];
+};
+SimpleRant.prototype.getFacialExpression = function () {
+    var num = Math.floor(Math.random() * dic_face.length);
+    return dic_face[num];
+};
+
+SimpleRant.prototype.getCoordinatingConjunction = function () {
+    var num = Math.floor(Math.random() * dic_conj.length);
+    return dic_conj[num];
+};
+
+
+SimpleRant.prototype.getTimeNoun = function (plural) {
+    var num = Math.floor(Math.random() * dic_timenoun.length);
+    return dic_timenoun[num].split("/")[plural];
+};
+
+SimpleRant.prototype.getTimeDayOfWeek = function (plural) {
+    var num = Math.floor(Math.random() * dic_timenoun_dayofweek.length);
+    return dic_timenoun_dayofweek[num].split("/")[plural];
+};
+SimpleRant.prototype.getTimeOfDay = function (plural) {
+    var num = Math.floor(Math.random() * dic_timenoun_timeofday.length);
+    return dic_timenoun_timeofday[num].split("/")[plural];
+};
+SimpleRant.prototype.getTimeOfMonth = function (plural) {
+    var num = Math.floor(Math.random() * dic_timenoun_month.length);
+    return dic_timenoun_month[num].split("/")[plural];
+};
+
+

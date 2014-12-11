@@ -17,14 +17,15 @@ var gulp = require("gulp"),
             gulp.src('./source/arrayMethods.js'),
             gulp.src('./source/dic/**/*'),
             gulp.src('./source/core/simpleRant.js'),
+            gulp.src('./source/parser/**/*'),
             gulp.src('./source/extensions/**/*')
         )
-            .pipe(concat('simpleRant.js'))
+            .pipe(concat('./simpleRant.js'))
             .pipe(gulp.dest('./'))
             .on('error', handleErrors);
     });
 
-    gulp.task("scripts", function(){
+    gulp.task("scripts", ["concatjs"], function(){
          gulp.src(["./simpleRant.js"])
          .pipe(maps.init())
          .pipe(uglify())
@@ -35,9 +36,9 @@ var gulp = require("gulp"),
     gulp.task("sass", function(){
         gulp.src("./*.scss")
         .pipe(autoprefixer(config.autoprefixer))
-        .pipe(csso())
         .pipe(sass())
-        .pipe(gulp.dest("dist"));
+        .pipe(gulp.dest("dist"))
+        .on('error', handleErrors);
     });
 
     gulp.task("parse", shell.task([
@@ -48,7 +49,7 @@ var gulp = require("gulp"),
         'npm run-script coverage'
     ]));
 
-    gulp.task("default", ["nodemon"], function(){
+    gulp.task("default", ["scripts","nodemon"], function(){
         gulp.watch(["resources/"], ["parse"]);
         gulp.watch(["./style.scss"], ["sass"]);
         gulp.watch(["./index.js"], ["scripts"]);
