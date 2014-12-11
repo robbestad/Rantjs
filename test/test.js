@@ -252,13 +252,237 @@ describe('Get furniture', function () {
     })
 });
 
-describe('All nouns', function () {
-    it('should return three nouns', function () {
+
+describe('Get noun round', function () {
+    it('should return a round', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<noun-animal>|<noun>|<noun.plural>|')
+        var result = r.rantConstructor('<noun-round>')
             .replace(new RegExp("<.*>","g"),"");
-        var count=result.match(/\|+/g).length;
-        assert(count,assert.equal(3,count));
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun body', function () {
+    it('should return a body', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-body>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun liquid', function () {
+    it('should return a liquid', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-liquid>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun insect', function () {
+    it('should return a insect', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-insect>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun clothes', function () {
+    it('should return a clothes', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-clothes>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun plant', function () {
+    it('should return a plant', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-plant>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun person', function () {
+    it('should return a person', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-person>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun long', function () {
+    it('should return a long', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-long>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun ball', function () {
+    it('should return a ball', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-ball>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun article', function () {
+    it('should return a article', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-article>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun drug', function () {
+    it('should return a drug', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-drug>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun fruit', function () {
+    it('should return a fruit', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-fruit>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun container', function () {
+    it('should return a container', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-container>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun instrument', function () {
+    it('should return a instrument', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-instrument>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun sex', function () {
+    it('should return a sex', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-sex>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun job', function () {
+    it('should return a job', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-job>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun weapon', function () {
+    it('should return a weapon', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-weapon>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun hole', function () {
+    it('should return a hole', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-hole>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun food', function () {
+    it('should return a food', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-food>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun vehicle', function () {
+    it('should return a vehicle', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-vehicle>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun animal', function () {
+    it('should return a animal', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-animal>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get noun shape', function () {
+    it('should return a shape', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-shape>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('All nouns', function () {
+    it('should return all nouns', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-animal> <noun> <noun.plural> <noun-furniture> <noun-surface> <noun-tool> ' +
+        '<noun-round> <noun-body> <noun-liquid> <noun-insect> <noun-clothes> <noun-plant> <noun-person> <noun-tool> ' +
+        '<noun-long> <noun-ball> <noun-article> <noun-drug> <noun-fruit> <noun-container <noun-instrument> <noun-sex> ' +
+        '<noun-job> <noun-weapon> <noun-hole> <noun-food> <noun-vehicle> <noun-animal> <noun-shape>');
+        var count=result.match(/\<|\>/g);
+        assert.equal(null,count);
+
     })
 });
 
@@ -339,6 +563,16 @@ describe('Get offensive sentence', function () {
     it('should return an offensive sentence', function () {
         var r = new rant.SimpleRant();
         var result = r.rantConstructor('The <adj> <noun> <adv> <verb.ed> the <adj> <noun> on the <noun-surface>');
+        var count=result.match(/\<|\>/g);
+        assert.equal(null,count);
+    })
+});
+
+
+describe('Get another offensive sentence', function () {
+    it('should return an offensive sentence', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('I like my <noun-shape>-shaped <noun-body.plural>');
         var count=result.match(/\<|\>/g);
         assert.equal(null,count);
     })

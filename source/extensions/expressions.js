@@ -87,7 +87,98 @@ SimpleRant.prototype.getNounByType = function (nountype,plural) {
         var num = Math.floor(Math.random() * dic_noun_furniture.length);
         return dic_noun_furniture[num].split("/")[plural];
     }
-
+    if(nountype == "round"){
+        var num = Math.floor(Math.random() * dic_noun_round.length);
+        return dic_noun_round[num].split("/")[plural];
+    }
+    if(nountype == "body"){
+        var num = Math.floor(Math.random() * dic_noun_body.length);
+        return dic_noun_body[num].split("/")[plural];
+    }
+    if(nountype == "liquid"){
+        var num = Math.floor(Math.random() * dic_noun_liquid.length);
+        return dic_noun_liquid[num].split("/")[plural];
+    }
+    if(nountype == "insect"){
+        var num = Math.floor(Math.random() * dic_noun_insect.length);
+        return dic_noun_insect[num].split("/")[plural];
+    }
+    if(nountype == "clothes"){
+        var num = Math.floor(Math.random() * dic_noun_clothes.length);
+        return dic_noun_clothes[num].split("/")[plural];
+    }
+    if(nountype == "plant"){
+        var num = Math.floor(Math.random() * dic_noun_plant.length);
+        return dic_noun_plant[num].split("/")[plural];
+    }
+    if(nountype == "person"){
+        var num = Math.floor(Math.random() * dic_noun_person.length);
+        return dic_noun_person[num].split("/")[plural];
+    }
+    if(nountype == "tool"){
+        var num = Math.floor(Math.random() * dic_noun_tool.length);
+        return dic_noun_tool[num].split("/")[plural];
+    }
+    if(nountype == "long"){
+        var num = Math.floor(Math.random() * dic_noun_long.length);
+        return dic_noun_long[num].split("/")[plural];
+    }
+    if(nountype == "ball"){
+        var num = Math.floor(Math.random() * dic_noun_ball.length);
+        return dic_noun_ball[num].split("/")[plural];
+    }
+    if(nountype == "article"){
+        var num = Math.floor(Math.random() * dic_noun_article.length);
+        return dic_noun_article[num].split("/")[plural];
+    }
+    if(nountype == "drug"){
+        var num = Math.floor(Math.random() * dic_noun_drug.length);
+        return dic_noun_drug[num].split("/")[plural];
+    }
+    if(nountype == "fruit"){
+        var num = Math.floor(Math.random() * dic_noun_fruit.length);
+        return dic_noun_fruit[num].split("/")[plural];
+    }
+    if(nountype == "container"){
+        var num = Math.floor(Math.random() * dic_noun_container.length);
+        return dic_noun_container[num].split("/")[plural];
+    }
+    if(nountype == "instrument"){
+        var num = Math.floor(Math.random() * dic_noun_instrument.length);
+        return dic_noun_instrument[num].split("/")[plural];
+    }
+    if(nountype == "sex"){
+        var num = Math.floor(Math.random() * dic_noun_sex.length);
+        return dic_noun_sex[num].split("/")[plural];
+    }
+    if(nountype == "job"){
+        var num = Math.floor(Math.random() * dic_noun_job.length);
+        return dic_noun_job[num].split("/")[plural];
+    }
+    if(nountype == "weapon"){
+        var num = Math.floor(Math.random() * dic_noun_weapon.length);
+        return dic_noun_weapon[num].split("/")[plural];
+    }
+    if(nountype == "hole"){
+        var num = Math.floor(Math.random() * dic_noun_hole.length);
+        return dic_noun_hole[num].split("/")[plural];
+    }
+    if(nountype == "food"){
+        var num = Math.floor(Math.random() * dic_noun_food.length);
+        return dic_noun_food[num].split("/")[plural];
+    }
+    if(nountype == "vehicle"){
+        var num = Math.floor(Math.random() * dic_noun_vehicle.length);
+        return dic_noun_vehicle[num].split("/")[plural];
+    }
+    if(nountype == "animal"){
+        var num = Math.floor(Math.random() * dic_noun_animal.length);
+        return dic_noun_animal[num].split("/")[plural];
+    }
+    if(nountype == "shape"){
+        var num = Math.floor(Math.random() * dic_noun_shape.length);
+        return dic_noun_shape[num].split("/")[plural];
+    }
     return "";
 };
 SimpleRant.prototype.getAmount = function () {

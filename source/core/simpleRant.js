@@ -84,10 +84,6 @@ function SimpleRant() {
                 if('undefined' == typeof nplmatch) var nplmatch=false;
                 if(!nplmatch) { nplmatch = true; result = parseNouns(this, matches[1], input, result); } }
 
-            if (matches[1].match('^noun-animal$')) {
-                if('undefined' == typeof nanmmatch) var nanmmatch=false;
-                if(!nanmmatch) { nanmmatch = true; result = parseNouns(this, matches[1], input, result); } }
-
             if (matches[1].match('^noun-tool')) {
                 if('undefined' == typeof toolmatch) var toolmatch=false;
                 if(!toolmatch) { toolmatch = true; result = parseNouns(this, matches[1], input, result); } }
@@ -99,6 +95,95 @@ function SimpleRant() {
             if (matches[1].match('^noun-furniture')) {
                 if('undefined' == typeof furnimatch) var furnimatch=false;
                 if(!furnimatch) { furnimatch = true; result = parseNouns(this, matches[1], input, result); } }
+
+
+            if (matches[1].match('^noun-round')) {
+                if('undefined' == typeof n1m) var n1m=false;
+                if(!n1m) { n1m = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-body')) {
+                if('undefined' == typeof n2m) var n2m=false;
+                if(!n2m) { n2m = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-long')) {
+                if('undefined' == typeof nlmn) var nlmn=false;
+                if(!nlmn) { nlmn = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-liquid')) {
+                if('undefined' == typeof n3m) var n3m=false;
+                if(!n3m) { n3m = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-insect')) {
+                if('undefined' == typeof n4m) var n4m=false;
+                if(!n4m) { n4m = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-clothes')) {
+                if('undefined' == typeof n5m) var n5m=false;
+                if(!n5m) { n5m = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-plant')) {
+                if('undefined' == typeof n6m) var n6m=false;
+                if(!n6m) { n6m = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-person')) {
+                if('undefined' == typeof n7m) var n7m=false;
+                if(!n7m) { n7m = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-ball')) {
+                if('undefined' == typeof n9m) var n9m=false;
+                if(!n9m) { n9m = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-article')) {
+                if('undefined' == typeof n1am) var n1am=false;
+                if(!n1am) { n1am = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-drug')) {
+                if('undefined' == typeof n1bm) var n1bm=false;
+                if(!n1bm) { n1bm = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-fruit')) {
+                if('undefined' == typeof n1cm) var n1cm=false;
+                if(!n1cm) { n1cm = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-container')) {
+                if('undefined' == typeof n1dm) var n1dm=false;
+                if(!n1dm) { n1dm = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-instrument')) {
+                if('undefined' == typeof n2em) var n2em=false;
+                if(!n2em) { n2em = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-sex')) {
+                if('undefined' == typeof n2rm) var n2rm=false;
+                if(!n2rm) { n2rm = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-job')) {
+                if('undefined' == typeof n2fm) var n2fm=false;
+                if(!n2fm) { n2fm = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-weapon')) {
+                if('undefined' == typeof n2tm) var n2tm=false;
+                if(!n2tm) { n2tm = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-hole')) {
+                if('undefined' == typeof n2gm) var n2gm=false;
+                if(!n2gm) { n2gm = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-food')) {
+                if('undefined' == typeof n2hm) var n2hm=false;
+                if(!n2hm) { n2hm = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-vehicle')) {
+                if('undefined' == typeof n2jm) var n2jm=false;
+                if(!n2jm) { n2jm = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-animal')) {
+                if('undefined' == typeof n2km) var n2km=false;
+                if(!n2km) { n2km = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-shape')) {
+                if('undefined' == typeof n2lm) var n2lm=false;
+                if(!n2lm) { n2lm = true; result = parseNouns(this, matches[1], input, result); } }
 
             if (matches[1].match('^time$')) {
                 if('undefined' == typeof tn1match) var tn1match=false;
