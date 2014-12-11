@@ -88,6 +88,18 @@ function SimpleRant() {
                 if('undefined' == typeof nanmmatch) var nanmmatch=false;
                 if(!nanmmatch) { nanmmatch = true; result = parseNouns(this, matches[1], input, result); } }
 
+            if (matches[1].match('^noun-tool')) {
+                if('undefined' == typeof toolmatch) var toolmatch=false;
+                if(!toolmatch) { toolmatch = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-surface')) {
+                if('undefined' == typeof surfmatch) var surfmatch=false;
+                if(!surfmatch) { surfmatch = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-furniture')) {
+                if('undefined' == typeof furnimatch) var furnimatch=false;
+                if(!furnimatch) { furnimatch = true; result = parseNouns(this, matches[1], input, result); } }
+
             if (matches[1].match('^time$')) {
                 if('undefined' == typeof tn1match) var tn1match=false;
                 if(!tn1match) { tn1match = true; result = parseTimeNoun(this, matches[1], input, result); } }

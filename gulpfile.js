@@ -49,11 +49,12 @@ var gulp = require("gulp"),
         'npm run-script coverage'
     ]));
 
+
     gulp.task("default", ["scripts","nodemon"], function(){
         gulp.watch(["resources/"], ["parse"]);
         gulp.watch(["./style.scss"], ["sass"]);
         gulp.watch(["./index.js"], ["scripts"]);
-        gulp.watch(["./test"], ["test"]);
+        gulp.watch(["./test"], ["scripts","test"]);
     });
 
     gulp.task('nodemon', function() {

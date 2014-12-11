@@ -418,6 +418,18 @@ function SimpleRant() {
                 if('undefined' == typeof nanmmatch) var nanmmatch=false;
                 if(!nanmmatch) { nanmmatch = true; result = parseNouns(this, matches[1], input, result); } }
 
+            if (matches[1].match('^noun-tool')) {
+                if('undefined' == typeof toolmatch) var toolmatch=false;
+                if(!toolmatch) { toolmatch = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-surface')) {
+                if('undefined' == typeof surfmatch) var surfmatch=false;
+                if(!surfmatch) { surfmatch = true; result = parseNouns(this, matches[1], input, result); } }
+
+            if (matches[1].match('^noun-furniture')) {
+                if('undefined' == typeof furnimatch) var furnimatch=false;
+                if(!furnimatch) { furnimatch = true; result = parseNouns(this, matches[1], input, result); } }
+
             if (matches[1].match('^time$')) {
                 if('undefined' == typeof tn1match) var tn1match=false;
                 if(!tn1match) { tn1match = true; result = parseTimeNoun(this, matches[1], input, result); } }
@@ -671,8 +683,8 @@ var parseNameFemale = function(rant, input, result) {
 };
 var parseNouns = function (rant, matched, input, result) {
     if (matched.match('noun(|animal)(|.plural)')) {
-        replacement = [];
-        var re = new RegExp(matched, 'g');
+        var re,replacement = [];
+        re = new RegExp(matched, 'g');
         i = result.match(re).length;
         var plural = 0;
         if (matched.match('plural', 'g')) {
@@ -681,7 +693,19 @@ var parseNouns = function (rant, matched, input, result) {
 
         while (i > 0) {
             if (matched.match('animal', 'g')) {
-                var str=rant.getNounByType('animal', plural);
+                var str = rant.getNounByType('animal', plural);
+                if (str.match(/\//)) str.split("/")[0];
+                replacement.push(str);
+            } else if (matched.match('tool', 'g')) {
+                var str=rant.getNounByType('tool', plural);
+                if(str.match(/\//)) str.split("/")[0];
+                replacement.push(str);
+            } else if (matched.match('surface', 'g')) {
+                var str=rant.getNounByType('surface', plural);
+                if(str.match(/\//)) str.split("/")[0];
+                replacement.push(str);
+            } else if (matched.match('furniture', 'g')) {
+                var str=rant.getNounByType('furniture', plural);
                 if(str.match(/\//)) str.split("/")[0];
                 replacement.push(str);
 
@@ -695,7 +719,7 @@ var parseNouns = function (rant, matched, input, result) {
         }
 
 
-        var re = new RegExp('<' + matched + '>', 'g');
+        re = new RegExp('<' + matched + '>', 'g');
         result = result.replace(re, function () {
             return replacement[i++];
         });
@@ -1024,6 +1048,18 @@ SimpleRant.prototype.getNounByType = function (nountype,plural) {
     if(nountype == "animal"){
         var num = Math.floor(Math.random() * dic_noun_animal.length);
         return dic_noun_animal[num].split("/")[plural];
+    }
+    if(nountype == "tool"){
+        var num = Math.floor(Math.random() * dic_noun_tool.length);
+        return dic_noun_tool[num].split("/")[plural];
+    }
+    if(nountype == "surface"){
+        var num = Math.floor(Math.random() * dic_noun_surface.length);
+        return dic_noun_surface[num].split("/")[plural];
+    }
+    if(nountype == "furniture"){
+        var num = Math.floor(Math.random() * dic_noun_furniture.length);
+        return dic_noun_furniture[num].split("/")[plural];
     }
 
     return "";

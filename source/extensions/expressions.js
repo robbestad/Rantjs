@@ -75,6 +75,18 @@ SimpleRant.prototype.getNounByType = function (nountype,plural) {
         var num = Math.floor(Math.random() * dic_noun_animal.length);
         return dic_noun_animal[num].split("/")[plural];
     }
+    if(nountype == "tool"){
+        var num = Math.floor(Math.random() * dic_noun_tool.length);
+        return dic_noun_tool[num].split("/")[plural];
+    }
+    if(nountype == "surface"){
+        var num = Math.floor(Math.random() * dic_noun_surface.length);
+        return dic_noun_surface[num].split("/")[plural];
+    }
+    if(nountype == "furniture"){
+        var num = Math.floor(Math.random() * dic_noun_furniture.length);
+        return dic_noun_furniture[num].split("/")[plural];
+    }
 
     return "";
 };

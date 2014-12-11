@@ -223,6 +223,35 @@ describe('Get animal', function () {
     })
 });
 
+describe('Get tool', function () {
+    it('should return a tool', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-tool>')
+            .replace(new RegExp("<.*>","g"),"");
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get surface', function () {
+    it('should return a surface', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-surface>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get furniture', function () {
+    it('should return a furniture', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<noun-furniture>')
+            .replace(new RegExp("<.*>","g"),"");
+
+        assert(result,assert.hasContent);
+    })
+});
+
 describe('All nouns', function () {
     it('should return three nouns', function () {
         var r = new rant.SimpleRant();
@@ -302,6 +331,16 @@ describe('Get faced', function () {
         var result = r.rantConstructor('<face.d>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
+    })
+});
+
+
+describe('Get offensive sentence', function () {
+    it('should return an offensive sentence', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('The <adj> <noun> <adv> <verb.ed> the <adj> <noun> on the <noun-surface>');
+        var count=result.match(/\<|\>/g);
+        assert.equal(null,count);
     })
 });
 
