@@ -458,7 +458,7 @@ function SimpleRant() {
             if (matches[1].match('^noun-person')) {
                 if('undefined' == typeof n7m) var n7m=false;
                 if(!n7m) { n7m = true; result = parseNouns(this, matches[1], input, result); } }
-            
+
             if (matches[1].match('^noun-ball')) {
                 if('undefined' == typeof n9m) var n9m=false;
                 if(!n9m) { n9m = true; result = parseNouns(this, matches[1], input, result); } }
