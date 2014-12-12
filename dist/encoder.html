@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<!--<name-female> likes to <verb-transitive> <noun.plural> with <pron.poss-female> pet <noun-animal> on <time-dayofweek.plural>.-->
+<h1>HTML Encoder/ Decoder</h1>
+<p>Type or paste in the text you want to HTML-decode, then press either the «Encode» or the «Decode» button</p>
+<p>
+    <label for="input">Input</label>
+    <textarea name="input" id="input" class="input dark"
+              spellcheck="false"></textarea>
+</p>
+<p>
+    <a id="convert-button" href="#">Encode</a>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <a id="decode-button" href="#">Decode</a>
+
+</p>
+
+<p>
+    <label for="input">Output</label>
+
+    <textarea name="output" class="output" id="output" spellcheck="false" disabled></textarea>
+</p>
+<p>
+    <a id="copy-button" href="#">Copy</a>
+    <!--<p id="callback-paragraph" style="background:red;">-->
+    <!--This callback paragraph starts red...<br /><br />-->
+    <!--Turns yellow before being copied...<br /><br />-->
+    <!--Then turns green after being copied.<br /><br />-->
+    <!--The link itself changes color; checkmark on complete.-->
+    <!--</p>-->
+    <!--<a id="copy-callbacks" href="#">Click here to see zClip callback functions in action.</a><img src="img/checkmark.png" class="check" />-->
+
+
+
+</p>
+
+<div class="about">
+    <h2>About the encoding / decoding process</h2>
+    <p>
+        HTML has special handling for characters like &lt; and &gt; symbols, so they don't work well with those characters where they shouldn't be.
+    </p>
+    <p>
+        Having spurious characters like those symbols in your text can have some weird
+        effects - blocks of text not appearing, broken formatting, and generally just
+        not seeing what you expect to see.
+    </p>
+    <p>
+        This can all be fixed by 'escaping' those characters.  This process involves
+        scanning the text for those characters, and replacing them with a special
+        character-code that browsers can interpret as the correct symbol, without
+        actually embedding that symbol in your text.
+    </p>
+    <p>
+        For example, the escaped character code for &gt; is &amp;gt;.
+    </p>
+</div>
+
+<div>
+    &nbsp;
+</div>
+
+
+
+</body>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="zeroclip/jquery.zclip.min.js"></script>
+<script type="text/javascript">
+    function htmlEncode(value){
+        //create a in-memory div, set it's inner text(which jQuery automatically encodes)
+        //then grab the encoded contents back out.  The div never exists on the page.
+        return $('<div/>').text(value).html();
+    }
+
+    function htmlDecode(value){
+        return $('<div/>').html(value).text();
+    }
+    $(document).ready(function(){
+
+        document.getElementById('convert-button').addEventListener('click', function() {
+            if('' == document.getElementById("input").value) return;
+
+            var result = htmlEncode(document.getElementById("input").value);
+            document.getElementById("output").value = result;
+            if($('#output').hasClass('dark')){
+                $('#output').removeClass('dark');
+            }
+            if($('#output').hasClass('light')){
+                $('#output').removeClass('light');
+            }
+        }, false);
+
+        document.getElementById('decode-button').addEventListener('click', function() {
+            if('' == document.getElementById("input").value) return;
+
+            var result = htmlDecode(document.getElementById("input").value);
+            document.getElementById("output").value = result;
+            if($('#output').hasClass('dark')){
+                $('#output').removeClass('dark');
+            }
+            if($('#output').hasClass('light')){
+                $('#output').removeClass('light');
+            }
+        }, false);
+
+
+        $("#copy-button").zclip({
+            path: "zeroclip/ZeroClipboard.swf",
+            copy:function(){return $('textarea#output').val();},
+            beforeCopy:function(){
+            },
+            afterCopy:function(){
+                $('#output').css('color','white');
+                $('#output').addClass('light');
+            }
+        });
+
+
+
+
+    });
+
+</script>
+</html>
