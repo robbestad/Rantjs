@@ -1,5 +1,4 @@
-Rantjs
-======
+# Rantjs
 
 A naive port of TheBerkins [Rant project][1]
 
