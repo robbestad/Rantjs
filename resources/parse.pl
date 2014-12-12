@@ -5,7 +5,7 @@
 undef $/;
 $n = 0;
 use strict;
-my $content         = <>;    #Whole file content in a single scalar variable
+my $content         = <>;   
 my $out             = "";
 my $outkeywordarray = "";
 my $group           = "";
@@ -48,7 +48,6 @@ foreach my $line ( split /\n/, $content ) {
         next;
     }
 
-    #$line =~ s/(\#name)+(.*)//igm;
     $line =~ s/(\#version)+(.*)//igm;
     $line =~ s/(\#subs)+(.*)//igm;
 
@@ -131,16 +130,7 @@ foreach my $line ( split /\n/, $content ) {
 
 }
 
-# $out .= "\n";
-
-# $out .= "var dic_" . $name . "=[";
-# foreach my $noun (@nouns) {
-#     $out .= '"' . $noun . '",';
-# }
-# $out =~ s/,+$//m;
-# $out .= "];";
-
-## unique array
+## make unique array
 my @uniqueKeywords;
 foreach my $kw (@keywords) {
 
@@ -156,10 +146,6 @@ foreach my $kw (@keywords) {
         push( @uniqueKeywords, $uq );
     }
 }
-
-#remove unique
-#my %seen=();
-#my @unique = grep { ! $seen{$_} ++ } @uniqueKeywords;
 
 ## try to group keywords and collection together
 my $num = scalar(@keywords);
@@ -182,8 +168,6 @@ while ( $i < $num ) {
 my $array_list = "\ndic_$name = dic_$name.concat(";
 foreach my $t ( keys %collection_keywords ) {
     $collection_keywords{$t} =~ s/, //s;
-
-
     $outkeywordarray
         .= "\nvar dic_" . $name . "_$t = [$collection_keywords{$t}];";
     $array_list .= "dic_" . $name . "_$t,";
@@ -217,7 +201,7 @@ foreach my $noun (@nouns) {
 }
 
 
-# # print @nongrouped;
+# output @nongrouped;
 $out = "\nvar dic_" . $name . "=[";
 foreach my $noun (@nongrouped) {
     $out .= '"' . $noun . '",';
