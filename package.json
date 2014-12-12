@@ -1,15 +1,18 @@
 {
-  "name": "simple-rant",
+  "name": "rantjs",
   "version": "0.7.0",
-  "description": "A simple implementation of Rant, the procedural text generator",
+  "description": "A naive implementation of Rant, the procedural text generator",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha",
-    "coverage": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha"
+    "coverage": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha",
+    "start": "node server.js"
   },
   "author": "Sven Anders Robbestad <anders@robbestad.com>",
   "license": "ISC",
   "dependencies": {
+    "compression": "^1.2.2",
+    "express": "^4.10.5",
     "gulp": "^3.8.10",
     "gulp-inject": "^1.0.2",
     "gulp-rename": "^1.2.0",
@@ -33,7 +36,6 @@
     "karma-mocha": "^0.1.9",
     "karma-requirejs": "^0.2.2",
     "mocha": "^2.0.1",
-    "path": "^0.4.9",
     "requirejs": "^2.1.15",
     "should": "^4.3.0",
     "streamqueue": "^0.1.1"
