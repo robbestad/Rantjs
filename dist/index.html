@@ -1,34 +1,176 @@
-<!doctype html>
-<html>
-<head>
-    <link href="style.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Sample Page</title>
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name=viewport content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="A showcase of problems once hard or impossible to solve with CSS alone, now made trivially easy with Flexbox.">
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="boilerplate.css" type="text/css">
+  <link rel="stylesheet" href="style.css" type="text/css">
+
+
+  <script class="js-allow-in-head" src="//use.typekit.net/txx2jfv.js"></script>
+  <script class="js-allow-in-head">try{Typekit.load();}catch(e){}</script>
+
+  
+  
+    <script id="google-analytics">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-45283197-1');
+      ga('send', 'pageview');
+    </script>
+  
+
 </head>
 <body>
-<p>
-    <label for="input">Input</label>
-    <textarea name="input" id="input" class="input"
-              spellcheck="false">The &lt;adj&gt; &lt;noun&gt; &lt;adv&gt; &lt;verb.ed&gt; the &lt;adj&gt; &lt;noun&gt; whilst &lt;adv&gt; being &lt;verb.ed&gt;</textarea>
-</p>
-<p>
-    <input type="submit" name="submit" id="submit" class="submit" value="Run Pattern">
-</p>
 
-<p>
-    <label for="input">Output</label>
 
-    <textarea name="output" class="output" id="output" spellcheck="false" disabled></textarea>
-</p>
+  <body class="HolyGrail">
+  
+<header class="Header Header--cozy" role="banner">
+  <div class="Header-titles">
+    <h1 class="Header-title">Rant<i>js</i></h1>
+    <h2 class="Header-subTitle">Procedurally generated text with JavaScript</h2>
+  </div>
+  <div class="Header-actions">
+    <a href="https://github.com/svenanders/Rantjs" class="Header-button Button Button--action Button--wide"><span class="icon-github icon-large"></span>&nbsp; View Project Source</a>
 
-</body>
+
+    <a href="http://twitter.com/intent/tweet?text=Procedurally%20generated%20text%20with%20JavaScript:%20rantjs%20&url=https://rantjs.herokuapp.com/" class="Header-button Button Button--wide"><span class="icon-twitter icon-large twitter-color"></span>&nbsp; Spread the Word</a>
+  </div>
+</header>
+
+  <div class="HolyGrail-body">
+
+  <article class="HolyGrail-content">
+
+    <h1>Make a sentence</h1>
+
+    <p>
+      <label for="input">Input</label>
+      <textarea name="input" id="input" class="input"
+                spellcheck="false">The &lt;adj&gt; &lt;noun&gt; &lt;adv&gt; &lt;verb.ed&gt; the &lt;adj&gt; &lt;noun&gt; whilst &lt;adv&gt; being &lt;verb.ed&gt;</textarea>
+    </p>
+    <p>
+      <input type="submit" name="submit" id="submit" class="submit" value="Run Pattern">
+    </p>
+
+    <p>
+      <label for="input">Output</label>
+
+      <textarea name="output" class="output" id="output" spellcheck="false" disabled></textarea>
+    </p>
+
+    <h2>Other sample sentencens</h2>
+
+<pre class="highlight"><code class="language-xml">I need &lt;amount&gt; &lt;adj&gt; &lt;noun.plural&gt; filled with &lt;adj.plural&gt;
+
+&lt;title&gt;, help! He &lt;verb.ed&gt; me and &lt;facial_expression.ed&gt; the whole time!
+
+I like my &lt;noun-shape&gt;-shaped &lt;noun-body.plural&gt;
+
+&lt;name-male&gt; likes to &lt;verb-transitive&gt; &lt;noun.plural&gt; with &lt;pron.poss-male&gt; pet &lt;noun-animal&gt; on &lt;time-dayofweek.plural&gt;.
+</code></pre>
+
+    <h2>Supported tags</h2>
+<p>Here's a non-complete list of currently supported tags</p>
+<pre class="highlight"><code class="language-xml">
+  &lt;adj&gt;
+  &lt;adv&gt;
+  &lt;color&gt;
+  &lt;relationship&gt;
+  &lt;conjunction&gt;
+  &lt;face&gt;
+  &lt;face.d&gt;
+  &lt;verb&gt;
+  &lt;verb.ed&gt;
+  &lt;yes&gt;
+  &lt;no&gt;
+  &lt;veb-transitive&gt;
+  &lt;pron.poss-male&gt;
+  &lt;title&gt;
+  &lt;title-male&gt;
+  &lt;name-male&gt;
+  &lt;name-female&gt;
+  &lt;time-month&gt;
+  &lt;exclamation&gt;
+  &lt;noun-round&gt;
+  &lt;noun-body&gt;
+  &lt;noun-liquid&gt;
+  &lt;noun-insect&gt;
+  &lt;noun-clothes&gt;
+  &lt;noun-plant&gt;
+  &lt;noun-person&gt;
+  &lt;noun-tool&gt;
+  &lt;noun-long&gt;
+  &lt;noun-ball&gt;
+  &lt;noun-article&gt;
+  &lt;noun-drug&gt;
+  &lt;noun-fruit&gt;
+  &lt;noun-container
+  &lt;noun-instrument&gt;
+  &lt;noun-sex&gt;
+  &lt;noun-job&gt;
+  &lt;noun-weapon&gt;
+  &lt;noun-hole&gt;
+  &lt;noun-food&gt;
+  &lt;noun-vehicle&gt;
+  &lt;noun-animal&gt;
+  &lt;noun-shape&gt;
+</code></pre>
+
+  </article>
+
+  <nav class="HolyGrail-nav u-textCenter">
+    <h3 class="u-spaceBN">Rantjs</h3><p>Rantjs is a procedural text generator. The goal is to
+      augment human creativity with the boundless potential of randomness.
+  </p>  </nav>
+
+  <aside class="HolyGrail-ads u-textCenter">
+    <h3 class="u-spaceBN">The project is based on <a href="https://github.com/TheBerkin/Rant">Rant</a>. This implementation
+    is made to be included in JavaScript projects.</h3>
+  </aside>
+
+</div>
+  <footer class="Footer">
+  <span class="Footer-social">
+   <!--  <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=philipwalton&repo=solved-by-flexbox&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="106px" height="20px"></iframe> -->
+    <!-- <a href="https://twitter.com/share" class="twitter-share-button" data-text="" data-url="http://philipwalton.github.io/solved-by-flexbox/" data-count="horizontal" data-via="svenardocom" data-related="svenardocom">Tweet</a>
+    <a href="https://twitter.com/svenardocom" class="twitter-follow-button" data-show-count="true" data-lang="en">@svenardocom</a> -->
+  </span>
+  <div class="Footer-credits">
+    <span class="Footer-credit">Created and maintained by <a href="http://robbestad.com">Sven A Robbestad</a> &copy; 2015.</span>
+
+    <span class="Footer-credit"><a href="https://github.com/svenanders/Rantjs">Source code and examples</a></span>
+
+  </div>
+</footer>
+
+
 <script src="simpleRant.js" type="text/javascript"></script>
 <script type="text/javascript">
-    document.getElementById('submit').addEventListener('click', function() {
-        rant = new SimpleRant;
-        if('' == document.getElementById("input").value) return;
+  document.getElementById('submit').addEventListener('click', function() {
+    rant = new SimpleRant;
+    if('' == document.getElementById("input").value) return;
 
-        var result = rant.rantConstructor(document.getElementById("input").value);
-        document.getElementById("output").value = result;
-    }, false);
+    var result = rant.rantConstructor(document.getElementById("input").value);
+    document.getElementById("output").value = result;
+  }, false);
 
 </script>
+  <script src="highlight.js"></script>
+</body>
+
 </html>

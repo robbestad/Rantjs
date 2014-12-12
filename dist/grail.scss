@@ -1,0 +1,59 @@
+$breakpoints: (
+  "(min-width: 24em)" "small",
+  "(min-width: 36em)" "med",
+  "(min-width: 48em)" "large"
+);
+
+@mixin breakpoint($point) {
+  @each $breakpoint in $breakpoints {
+    $query: nth($breakpoint, 1);
+    $name: nth($breakpoint, 2);
+    @if ($name == $point) {
+      @media #{$query} { @content }
+    }
+  }
+}
+
+.HolyGrail {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.HolyGrail-body {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em;
+}
+
+.HolyGrail-content {
+  margin: 1.5em 0;
+}
+
+.HolyGrail-nav {
+  order: -1;
+}
+
+.HolyGrail-nav, .HolyGrail-ads {
+  padding: 1em;
+  border-radius: 3px;
+  background: hsla(31, 15%, 50%, 0.1);
+}
+
+@include breakpoint("large") {
+  .HolyGrail-body {
+    // `flex: 1` is all that shoule be needed, but `flex: 1 1 auto` is used to
+    // make IE play nice.
+    flex: 1 1 auto;
+
+    flex-direction: row;
+  }
+  .HolyGrail-content {
+    flex: 1;
+    padding: 0 1.5em;
+    margin: 0;
+  }
+  .HolyGrail-nav, .HolyGrail-ads {
+    flex: 0 0 12em;
+  }
+}

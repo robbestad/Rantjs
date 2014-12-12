@@ -41,6 +41,11 @@ var gulp = require("gulp"),
         .on('error', handleErrors);
     });
 
+    gulp.task("shellsass", shell.task([
+        'sass style.scss dist/style.css'
+    ]));
+
+
     gulp.task("parse", shell.task([
         'perl resources/parseAll.pl'
     ]));
@@ -50,9 +55,9 @@ var gulp = require("gulp"),
     ]));
 
 
-    gulp.task("default", ["scripts","nodemon"], function(){
+    gulp.task("default", ["scripts","shellsass","nodemon"], function(){
         gulp.watch(["resources/"], ["parse"]);
-        gulp.watch(["./style.scss"], ["sass"]);
+        gulp.watch(["./style.scss"], ["shellsass"]);
         gulp.watch(["./index.js"], ["scripts"]);
         gulp.watch(["./test"], ["scripts","test"]);
     });
