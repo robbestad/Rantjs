@@ -26,7 +26,7 @@ sub remove_whitespace{
    return $_[0];
 }
 
-my $name; my $sub; my $keyword; my @keywords; my $out;
+my $name; my $sub; my $keyword; my @keywords; my $out; my @keyCollection;
 foreach my $file (@files) {
     @keywords = ""; # reset keywords
     next if ( $file =~ /^\.$/ ); # skip . and ..
@@ -51,7 +51,8 @@ foreach my $file (@files) {
             $line =~ s/\#name //;
             $line =~ s/-'//g;
             $name = $line;
-            $out .= "\nvar accepted_keys=[\"".$name."\"]; ";
+            #$out .= "\nvar valid_keys=[\"".$name."\"]; ";
+            push( @keyCollection, $name );
             next;
         }
 
@@ -60,12 +61,12 @@ foreach my $file (@files) {
             $line =~ s/\#subs //;
             $line =~ s/default//g; # remove 'default'
             $line =~ s/-//g; # remove dash
-            $out .= "\nvar accepted_subs_$name=[";
-
+            $out .= "\nvar valid_subs_$name=[";
             if(!$line eq ''){
                 $sub = $line;
                 my @subwords = split / /, $sub;
                 my $iterator = 0;
+                if(scalar @subwords > 0){
                 foreach my $uniqsub (@subwords) {
                 $iterator++;
                 $uniqsub = remove_whitespace($uniqsub);
@@ -74,11 +75,12 @@ foreach my $file (@files) {
                         $out .= ",";
                     }
                 }
+                }
             }
             $out .= "];";
             next;
         }
-        
+
     # get keywords starting with pipe
     if ( $line =~ m/\| class/ ) {
         $line =~ s/(\| class)//g;
@@ -99,31 +101,41 @@ foreach my $file (@files) {
                 }
                 if($exists == 0){ push( @keywords, $uq );  }
             }
-
-       
-    }
-
-    }
-
-    $out .= "\nvar accepted_filters_$name=[";
-    my $iterator = 0;
-    foreach my $kw (@keywords) {
-        $iterator++;
-        if(!$kw eq ""){
-            $out .= "\"".$kw."\"";
-            if($iterator < scalar @keywords){
-                $out .= ",";
-            }
- 
         }
     }
-    $out .= "];";
 
+    if(scalar @keywords > 0){
+        $out .= "\nvar valid_filters_$name=[";
+        my $iterator = 0;
+        foreach my $kw (@keywords) {
+            $iterator++;
+            if(!$kw eq ""){
+                $out .= "\"".$kw."\"";
+                if($iterator < scalar @keywords){
+                    $out .= ",";
+                }
+
+            }
+        }
+        $out .= "];";
+    }
 }
 
+$out .= "\nvar valid_keys=[";
+my $iterator=0;
+foreach my $key(@keyCollection){
+$iterator++;
+$out .= "\"$key\"";
+    if($iterator < scalar @keyCollection){
+        $out .= ", ";
+    }
+}
+$out .= "];";
+
+
 ## finally, write the files
-print "writing $dirname/out/accepted_keys.js\n";
-my $file = "$dirname/out/accepted_keys.js";
+print "writing $dirname/out/valid_keys.js\n";
+my $file = "$dirname/out/valid_keys.js";
 open(my $fh, '>', $file) or die "Can't write to file '$file' [$!]\n";
 print {$fh} $out;
 close $fh;

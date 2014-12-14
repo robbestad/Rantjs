@@ -446,15 +446,15 @@ function SimpleRant() {
 
 
             //var input = "noun -long -animal";
-            //var re=new RegExp("\\w+","g");
-            //
-            //console.log(
-            //    input.match(re)[0]
-            //);
-            //
-            //// First, get the DIC keyword
-            //keyword = input.match(re)[0];
-            //
+            var re=new RegExp("\\w+","g");
+
+            console.log(
+                input.match(re)[0]
+            );
+
+            // First, get the DIC keyword
+            keyword = input.match(re)[0];
+
             // We accept a number of keywords, and they all correlate to the entries in the DIC files
 
             //Below is the naive approach. It works, but it's neither elegant nor practical
