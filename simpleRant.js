@@ -166,104 +166,6 @@ var dic_faced = ["smiled", "frowned", "grimaced", "grinned evilly", "grinned che
 var dic_pron_female = ["her/she/herself/her/hers"];
 
 
-var accepted_keys=["activity"]; 
-var accepted_subs_activity=[];
-var accepted_filters_activity=[];
-var accepted_keys=["adj"]; 
-var accepted_subs_adj=["normal","ness"];
-var accepted_filters_adj=["appearance","nationality","emotion","weather"];
-var accepted_keys=["adv"]; 
-var accepted_subs_adv=[];
-var accepted_filters_adv=["sexy","emotion"];
-var accepted_keys=["color"]; 
-var accepted_subs_color=["","ish"];
-var accepted_filters_color=["primary","secondary"];
-var accepted_keys=["conj"]; 
-var accepted_subs_conj=[];
-var accepted_filters_conj=[];
-var accepted_keys=["country"]; 
-var accepted_subs_country=[];
-var accepted_filters_country=["asia","middleeast","mediterranean","europe","southamerica","oceania","northamerica","africa","centralamerica","caribbean","eurasia"];
-var accepted_keys=["emo"]; 
-var accepted_subs_emo=[];
-var accepted_filters_emo=[];
-var accepted_keys=["em"]; 
-var accepted_subs_em=[];
-var accepted_filters_em=[];
-var accepted_keys=["x"]; 
-var accepted_subs_x=[];
-var accepted_filters_x=[];
-var accepted_keys=["face"]; 
-var accepted_subs_face=[];
-var accepted_filters_face=[];
-var accepted_keys=["name"]; 
-var accepted_subs_name=["","abbr"];
-var accepted_filters_name=["male"];
-var accepted_keys=["greet"]; 
-var accepted_subs_greet=[];
-var accepted_filters_greet=[];
-var accepted_keys=["surname"]; 
-var accepted_subs_surname=[];
-var accepted_filters_surname=[];
-var accepted_keys=["noun"]; 
-var accepted_subs_noun=["singular","plural"];
-var accepted_filters_noun=["body","hole","person","sex","weapon","animal","tool","food","drug","article","fruit","container","furniture","instrument","plant","shape","ball","surface","long","round","clothes","vehicle","insect"];
-var accepted_keys=["sound"]; 
-var accepted_subs_sound=["singular","plural"];
-var accepted_filters_sound=[];
-var accepted_keys=["title"]; 
-var accepted_subs_title=[];
-var accepted_filters_title=[];
-var accepted_keys=["place"]; 
-var accepted_subs_place=["singular","plural"];
-var accepted_filters_place=["building","indoor","natural","outdoor"];
-var accepted_keys=["prefix"]; 
-var accepted_subs_prefix=[];
-var accepted_filters_prefix=["position","quantity","scale","anatomy"];
-var accepted_keys=["prepos"]; 
-var accepted_subs_prepos=[];
-var accepted_filters_prepos=["space","time"];
-var accepted_keys=["pron"]; 
-var accepted_subs_pron=["obj","nom","self","poss","s"];
-var accepted_filters_pron=["male","female"];
-var accepted_keys=["quality"]; 
-var accepted_subs_quality=["property","more","less","est"];
-var accepted_filters_quality=["physical","human"];
-var accepted_keys=["rel"]; 
-var accepted_subs_rel=["singular","plural"];
-var accepted_filters_rel=["male","female","neutral"];
-var accepted_keys=["sconj"]; 
-var accepted_subs_sconj=[];
-var accepted_filters_sconj=[];
-var accepted_keys=["substance"]; 
-var accepted_subs_substance=[];
-var accepted_filters_substance=["liquid"];
-var accepted_keys=["timeadv"]; 
-var accepted_subs_timeadv=[];
-var accepted_filters_timeadv=["time","past","present","frequency"];
-var accepted_keys=["timenoun"]; 
-var accepted_subs_timenoun=["singular","plural"];
-var accepted_filters_timenoun=["timeofday","dayofweek","month","holiday","unit"];
-var accepted_keys=["unit"]; 
-var accepted_subs_unit=["singular","plural","abbr"];
-var accepted_filters_unit=["length","small","factor","large","weight","volume","pressure","energy","potential","capacitance","current","power","inductance"];
-var accepted_keys=["verbimg"]; 
-var accepted_subs_verbimg=["normal","ing","ed","s","er"];
-var accepted_filters_verbimg=[];
-var accepted_keys=["say"]; 
-var accepted_subs_say=["simple","ing","ed","s","er","pp","noun"];
-var accepted_filters_say=[];
-var accepted_keys=["verb"]; 
-var accepted_subs_verb=["simple","ing","ed","s","er","pp","noun"];
-var accepted_filters_verb=["transitive","walk","intransitive","sex","pose","eat","liquid","motion","insert","violent","political","legal","move"];
-var accepted_keys=["vocal"]; 
-var accepted_subs_vocal=[];
-var accepted_filters_vocal=[];
-var accepted_keys=["with"]; 
-var accepted_subs_with=[];
-var accepted_filters_with=[];
-var accepted_keys=["yn"]; 
-var accepted_filters_yn=[];
 var dic_activity=[];
 var dic_activity_video = ["Backgammon", "Pong", "Super Mario Bros.", "The Legend of Zelda", "Sonic the Hedgehog", "Call of Duty", "Battlefield", "Hitman", "Morrowind", "Oblivion", "Skyrim", "World of Warcraft", "Contra", "Halo", "Doom", "HalfLife", "Left 4 Dead"];
 var dic_activity_game = ["Football", "Soccer", "Tennis", "Basketball", "Baseball"];
@@ -407,6 +309,72 @@ var dic_unit_weight = ["pound/pounds/lb", "weight", "gram/grams/g", "weight", "k
 var dic_unit_capacitance = ["farad/farads/F", "energy capacitance", "microfarad/microfarads/μF", "energy capacitance small factor"];
 var dic_unit_inductance = ["henry/henries/H"];
 dic_unit = dic_unit.concat(dic_unit_energy,dic_unit_small,dic_unit_pressure,dic_unit_volume,dic_unit_potential,dic_unit_factor,dic_unit_large,dic_unit_length,dic_unit_power,dic_unit_current,dic_unit_weight,dic_unit_capacitance,dic_unit_inductance);
+var valid_subs_activity=[];
+var valid_filters_activity=[];
+var valid_subs_adj=["normal","ness"];
+var valid_filters_adj=["appearance","nationality","emotion","weather"];
+var valid_subs_adv=[];
+var valid_filters_adv=["sexy","emotion"];
+var valid_subs_color=["","ish"];
+var valid_filters_color=["primary","secondary"];
+var valid_subs_conj=[];
+var valid_filters_conj=[];
+var valid_subs_country=[];
+var valid_filters_country=["asia","middleeast","mediterranean","europe","southamerica","oceania","northamerica","africa","centralamerica","caribbean","eurasia"];
+var valid_subs_emo=[];
+var valid_filters_emo=[];
+var valid_subs_em=[];
+var valid_filters_em=[];
+var valid_subs_x=[];
+var valid_filters_x=[];
+var valid_subs_face=[];
+var valid_filters_face=[];
+var valid_subs_name=["","abbr"];
+var valid_filters_name=["male"];
+var valid_subs_greet=[];
+var valid_filters_greet=[];
+var valid_subs_surname=[];
+var valid_filters_surname=[];
+var valid_subs_noun=["singular","plural"];
+var valid_filters_noun=["body","hole","person","sex","weapon","animal","tool","food","drug","article","fruit","container","furniture","instrument","plant","shape","ball","surface","long","round","clothes","vehicle","insect"];
+var valid_subs_sound=["singular","plural"];
+var valid_filters_sound=[];
+var valid_subs_title=[];
+var valid_filters_title=[];
+var valid_subs_place=["singular","plural"];
+var valid_filters_place=["building","indoor","natural","outdoor"];
+var valid_subs_prefix=[];
+var valid_filters_prefix=["position","quantity","scale","anatomy"];
+var valid_subs_prepos=[];
+var valid_filters_prepos=["space","time"];
+var valid_subs_pron=["obj","nom","self","poss","s"];
+var valid_filters_pron=["male","female"];
+var valid_subs_quality=["property","more","less","est"];
+var valid_filters_quality=["physical","human"];
+var valid_subs_rel=["singular","plural"];
+var valid_filters_rel=["male","female","neutral"];
+var valid_subs_sconj=[];
+var valid_filters_sconj=[];
+var valid_subs_substance=[];
+var valid_filters_substance=["liquid"];
+var valid_subs_timeadv=[];
+var valid_filters_timeadv=["time","past","present","frequency"];
+var valid_subs_timenoun=["singular","plural"];
+var valid_filters_timenoun=["timeofday","dayofweek","month","holiday","unit"];
+var valid_subs_unit=["singular","plural","abbr"];
+var valid_filters_unit=["length","small","factor","large","weight","volume","pressure","energy","potential","capacitance","current","power","inductance"];
+var valid_subs_verbimg=["normal","ing","ed","s","er"];
+var valid_filters_verbimg=[];
+var valid_subs_say=["simple","ing","ed","s","er","pp","noun"];
+var valid_filters_say=[];
+var valid_subs_verb=["simple","ing","ed","s","er","pp","noun"];
+var valid_filters_verb=["transitive","walk","intransitive","sex","pose","eat","liquid","motion","insert","violent","political","legal","move"];
+var valid_subs_vocal=[];
+var valid_filters_vocal=[];
+var valid_subs_with=[];
+var valid_filters_with=[];
+var valid_filters_yn=[];
+var valid_keys=["activity", "adj", "adv", "color", "conj", "country", "emo", "em", "x", "face", "name", "greet", "surname", "noun", "sound", "title", "place", "prefix", "prepos", "pron", "quality", "rel", "sconj", "substance", "timeadv", "timenoun", "unit", "verbimg", "say", "verb", "vocal", "with", "yn"];
 var dic_verb=["infest/infesting/infested/infests/infester/infested/infestation"];
 var dic_verb_eat = ["slurp/slurping/slurped/slurps/slurper/slurped/slurping", "eat intransitive", "lick/licking/licked/licks/licker/licked/licking", "eat intransitive", "snort/snorting/snorted/snorts/snorter/snorted/snorting", "eat intransitive", "eat/eating/ate/eats/eater/eaten/eating", "eat intransitive transitive", "suck/sucking/sucked/sucks/sucker/sucked/sucking", "eat transitive", "snuffle/snuffling/snuffled/snuffles/snuffler/snuffled/snuffling", "eat intransitive", "guzzle/guzzling/guzzled/guzzles/guzzler/guzzled/guzzling", "eat transitive", "sniff/sniffing/sniffed/sniffs/sniffer/sniffed/sniffing", "eat transitive intransitive", "nibble/nibbling/nibbled/nibbles/nibbler/nibbled/nibbling", "eat transitive", "gnaw/gnawing/gnawed/gnaws/gnawer/gnawed/gnawing", "eat", "nip/nipping/nipped/nips/nipper/nipped/nipping", "eat violent", "masticate/masticating/masticated/masticates/masticater/masticated/mastication", "eat intransitive transitive", "chew/chewing/chewed/chews/chewer/chewed/chewing", "eat intransitive transitive"];
 var dic_verb_move = ["lunge/lunging/lunged/lunges/lunger/lunged/lunging", "motion move", "jump/jumping/jumped/jumps/jumper/jumped/jumping", "motion move", "push/pushing/pushed/pushes/pusher/pushed/pushing", "move transitive insert", "gyrate/gyrating/gyrated/gyrates/gyrator/gyrated/gyration", "motion move intransitive"];
@@ -436,6 +404,7 @@ var dic_yn_no = ["I couldn't agree more", "no", "definitely not", "absolutely no
 dic_yn = dic_yn.concat(dic_yn_yes,dic_yn_no);
 function SimpleRant() {
 
+
     this.rantConstructor = function (input) {
         var result = input;
         var regex = /\<(.*?)\>/g;
@@ -446,16 +415,28 @@ function SimpleRant() {
 
 
             //var input = "noun -long -animal";
-            var re=new RegExp("\\w+","g");
-
-            console.log(
-                input.match(re)[0]
-            );
-
-            // First, get the DIC keyword
-            keyword = input.match(re)[0];
-
             // We accept a number of keywords, and they all correlate to the entries in the DIC files
+            // First, get the DIC keyword
+            var re=new RegExp("\\w+","g");
+            keyword = matches[1].match(re);
+            // Match against valid keywords in valid_keys
+
+            console.log("checking for existence of keyword "+keyword[0]+" in valid_keys");
+
+            if(valid_keys.indexOf(keyword[0]) != -1){
+                console.log("keyword "+keyword[0]+" exists in valid_keys");
+
+                // Now we're ready to pass the keyword to the parser. It should
+                // include the keyword and any modifiers
+                var nresult = parseWords(this, keyword);
+
+                console.log("result");
+                console.log(nresult);
+            }
+
+
+
+
 
             //Below is the naive approach. It works, but it's neither elegant nor practical
 
@@ -1217,6 +1198,60 @@ var parseVerbed= function(rant, input, result) {
         return result;
     }
 };
+
+var parseWords = function (rant, matched) {
+    var result;
+
+    console.log(matched);
+
+    // matched[0] contains the keyword. It can be noun, verb, adj etc.
+    // we already know it's valid, because this function doesn't get
+    // called unless it is.
+
+    // Let's check if there's any qualifiers or modifiers
+    if(matched[0].length>1){
+        // yes, there are. There are two classes. Filters and subs. Let's see what we got
+
+        var subs = "valid_subs_"+matched[0];
+        var filters = "valid_filters_"+matched[0];
+
+        if(subs.length>0){
+            console.log("subs: "+subs.length);
+            console.log(subs);
+        }
+
+        if(filters.length>0){
+            console.log("filters: "+filters.length);
+            console.log(filters);
+        }
+
+    }
+
+
+    return matched;
+    if(matched.match('adj(|.plural)$')) {
+        replacement = [];
+        var re = new RegExp( matched, 'g');
+        i = result.match(re).length;
+        var plural=0;
+        if(matched.match('plural','g')){
+            plural=1;
+        }
+
+        while (i > 0) {
+            replacement.push(rant.getAdjective(plural));
+            i--;
+        }
+
+        var re = new RegExp('<'+matched+'>', 'g');
+        result = result.replace(re, function () {
+            return replacement[i++];
+        });
+    }
+    return result;
+};
+
+
 
 var parseYes = function(rant, input, result) {
         var result;

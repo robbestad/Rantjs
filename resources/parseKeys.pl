@@ -61,12 +61,14 @@ foreach my $file (@files) {
             $line =~ s/\#subs //;
             $line =~ s/default//g; # remove 'default'
             $line =~ s/-//g; # remove dash
-            $out .= "\nvar valid_subs_$name=[";
+            $line = remove_whitespace($line);
+
             if(!$line eq ''){
                 $sub = $line;
                 my @subwords = split / /, $sub;
                 my $iterator = 0;
                 if(scalar @subwords > 0){
+                $out .= "\nvar subs_$name=[";
                 foreach my $uniqsub (@subwords) {
                 $iterator++;
                 $uniqsub = remove_whitespace($uniqsub);
@@ -75,9 +77,9 @@ foreach my $file (@files) {
                         $out .= ",";
                     }
                 }
+                $out .= "];";
                 }
             }
-            $out .= "];";
             next;
         }
 
@@ -104,8 +106,9 @@ foreach my $file (@files) {
         }
     }
 
-    if(scalar @keywords > 0){
-        $out .= "\nvar valid_filters_$name=[";
+
+    if(scalar @keywords > 1){
+        $out .= "\nvar filter_".$name."=[";
         my $iterator = 0;
         foreach my $kw (@keywords) {
             $iterator++;
