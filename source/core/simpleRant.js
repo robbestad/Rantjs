@@ -17,10 +17,10 @@ function SimpleRant() {
             keyword = matches[1].match(re);
             // Match against valid keywords in valid_keys
 
-            console.log("checking for existence of keyword "+keyword[0]+" in valid_keys");
+            // console.log("checking for existence of keyword "+keyword[0]+" in valid_keys");
 
             if(valid_keys.indexOf(keyword[0]) != -1){
-                console.log("keyword "+keyword[0]+" exists in valid_keys");
+                console.log("valid keyword: "+keyword[0]+" ");
 
                 // Now we're ready to pass the keyword to the parser. It should
                 // include the keyword and any modifiers
@@ -34,7 +34,8 @@ function SimpleRant() {
 
 
 
-            //Below is the naive approach. It works, but it's neither elegant nor practical
+            // Below is the naive approach. It works, but it's neither elegant nor practical and
+            // should be considered POC rather than production code.
 
             if (matches[1] == "adv") {
                 if('undefined' == typeof adv1match) var adv1match=false;

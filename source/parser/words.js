@@ -9,15 +9,21 @@ var parseWords = function (rant, keyword, matched) {
     // Let's check if there's any qualifiers or modifiers
     if(matched[0].length>1){
         // yes, there are. There are two classes. Filters and subs. Let's see what we got
-        console.log(matched);
-
         if(matched.length>1){
             matched.forEach(function(entry,idx) {
                 if(idx>0){
-                    console.log("filters");
-                    console.log(filters[keyword].indexOf(entry));
-                    console.log("subs");
-                    console.log(subs[keyword].indexOf(entry));
+                    if("undefined" != typeof filters[keyword]){
+                        if(filters[keyword].indexOf(entry)>-1){
+                        // this is valid and we apply it
+                        console.log("valid filter: "+entry);
+                        }
+                    }
+                    if("undefined" != typeof subs[keyword]){
+                        if(subs[keyword].indexOf(entry)>-1){
+                            // this is valid and we apply it
+                            console.log("valid sub: "+entry);
+                        }
+                    }
                 }
             });
             console.log("matched length: "+matched.length);

@@ -388,10 +388,10 @@ function SimpleRant() {
             keyword = matches[1].match(re);
             // Match against valid keywords in valid_keys
 
-            console.log("checking for existence of keyword "+keyword[0]+" in valid_keys");
+            // console.log("checking for existence of keyword "+keyword[0]+" in valid_keys");
 
             if(valid_keys.indexOf(keyword[0]) != -1){
-                console.log("keyword "+keyword[0]+" exists in valid_keys");
+                console.log("valid keyword: "+keyword[0]+" ");
 
                 // Now we're ready to pass the keyword to the parser. It should
                 // include the keyword and any modifiers
@@ -1177,15 +1177,21 @@ var parseWords = function (rant, keyword, matched) {
     // Let's check if there's any qualifiers or modifiers
     if(matched[0].length>1){
         // yes, there are. There are two classes. Filters and subs. Let's see what we got
-        console.log(matched);
-
         if(matched.length>1){
             matched.forEach(function(entry,idx) {
                 if(idx>0){
-                    console.log("filters");
-                    console.log(filters[keyword].indexOf(entry));
-                    console.log("subs");
-                    console.log(subs[keyword].indexOf(entry));
+                    if("undefined" != typeof filters[keyword]){
+                        if(filters[keyword].indexOf(entry)>-1){
+                        // this is valid and we apply it
+                        console.log("valid filter: "+entry);
+                        }
+                    }
+                    if("undefined" != typeof subs[keyword]){
+                        if(subs[keyword].indexOf(entry)>-1){
+                            // this is valid and we apply it
+                            console.log("valid sub: "+entry);
+                        }
+                    }
                 }
             });
             console.log("matched length: "+matched.length);
