@@ -1,7 +1,6 @@
-var parseWords = function (rant, matched) {
+var parseWords = function (rant, keyword, matched) {
     var result;
 
-    console.log(matched);
 
     // matched[0] contains the keyword. It can be noun, verb, adj etc.
     // we already know it's valid, because this function doesn't get
@@ -10,19 +9,24 @@ var parseWords = function (rant, matched) {
     // Let's check if there's any qualifiers or modifiers
     if(matched[0].length>1){
         // yes, there are. There are two classes. Filters and subs. Let's see what we got
+        console.log(matched);
 
-        var subs = {}; subs=subs["valid_subs_"+matched[0]];
-        var filters = "valid_filters_"+matched[0];
-
-        if(subs.length>0){
-            console.log("subs: "+subs.length);
-            console.log(subs);
+        if(matched.length>1){
+            matched.forEach(function(entry,idx) {
+                if(idx>0){
+                    console.log("filters");
+                    console.log(filters[keyword].indexOf(entry));
+                    console.log("subs");
+                    console.log(subs[keyword].indexOf(entry));
+                }
+            });
+            console.log("matched length: "+matched.length);
         }
-
-        if(filters.length>0){
-            console.log("filters: "+filters.length);
-            console.log(filters);
-        }
+        //
+        //if(filters.length>0){
+        //    console.log("filters: "+filters.length);
+        //    console.log(filters);
+        //}
 
     }
 

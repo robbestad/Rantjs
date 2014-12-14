@@ -13,22 +13,22 @@ function SimpleRant() {
             //var input = "noun -long -animal";
             // We accept a number of keywords, and they all correlate to the entries in the DIC files
             // First, get the DIC keyword
-            //var re=new RegExp("\\w+","g");
-            //keyword = matches[1].match(re);
-            //// Match against valid keywords in valid_keys
-            //
-            //console.log("checking for existence of keyword "+keyword[0]+" in valid_keys");
-            //
-            //if(valid_keys.indexOf(keyword[0]) != -1){
-            //    console.log("keyword "+keyword[0]+" exists in valid_keys");
-            //
-            //    // Now we're ready to pass the keyword to the parser. It should
-            //    // include the keyword and any modifiers
-            //    var nresult = parseWords(this, keyword);
-            //
-            //    console.log("result");
-            //    console.log(nresult);
-            //}
+            var re=new RegExp("\\w+","g");
+            keyword = matches[1].match(re);
+            // Match against valid keywords in valid_keys
+
+            console.log("checking for existence of keyword "+keyword[0]+" in valid_keys");
+
+            if(valid_keys.indexOf(keyword[0]) != -1){
+                console.log("keyword "+keyword[0]+" exists in valid_keys");
+
+                // Now we're ready to pass the keyword to the parser. It should
+                // include the keyword and any modifiers
+                var nresult = parseWords(this, keyword[0], keyword);
+
+                console.log("result");
+                console.log(nresult);
+            }
 
 
 

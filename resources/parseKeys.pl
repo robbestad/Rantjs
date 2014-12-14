@@ -27,6 +27,8 @@ sub remove_whitespace{
 }
 
 my $name; my $sub; my $keyword; my @keywords; my $out; my @keyCollection;
+$out="var subs={}; var filters={};\n";
+
 foreach my $file (@files) {
     @keywords = ""; # reset keywords
     next if ( $file =~ /^\.$/ ); # skip . and ..
@@ -56,6 +58,7 @@ foreach my $file (@files) {
             next;
         }
 
+
     # extract subs
         if ( $line =~ m/\#subs/ ) {
             $line =~ s/\#subs //;
@@ -68,7 +71,8 @@ foreach my $file (@files) {
                 my @subwords = split / /, $sub;
                 my $iterator = 0;
                 if(scalar @subwords > 0){
-                $out .= "\nvar subs_$name=[";
+                $out .= "\nsubs.$name=[";
+
                 foreach my $uniqsub (@subwords) {
                 $iterator++;
                 $uniqsub = remove_whitespace($uniqsub);
@@ -108,7 +112,7 @@ foreach my $file (@files) {
 
 
     if(scalar @keywords > 1){
-        $out .= "\nvar filter_".$name."=[";
+        $out .= "\nfilters.".$name."=[";
         my $iterator = 0;
         foreach my $kw (@keywords) {
             $iterator++;
