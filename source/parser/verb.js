@@ -46,7 +46,7 @@ var parseVerbed= function(rant, input, result) {
         replacement = [];
         i = result.match(/\<verb.ed\>/g).length;
         while (i > 0) {
-            replacement.push(rant.getVerb(5));
+            replacement.push(rant.getVerb(2));
             i--;
         }
 

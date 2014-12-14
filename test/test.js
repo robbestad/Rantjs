@@ -39,8 +39,6 @@ describe('Get Verb.ed', function () {
     })
 });
 
-
-
 describe('Get Personal Pronoun', function () {
     it('should return a pronoun', function () {
         var r = new rant.SimpleRant();
@@ -558,7 +556,6 @@ describe('Get faced', function () {
     })
 });
 
-
 describe('Get offensive sentence', function () {
     it('should return an offensive sentence', function () {
         var r = new rant.SimpleRant();
@@ -568,7 +565,6 @@ describe('Get offensive sentence', function () {
     })
 });
 
-
 describe('Get another offensive sentence', function () {
     it('should return an offensive sentence', function () {
         var r = new rant.SimpleRant();
@@ -577,4 +573,3 @@ describe('Get another offensive sentence', function () {
         assert.equal(null,count);
     })
 });
-

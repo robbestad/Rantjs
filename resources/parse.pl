@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # Sven A Robbestad <anders@robbestad.com>
-# This script decompresses a Rant vocab file
+# This script converts a Rant vocab file to JavaScript lists
 
 undef $/;
 $n = 0;
@@ -19,6 +19,9 @@ my @nouns;
 my $currentOp = 0;
 my $name;                    # Name of file
 
+use File::Basename;
+my $dirname = dirname(__FILE__);
+
 # Get a line count
 foreach my $line ( split /\n/, $content ) {
     $i++;
@@ -26,9 +29,20 @@ foreach my $line ( split /\n/, $content ) {
 my $n = $i;
 $i = 0;                      # reset counter
 
+# subroutine to remove whitespace
+sub remove_whitespace{
+   $_[0] =~ s/^\s*//;           #remove leading whitespace
+   $_[0] =~ s/\s*$//;           #remove trailing whitespace
+   $_[0] =~ s/\ {2,}/ /g;       #remove multiple literal spaces
+   $_[0] =~ s/\t{2,}/\t/g;      #remove excess tabs
+   $_[0] =~ s/(?<=\t)\ *//g;    #remove any spaces after a tab
+   chomp($_[0]);
+   return $_[0];
+}
+
 foreach my $line ( split /\n/, $content ) {
 
-# remove commented line
+# get name var as #name from file
     if ( $line =~ m/\#name/ ) {
         $line =~ s/\#name //;
         $line =~ s/-//g;
@@ -57,61 +71,35 @@ foreach my $line ( split /\n/, $content ) {
     $line =~ s/\t{2,}/\t/g;      #remove excess tabs
     $line =~ s/(?<=\t)\ *//g;    #remove any spaces after a tab
 
-# remove lines starting with pipe (|)
+# get keywords from lines starting with pipe (|)
     if ( $line =~ m/\|/ ) {
-        $keyword = $line;
-        $keyword =~ s/(\| class)//g;
-        $keyword =~ s/^\s*//;           #remove leading whitespace
-        $keyword =~ s/\s*$//;           #remove trailing whitespace
-        $keyword =~ s/\ {2,}/ /g;       #remove multiple literal spaces
-        $keyword =~ s/\t{2,}/\t/g;      #remove excess tabs
-        $keyword =~ s/(?<=\t)\ *//g;    #remove any spaces after a tab
-        chomp($keyword);
+        $line =~ s/(\| class)//g;
+        $keyword = remove_whitespace($line);
     }
 
-
-# Setter eller fjerner gruppe for alle de kommende ord
+# Set or remove group for all the next words
     if ( $line =~ m/\#class add/ ) {
         if ($currentOp) { next; }       # only one op at a time
-        $group = $line;
-        $group =~ s/(\#class add )//g;
-        $group =~ s/^\s*//;             #remove leading whitespace
-        $group =~ s/\s*$//;             #remove trailing whitespace
-        $group =~ s/\ {2,}/ /g;         #remove multiple literal spaces
-        $group =~ s/\t{2,}/\t/g;        #remove excess tabs
-        $group =~ s/(?<=\t)\ *//g;      #remove any spaces after a tab
-            #print("adding ".$group." for ".$line."\n");
+        $line =~ s/(\| class)//g;
+        $line =~ s/(\#class add)//g;
+        $line =~ s/(\|#)//g;
+        $group = remove_whitespace($line);
         $currentOp = 1;
-
-#    $out.="\n";
-#    $out .="var ".$name."_".$group." =[";
+        if(!$group eq ""){
         $keyword = $group;
+        }
         next;
     }
 
-
     if ( $line =~ m/\#class remove/ ) {
-        if ( $currentOp eq 0 ) { next; }    # prevents a double remove
-        $group = $line;
-
-        #print("removing ".$group." for ".$line."\n");
-
-        $group =~ s/(\#class remove)//g;
-        $group =~ s/^\s*//;                 #remove leading whitespace
-        $group =~ s/\s*$//;                 #remove trailing whitespace
-        $group =~ s/\ {2,}/ /g;             #remove multiple literal spaces
-        $group =~ s/\t{2,}/\t/g;            #remove excess tabs
-        $group =~ s/(?<=\t)\ *//g;          #remove any spaces after a tab
+#        if ( $currentOp eq 0 ) { next; }    # prevents a double remove
+#        $group = $line;
+#        $line =~ s/(\#class remove)//g;
+#        $group = remove_whitespace($line);
         $group = "";
-
-#    $out =~ s/,+$//m;
-#    $out .="];";
-#    $out .="\n";
-
         $currentOp = 0;
         next;
     }
-
 
 # remove commented line
     $line =~ s/^[\#]+(.*)//igm;
@@ -121,6 +109,8 @@ foreach my $line ( split /\n/, $content ) {
     $line =~ s/-//igm;         # remove dash
     chomp($line);              # strip the trailing newline from the line.
     next if ( $line eq "" );   # skip empty lines
+
+    #print "$line \n";
 
     if   ( $keyword eq '' ) { push( @keywords, '' ); }
     else                    { push( @keywords, $keyword ); }
@@ -136,13 +126,8 @@ foreach my $kw (@keywords) {
 
     my @kwords = split / /, $kw;
     foreach my $uq (@kwords) {
-        $uq =~ s/^\s*//;           #remove leading whitespace
-        $uq =~ s/\s*$//;           #remove trailing whitespace
-        $uq =~ s/\ {2,}/ /g;       #remove multiple literal spaces
-        $uq =~ s/\t{2,}/\t/g;      #remove excess tabs
-        $uq =~ s/(?<=\t)\ *//g;    #remove any spaces after a tab
+        $uq = remove_whitespace($uq);
         $uq =~ s/-//g;             # remove dash
-
         push( @uniqueKeywords, $uq );
     }
 }
@@ -156,8 +141,8 @@ while ( $i < $num ) {
     my @tokens = split / /, @keywords[$i];
 
     foreach my $token (@tokens) {
+        next if (@collection[$i] eq "");
         $token =~ s/-//igm;    # remove dash
-
         $collection_keywords{"$token"}
             = $collection_keywords{"$token"} . ", \"@collection[$i]\"";
     }
@@ -168,6 +153,8 @@ while ( $i < $num ) {
 my $array_list = "\ndic_$name = dic_$name.concat(";
 foreach my $t ( keys %collection_keywords ) {
     $collection_keywords{$t} =~ s/, //s;
+    #next if ( $collection_keywords{$t} eq "\"\"" );   # skip empty lines
+
     $outkeywordarray
         .= "\nvar dic_" . $name . "_$t = [$collection_keywords{$t}];";
     $array_list .= "dic_" . $name . "_$t,";
@@ -189,7 +176,11 @@ foreach my $noun (@nouns) {
             $token =~ s/,//;
             $token =~ s/\s//;
 
-            # print "$token \n";
+            if ( $noun == "" ) {
+                $skip = 1;
+            }
+
+
             if ( $noun == $token ) {
                 $skip = 1;
             }
@@ -200,8 +191,6 @@ foreach my $noun (@nouns) {
     }
 }
 
-
-# output @nongrouped;
 $out = "\nvar dic_" . $name . "=[";
 foreach my $noun (@nongrouped) {
     $out .= '"' . $noun . '",';
@@ -210,7 +199,8 @@ $out =~ s/,+$//m;
 $out .= "];";
 
 ## finally, write the files
-print "writing " . 'out/' . $name . '.js' . "\n";
-open( O, '>out/' . $name . '.js' );
-print O $out . $outkeywordarray . $array_list;
-close(O);
+my $file = "$dirname/out/$name.js";
+print "writing $file\n";
+open(my $fh, '>', $file) or die "Can't write to file '$file' [$!]\n";
+print {$fh}  $out . $outkeywordarray . $array_list;
+close $fh;

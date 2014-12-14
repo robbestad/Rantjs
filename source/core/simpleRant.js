@@ -3,10 +3,25 @@ function SimpleRant() {
     this.rantConstructor = function (input) {
         var result = input;
         var regex = /\<(.*?)\>/g;
-        var matches;
+        var matches, keyword, acceptedKeywords;
         var replacement = [], i=0;
 
         while (matches = regex.exec(input)) {
+
+
+            //var input = "noun -long -animal";
+            //var re=new RegExp("\\w+","g");
+            //
+            //console.log(
+            //    input.match(re)[0]
+            //);
+            //
+            //// First, get the DIC keyword
+            //keyword = input.match(re)[0];
+            //
+            // We accept a number of keywords, and they all correlate to the entries in the DIC files
+
+            //Below is the naive approach. It works, but it's neither elegant nor practical
 
             if (matches[1] == "adv") {
                 if('undefined' == typeof adv1match) var adv1match=false;

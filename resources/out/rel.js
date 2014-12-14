@@ -1,6 +1,6 @@
 
 var dic_rel=[];
-var dic_rel_female = ["mommy/mommies", "sister/sisters", "mother/mothers", "grandma/grandmas", "stepmother/stepmothers", "aunt/aunts", "girlfriend/girlfriends", "wife/wives", "daughter/daughters", "granddaughter/granddaughters", "girl/girls", "woman/women"];
-var dic_rel_male = ["brother/brothers", "father/fathers", "grandpa/grandpas", "uncle/uncles", "boyfriend/boyfriends", "husband/husbands", "stepfather/stepfathers", "godfather/godfathers", "son/sons", "grandson/grandsons", "boy/boys", "man/men", "daddy/daddies"];
-var dic_rel_neutral = ["friend/friends", "cousin/cousins", "colleague/colleagues", "boss/bosses", "master/masters", "buddy/buddies", "child/children", "baby/babies"];
+var dic_rel_female = ["mommy/mommies", "female", "sister/sisters", "female", "mother/mothers", "female", "grandma/grandmas", "female", "stepmother/stepmothers", "female", "aunt/aunts", "female", "girlfriend/girlfriends", "female", "wife/wives", "female", "daughter/daughters", "female", "granddaughter/granddaughters", "female", "girl/girls", "female", "woman/women", "female"];
+var dic_rel_male = ["brother/brothers", "male", "father/fathers", "male", "grandpa/grandpas", "male", "uncle/uncles", "male", "boyfriend/boyfriends", "male", "husband/husbands", "male", "stepfather/stepfathers", "male", "godfather/godfathers", "male", "son/sons", "male", "grandson/grandsons", "male", "boy/boys", "male", "man/men", "male", "daddy/daddies", "male"];
+var dic_rel_neutral = ["friend/friends", "neutral", "cousin/cousins", "neutral", "colleague/colleagues", "neutral", "boss/bosses", "neutral", "master/masters", "neutral", "buddy/buddies", "neutral", "child/children", "neutral", "baby/babies", "neutral", "fella/fellas"];
 dic_rel = dic_rel.concat(dic_rel_female,dic_rel_male,dic_rel_neutral);

@@ -10,6 +10,8 @@ var gulp = require("gulp"),
     handleErrors = require('./util/handleErrors'),
     streamqueue  = require('streamqueue'),
     concat = require("gulp-concat"),
+    watch = require('gulp-watch'),
+    mocha = require('gulp-mocha'),
     config = require("./config").nodemon.development;
 
     gulp.task("concatjs", function(){
@@ -50,24 +52,33 @@ var gulp = require("gulp"),
         'perl resources/parseAll.pl'
     ]));
 
-    gulp.task("test", shell.task([
+    gulp.task("coverage", shell.task([
         'npm run-script coverage'
     ]));
 
-
-    gulp.task("default", ["scripts","shellsass","nodemon"], function(){
-        gulp.watch(["resources/"], ["parse"]);
-        gulp.watch(["./style.scss"], ["shellsass"]);
-        gulp.watch(["./index.js"], ["scripts"]);
-        gulp.watch(["./test"], ["scripts","test"]);
+    gulp.task('test', function () {
+        return gulp.src('./test/test.js', {read: false})
+            .pipe(mocha({ui:'bdd',reporter: 'nyan'})
+        );
     });
 
-    gulp.task('nodemon', function() {
-        nodemon(config)
-            .on('restart', ['scripts'], function () {
+    gulp.task("watcher", function(){
+        gulp.watch('./test/test.js',["scripts","test"]);
+        gulp.watch(["resources/**/*"], ["parse"]);
+        gulp.watch(["./style.scss"], ["shellsass"]);
+        gulp.watch(["./index.js"], ["scripts"]);
+    });
+
+    gulp.task('nodemon', function () {
+        nodemon(config).on('restart', ['scripts'], function () {
                 console.log('#**# Restarted server')
             });
     });
+
+
+    gulp.task("default", ["scripts","shellsass","watcher"]);
+
+    gulp.task("serve", ["scripts","shellsass","watcher","nodemon"]);
 
 
     /*

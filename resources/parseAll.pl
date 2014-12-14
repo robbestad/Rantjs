@@ -26,3 +26,4 @@ foreach my $file (@files) {
     print `perl $dirname/parse.pl < $dirname/RantVocab/$file`;
 }
 print `cat $dirname/out/*.js > $dirname/../source/dic/dic.js`;
+print `perl $dirname/parseKeys.pl`;

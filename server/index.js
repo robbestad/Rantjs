@@ -15,6 +15,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/*', function (req, res) {
+   console.log(req.path);
     res.sendFile(__dirname + '/../dist' + req.path);
 });
 
