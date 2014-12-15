@@ -23,6 +23,7 @@
   "devDependencies": {
     "compression": "^1.2.1",
     "debug": "^2.1.0",
+    "del": "^1.1.0",
     "express": "^4.10.4",
     "gulp-autoprefixer": "^2.0.0",
     "gulp-concat": "^2.4.2",
@@ -40,6 +41,7 @@
     "mocha": "^2.0.1",
     "mocha-lcov-reporter": "0.0.1",
     "requirejs": "^2.1.15",
+    "run-sequence": "^1.0.2",
     "should": "^4.3.0",
     "streamqueue": "^0.1.1"
   }

@@ -56,11 +56,27 @@ var gulp = require("gulp"),
         'npm run-script coverage'
     ]));
 
-    gulp.task('test', ["scripts"], function () {
+    gulp.task('mocha', ["scripts"], function () {
         return gulp.src('./test/test.js', {read: false})
             .pipe(mocha({ui:'bdd',reporter: 'nyan'})
         );
     });
+
+    var del    = require('del');
+    gulp.task('delete', function(callback) {
+        del(["./resources/out/**/*"], callback);
+    });
+
+    var runSequence = require('run-sequence');
+    gulp.task('test', function(callback) {
+        runSequence('delete',
+            [
+                'scripts',
+                'mocha',
+            ],
+            callback);
+    });
+
 
     gulp.task("watcher", function(){
         gulp.watch('./test/test.js',["scripts","test"]);
