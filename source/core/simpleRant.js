@@ -17,25 +17,26 @@ function SimpleRant() {
             keyword = matches[1].match(re);
             // Match against valid keywords in valid_keys
 
-            // console.log("checking for existence of keyword "+keyword[0]+" in valid_keys");
+            console.log("checking for existence of keyword "+keyword[0]+" in valid_keys");
 
-            if(valid_keys.indexOf(keyword[0]) != -1){
-                console.log("valid keyword: "+keyword[0]+" ");
-
-                // Now we're ready to pass the keyword to the parser. It should
-                // include the keyword and any modifiers
-                var nresult = parseWords(this, keyword[0], keyword);
-
-                console.log("result");
-                console.log(nresult);
-            }
-
-
-
+            //if(valid_keys.indexOf(keyword[0]) != -1){
+            //    console.log("valid keyword: "+keyword[0]+" ");
+            //
+            //    // Now we're ready to pass the keyword to the parser. It should
+            //    // include the keyword and any modifiers
+            //    var nresult = parseWords(this, keyword[0], keyword);
+            //
+            //    console.log(nresult);
+            //    console.log("-------");
+            //}
 
 
             // Below is the naive approach. It works, but it's neither elegant nor practical and
             // should be considered POC rather than production code.
+
+
+
+            console.log("parsing using the old functions");
 
             if (matches[1] == "adv") {
                 if('undefined' == typeof adv1match) var adv1match=false;
@@ -99,7 +100,9 @@ function SimpleRant() {
 
             if (matches[1] == "adj") {
                 if('undefined' == typeof adjmatch) var adjmatch=false;
-                if(!adjmatch) { adjmatch = true; result = parseAdjective(this, matches[1], input, result); } }
+                if(!adjmatch) { adjmatch = true;
+                    console.log("parsing adjective");
+                    result = parseAdjective(this, matches[1], input, result); } }
 
             if (matches[1] == "adj.plural") {
                 if('undefined' == typeof adjpmatch) var adjpmatch=false;

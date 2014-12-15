@@ -27,7 +27,7 @@ sub remove_whitespace{
 }
 
 my $name; my $sub; my $keyword; my @keywords; my $out; my @keyCollection;
-$out="var subs={}; var filters={};\n";
+$out="var dic={}; var subs={}; var filters={};\n";
 
 foreach my $file (@files) {
     @keywords = ""; # reset keywords
@@ -137,12 +137,13 @@ $out .= "\"$key\"";
         $out .= ", ";
     }
 }
-$out .= "];";
+$out .= "];\n";
 
+print $out;
 
 ## finally, write the files
-print "writing $dirname/out/valid_keys.js\n";
-my $file = "$dirname/out/valid_keys.js";
-open(my $fh, '>', $file) or die "Can't write to file '$file' [$!]\n";
-print {$fh} $out;
-close $fh;
+#print "writing $dirname/out/valid_keys.js\n";
+#my $file = "$dirname/out/valid_keys.js";
+#open(my $fh, '>', $file) or die "Can't write to file '$file' [$!]\n";
+#print {$fh} $out;
+#close $fh;

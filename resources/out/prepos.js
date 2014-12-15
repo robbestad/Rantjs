@@ -1,5 +1,0 @@
-
-var dic_prepos=[];
-var dic_prepos_time = ["after", "time", "before", "time", "during", "time", "despite", "time", "following", "time", "for", "time", "until", "time", "since", "time", "regarding"];
-var dic_prepos_space = ["aboard", "space", "about", "space", "above", "space", "across", "space", "against", "space", "along", "space", "amid", "space", "among", "space", "around", "space", "as", "space", "at", "space", "behind", "space", "below", "space", "beneath", "space", "beside", "space", "besides", "space", "between", "space", "beyond", "space", "by", "space", "down", "space", "from", "space", "in", "space", "inside", "space", "into", "space", "near", "space", "of", "space", "off", "space", "on", "space", "onto", "space", "opposite", "space", "outside", "space", "over", "space", "past", "space", "round", "space", "through", "space", "to", "space", "toward", "space", "towards", "space", "under", "space", "underneath", "space", "up", "space", "upon", "space", "versus", "space", "via", "space", "with", "space", "within", "space", "without", "space"];
-dic_prepos = dic_prepos.concat(dic_prepos_time,dic_prepos_space);

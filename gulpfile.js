@@ -17,7 +17,7 @@ var gulp = require("gulp"),
     gulp.task("concatjs", function(){
         return streamqueue({ objectMode: true },
             gulp.src('./source/arrayMethods.js'),
-            gulp.src('./source/dic/**/*'),
+            gulp.src(['./source/dic/keywords.js','./source/dic/custom.js','./source/dic/dic.js']),
             gulp.src('./source/core/simpleRant.js'),
             gulp.src('./source/parser/**/*'),
             gulp.src('./source/extensions/**/*')
@@ -56,7 +56,7 @@ var gulp = require("gulp"),
         'npm run-script coverage'
     ]));
 
-    gulp.task('test', function () {
+    gulp.task('test', ["scripts"], function () {
         return gulp.src('./test/test.js', {read: false})
             .pipe(mocha({ui:'bdd',reporter: 'nyan'})
         );

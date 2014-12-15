@@ -24,15 +24,16 @@ var parseWords = function (rant, keyword, matched) {
                             console.log("valid sub: "+entry);
                         }
                     }
+
+                    // So.. now we got the keyword, the filters and the subs. Let's do some magic
+                    dic[keyword]
+
+
                 }
             });
-            console.log("matched length: "+matched.length);
+            //console.log("matched length: "+matched.length);
         }
-        //
-        //if(filters.length>0){
-        //    console.log("filters: "+filters.length);
-        //    console.log(filters);
-        //}
+
 
     }
 

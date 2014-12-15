@@ -5,7 +5,7 @@ var rant = require("./../simpleRant");
 describe('Get Sentence', function () {
     it('should return a sentence when calling several keywords', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<yes>, I need a bunch of <adjective> <noun.plural>')
+        var result = r.rantConstructor('<yes>, I need a bunch of <adj> <noun.plural>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
@@ -474,10 +474,7 @@ describe('Get noun shape', function () {
 describe('All nouns', function () {
     it('should return all nouns', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<noun-animal> <noun> <noun.plural> <noun-furniture> <noun-surface> <noun-tool> ' +
-        '<noun-round> <noun-body> <noun-liquid> <noun-insect> <noun-clothes> <noun-plant> <noun-person> <noun-tool> ' +
-        '<noun-long> <noun-ball> <noun-article> <noun-drug> <noun-fruit> <noun-container <noun-instrument> <noun-sex> ' +
-        '<noun-job> <noun-weapon> <noun-hole> <noun-food> <noun-vehicle> <noun-animal> <noun-shape>');
+        var result = r.rantConstructor('<noun-animal> <noun> <noun.plural>');
         var count=result.match(/\<|\>/g);
         assert.equal(null,count);
 

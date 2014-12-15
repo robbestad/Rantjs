@@ -42,13 +42,21 @@ sub remove_whitespace{
 
 foreach my $line ( split /\n/, $content ) {
 
-# get name var as #name from file
+# get #name as name from file
     if ( $line =~ m/\#name/ ) {
         $line =~ s/\#name //;
         $line =~ s/-//g;
         $name = $line;
 
-        # print $name;
+
+        if($name eq "with"){
+            $name = "preposition";
+        }
+
+        if($name eq "name"){
+            $name = "names";
+        }
+
         next;
     }
 
@@ -149,18 +157,17 @@ while ( $i < $num ) {
     $i++;
 }
 
+$outkeywordarray = "\nvar $name ={\n";
 
-my $array_list = "\ndic_$name = dic_$name.concat(";
+my $array_list = ".concat(";
+print scalar %collection_keywords;
+print "\n";
 foreach my $t ( keys %collection_keywords ) {
     $collection_keywords{$t} =~ s/, //s;
-    #next if ( $collection_keywords{$t} eq "\"\"" );   # skip empty lines
-
-    $outkeywordarray
-        .= "\nvar dic_" . $name . "_$t = [$collection_keywords{$t}];";
-    $array_list .= "dic_" . $name . "_$t,";
+    $array_list .= $name . ".$t,";
+    $outkeywordarray .= "\t$t: [ $collection_keywords{$t}, ],\n";
 }
-$array_list =~ s/,$//;
-$array_list .= ");";
+
 
 ## deduplicate
 my @nongrouped;
@@ -191,16 +198,40 @@ foreach my $noun (@nouns) {
     }
 }
 
-$out = "\nvar dic_" . $name . "=[";
+my $allconcat;
+if(scalar @nongrouped > 0){
+$allconcat = "\tvar ".$name."_all= [";
 foreach my $noun (@nongrouped) {
-    $out .= '"' . $noun . '",';
+    $allconcat .= '"' . $noun . '",';
 }
-$out =~ s/,+$//m;
-$out .= "];";
+$outkeywordarray =~ s/, ],+$/],/m; # remove unnecessary commas
+$outkeywordarray =~ s/, ],/],/mg; # remove unnecessary commas
+$allconcat .= "]".$array_list.");\n"; # remove unnecessary commas
+$outkeywordarray =~ s/,]/]/g; # remove unnecessary commas
+}
+$outkeywordarray .= "};\n";
+$outkeywordarray .= "dic.$name = $name;\n";
+$outkeywordarray =~ s/,\)};/\)};/g; # remove unnecessary commas
+$outkeywordarray =~ s/,\n}/\n}/g; # remove unnecessary commas
+$outkeywordarray =~ s/, ]/]/g; # remove unnecessary commas
 
-## finally, write the files
+$allconcat =~ s/,]/]/g; # remove unnecessary commas
+$allconcat =~ s/,\)/\)/g; # remove unnecessary commas
+
+my $out_all;
+if(scalar @nongrouped > 0){
+    $out_all="dic.".$name.".all=".$name."_all;\n";
+}
+#
+#print $outkeywordarray;
+#print $allconcat;
+#print $out_all;
+#print $array_list;
+
+# finally, write the files
 my $file = "$dirname/out/$name.js";
 print "writing $file\n";
 open(my $fh, '>', $file) or die "Can't write to file '$file' [$!]\n";
-print {$fh}  $out . $outkeywordarray . $array_list;
+#print {$fh}  $out . $outkeywordarray . $array_list;
+print {$fh}  $outkeywordarray .$allconcat.$out_all;
 close $fh;

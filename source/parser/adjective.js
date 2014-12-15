@@ -8,6 +8,7 @@ var parseAdjective = function (rant, matched, input, result) {
             plural=1;
         }
 
+
         while (i > 0) {
             replacement.push(rant.getAdjective(plural));
             i--;

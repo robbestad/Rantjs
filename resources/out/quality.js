@@ -1,5 +1,0 @@
-
-var dic_quality=[];
-var dic_quality_human = ["race/racier/less racier/raciest", "human", "age/older/younger/oldest", "human", "gender/sexier/more gender neutral/sexiest", "human", "ethnicity/more ethnic/less ethnic/most ethnic", "human", "honesty/more thuthful/less truthful/most truthful"];
-var dic_quality_physical = ["speed/faster/slower/fastest", "physical", "size/bigger/smaller/biggest", "physical", "wetness/wetter/drier/wettest", "physical", "force/harder/softer/hardest", "physical", "weight/heavier/lighter/heaviest", "physical", "color/more colorful/duller/most colorful", "physical", "luminosity/brighter/darker/brightest", "physical", "power level/more powerful/weaker/most powerful", "physical", "height/taller/shorter/tallest", "physical", "length/longer/shorter/longest", "physical", "width/wider/skinnier/widest", "physical", "girth/girthier/less girthy/girthiest", "physical"];
-dic_quality = dic_quality.concat(dic_quality_human,dic_quality_physical);
