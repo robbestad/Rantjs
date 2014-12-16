@@ -81,17 +81,19 @@ foreach my $line ( split /\n/, $content ) {
 
 # get keywords from lines starting with pipe (|)
     if ( $line =~ m/\|/ ) {
-        $line =~ s/(\| class)//g;
-        $keyword = remove_whitespace($line);
+        $keyword = $line;
+        $keyword =~ s/(\| class)//g;
+        $keyword = remove_whitespace($keyword);
     }
 
 # Set or remove group for all the next words
     if ( $line =~ m/\#class add/ ) {
         if ($currentOp) { next; }       # only one op at a time
-        $line =~ s/(\| class)//g;
-        $line =~ s/(\#class add)//g;
-        $line =~ s/(\|#)//g;
-        $group = remove_whitespace($line);
+        $group = $line;
+        $group =~ s/(\| class)//g;
+        $group =~ s/(\#class add)//g;
+        $group =~ s/(\|#)//g;
+        $group = remove_whitespace($group);
         $currentOp = 1;
         if(!$group eq ""){
         $keyword = $group;
@@ -221,11 +223,28 @@ $allconcat =~ s/,\)/\)/g; # remove unnecessary commas
 my $out_all;
 if(scalar @nongrouped > 0){
     $out_all="dic.".$name.".all=".$name."_all;\n";
+} else {
+    my $iterator=1;
+    foreach my $t ( keys %collection_keywords ) {
+        if($iterator == 1 && $iterator == scalar (keys %collection_keywords)){
+            $out_all="dic.".$name.".all=dic.".$name.".".$t.";\n";
+        }
+        elsif($iterator == 1){
+            $out_all="dic.".$name.".all=dic.".$name.".".$t.".concat(";
+        }
+        elsif($iterator == scalar (keys %collection_keywords)){
+            $out_all.="dic.".$name.".".$t.");\n";
+        } else {
+            $out_all.="dic.".$name.".".$t.",";
+        }
+        $iterator++;
+    }
+
 }
 #
 #print $outkeywordarray;
 #print $allconcat;
-#print $out_all;
+print $out_all;
 #print $array_list;
 
 # finally, write the files
