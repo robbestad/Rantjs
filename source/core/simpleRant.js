@@ -19,16 +19,16 @@ function SimpleRant() {
 
             console.log("checking for existence of keyword "+keyword[0]+" in valid_keys");
 
-            //if(valid_keys.indexOf(keyword[0]) != -1){
-            //    console.log("valid keyword: "+keyword[0]+" ");
-            //
-            //    // Now we're ready to pass the keyword to the parser. It should
-            //    // include the keyword and any modifiers
-            //    var nresult = parseWords(this, keyword[0], keyword);
-            //
-            //    console.log(nresult);
-            //    console.log("-------");
-            //}
+            if(valid_keys.indexOf(keyword[0]) != -1){
+                console.log("valid keyword: "+keyword[0]+" ");
+
+                // Now we're ready to pass the keyword to the parser. It should
+                // include the keyword and any modifiers
+                var nresult = parseWords(this, keyword[0], keyword);
+
+                console.log(nresult);
+                console.log("-------");
+            }
 
 
             // Below is the naive approach. It works, but it's neither elegant nor practical and

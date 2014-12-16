@@ -14,21 +14,34 @@ var gulp = require("gulp"),
     mocha = require('gulp-mocha'),
     config = require("./config").nodemon.development;
 
-    gulp.task("concatjs", function(){
+    gulp.task("concat:js", function(){
         return streamqueue({ objectMode: true },
             gulp.src('./source/arrayMethods.js'),
-            gulp.src(['./source/dic/keywords.js','./source/dic/custom.js','./source/dic/dic.js']),
             gulp.src('./source/core/simpleRant.js'),
             gulp.src('./source/parser/**/*'),
             gulp.src('./source/extensions/**/*')
         )
-            .pipe(concat('./simpleRant.js'))
+            .pipe(concat('./build/simpleRant.core.js'))
             .pipe(gulp.dest('./'))
             .on('error', handleErrors);
     });
 
-    gulp.task("scripts", ["concatjs"], function(){
-         gulp.src(["./simpleRant.js"])
+    gulp.task("concat:dic", function(){
+            gulp.src(['./source/dic/keywords.js','./source/dic/custom.js','./source/dic/dic.js'])
+            .pipe(concat('./build/simpleRant.dic.js'))
+            .pipe(gulp.dest('./'))
+            .on('error', handleErrors);
+    });
+
+    gulp.task("minify:core", ["concat:js"], function(){
+         gulp.src(["./build/simpleRant.core.js"])
+         .pipe(maps.init())
+         .pipe(uglify())
+         .pipe(maps.write())
+         .pipe(gulp.dest("dist"));
+         });
+    gulp.task("minify:dic", ["concat:dic"], function(){
+         gulp.src(["./build/simpleRant.dic.js"])
          .pipe(maps.init())
          .pipe(uglify())
          .pipe(maps.write())
@@ -56,7 +69,7 @@ var gulp = require("gulp"),
         'npm run-script coverage'
     ]));
 
-    gulp.task('mocha', ["scripts"], function () {
+    gulp.task('mocha', ["minify:core","minify:dic"], function () {
         return gulp.src('./test/test.js', {read: false})
             .pipe(mocha({ui:'bdd',reporter: 'nyan'})
         );
@@ -71,30 +84,48 @@ var gulp = require("gulp"),
     gulp.task('test', function(callback) {
         runSequence('delete',
             [
-                'scripts',
-                'mocha',
+                "compile:dev",
+                'mocha'
+            ],
+            callback);
+    });
+
+    gulp.task('compile:dist', function(callback) {
+        runSequence(
+            [
+                "concat:js","concat:dic",
+                "minify:core","minify:dic"
+            ],
+            callback);
+    });
+    gulp.task('compile:dev', function(callback) {
+        runSequence(
+            [
+                "concat:js","concat:dic"
             ],
             callback);
     });
 
 
+
+
     gulp.task("watcher", function(){
-        gulp.watch('./test/test.js',["scripts","test"]);
+        gulp.watch('./test/test.js',["test"]);
         gulp.watch(["resources/**/*"], ["parse"]);
         gulp.watch(["./style.scss"], ["shellsass"]);
-        gulp.watch(["./index.js"], ["scripts"]);
+        gulp.watch(["./index.js"], ["compile:dist"]);
     });
 
     gulp.task('nodemon', function () {
-        nodemon(config).on('restart', ['scripts'], function () {
+        nodemon(config).on('restart', ["compile:dist"], function () {
                 console.log('#**# Restarted server')
             });
     });
 
 
-    gulp.task("default", ["scripts","shellsass","watcher"]);
+    gulp.task("default", ["compile:dist","shellsass","watcher"]);
 
-    gulp.task("serve", ["scripts","shellsass","watcher","nodemon"]);
+    gulp.task("serve", ["compile:dist","shellsass","watcher","nodemon"]);
 
 
     /*
