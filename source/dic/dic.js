@@ -146,10 +146,11 @@ dic.preposition = preposition;
 dic.preposition.all=preposition_all;
 
 var pron ={
+	female: [ "her/she/herself/her/hers"],
 	male: [ "him/he/himself/his/his"]
 };
 dic.pron = pron;
-dic.pron.all=dic.pron.male;
+dic.pron.all=dic.pron.female.concat(dic.pron.male);
 
 var quality ={
 	human: [ "race/racier/less racier/raciest", "age/older/younger/oldest", "gender/sexier/more gender neutral/sexiest", "ethnicity/more ethnic/less ethnic/most ethnic"],
