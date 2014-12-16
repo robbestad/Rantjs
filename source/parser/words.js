@@ -39,9 +39,9 @@ var parseWords = function (rant, keyword, matched) {
     //    console.log("pushing "+keyword+" & "+e);
     //    dictionary.push(dic[keyword].e);
     //});
-
-    console.log("using dictionary ");
-    console.dir(dictionary);
+    //
+    //console.log("using dictionary ");
+    //console.dir(dictionary);
     //console.log("matched length: "+matched.length);
 
 
