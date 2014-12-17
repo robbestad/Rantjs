@@ -106,7 +106,7 @@ describe('Get Multiple Yeses', function () {
 describe('Get No', function () {
     it('should return a negative string', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<no>')
+        var result = r.rantConstructor('<yn no>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
@@ -115,7 +115,7 @@ describe('Get No', function () {
 describe('Get Single Month', function () {
     it('should return a string when calling a month', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<time-month>')
+        var result = r.rantConstructor('<timenoun month>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
@@ -124,7 +124,7 @@ describe('Get Single Month', function () {
 describe('Get All Month Nouns', function () {
     it('should return all mounth nouns', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<time>|<time-month>|<time-month.plural>|')
+        var result = r.rantConstructor('<timenoun>|<timenoun dayofmonth>|<timenoun dayofmonth plural>|')
             .replace(new RegExp("<.*>","g"),"");
         var count=result.match(/\|+/g).length;
         assert(count,assert.equal(3,count));
@@ -134,7 +134,7 @@ describe('Get All Month Nouns', function () {
 describe('Get plural time', function () {
     it('should return a string when a time noun with flags: plural and month', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<time-month.plural>')
+        var result = r.rantConstructor('<timenoun dayofmonth plural>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
@@ -142,7 +142,7 @@ describe('Get plural time', function () {
 describe('Get day of week', function () {
     it('should return a string with day of the week', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<time-dayofweek>')
+        var result = r.rantConstructor('<timenoun dayofweek>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
@@ -481,10 +481,10 @@ describe('All nouns', function () {
     })
 });
 
-describe('Get exclamation', function () {
-    it('should return an exclamation', function () {
+describe('Say something', function () {
+    it('should return a say', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<exclamation>')
+        var result = r.rantConstructor('<say>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
@@ -511,7 +511,34 @@ describe('Get color plural', function () {
 describe('Get relationship', function () {
     it('should return a relationship', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<relationship>')
+        var result = r.rantConstructor('<rel>')
+            .replace(new RegExp("<.*>","g"),"");
+        assert(result,assert.hasContent);
+    })
+});
+
+
+describe('Get neutral relationship', function () {
+    it('should return a neutral relationship', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<rel neutral>')
+            .replace(new RegExp("<.*>","g"),"");
+        assert(result,assert.hasContent);
+    })
+});
+
+describe('Get female relationship', function () {
+    it('should return a male relationship', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<rel female>')
+            .replace(new RegExp("<.*>","g"),"");
+        assert(result,assert.hasContent);
+    })
+});
+describe('Get male relationship', function () {
+    it('should return a male relationship', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('<rel male>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
@@ -520,7 +547,7 @@ describe('Get relationship', function () {
 describe('Get relationship plural', function () {
     it('should return a plural relationship', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<relationship.plural>')
+        var result = r.rantConstructor('<rel plural>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
@@ -529,7 +556,7 @@ describe('Get relationship plural', function () {
 describe('Get conjunction', function () {
     it('should return a conjunction', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<conjunction>')
+        var result = r.rantConstructor('<conj>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
