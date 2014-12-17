@@ -1,12 +1,12 @@
-var lexer = function (rant, token, matched, matchString, input) {
+var lexer = function (rant, matched, matches, input) {
     var result, modifier=0;
-
+    var token = matched[0];
 
     // matched[0] contains the token. It can be noun, verb, adj etc.
     // we already know it's valid, because this function doesn't get
     // called unless it is.
 
-    // Let's check if there's any qualifiers or modifiers
+    // Let's check if there's any qua'lifiers or modifiers
     if(matched[0].length>1){
         // yes, there are. There are two classes. Filters and subs. Let's see what we got
         var mysubs=myfilters=[];
@@ -56,7 +56,7 @@ var lexer = function (rant, token, matched, matchString, input) {
     }
 
     var rand, re, i, newToken, replacement = [];
-    re = new RegExp( matchString, 'g');
+    re = new RegExp( matches[0], 'g');
     if(null !== input.match(re)) i = input.match(re).length;
     while (i > 0) {
         rand = Math.floor(Math.random()*dictionary.length);
@@ -73,7 +73,7 @@ var lexer = function (rant, token, matched, matchString, input) {
     var rand=Math.floor(Math.random()*dictionary.length);
     //console.dir(dictionary[rand]);
 
-    re = new RegExp(matchString, 'g');
+    re = new RegExp(matches[0], 'g');
     input = input.replace(re, function () {
         return replacement[i++];
     });

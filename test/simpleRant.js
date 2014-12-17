@@ -162,7 +162,6 @@
 })();
 function SimpleRant() {
 
-
     this.rantConstructor = function (input) {
         var result = input;
         var regex = /\<(.*?)\>/g;
@@ -170,37 +169,30 @@ function SimpleRant() {
         var replacement = [], i=0;
 
         while (matches = regex.exec(input)) {
-
-
-            //var input = "noun -long -animal";
             // We accept a number of keywords, and they all correlate to the entries in the DIC files
             // First, get the DIC token
             var re=new RegExp("\\w+","g");
             token = matches[1].match(re);
             // Match against valid keywords in valid_tokens
-
-            //console.log("checking for existence of token "+token[0]+" in valid_tokens");
             if(valid_tokens.indexOf(token[0]) != -1){
-                //console.log("valid token: "+token[0]+" ");
-
                 // Now we're ready to pass the token to the parser. It should
                 // include the token and any modifiers
-                result = lexer(this, token[0], token, matches[0], result);
-
+                result = lexer(this, matches, result);
             }
-
         }
         return this.capitalize(result);
     };
-
 
 }
 
 if('undefined' != typeof module){
     module.exports.SimpleRant = SimpleRant;
 }
-var lexer = function (rant, token, matched, matchString, input) {
+var lexer = function (rant, matches, input) {
     var result, modifier=0;
+    var token = matches[1].match(re)[0];
+    var matched = matches[1].match(re);
+    var matchString = matches[0];
 
 
     // matched[0] contains the token. It can be noun, verb, adj etc.
@@ -237,8 +229,9 @@ var lexer = function (rant, token, matched, matchString, input) {
 
     }
     if(myfilters.length<=0){
-        //console.dir(myfilters);
-        dictionary=dictionary.concat(dic[token].all);
+        if("undefined" != typeof dic[token].all){
+            dictionary=dictionary.concat(dic[token].all);
+        }
     } else {
         myfilters.forEach(function(e){
             dictionary=dictionary.concat(dic[token][e]);
@@ -296,8 +289,8 @@ filters.adv=["sexy","emotion"];
 subs.color=["ish"];
 filters.color=["primary","secondary"];
 filters.country=["asia","middleeast","mediterranean","europe","southamerica","oceania","northamerica","africa","centralamerica","caribbean","eurasia"];
-subs.name=["abbr"];
-filters.name=["male"];
+subs.firstname=["abbr"];
+filters.firstname=["male"];
 subs.noun=["singular","plural"];
 filters.noun=["body","hole","person","sex","weapon","animal","tool","food","drug","article","fruit","container","furniture","instrument","plant","shape","ball","surface","long","round","clothes","vehicle","insect"];
 subs.sound=["singular","plural"];
@@ -321,7 +314,7 @@ subs.verbimg=["normal","ing","ed","s","er"];
 subs.say=["simple","ing","ed","s","er","pp","noun"];
 subs.verb=["simple","ing","ed","s","er","pp","noun"];
 filters.verb=["transitive","walk","intransitive","sex","pose","eat","liquid","motion","insert","violent","political","legal","move"];
-var valid_tokens=["preposition","firstname","activity", "adj", "adv", "color", "conj", "country", "emo", "em", "x", "face", "name", "greet", "surname", "noun", "sound", "title", "place", "prefix", "prepos", "pron", "quality", "rel", "sconj", "substance", "timeadv", "timenoun", "unit", "verbimg", "say", "verb", "vocal", "with", "yn"];
+var valid_tokens=["preposition","firstname","activity", "adj", "adv", "color", "conj", "country", "emo", "em", "x", "face", "firstname", "greet", "surname", "noun", "sound", "title", "place", "prefix", "prepos", "pron", "quality", "rel", "sconj", "substance", "timeadv", "timenoun", "unit", "verbimg", "say", "verb", "vocal", "preposition", "yn"];
 
 
 var activity ={
@@ -472,11 +465,10 @@ dic.preposition.all=preposition_all;
 
 var pron ={
 	female: [ "her/she/herself/her/hers"],
-	male: [ "him/he/himself/his/his"],
-	neutral: [ "it/it/itself/its/its"]
+	male: [ "him/he/himself/his/his"]
 };
 dic.pron = pron;
-dic.pron.all=dic.pron.female.concat(dic.pron.male,dic.pron.neutral);
+dic.pron.all=dic.pron.female.concat(dic.pron.male);
 
 var quality ={
 	human: [ "race/racier/less racier/raciest", "age/older/younger/oldest", "gender/sexier/more gender neutral/sexiest", "ethnicity/more ethnic/less ethnic/most ethnic"],
