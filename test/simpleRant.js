@@ -161,14 +161,10 @@
     }
 })();
 function SimpleRant() {
-
     this.rantConstructor = function (input) {
-        var result = input;
-        var regex = /\<(.*?)\>/g;
-        var matches, token;
-        var replacement = [], i=0;
-
+        var result = input, matches, token, replacement = [], i= 0, regex = /\<(.*?)\>/g;
         while (matches = regex.exec(input)) {
+            //var input = "noun -long -animal";
             // We accept a number of keywords, and they all correlate to the entries in the DIC files
             // First, get the DIC token
             var re=new RegExp("\\w+","g");
@@ -182,25 +178,27 @@ function SimpleRant() {
         }
         return this.capitalize(result);
     };
-
 }
+
+SimpleRant.prototype.capitalize = function (s) {
+    return s[0].toUpperCase() + s.slice(1);
+};
 
 if('undefined' != typeof module){
     module.exports.SimpleRant = SimpleRant;
 }
 var lexer = function (rant, matches, input) {
-    var result, modifier=0;
+    var result, modifier= 0, re=new RegExp("\\w+","g");
     var token = matches[1].match(re)[0];
-    var matched = matches[1].match(re);
-    var matchString = matches[0];
-
+    var matched=matches[1].match(re);
 
     // matched[0] contains the token. It can be noun, verb, adj etc.
     // we already know it's valid, because this function doesn't get
     // called unless it is.
 
+
     // Let's check if there's any qualifiers or modifiers
-    if(matched[0].length>1){
+    if(token.length>1){
         // yes, there are. There are two classes. Filters and subs. Let's see what we got
         var mysubs=myfilters=[];
         var dictionary=[];
@@ -249,7 +247,7 @@ var lexer = function (rant, matches, input) {
     }
 
     var rand, re, i, newToken, replacement = [];
-    re = new RegExp( matchString, 'g');
+    re = new RegExp( matches[0], 'g');
     if(null !== input.match(re)) i = input.match(re).length;
     while (i > 0) {
         rand = Math.floor(Math.random()*dictionary.length);
@@ -266,7 +264,7 @@ var lexer = function (rant, matches, input) {
     var rand=Math.floor(Math.random()*dictionary.length);
     //console.dir(dictionary[rand]);
 
-    re = new RegExp(matchString, 'g');
+    re = new RegExp(matches[0], 'g');
     input = input.replace(re, function () {
         return replacement[i++];
     });

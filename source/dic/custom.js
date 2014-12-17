@@ -21,4 +21,5 @@ valid_tokens.push("pron_female");
 
 filters.firstname=["male","female"];
 
-
+//
+//filters.yn=["yes","no"];

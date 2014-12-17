@@ -41,6 +41,7 @@ foreach my $file (@files) {
     open (FILE, "$filename")
         or die "Could not open file '$filename' $!";
 
+
     my $lines = <FILE>;
     foreach my $line ( split /\n/, $lines ) {
     # remove lines starting with pipe pron (| pron)
@@ -83,6 +84,7 @@ foreach my $file (@files) {
                 $out .= "\nsubs.$name=[";
 
                 foreach my $uniqsub (@subwords) {
+
                 $iterator++;
                 $uniqsub = remove_whitespace($uniqsub);
                     $out .= "\"".$uniqsub."\"";
@@ -96,11 +98,10 @@ foreach my $file (@files) {
             next;
         }
 
-    # get keywords starting with pipe
-    if ( $line =~ m/\| class/ ) {
+        # get keywords starting with pipe
+        if ( $line =~ m/\| class/ ) {
         $line =~ s/(\| class)//g;
         $keyword = remove_whitespace($line);
-        
         # there can be a lot of keywords. Let's split them up
         my @kwords = split / /, $keyword;
             foreach my $uq (@kwords) {
@@ -117,7 +118,32 @@ foreach my $file (@files) {
                 if($exists == 0){ push( @keywords, $uq );  }
             }
         }
+
+        # get keywords starting with pipe
+        if ( $line =~ m/#class add/ ) {
+        $line =~ s/(#class add)//g;
+        $keyword = remove_whitespace($line);
+        # there can be a lot of keywords. Let's split them up
+        my @kwords = split / /, $keyword;
+            foreach my $uq (@kwords) {
+                $uq = remove_whitespace($uq);
+                $uq =~ s/-//g;             # remove dash
+
+                # add them to my list of keywords
+                # this is iterating over and over
+                # that's okay, because the list is pretty small
+                my $exists=0;
+                foreach my $kw (@keywords) {
+                   if($kw eq $uq) {$exists=1; }
+                }
+                if($exists == 0){ push( @keywords, $uq );  }
+            }
+        }
+
+
+
     }
+
 
 
     if(scalar @keywords > 1){
@@ -127,7 +153,7 @@ foreach my $file (@files) {
             $iterator++;
             if(!$kw eq ""){
                 $out .= "\"".$kw."\"";
-                if($iterator < scalar @keywords){
+                if($iterator <= scalar @keywords){
                     $out .= ",";
                 }
 

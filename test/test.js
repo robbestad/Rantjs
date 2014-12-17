@@ -70,7 +70,7 @@ describe('Get Male Title', function () {
 describe('Get Male Name', function () {
     it('should return a positive string', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<name-male>')
+        var result = r.rantConstructor('<firstname male>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
@@ -79,7 +79,7 @@ describe('Get Male Name', function () {
 describe('Get Female Name', function () {
     it('should return a positive string', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<name-female>')
+        var result = r.rantConstructor('<firstname female>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
@@ -88,7 +88,7 @@ describe('Get Female Name', function () {
 describe('Get Yes', function () {
     it('should return a positive string', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<yes>')
+        var result = r.rantConstructor('<yn yes>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })
@@ -97,7 +97,7 @@ describe('Get Yes', function () {
 describe('Get Multiple Yeses', function () {
     it('should return a positive string', function () {
         var r = new rant.SimpleRant();
-        var result = r.rantConstructor('<yes> <yes> <yes> <yes>')
+        var result = r.rantConstructor('<yn yes> <yn yes> <yn yes> <yn yes>')
             .replace(new RegExp("<.*>","g"),"");
         assert(result,assert.hasContent);
     })

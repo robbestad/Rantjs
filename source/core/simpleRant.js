@@ -11,7 +11,7 @@ function SimpleRant() {
             if(valid_tokens.indexOf(token[0]) != -1){
                 // Now we're ready to pass the token to the parser. It should
                 // include the token and any modifiers
-                result = lexer(this, token, matches, result);
+                result = lexer(this, matches, result);
             }
         }
         return this.capitalize(result);

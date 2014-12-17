@@ -110,7 +110,8 @@ gulp.task("minify:core", ["concat:js"], function(){
     gulp.task('compile:dev', function(callback) {
         runSequence(
             [
-                "concat:js","concat:dic"
+                "concat:js","concat:dic",
+                "concat:test"
             ],
             callback);
     });

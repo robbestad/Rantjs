@@ -173,7 +173,7 @@ function SimpleRant() {
             if(valid_tokens.indexOf(token[0]) != -1){
                 // Now we're ready to pass the token to the parser. It should
                 // include the token and any modifiers
-                result = lexer(this, token, matches, result);
+                result = lexer(this, matches, result);
             }
         }
         return this.capitalize(result);
@@ -187,16 +187,18 @@ SimpleRant.prototype.capitalize = function (s) {
 if('undefined' != typeof module){
     module.exports.SimpleRant = SimpleRant;
 }
-var lexer = function (rant, matched, matches, input) {
-    var result, modifier=0;
-    var token = matched[0];
+var lexer = function (rant, matches, input) {
+    var result, modifier= 0, re=new RegExp("\\w+","g");
+    var token = matches[1].match(re)[0];
+    var matched=matches[1].match(re);
 
     // matched[0] contains the token. It can be noun, verb, adj etc.
     // we already know it's valid, because this function doesn't get
     // called unless it is.
 
-    // Let's check if there's any qua'lifiers or modifiers
-    if(matched[0].length>1){
+
+    // Let's check if there's any qualifiers or modifiers
+    if(token.length>1){
         // yes, there are. There are two classes. Filters and subs. Let's see what we got
         var mysubs=myfilters=[];
         var dictionary=[];
