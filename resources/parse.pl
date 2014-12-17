@@ -54,7 +54,7 @@ foreach my $line ( split /\n/, $content ) {
         }
 
         if($name eq "name"){
-            $name = "names";
+            $name = "firstname";
         }
 
         next;

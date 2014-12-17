@@ -31,4 +31,4 @@ subs.verbimg=["normal","ing","ed","s","er"];
 subs.say=["simple","ing","ed","s","er","pp","noun"];
 subs.verb=["simple","ing","ed","s","er","pp","noun"];
 filters.verb=["transitive","walk","intransitive","sex","pose","eat","liquid","motion","insert","violent","political","legal","move"];
-var valid_keys=["activity", "adj", "adv", "color", "conj", "country", "emo", "em", "x", "face", "name", "greet", "surname", "noun", "sound", "title", "place", "prefix", "prepos", "pron", "quality", "rel", "sconj", "substance", "timeadv", "timenoun", "unit", "verbimg", "say", "verb", "vocal", "with", "yn"];
+var valid_tokens=["preposition","firstname","activity", "adj", "adv", "color", "conj", "country", "emo", "em", "x", "face", "name", "greet", "surname", "noun", "sound", "title", "place", "prefix", "prepos", "pron", "quality", "rel", "sconj", "substance", "timeadv", "timenoun", "unit", "verbimg", "say", "verb", "vocal", "with", "yn"];

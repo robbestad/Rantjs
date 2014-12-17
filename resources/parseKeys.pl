@@ -53,7 +53,7 @@ foreach my $file (@files) {
             $line =~ s/\#name //;
             $line =~ s/-'//g;
             $name = $line;
-            #$out .= "\nvar valid_keys=[\"".$name."\"]; ";
+            #$out .= "\nvar valid_tokens=[\"".$name."\"]; ";
             push( @keyCollection, $name );
             next;
         }
@@ -128,7 +128,7 @@ foreach my $file (@files) {
     }
 }
 
-$out .= "\nvar valid_keys=[";
+$out .= "\nvar valid_tokens=[\"preposition\",\"firstname\",";
 my $iterator=0;
 foreach my $key(@keyCollection){
 $iterator++;
@@ -142,8 +142,8 @@ $out .= "];\n";
 print $out;
 
 ## finally, write the files
-#print "writing $dirname/out/valid_keys.js\n";
-#my $file = "$dirname/out/valid_keys.js";
+#print "writing $dirname/out/valid_tokens.js\n";
+#my $file = "$dirname/out/valid_tokens.js";
 #open(my $fh, '>', $file) or die "Can't write to file '$file' [$!]\n";
 #print {$fh} $out;
 #close $fh;

@@ -27,7 +27,7 @@ var gulp = require("gulp"),
     });
 
     gulp.task("concat:dic", function(){
-            gulp.src(['./source/dic/keywords.js','./source/dic/custom.js','./source/dic/dic.js'])
+            gulp.src(['./source/dic/tokens.js','./source/dic/dic.js','./source/dic/custom.js'])
             .pipe(concat('./build/simpleRant.dic.js'))
             .pipe(gulp.dest('./'))
             .on('error', handleErrors);
@@ -35,16 +35,16 @@ var gulp = require("gulp"),
 
     gulp.task("minify:core", ["concat:js"], function(){
          gulp.src(["./build/simpleRant.core.js"])
-         .pipe(maps.init())
-         .pipe(uglify())
-         .pipe(maps.write())
+         //.pipe(maps.init())
+         //.pipe(uglify())
+         //.pipe(maps.write())
          .pipe(gulp.dest("dist"));
          });
     gulp.task("minify:dic", ["concat:dic"], function(){
          gulp.src(["./build/simpleRant.dic.js"])
-         .pipe(maps.init())
-         .pipe(uglify())
-         .pipe(maps.write())
+         //.pipe(maps.init())
+         //.pipe(uglify())
+         //.pipe(maps.write())
          .pipe(gulp.dest("dist"));
          });
 
@@ -126,14 +126,3 @@ var gulp = require("gulp"),
     gulp.task("default", ["compile:dist","shellsass","watcher"]);
 
     gulp.task("serve", ["compile:dist","shellsass","watcher","nodemon"]);
-
-
-    /*
-    gulp.task('inject', ['copy'], function(){
-        var target = gulp.src('./dist/index.min.js');
-        // It's not necessary to read the files (will speed up things), we're only after their paths:
-        var sources = gulp.src(['./resources/all.dic.js'], {read: false});
-
-        return target.pipe(inject(sources))
-        .pipe(gulp.dest('./src'));
-    });*/
