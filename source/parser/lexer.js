@@ -36,8 +36,9 @@ var lexer = function (rant, token, matched, matchString, input) {
 
     }
     if(myfilters.length<=0){
-        //console.dir(myfilters);
-        dictionary=dictionary.concat(dic[token].all);
+        if("undefined" != typeof dic[token].all){
+            dictionary=dictionary.concat(dic[token].all);
+        }
     } else {
         myfilters.forEach(function(e){
             dictionary=dictionary.concat(dic[token][e]);
