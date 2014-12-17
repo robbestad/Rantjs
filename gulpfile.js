@@ -33,7 +33,16 @@ var gulp = require("gulp"),
             .on('error', handleErrors);
     });
 
-    gulp.task("minify:core", ["concat:js"], function(){
+    gulp.task("concat:test", function(){
+        gulp.src(['./build/simpleRant.core.js','./build/simpleRant.dic.js'])
+            .pipe(concat('./test/simpleRant.js'))
+            .pipe(gulp.dest('./'))
+            .on('error', handleErrors);
+    });
+
+
+
+gulp.task("minify:core", ["concat:js"], function(){
          gulp.src(["./build/simpleRant.core.js"])
          //.pipe(maps.init())
          //.pipe(uglify())
@@ -65,11 +74,11 @@ var gulp = require("gulp"),
         'perl resources/parseAll.pl'
     ]));
 
-    gulp.task("coverage", shell.task([
+    gulp.task("coverage", ["concat:test"], shell.task([
         'npm run-script coverage'
     ]));
 
-    gulp.task('mocha', ["minify:core","minify:dic"], function () {
+    gulp.task('mocha', ["concat:test"], function () {
         return gulp.src('./test/test.js', {read: false})
             .pipe(mocha({ui:'bdd',reporter: 'nyan'})
         );

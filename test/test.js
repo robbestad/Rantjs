@@ -1,6 +1,6 @@
 var assert = require("assert");
 //var should = require("should");
-var rant = require("./../simpleRant");
+var rant = require("./simpleRant");
 
 describe('Get Sentence', function () {
     it('should return a sentence when calling several keywords', function () {
