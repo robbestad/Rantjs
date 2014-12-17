@@ -53,6 +53,15 @@ foreach my $file (@files) {
             $line =~ s/\#name //;
             $line =~ s/-'//g;
             $name = $line;
+
+            if($name eq "with"){
+                $name = "preposition";
+            }
+
+            if($name eq "name"){
+                $name = "firstname";
+            }
+
             #$out .= "\nvar valid_tokens=[\"".$name."\"]; ";
             push( @keyCollection, $name );
             next;

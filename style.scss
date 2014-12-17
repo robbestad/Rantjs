@@ -143,7 +143,8 @@ p {
   }
 }
 
-#copy-button {
+
+.runButton {
   width: 110px;
   height: 50px;
   display: block;
@@ -152,24 +153,35 @@ p {
   text-decoration: none;
   line-height: 43px;
   vertical-align: middle;
+  text-align: center;
   margin: 0 auto;
   border: none;
   outline: none !important;
-  background: url(img/button.png) no-repeat 0 0;
-  ::-moz-focus-inner {
-    border: 0 !important;
-  }
-  &:active {
-    background: url(img/button.png) no-repeat 1px 1px;
-  }
-  &:hover {
-    color: #ff0;
-  }
+  background: url(img/button.png) no-repeat 0 0; }
+#copy-button ::-moz-focus-inner {
+  border: 0 !important; }
+#copy-button:active {
+  background: url(img/button.png) no-repeat 1px 1px; }
+#copy-button:hover {
+  color: #ff0; }
 
-}
+a ::-moz-focus-inner {
+  border: 0 !important; }
 
-a {
-  ::-moz-focus-inner {
-    border: 0 !important;
-  }
-}
+
+.dark {
+  border: solid 2px grey;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #512da8), to(#7e57c2));
+  background: -webkit-linear-gradient(top, #512da8 0, #7e57c2 100%);
+  background: linear-gradient(to bottom, #512da8 0, #7e57c2 100%); }
+
+.light {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #007700), to(#00aa00));
+  background: -webkit-linear-gradient(top, #007700 0, #00aa00 100%);
+  background: linear-gradient(to bottom, #007700 0, #00aa00 100%);
+  border: 2px solid lightgreen !important; }
+
+.purple {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #a527aa), to(#a527ff));
+  background: -webkit-linear-gradient(top, #a527aa 0, #a527ff 100%);
+  background: linear-gradient(to bottom, #a527aa 0, #a527ff 100%); }

@@ -33,7 +33,7 @@ var gulp = require("gulp"),
             .on('error', handleErrors);
     });
 
-    gulp.task("concat:test", function(){
+    gulp.task("concat:test", ["minify:core"], function(){
         gulp.src(['./build/simpleRant.core.js','./build/simpleRant.dic.js'])
             .pipe(concat('./test/simpleRant.js'))
             .pipe(gulp.dest('./'))

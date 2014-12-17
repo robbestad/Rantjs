@@ -64,13 +64,17 @@
                 spellcheck="false">&lt;firstname male&gt; likes to &lt;verb-transitive&gt; &lt;noun.plural&gt; with &lt;pron poss male&gt; pet &lt;noun-animal&gt; on &lt;timenoun dayofweek plural&gt;.</textarea>
     </p>
     <p>
-      <input type="submit" name="submit" id="submit" class="submit" value="Run Pattern">
+      <input type="submit" name="submit"  class="runButton" id="submit" class="submit" value="Run Pattern">
     </p>
 
     <p>
       <label for="input">Output</label>
 
       <textarea name="output" class="output" id="output" spellcheck="false" disabled></textarea>
+    </p>
+    <p>
+      <input id="copy-button" class="runButton" href="#" value="Copy">
+
     </p>
 
     <h2>Other sample sentencens</h2>
@@ -87,50 +91,96 @@ I like my &lt;noun-shape&gt;-shaped &lt;noun-body.plural&gt;
 </code></pre>
 
     <h2>Supported tags</h2>
-<p>Here's a non-complete list of currently supported tags</p>
+<p>Here's a list of currently supported tags</p>
 <pre class="highlight"><code class="language-xml">
+  &lt;preposition&gt;
+  &lt;firstname&gt;
+  &lt;activity&gt;
   &lt;adj&gt;
   &lt;adv&gt;
+  &lt;amount&gt;
   &lt;color&gt;
-  &lt;relationship&gt;
-  &lt;conjunction&gt;
+  &lt;conj&gt;
+  &lt;country&gt;
+  &lt;emo&gt;
+  &lt;em&gt;
   &lt;face&gt;
-  &lt;face.d&gt;
-  &lt;verb&gt;
-  &lt;verb.ed&gt;
-  &lt;yes&gt;
-  &lt;no&gt;
-  &lt;veb-transitive&gt;
-  &lt;pron.poss-male&gt;
+  &lt;greet&gt;
+  &lt;surname&gt;
+  &lt;noun&gt;
+  &lt;sound&gt;
   &lt;title&gt;
-  &lt;title-male&gt;
-  &lt;name-male&gt;
-  &lt;name-female&gt;
-  &lt;time-month&gt;
-  &lt;exclamation&gt;
-  &lt;noun-round&gt;
-  &lt;noun-body&gt;
-  &lt;noun-liquid&gt;
-  &lt;noun-insect&gt;
-  &lt;noun-clothes&gt;
-  &lt;noun-plant&gt;
-  &lt;noun-person&gt;
-  &lt;noun-tool&gt;
-  &lt;noun-long&gt;
-  &lt;noun-ball&gt;
-  &lt;noun-article&gt;
-  &lt;noun-drug&gt;
-  &lt;noun-fruit&gt;
-  &lt;noun-container
-  &lt;noun-instrument&gt;
-  &lt;noun-sex&gt;
-  &lt;noun-job&gt;
-  &lt;noun-weapon&gt;
-  &lt;noun-hole&gt;
-  &lt;noun-food&gt;
-  &lt;noun-vehicle&gt;
-  &lt;noun-animal&gt;
-  &lt;noun-shape&gt;
+  &lt;place&gt;
+  &lt;prefix&gt;
+  &lt;prepos&gt;
+  &lt;pron&gt;
+  &lt;quality&gt;
+  &lt;rel&gt;
+  &lt;sconj&gt;
+  &lt;substance&gt;
+  &lt;timeadv&gt;
+  &lt;timenoun&gt;
+  &lt;unit&gt;
+  &lt;verbimg&gt;
+  &lt;say&gt;
+  &lt;verb&gt;
+  &lt;vocal&gt;
+  &lt;yn&gt;
+
+  Additionally, many of the tokens can have subgroups, such as:
+  &lt;activity video&gt;
+  &lt;activity game&gt;
+  &lt;activity board&gt;
+  &lt;adj weather&gt;
+  &lt;adj emotion&gt;
+  &lt;adj nationality&gt;
+  &lt;adj appearance&gt;
+  &lt;adv emotion&gt;
+  &lt;adv sexy&gt;
+  &lt;color secondary&gt;
+  &lt;color primary&gt;
+  &lt;country&gt;mediterranean&gt;
+  &lt;country&gt;caribbean&gt;
+  &lt;country&gt;oceania&gt;
+  &lt;country&gt;eurasia&gt;
+  &lt;country&gt;africa&gt;
+  &lt;country&gt;middleeast&gt;
+  &lt;country&gt;southamerica&gt;
+  &lt;country&gt;asia&gt;
+  &lt;country&gt;europe&gt;
+  &lt;country&gt;northamerica&gt;
+  &lt;country&gt;centralamerica&gt;
+  &lt;firstname male&gt;
+  &lt;firstname female&gt;
+  &lt;noun surface&gt;
+  &lt;noun furniture&gt;
+  &lt;noun round&gt;
+  &lt;noun body&gt;
+  &lt;noun liquid&gt;
+  &lt;noun insect&gt;
+  &lt;noun clothes&gt;
+  &lt;noun plant&gt;
+  &lt;noun person&gt;
+  &lt;noun tool&gt;
+  &lt;noun long&gt;
+  &lt;noun ball&gt;
+  &lt;noun article&gt;
+  &lt;noun drug&gt;
+  &lt;noun fruit&gt;
+  &lt;noun container&gt;
+  &lt;noun instrument&gt;
+  &lt;noun sex&gt;
+  &lt;noun job&gt;
+  &lt;noun weapon&gt;
+  &lt;noun hole&gt;
+  &lt;noun food&gt;
+  &lt;noun vehicle&gt;
+  &lt;noun animal&gt;
+  &lt;noun shape&gt;
+  and many more
+
+  Tags such as &lt;noun&gt;, &lt;verb&gt;, &lt;adv&gt;, &lt;place&gt; etc can also have a &lt;em&gt;plural&lt;/em&gt; attribute
+  &lt;noun plural&gt;, &lt;verb plural&gt;, &lt;adv plural&gt;, &lt;place plural&gt;
 </code></pre>
 
   </article>
@@ -168,6 +218,9 @@ I like my &lt;noun-shape&gt;-shaped &lt;noun-body.plural&gt;
 <script src="simpleRant.core.js" type="text/javascript"></script>
 <script src="simpleRant.dic.js" type="text/javascript"></script>
 
+<script src="jquery.min.js"></script>
+<script src="zeroclip/jquery.zclip.min.js"></script>
+
 <script type="text/javascript">
   document.getElementById('submit').addEventListener('click', function() {
     rant = new SimpleRant;
@@ -177,6 +230,27 @@ I like my &lt;noun-shape&gt;-shaped &lt;noun-body.plural&gt;
     document.getElementById("output").value = result;
   }, false);
 
+
+
+  $(document).ready(function(){
+
+    $("#submit").click(function(){
+      $('#output').removeClass('light');
+      $('#output').addClass('purple');
+    });
+
+    $("#copy-button").zclip({
+      path: "zeroclip/ZeroClipboard.swf",
+      copy:function(){return $('textarea#output').val();},
+      beforeCopy:function(){
+      },
+      afterCopy:function(){
+        $('#output').css('color','white');
+        $('#output').removeClass('purple');
+        $('#output').addClass('light');
+      }
+    });
+  });
 </script>
   <script src="highlight.js"></script>
 </body>
