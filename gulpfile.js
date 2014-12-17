@@ -19,7 +19,7 @@ var gulp = require("gulp"),
             gulp.src('./source/arrayMethods.js'),
             gulp.src('./source/core/simpleRant.js'),
             gulp.src('./source/parser/**/*'),
-            gulp.src('./source/extensions/**/*')
+            gulp.src('./source/extensions/prototypes.js')
         )
             .pipe(concat('./build/simpleRant.core.js'))
             .pipe(gulp.dest('./'))

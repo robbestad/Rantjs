@@ -4,9 +4,6 @@ SimpleRant.prototype.getFacialExpressionVerbed = function () {
     return dic.faced[num];
 };
 
-SimpleRant.prototype.capitalize = function (s) {
-    return s[0].toUpperCase() + s.slice(1);
-};
 SimpleRant.prototype.getTitle = function () {
     var num = Math.floor(Math.random() * dic.title.all.length);
     return dic.title.all[num];
@@ -32,7 +29,7 @@ SimpleRant.prototype.getCountry = function() {
 SimpleRant.prototype.getAdjective = function (plural) {
     var num = Math.floor(Math.random() * dic.adj.all.length);
     if("undefined" != dic.adj.all[num].split("/")[plural])
-    return dic.adj.all[num].split("/")[plural];
+        return dic.adj.all[num].split("/")[plural];
     else
         return dic.adj.all[num];
 
