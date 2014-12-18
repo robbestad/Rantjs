@@ -162,23 +162,15 @@
 })();
 function SimpleRant() {
     this.rantConstructor = function (input) {
-        var result, re;
-        // operator matches (anything inside bracket notation)
-        result = input, matches, token, replacement = [], i= 0, regex = /\[(.*?)\]/g;
-        while (matches = regex.exec(input)) {
-            // [rep:4] - repeat 4 times (loop)
-            console.log(matches[1]);
-            //result = lexer(this, matches, result);
 
-        }
 
         // lexer matches (anything inside arrow notation)
-        result = input, matches, token, replacement = [], i= 0, regex = /\<(.*?)\>/g;
+        var result = input, matches, token, replacement = [], i= 0, regex = /\<(.*?)\>/g;
         while (matches = regex.exec(input)) {  
             //var input = "noun long animal";
             // We accept a number of keywords, and they all correlate to the entries in the DIC files
             // First, get the DIC token
-            re=new RegExp("\\w+","g");
+            var re=new RegExp("\\w+","g");
             token = matches[1].match(re);
             // Match against valid keywords in valid_tokens
             if(dic.tokens.indexOf(token[0]) != -1){
