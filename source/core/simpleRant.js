@@ -2,13 +2,13 @@ function SimpleRant() {
     this.rantConstructor = function (input) {
         var result, re;
         // operator matches (anything inside bracket notation)
-        result = input, matches, token, replacement = [], i= 0, regex = /\[(.*?)\]/g;
-        while (matches = regex.exec(input)) {
-            // [rep:4] - repeat 4 times (loop)
-            console.log(matches[1]);
-            //result = lexer(this, matches, result);
-
-        }
+        //result = input, matches, token, replacement = [], i= 0, regex = /\[(.*?)\]/g;
+        //while (matches = regex.exec(input)) {
+        //    // [rep:4] - repeat 4 times (loop)
+        //    console.log(matches[1]);
+        //    //result = lexer(this, matches, result);
+        //
+        //}
 
         // lexer matches (anything inside arrow notation)
         result = input, matches, token, replacement = [], i= 0, regex = /\<(.*?)\>/g;
