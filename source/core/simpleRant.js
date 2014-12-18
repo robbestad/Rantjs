@@ -5,7 +5,7 @@ function SimpleRant() {
         //result = input, matches, token, replacement = [], i= 0, regex = /\[(.*?)\]/g;
         //while (matches = regex.exec(input)) {
         //    // [rep:4] - repeat 4 times (loop)
-        //    console.log(matches[1]);
+        //    console.log(matches);
         //    //result = lexer(this, matches, result);
         //
         //}
