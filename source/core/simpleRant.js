@@ -8,7 +8,7 @@ function SimpleRant() {
             var re=new RegExp("\\w+","g");
             token = matches[1].match(re);
             // Match against valid keywords in valid_tokens
-            if(valid_tokens.indexOf(token[0]) != -1){
+            if(dic.tokens.indexOf(token[0]) != -1){
                 // Now we're ready to pass the token to the parser. It should
                 // include the token and any modifiers
                 result = lexer(this, matches, result);

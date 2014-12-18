@@ -40,6 +40,10 @@ sub remove_whitespace{
    return $_[0];
 }
 
+#
+#$content =~ s/\\n/::/;
+#print $content;
+#exit;
 foreach my $line ( split /\n/, $content ) {
 
 # get #name as name from file

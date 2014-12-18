@@ -170,7 +170,7 @@ function SimpleRant() {
             var re=new RegExp("\\w+","g");
             token = matches[1].match(re);
             // Match against valid keywords in valid_tokens
-            if(valid_tokens.indexOf(token[0]) != -1){
+            if(dic.tokens.indexOf(token[0]) != -1){
                 // Now we're ready to pass the token to the parser. It should
                 // include the token and any modifiers
                 result = lexer(this, matches, result);
@@ -205,18 +205,18 @@ var lexer = function (rant, matches, input) {
         if(matched.length>1){
             matched.forEach(function(entry,idx) {
                 if(idx>0){
-                    if("undefined" != typeof filters[token]){
-                        if(filters[token].indexOf(entry)>-1){
+                    if("undefined" != typeof dic[token].filters){
+                        if(dic[token].filters.indexOf(entry)>-1){
                             //console.log("valid filter: "+entry);
                             // Filters are categories of the token, so <adj emotion> will
                             // set filters valid for emotion for the token adj
                             myfilters.push(entry);
                         }
                     }
-                    if("undefined" != typeof subs[token]){
-                        if(subs[token].indexOf(entry)>-1){
+                    if("undefined" != typeof dic[token].subs){
+                        if(dic[token].subs.indexOf(entry)>-1){
                             // Subs are grammatical instructions
-                            modifier = subs[token].indexOf(entry);
+                            modifier = dic[token].subs.indexOf(entry);
                             //console.log("valid sub: "+entry);
                         }
                     }

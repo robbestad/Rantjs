@@ -23,7 +23,8 @@ foreach my $file (@files) {
     next if ( $file =~ /^\.\.$/ );
     $file =~ s/\s/\\ /g;
     #print `ls ./RantVocab/$file`;
-    print `perl $dirname/parse.pl < $dirname/RantVocab/$file`;
+    #print `perl $dirname/parse.pl < $dirname/RantVocab/$file`;
+    print `node $dirname/parse.js ./RantVocab/$file `;
 }
 print `perl $dirname/parseTokens.pl > $dirname/../source/dic/tokens.js`;
 print `cat $dirname/out/*.js > $dirname/../source/dic/dic.js`;

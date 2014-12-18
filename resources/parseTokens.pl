@@ -27,7 +27,8 @@ sub remove_whitespace{
 }
 
 my $name; my $sub; my $keyword; my @keywords; my $out; my @keyCollection;
-$out="var dic={}; var subs={}; var filters={};\n";
+$out="var dic={};\n";
+# var subs={}; var filters={};\n";
 
 foreach my $file (@files) {
     @keywords = ""; # reset keywords
@@ -68,35 +69,35 @@ foreach my $file (@files) {
             next;
         }
 
-
-    # extract subs
-        if ( $line =~ m/\#subs/ ) {
-            $line =~ s/\#subs //;
-            $line =~ s/default//g; # remove 'default'
-            $line =~ s/-//g; # remove dash
-            $line = remove_whitespace($line);
-
-            if(!$line eq ''){
-                $sub = $line;
-                my @subwords = split / /, $sub;
-                my $iterator = 0;
-                if(scalar @subwords > 0){
-                $out .= "\nsubs.$name=[";
-
-                foreach my $uniqsub (@subwords) {
-
-                $iterator++;
-                $uniqsub = remove_whitespace($uniqsub);
-                    $out .= "\"".$uniqsub."\"";
-                    if($iterator < scalar @subwords){
-                        $out .= ",";
-                    }
-                }
-                $out .= "];";
-                }
-            }
-            next;
-        }
+#
+#    # extract subs
+#        if ( $line =~ m/\#subs/ ) {
+#            $line =~ s/\#subs //;
+#            $line =~ s/default//g; # remove 'default'
+#            $line =~ s/-//g; # remove dash
+#            $line = remove_whitespace($line);
+#
+#            if(!$line eq ''){
+#                $sub = $line;
+#                my @subwords = split / /, $sub;
+#                my $iterator = 0;
+#                if(scalar @subwords > 0){
+#                $out .= "\ndic.subs.$name=[";
+#
+#                foreach my $uniqsub (@subwords) {
+#
+#                $iterator++;
+#                $uniqsub = remove_whitespace($uniqsub);
+#                    $out .= "\"".$uniqsub."\"";
+#                    if($iterator < scalar @subwords){
+#                        $out .= ",";
+#                    }
+#                }
+#                $out .= "];";
+#                }
+#            }
+#            next;
+#        }
 
         # get keywords starting with pipe
         if ( $line =~ m/\| class/ ) {
@@ -145,25 +146,25 @@ foreach my $file (@files) {
     }
 
 
-
-    if(scalar @keywords > 1){
-        $out .= "\nfilters.".$name."=[";
-        my $iterator = 0;
-        foreach my $kw (@keywords) {
-            $iterator++;
-            if(!$kw eq ""){
-                $out .= "\"".$kw."\"";
-                if($iterator <= scalar @keywords){
-                    $out .= ",";
-                }
-
-            }
-        }
-        $out .= "];";
-    }
+#
+#    if(scalar @keywords > 1){
+#        $out .= "\ndic.filters.".$name."=[";
+#        my $iterator = 0;
+#        foreach my $kw (@keywords) {
+#            $iterator++;
+#            if(!$kw eq ""){
+#                $out .= "\"".$kw."\"";
+#                if($iterator <= scalar @keywords){
+#                    $out .= ",";
+#                }
+#
+#            }
+#        }
+#        $out .= "];";
+#    }
 }
 
-$out .= "\nvar valid_tokens=[\"preposition\",\"firstname\",";
+$out .= "\ndic.tokens=[\"preposition\",\"firstname\",";
 my $iterator=0;
 foreach my $key(@keyCollection){
 $iterator++;
