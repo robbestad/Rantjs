@@ -294,9 +294,6 @@ var pron_female ={
 dic.pron_female = pron_female;
 var pron_female_all  =  ["her/she/herself/her/hers"];
 dic.pron_female.all = pron_female_all;
-//dic.tokens.push("pron_female");
+dic.tokens.push("pron_female");
 
-dic.filters.firstname=["male","female"];
-
-//
-filters.yn=["yes","no"];
+dic.firstname.filters=["male","female"];

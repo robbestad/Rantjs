@@ -17,9 +17,14 @@ var pron_female ={
 dic.pron_female = pron_female;
 var pron_female_all  =  ["her/she/herself/her/hers"];
 dic.pron_female.all = pron_female_all;
-//dic.tokens.push("pron_female");
+dic.tokens.push("pron_female");
 
-dic.filters.firstname=["male","female"];
+dic.firstname.filters=["male","female"];
 
-//
-filters.yn=["yes","no"];
+
+dic.alien = {};
+var alien_race  = ["Badoon/Badoons","Brood/The Broods","Celestials/The Celestials","Kree/The Kree"];
+dic.alien.all = alien_race;
+dic.alien.races = alien_race;
+dic.alien.subs=["plural"];
+dic.tokens.push("alien");
