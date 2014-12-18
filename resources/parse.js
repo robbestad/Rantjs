@@ -23,6 +23,12 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
             //#name noun
             //#subs singular plural
 
+            if(line === "#nsfw"){
+                addedClasses.push("nsfw");
+                //console.log("matched ...."+line.replace(/#/,''));
+            }
+
+
             re=new RegExp("^(#name )","g");
             match=line.match(re);
             if(null !== match) {
@@ -57,10 +63,8 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
                     tokenword[lineNr]=word;
 
                     addedClasses.map(function(item){
-                        //console.log(keywords[lineNr]);
                         if("undefined" != typeof keywords[lineNr]){
                             keywords[lineNr]=keywords[lineNr]+" "+item;
-                            //console.log(item);
                         } else {
                             keywords[lineNr]=item;
                         }
@@ -73,15 +77,10 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
             if(null !== match){
                 e=line.replace(re,'');
                 keywords[lineNr-1]=e.replace(/-/g,'');
-                //var tokens=classes.split(" ");
-                //tokens.forEach(function(e){
-                //    e.replace(/(a-z)/ig,'');
-                //    if(e !== '' && e !== '|')
-                //        keywords[lineNr-1]=e;
-                //});
             }
 
 
+            // Classes that matches several tokens
             re=new RegExp("\\#class add ","g");
             match=line.match(re);
             if(null !== match){
@@ -97,6 +96,17 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
                     addedClasses.splice(index, 1);
                 }
             }
+
+
+
+            if(line === "#sfw"){
+                var index = addedClasses.indexOf("nsfw");
+                if (index > -1) {
+                    addedClasses.splice(index, 1);
+                }
+            }
+
+
 
 
             // resume the readstream
@@ -115,13 +125,6 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
         console.log('Error while reading file.');
     })
     .on('end', function(){
-
-            //
-            ////console.log(addedClasses);
-            ////keywords.map(function(item,idx){
-            ////    console.log(idx+" "+item);
-            ////});
-            //////
             var mappedKeywords=[]; dic={};
             re = new RegExp(/ /);
 
@@ -138,7 +141,6 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
 
 
             var all = []; dic.all = all; var toFile;
-            //var animal = []; dic.animal = animal;
             tokenword.map(function(item,idx){
                 if("undefined" == typeof keywords[idx]){
                     // plain .all
@@ -152,7 +154,7 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
                 }
             });
 
-            var toFile =("var "+filename+"={};\n");
+            toFile =("var "+filename+"={};\n");
             toFile+=("dic."+filename+"="+filename+";\n");
             mappedKeywords.map(function(k){
                 toFile+=("dic."+filename+"."+k+"=["+dic[k].map(function(item){return "\""+item+"\""})+"];\n");
@@ -169,7 +171,7 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
             toFile+=("dic."+filename+".subs=["+subs.map(function(item){return "\""+item+"\""})+"];\n");
             toFile+=("dic."+filename+".filters=["+mappedKeywords.map(function(item){return "\""+item+"\""})+"];\n");
 
-
+            //console.log(toFile);
             fs.writeFile(__dirname+"/out/"+filename+".js", toFile, function(err) {
                 if(err) {
                     console.log(err);
