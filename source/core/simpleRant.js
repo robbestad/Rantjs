@@ -1,8 +1,12 @@
 function SimpleRant() {
     this.rantConstructor = function (input) {
+
+        // 
+
+        // lexer matches (anything inside arrow notation)
         var result = input, matches, token, replacement = [], i= 0, regex = /\<(.*?)\>/g;
-        while (matches = regex.exec(input)) {
-            //var input = "noun -long -animal";
+        while (matches = regex.exec(input)) {  
+            //var input = "noun long animal";
             // We accept a number of keywords, and they all correlate to the entries in the DIC files
             // First, get the DIC token
             var re=new RegExp("\\w+","g");
@@ -10,7 +14,7 @@ function SimpleRant() {
             // Match against valid keywords in valid_tokens
             if(dic.tokens.indexOf(token[0]) != -1){
                 // Now we're ready to pass the token to the parser. It should
-                // include the token and any modifiers
+                // include the token and any modifiers and subs
                 result = lexer(this, matches, result);
             }
         }
