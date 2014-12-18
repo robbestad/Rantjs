@@ -1,6 +1,6 @@
 {
   "name": "rantjs",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "A naive implementation of Rant, the procedural text generator",
   "main": "index.js",
   "scripts": {
