@@ -153,6 +153,7 @@ var gulp = require("gulp"),
 
     gulp.task("watcher", function(){
         gulp.watch('./test/test.js',["test"]);
+        gulp.watch(['./source/core/*','./source/parser/*'],["compile:dev","test"]);
         gulp.watch(["resources/**/*"], ["parse"]);
         gulp.watch(["./style.scss"], ["shellsass"]);
         gulp.watch(["./index.js"], ["compile:dist"]);
