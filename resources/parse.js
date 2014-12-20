@@ -168,11 +168,14 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
             var i=0;
             mappedKeywords.map(function(k){
                 if(k !== "nsfw"){
-                out_all+="dic."+filename+"."+k;
+                    out_all+="dic."+filename+"."+k;
                 }
                 if(++i<mappedKeywords.length) out_all+=",";
             });
             out_all+=");\n";
+            re=new RegExp(",\\);","g");
+            out_all=out_all.replace(re,'\);');
+            
             toFile+=(out_all);
 
             toFile+=("dic."+filename+".subs=["+subs.map(function(item){return "\""+item+"\""})+"];\n");

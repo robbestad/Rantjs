@@ -167,27 +167,27 @@ function SimpleRant() {
         var matches, token;
         var replacement = [], i=0;
 
-        // operator matches (anything inside bracket notation)
-        result = input, matches, token, replacement = [], i= 0, regex = /(\[.*?\])/g;
-        while (matches = regex.exec(input)) {
-            // [rep:4] - repeat 4 times (loop)
-            // [rep:4][sep:\s]{\8,x}
-            console.log(matches[1]);
-            //result = lexer(this, matches, result);
-
-        }
-
-
-
-        // expression matches (anything inside curly bracket notation)
-        result = input, matches, token, replacement = [], i= 0, regex = /(\{.*?\})/g;
-        while (matches = regex.exec(input)) {
-            // [rep:4] - repeat 4 times (loop)
-            // [rep:4][sep:\s]{\8,x}
-            console.log(matches[1]);
-            //result = lexer(this, matches, result);
-
-        }
+        //// operator matches (anything inside bracket notation)
+        //result = input, matches, token, replacement = [], i= 0, regex = /(\[.*?\])/g;
+        //while (matches = regex.exec(input)) {
+        //    // [rep:4] - repeat 4 times (loop)
+        //    // [rep:4][sep:\s]{\8,x}
+        //    console.log(matches[1]);
+        //    //result = lexer(this, matches, result);
+        //
+        //}
+        //
+        //
+        //
+        //// expression matches (anything inside curly bracket notation)
+        //result = input, matches, token, replacement = [], i= 0, regex = /(\{.*?\})/g;
+        //while (matches = regex.exec(input)) {
+        //    // [rep:4] - repeat 4 times (loop)
+        //    // [rep:4][sep:\s]{\8,x}
+        //    console.log(matches[1]);
+        //    //result = lexer(this, matches, result);
+        //
+        //}
 
         // lexer matches (anything inside arrow notation)
         result = input, matches, token, replacement = [], i= 0, regex = /\<(.*?)\>/g;
