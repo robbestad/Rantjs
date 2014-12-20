@@ -23,6 +23,10 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
             //#name noun
             //#subs singular plural
 
+            // Fix cases where you got (# class) instead of (#class)
+            re=new RegExp("^#[\t\v\f \u00a0\u1680\u2000-\u200b\u2028\u2029\u202f\u205f\u3000]+","g");
+            line=line.replace(re,'#');
+
             if(line === "#nsfw"){
                 addedClasses.push("nsfw");
                 //console.log("matched ...."+line.replace(/#/,''));
@@ -81,14 +85,15 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
 
 
             // Classes that matches several tokens
-            re=new RegExp("\\#class add ","g");
+
+            re=new RegExp("\\#?class add ","g");
             match=line.match(re);
             if(null !== match){
                 e=line.replace(re,'');
                 addedClasses.push(e.replace(/-/g,''));
             }
 
-            re=new RegExp("\\#class remove ","g");
+            re=new RegExp("\\#?class remove ","g");
             match=line.match(re);
             if(null !== match){
                 var index = addedClasses.indexOf(line.replace(re,''));
@@ -162,7 +167,9 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
             var out_all="dic."+filename+".all=["+dic.all.map(function(item){return "\""+item+"\""})+"].concat(";
             var i=0;
             mappedKeywords.map(function(k){
+                if(k !== "nsfw"){
                 out_all+="dic."+filename+"."+k;
+                }
                 if(++i<mappedKeywords.length) out_all+=",";
             });
             out_all+=");\n";
@@ -182,15 +189,3 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
 
         })
 );
-
-
-
-//var greet ={
-//};
-//dic.greet = greet;
-//var greet_all= ["hello","greetings","hola","hey","what's up","whazzup","yo","good day","good morning","good afternoon","good evening","good night","hey buddy","ahoy","sup","salutations","aloha","konichi wa","what's happening","how's it hanging","how's it going","what's new","guten Tag"].concat();
-//dic.greet.all=greet_all;
-
-//subs.noun=["singular","plural"];
-//filters.noun=["body","hole","person","sex","weapon","animal","tool","food","drug","article","fruit","container","furniture","instrument","plant","shape","ball","surface","liquid","long","dog","job","round","clothes","vehicle","insect",];
-

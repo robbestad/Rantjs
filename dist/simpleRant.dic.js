@@ -1,7 +1,16 @@
 var dic={};
 
-dic.tokens=["preposition","firstname","activity", "adj", "adv", "color", "conj", "country", "emo", "em", "x", "face", "firstname", "greet", "surname", "noun", "sound", "title", "place", "prefix", "prepos", "pron", "quality", "rel", "sconj", "substance", "timeadv", "timenoun", "unit", "verbimg", "say", "verb", "vocal", "preposition", "yn"];
+dic.tokens=["preposition","firstname","abstract", "activity", "adj", "adv", "color", "conj", "country", "emo", "em", "x", "face", "firstname", "greet", "surname", "noun", "sound", "title", "place", "prefix", "prepos", "pron", "quality", "rel", "sconj", "substance", "timeadv", "timenoun", "unit", "verbimg", "say", "verb", "vocal", "preposition", "yn"];
 
+var abstract={};
+dic.abstract=abstract;
+dic.abstract.concept=["idea/ideas","lie/lies","philosophy/philosophies","hypothesis/hypotheses","theory/theories","concept/concepts","thought/thoughts","plan/plans","scheme/schemes","notion/notions","conception/conceptions","impression/impressions","proposal/proposals","law/laws","vision/visions","conclusion/conclusions"];
+dic.abstract.subjective=["belief/beliefs","opinion/opinions"];
+dic.abstract.social=["relationship/relationships","conflict/conflicts","fight/fights","disagreement/disagreements","consensus/consensuses","agreement/agreements","understanding/understandings","friendship/friendships","rivalry/rivalries","feud/feuds","romance/romances"];
+dic.abstract.linguistic=["question/questions","answer/answers"];
+dic.abstract.all=[].concat(dic.abstract.concept,dic.abstract.subjective,dic.abstract.social,dic.abstract.linguistic);
+dic.abstract.subs=["singular","plural"];
+dic.abstract.filters=["concept","subjective","social","linguistic"];
 var activity={};
 dic.activity=activity;
 dic.activity.game=["Football","Soccer","Tennis","Basketball","Baseball","Golf","Chess","Checkers","Backgammon","Pong","Super Mario Bros.","The Legend of Zelda","Sonic the Hedgehog","Call of Duty","Battlefield","Hitman","Morrowind","Oblivion","Skyrim","World of Warcraft","Contra","Halo","Doom","Half-Life","Left 4 Dead","Counter-Strike"];
