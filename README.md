@@ -14,6 +14,21 @@ For implementation details, please visit the [npmjs page][3]
 
 [Click here for a writeup on my blog][4]
 
+## Development Plan
+
+Easy way to choose alternative dictionaries
+
+Indefinite article (a/an) automation
+
+Automatic capitalization
+
+Overwriting (targets)
+
+Looping (repeaters)
+
+Conditionals
+
+
 [1]: https://github.com/TheBerkin/Rant
 [2]: https://rantjs.herokuapp.com/
 [3]: https://www.npmjs.com/package/rantjs
