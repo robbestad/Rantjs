@@ -60,7 +60,7 @@
     <p>
       <label for="input">Input</label>
       <textarea name="input" id="input" class="input"
-                spellcheck="false">The &lt;adj emotion&gt; doctor &lt;verb insert pp&gt; the &lt;adj nsfw&gt; &lt;noun animal&gt;</textarea>
+                spellcheck="false">[case:title]The &lt;adj emotion&gt; doctor &lt;verb emotion pp&gt; the &lt;adj nsfw&gt; &lt;noun animal&gt;</textarea>
     </p>
     <p>
       <input type="submit" name="submit"  class="runButton" id="submit" class="submit" value="Run Pattern">
@@ -97,8 +97,14 @@ The &lt;adj emotion&gt; doctor &lt;verb walk ed&gt; the cat
 I like my &lt;noun-shape&gt;-shaped &lt;noun-body.plural&gt;
 </code></pre>
 
-    <h2>Supported tags</h2>
+<h2>Supported tags</h2>
 <p>Here's a list of currently supported tags</p>
+<pre class="highlight"><code class="language-xml">
+  [case:none|default|word|upper|lower|case|sentence]
+</code></pre>
+
+<h2>Supported tokens</h2>
+<p>Here's a list of currently supported tokens</p>
 <pre class="highlight"><code class="language-xml">
   &lt;preposition&gt;
   &lt;firstname&gt;
