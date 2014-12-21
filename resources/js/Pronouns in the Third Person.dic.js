@@ -1,1 +1,0 @@
-var pronouns_in_the_third_person=["him/he/himself/his/his","her/she/herself/her/hers"];
