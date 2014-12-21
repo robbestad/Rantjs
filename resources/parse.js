@@ -23,6 +23,10 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
             //#name noun
             //#subs singular plural
 
+            // Rename (male? female?) to (neutral)
+            re=new RegExp("(male\\? female\\?)","g");
+            line=line.replace(re,'neutral');
+
             // Fix cases where you got (# class) instead of (#class)
             re=new RegExp("^#[\t\v\f \u00a0\u1680\u2000-\u200b\u2028\u2029\u202f\u205f\u3000]+","g");
             line=line.replace(re,'#');
@@ -175,7 +179,7 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
             out_all+=");\n";
             re=new RegExp(",\\);","g");
             out_all=out_all.replace(re,'\);');
-            
+
             toFile+=(out_all);
 
             toFile+=("dic."+filename+".subs=["+subs.map(function(item){return "\""+item+"\""})+"];\n");

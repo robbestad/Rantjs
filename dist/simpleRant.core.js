@@ -165,17 +165,31 @@ function SimpleRant() {
         var result = input, re;
         var regex = /\<(.*?)\>/g;
         var matches, token;
-        var replacement = [], i=0;
+        var replacement = [], i = 0, tags={};
 
-        //// operator matches (anything inside bracket notation)
-        //result = input, matches, token, replacement = [], i= 0, regex = /(\[.*?\])/g;
-        //while (matches = regex.exec(input)) {
-        //    // [rep:4] - repeat 4 times (loop)
-        //    // [rep:4][sep:\s]{\8,x}
-        //    console.log(matches[1]);
-        //    //result = lexer(this, matches, result);
-        //
-        //}
+        // TAG matches (anything inside bracket notation)
+        // From the Wiki https://github.com/TheBerkin/Rant/wiki
+        // Tags are instructions that can be placed anywhere inside a pattern.
+        // They change various aspects of how the pattern is interpreted past that point.
+        // Tags are defined inside of square brackets ([ ]).
+        // There are several types of tags: functions, metapatterns, replacers, list functions, and subroutines.
+
+        result = input, matches, token, replacement = [], i= 0, regex = /(\[.*?\])/g;
+        tags.valid=["rep"];
+        while (matches = regex.exec(input)) {
+            // [rep:4] - repeat 4 times (loop)
+            // [rep:4][sep:\s]{\8,x}
+            console.log("input token: "+matches[1]);
+            re = new RegExp("\\w+", "g");
+            token = matches[1].match(re);
+
+            if (tags.valid.indexOf(token[0]) != -1) {
+                console.log("valid token: "+token);
+
+            }
+            //result = lexer(this, matches, result);
+
+        }
         //
         //
         //
@@ -190,15 +204,15 @@ function SimpleRant() {
         //}
 
         // lexer matches (anything inside arrow notation)
-        result = input, matches, token, replacement = [], i= 0, regex = /\<(.*?)\>/g;
-        while (matches = regex.exec(input)) {  
+        result = input, matches, token, replacement = [], i = 0, regex = /\<(.*?)\>/g;
+        while (matches = regex.exec(input)) {
             //var input = "noun long animal";
             // We accept a number of keywords, and they all correlate to the entries in the DIC files
             // First, get the DIC token
-            re=new RegExp("\\w+","g");
+            re = new RegExp("\\w+", "g");
             token = matches[1].match(re);
             // Match against valid keywords in valid_tokens
-            if(dic.tokens.indexOf(token[0]) != -1){
+            if (dic.tokens.indexOf(token[0]) != -1) {
                 // Now we're ready to pass the token to the parser. It should
                 // include the token and any modifiers and subs
                 result = lexer(this, matches, result);
@@ -212,7 +226,7 @@ SimpleRant.prototype.capitalize = function (s) {
     return s[0].toUpperCase() + s.slice(1);
 };
 
-if('undefined' != typeof module){
+if ('undefined' != typeof module) {
     module.exports.SimpleRant = SimpleRant;
 }
 var lexer = function (rant, matches, input) {
@@ -255,8 +269,8 @@ var lexer = function (rant, matches, input) {
 
     }
     if(myfilters.length<=0){
-        console.log(token);
-        console.log(dic[token]);
+        //console.log(token);
+        //console.log(dic[token]);
         if("undefined" != typeof dic[token].all){
             dictionary=dictionary.concat(dic[token].all);
         }
