@@ -597,3 +597,49 @@ describe('Get another offensive sentence', function () {
         assert.equal(null,count);
     })
 });
+
+
+// TAGS
+
+
+// CASES
+
+describe('Make sentence case', function () {
+    it('should return a sentence cased string', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('[case:sentence]i. like. big. butts');
+        assert.equal(result,'I. Like. Big. Butts');
+    })
+});
+
+describe('Make upper case', function () {
+    it('should return an upper cased string', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('[case:upper]i like big butts');
+        assert.equal(result,'I LIKE BIG BUTTS');
+    })
+});
+
+describe('Make lower case', function () {
+    it('should return an upper cased string', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('[case:lower]I LIKE BIG BUTTS');
+        assert.equal(result,'i like big butts');
+    })
+});
+
+describe('Make word case', function () {
+    it('should return a word cased string', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('[case:word]I LIKE BIG BUTTS');
+        assert.equal(result,'I Like Big Butts');
+    })
+});
+
+describe('Make title case', function () {
+    it('should return a title cased string', function () {
+        var r = new rant.SimpleRant();
+        var result = r.rantConstructor('[case:title]I LIKE ALL THE BIG BUTTS');
+        assert.equal(result,'I Like All the Big Butts');
+    })
+});
