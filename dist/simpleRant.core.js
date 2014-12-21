@@ -167,8 +167,7 @@ function SimpleRant() {
         var matches, token;
         var replacement = [], i = 0, tags={};
 
-        var _case="default";
-        var cases={valid:["default","none","lower","upper","title","word","first","sentence"]};
+        var stringCase=this.getCase(input);
 
         // TAG matches (anything inside bracket notation)
         // From the Wiki https://github.com/TheBerkin/Rant/wiki
@@ -180,41 +179,18 @@ function SimpleRant() {
         result = input, matches, token, replacement = [], i= 0, regex = /(\[.*?\])/g;
         tags.valid=["rep","case"];
         while (matches = regex.exec(input)) {
+            input = input.replace(matches[0], '');
+
             // [rep:4] - repeat 4 times (loop)
             // [rep:4][sep:\s]{\8,x}
-            //console.log("input token: "+matches[1]);
             re = new RegExp("\\w+", "g");
             token = matches[1].match(re);
 
-            if (tags.valid.indexOf(token[0]) != -1) {
-                //console.log("valid token: "+token);
-                if(token[0]==="case"){
-                    if(cases.valid.indexOf(token[1] != -1)){
-                        _case=cases.valid.indexOf(token[1]);
-                    }
-                }
-                //console.log("case: "+cases.valid[_case]);
 
-                //remove the tag
-                input = input.replace(matches[0], '');
-                //tags.applied=matches[1];
-            }
         }
 
 
 
-        //
-        //
-        //
-        //// expression matches (anything inside curly bracket notation)
-        //result = input, matches, token, replacement = [], i= 0, regex = /(\{.*?\})/g;
-        //while (matches = regex.exec(input)) {
-        //    // [rep:4] - repeat 4 times (loop)
-        //    // [rep:4][sep:\s]{\8,x}
-        //    console.log(matches[1]);
-        //    //result = lexer(this, matches, result);
-        //
-        //}
 
         // lexer matches (anything inside arrow notation)
         result = input, matches, token, replacement = [], i = 0, regex = /\<(.*?)\>/g;
@@ -231,7 +207,7 @@ function SimpleRant() {
                 result = lexer(this, matches, result);
             }
         }
-        return this.capitalize(result,cases.valid[_case]);
+        return this.capitalize(result,stringCase);
     };
 }
 
@@ -328,46 +304,6 @@ var lexer = function (rant, matches, input) {
 
 
 
-//SimpleRant.prototype.titleCase = function(title){
-//    var small = "(a|an|and|as|at|but|by|en|for|if|in|of|on|or|the|to|v[.]?|via|vs[.]?)";
-//    var punct = "([!\"#$%&'()*+,./:;<=>?@[\\\\\\]^_`{|}~-]*)";
-//
-//        var parts = [], split = /[:.;?!] |(?: |^)["Ò]/g, index = 0;
-//
-//        while (true) {
-//            var m = split.exec(title);
-//
-//            parts.push( title.substring(index, m ? m.index : title.length)
-//                .replace(/\b([A-Za-z][a-z.'Õ]*)\b/g, function(all){
-//                    return /[A-Za-z]\.[A-Za-z]/.test(all) ? all : upper(all);
-//                })
-//                .replace(RegExp("\\b" + small + "\\b", "ig"), lower)
-//                .replace(RegExp("^" + punct + small + "\\b", "ig"), function(all, punct, word){
-//                    return punct + upper(word);
-//                })
-//                .replace(RegExp("\\b" + small + punct + "$", "ig"), upper));
-//
-//            index = split.lastIndex;
-//
-//            if ( m ) parts.push( m[0] );
-//            else break;
-//        }
-//
-//        return parts.join("").replace(/ V(s?)\. /ig, " v$1. ")
-//            .replace(/(['Õ])S\b/ig, "$1s")
-//            .replace(/\b(AT&T|Q&A)\b/ig, function(all){
-//                return all.toUpperCase();
-//            });
-//
-//    function lower(word){
-//        return word.toLowerCase();
-//    }
-//
-//    function upper(word){
-//        return word.substr(0,1).toUpperCase() + word.substr(1);
-//    }
-//};
-
 String.prototype.toTitleCase = function() {
     var i, j, str, lowers, uppers;
     str = this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
@@ -403,6 +339,27 @@ String.prototype.toSentenceCase = function() {
         return str.toUpperCase();
     });
 };
+
+SimpleRant.prototype.getCase = function (tokenStream) {
+    var _case = 0;
+    var cases = ["default", "none", "lower", "upper", "title", "word", "first", "sentence"];
+    var token, matches, re;
+    while (matches = /(\[.*?\])/g.exec(tokenStream)) {
+        re = new RegExp("\\w+", "g");
+        token = matches[1].match(re);
+        if (["case"].indexOf(token[0]) != -1) {
+            if (token[0] === "case") {
+                if (cases.indexOf(token[1] != -1)) {
+                    _case = cases.indexOf(token[1]);
+                }
+            }
+        }
+        return cases[_case];
+    }
+};
+
+
+
 
 SimpleRant.prototype.capitalize = function (s,_case) {
     if(_case==="upper")
