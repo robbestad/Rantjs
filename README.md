@@ -4,8 +4,6 @@ An implementation of [Rant][1] by TheBerkin
 
 <img src="http://res.cloudinary.com/sven-anders-robbestad/image/upload/c_scale,w_350/v1418975366/rantjs_0.8.4.png">
 
-This project is still in its early stages, but the lexer is now complete.
-
 The project is available via npm (do _npm install rantjs_). 
 
 For implementation details, please visit the [npmjs page][3]
@@ -22,7 +20,9 @@ Indefinite article (a/an) automation
 
 Overwriting (targets)
 
-Looping (repeaters)
+~~Capitalisation~~
+
+~~Looping (repeaters)~~
 
 Conditionals
 
