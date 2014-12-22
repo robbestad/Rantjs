@@ -99,6 +99,16 @@ p {
   #decode-button:active {
     background: url(img/button.png) no-repeat 1px 1px; }
 
+ul li {
+  padding: 0 0 10px 0;
+  border: 0px solid gray !important;
+  box-shadow: 1px;
+  display: block;
+  font-size: 0.9rem; }
+  ul li :hover {
+    display: inline-block;
+    background-color: white; }
+
 .runButton {
   width: 110px;
   height: 50px;

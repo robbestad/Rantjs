@@ -60,7 +60,7 @@
     <p>
       <label for="input">Input</label>
       <textarea name="input" id="input" class="input"
-                spellcheck="false">[case:title][sep:n][rep:3]{I like &lt;noun animal plural&gt; and &lt;noun animal plural&gt;}</textarea>
+                spellcheck="false">[case:title][sep:n][rep:3]{I like &lt;noun animal plural&gt; but not &lt;noun animal plural&gt;}</textarea>
     </p>
     <p>
       <input type="submit" name="submit"  class="runButton" id="submit" class="submit" value="Run Pattern">
@@ -76,31 +76,13 @@
 
     </p>
 
-    <h2>Other sample sentencens</h2>
-
-<pre class="highlight"><code class="language-xml">- I &lt;verb emotion&gt; &lt;noun animal plural&gt;, said &lt;firstname&gt;.
-  - Why? asked &lt;firstname&gt;.
-  - They are so &lt;adj emotion ing&gt;.
-
-&lt;firstname male&gt; likes to &lt;verb nsfw&gt; &lt;noun nsfw&gt; with &lt;pron poss male&gt; pet &lt;noun-animal&gt;.
-
-&lt;firstname male&gt; likes to &lt;verb-transitive&gt; &lt;noun.plural&gt; with &lt;pron poss male&gt; pet &lt;noun-animal&gt; on &lt;timenoun dayofweek plural&gt;.
-
-I need &lt;amount&gt; &lt;adj&gt; &lt;noun.plural&gt; filled with &lt;adj&gt; &lt;noun plural&gt;.
-
-The &lt;adj&gt; &lt;noun&gt; &lt;adv&gt; &lt;verb.ed&gt; the &lt;adj&gt; &lt;noun&gt; whilst &lt;adv&gt; being &lt;verb ed&gt;.
-
-&lt;title&gt;, help!
-
-The &lt;adj emotion&gt; doctor &lt;verb walk ed&gt; the cat
-
-I like my &lt;noun-shape&gt;-shaped &lt;noun-body.plural&gt;
-</code></pre>
+    <h2 class="">Other sample sentencens</h2>
 
 <h2>Supported tags</h2>
 <p>Here's a list of currently supported tags</p>
-<pre class="highlight"><code class="language-xml">
-  [case:none|default|word|upper|lower|case|sentence]
+<pre class="highlight"><code class="language-xml">[sep:\s|\n]
+My favorite colors: [rep:2]{&lt;color&gt;}
+[case:none|default|word|upper|lower|case|sentence]
 </code></pre>
 
 <h2>Supported tokens</h2>
@@ -192,10 +174,15 @@ I like my &lt;noun-shape&gt;-shaped &lt;noun-body.plural&gt;
   &lt;noun shape&gt;
   and many more
 
-  Tags such as &lt;noun&gt;, &lt;adv&gt;, &lt;place&gt; (and more) can have a &lt;em&gt;plural&lt;/em&gt; attribute
-  &lt;noun plural&gt;, &lt;adv plural&gt;, &lt;place plural&gt;
+  Tags such as &lt;noun&gt;, &lt;adv&gt;, 
+  &lt;place&gt; (and more) can have a 
+  &lt;em&gt;plural&lt;/em&gt; attribute
+  &lt;noun plural&gt;, &lt;adv plural&gt;, 
+  &lt;place plural&gt;
 
-  Verbs has: transitive, walk, intransitive, sex, pose, eat, liquid, motion, insert, violent, political, legal, move
+  Verbs has: transitive, walk, intransitive, 
+  sex, pose, eat, liquid, motion, insert, 
+  violent, political, legal, move
   and can be: simple, ing, ed, s, er, pp, noun
 
   So...: 
@@ -210,25 +197,49 @@ I like my &lt;noun-shape&gt;-shaped &lt;noun-body.plural&gt;
   </article>
 
   <nav class="HolyGrail-nav u-textCenter">
-    <h3 class="u-spaceBN">Rantjs</h3><p>Rantjs is a procedural text generator. The goal is to
-      augment human creativity with the boundless potential of randomness.
-  </p>  </nav>
+    <h3 class="u-spaceBN">Rantjs</h3><p>Rantjs is a procedural 
+      text generator. The goal is to
+      augment human creativity with the 
+      boundless potential of randomness.
+  </p>  
+
+  <h4>Examples</h4>
+  <ul>
+    <li><span class="run-example">&lt;firstname male&gt; likes to &lt;verb nsfw&gt; &lt;noun nsfw&gt; with &lt;pron poss male&gt; pet &lt;noun-animal&gt;.
+    </span></li>
+
+    <li><span class="run-example">- I &lt;verb emotion&gt; &lt;noun animal plural&gt;, said &lt;firstname&gt;.
+- Why? asked &lt;firstname&gt;.
+- They are so &lt;adj emotion ing&gt;.
+    </span></li>
+
+  
+  <li><span class="run-example">&lt;firstname male&gt; likes to &lt;verb-transitive&gt; &lt;noun.plural&gt; with &lt;pron poss male&gt; pet &lt;noun-animal&gt; on &lt;timenoun dayofweek plural&gt;.</span></li>
+  <li><span class="run-example">I need &lt;amount&gt; &lt;adj&gt; &lt;noun.plural&gt; filled with &lt;adj&gt; &lt;noun plural&gt;.</span></li>
+  <li><span class="run-example">The &lt;adj&gt; &lt;noun&gt; &lt;adv&gt; &lt;verb.ed&gt; the &lt;adj&gt; &lt;noun&gt; whilst &lt;adv&gt; being &lt;verb ed&gt;.</span></li>
+  <li><span class="run-example">&lt;title&gt;, help!</span></li>
+  <li><span class="run-example">The &lt;adj emotion&gt; doctor &lt;verb walk ed&gt; the cat</span></li>
+  <li><span class="run-example">I like my &lt;noun-shape&gt;-shaped &lt;noun-body.plural&gt;</span></li>
+  <li><span class="run-example"> </span></li>
+    
+
+  </ul>
+
+  </nav>
 
   <aside class="HolyGrail-ads u-textCenter">
     <h3 class="u-spaceBN">The project is based on <a href="https://github.com/TheBerkin/Rant">Rant</a>. This implementation
     is made to be included in JavaScript projects.</h3>
 
     <p>
-      Rantjs is created and maintained by <a href="http://www.robbestad.com">Sven A Robbestad</a>
+      Rantjs is created and maintained by
+      <a href="http://www.robbestad.com">Sven A Robbestad</a>
     </p>
   </aside>
 
 </div>
   <footer class="Footer">
   <span class="Footer-social">
-   <!--  <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=philipwalton&repo=solved-by-flexbox&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="106px" height="20px"></iframe> -->
-    <!-- <a href="https://twitter.com/share" class="twitter-share-button" data-text="" data-url="http://philipwalton.github.io/solved-by-flexbox/" data-count="horizontal" data-via="svenardocom" data-related="svenardocom">Tweet</a>
-    <a href="https://twitter.com/svenardocom" class="twitter-follow-button" data-show-count="true" data-lang="en">@svenardocom</a> -->
   </span>
   <div class="Footer-credits">
     <span class="Footer-credit">Created and maintained by <a href="http://www.robbestad.com">Sven A Robbestad</a> &copy; 2015.</span>
@@ -256,7 +267,16 @@ I like my &lt;noun-shape&gt;-shaped &lt;noun-body.plural&gt;
 
 
 
+  function htmlDecode(value){
+        return $('<div/>').html(value).text();
+  }
   $(document).ready(function(){
+
+    $(".run-example").click(function(){
+      $('#input').text(htmlDecode(this.innerHTML));
+      $("#submit").click();
+
+    });
 
     $("#submit").click(function(){
       $('#output').removeClass('light');

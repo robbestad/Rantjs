@@ -142,6 +142,18 @@ p {
     background: url(img/button.png) no-repeat 1px 1px;
   }
 }
+ul li{
+  padding: 0 0 10px 0;
+  border:0px solid gray!important;
+  box-shadow: 1px;
+  display:block;
+  font-size:0.9rem;
+
+  :hover{
+  display:inline-block;
+    background-color: white;
+  }
+}
 
 
 .runButton {
