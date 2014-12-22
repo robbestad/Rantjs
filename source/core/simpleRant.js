@@ -1,51 +1,46 @@
 function SimpleRant() {
-    this.rantConstructor = function (input) {
-        var result = input, re;
+    this.rantConstructor = function (inputStream) {
+        var outputStream = inputStream, re;
         var regex = /\<(.*?)\>/g;
-        var matches, token;
-        var replacement = [], i = 0, tags={};
+        var matches, token, indexPos;
+        var replacement, i = 0, tags={};
+        var repetitions=1;
+        var separator=" ";
+        var stringCase=this.getCase(inputStream);
 
-        var stringCase=this.getCase(input);
-
-        // TAG matches (anything inside bracket notation)
-        // From the Wiki https://github.com/TheBerkin/Rant/wiki
-        // Tags are instructions that can be placed anywhere inside a pattern.
-        // They change various aspects of how the pattern is interpreted past that point.
-        // Tags are defined inside of square brackets ([ ]).
-        // There are several types of tags: functions, metapatterns, replacers, list functions, and subroutines.
-
-        result = input, matches, token, replacement = [], i= 0, regex = /(\[.*?\])/g;
-        tags.valid=["rep","case"];
-        while (matches = regex.exec(input)) {
-            input = input.replace(matches[0], '');
-
-            // [rep:4] - repeat 4 times (loop)
+        outputStream = inputStream.toLowerCase(), regex = /(\[.*?\])/g;
+        while (matches = regex.exec(inputStream)) {
             // [rep:4][sep:\s]{\8,x}
             re = new RegExp("\\w+", "g");
             token = matches[1].match(re);
-
-
-        }
-
-
-
-
-        // lexer matches (anything inside arrow notation)
-        result = input, matches, token, replacement = [], i = 0, regex = /\<(.*?)\>/g;
-        while (matches = regex.exec(input)) {
-            //var input = "noun long animal";
-            // We accept a number of keywords, and they all correlate to the entries in the DIC files
-            // First, get the DIC token
-            re = new RegExp("\\w+", "g");
-            token = matches[1].match(re);
-            // Match against valid keywords in valid_tokens
-            if (dic.tokens.indexOf(token[0]) != -1) {
-                // Now we're ready to pass the token to the parser. It should
-                // include the token and any modifiers and subs
-                result = lexer(this, matches, result);
+            if(token[0] === "sep"){
+                separator=token[1];
+                //separator=matches[0].match(/[^[\](sep:)]+(?=])/)[0];
+            }
+            if(token[0] === "rep"){
+                repetitions=token[1];
             }
         }
-        return this.capitalize(result,stringCase);
+
+        // remove the brackets
+        while (matches = regex.exec(inputStream)) {
+            inputStream = inputStream.replace(/(\[.*?\])/g, '');
+        }
+
+        // instructions in the brackets will only be applied to tokens matched in curly braces
+        regex = /(\{.*?\})/;
+        var res="";
+        var curlymatch;
+
+        while (curlymatch = regex.exec(inputStream)) {
+            replacement=this.curlyLexer(inputStream,curlymatch[1],repetitions,separator);
+            inputStream = inputStream.replace(curlymatch[1],replacement);
+        }
+
+        // lexer matches (anything inside arrow notation)
+        outputStream = this.lexer(inputStream);
+
+        return this.capitalize(this.lexer(inputStream), stringCase);
     };
 }
 

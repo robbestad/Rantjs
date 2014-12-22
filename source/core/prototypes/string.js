@@ -4,8 +4,7 @@ String.prototype.toTitleCase = function() {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 
-    // Certain minor words should be left lowercase unless
-    // they are the first or last words in the string
+    // Certain minor words should be left lowercase unless  they are the first or last words in the string
     lowers = ['A', 'An', 'The', 'And', 'But', 'Or', 'For', 'Nor', 'As', 'At',
         'By', 'For', 'From', 'In', 'Into', 'Near', 'Of', 'On', 'Onto', 'To', 'With'];
     for (i = 0, j = lowers.length; i < j; i++)
@@ -15,7 +14,7 @@ String.prototype.toTitleCase = function() {
             });
 
     // Certain words should be left uppercase
-    uppers = ['Id', 'Tv'];
+    uppers = ['Id', 'Tv', 'Lsd'];
     for (i = 0, j = uppers.length; i < j; i++)
         str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'),
             uppers[i].toUpperCase());

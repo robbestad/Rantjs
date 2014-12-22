@@ -113,12 +113,6 @@ var gulp = require("gulp"),
         'npm run-script coverage'
     ]));
 
-    gulp.task('mocha', function () {
-        return gulp.src('./test/test.js', {read: false})
-            .pipe(mocha({ui:'bdd',reporter: 'nyan'})
-        );
-    });
-
     var del = require('del');
     gulp.task('delete', function(callback) {
         del(["./resources/out/**/*","./test/simpleRant.js"], callback);
@@ -129,13 +123,9 @@ var gulp = require("gulp"),
             .pipe(mocha({ui:'bdd',reporter: 'nyan'})
         );
     });
-
-    gulp.task('compile:dist', ["concat:js","concat:dic","minify:core","minify:dic"]);
-    gulp.task('compile:dev', ["concat:js", "concat:dic", "concat:test"]);
-
     gulp.task("watcher", function(){
         gulp.watch('./test/test.js',["test"]);
-        gulp.watch(['./source/core/*','./source/parser/*'],["compile:dev","test"]);
+        gulp.watch(['./source/**/*'],["test"]);
         gulp.watch(["resources/**/*"], ["parse"]);
         gulp.watch(["./style.scss"], ["compile:sass"]);
         gulp.watch(["./index.js"], ["compile:dist"]);
@@ -147,6 +137,10 @@ var gulp = require("gulp"),
             });
     });
 
+
+    gulp.task('compile:dist', ["concat:js","concat:dic","minify:core","minify:dic"]);
+
+    gulp.task('compile:dev', ["concat:js", "concat:dic", "concat:test"]);
 
     gulp.task("default", ["compile:dist","compile:sass","watcher"]);
 

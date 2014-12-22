@@ -16,9 +16,6 @@ SimpleRant.prototype.getCase = function (tokenStream) {
     }
 };
 
-
-
-
 SimpleRant.prototype.capitalize = function (s,_case) {
     if(_case==="upper")
         return s.toUpperCase();
@@ -34,5 +31,4 @@ SimpleRant.prototype.capitalize = function (s,_case) {
         return s;
     else
         return s[0].toUpperCase() + s.slice(1); //default && first
-
 };

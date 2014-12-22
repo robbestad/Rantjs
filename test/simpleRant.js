@@ -161,53 +161,48 @@
     }
 })();
 function SimpleRant() {
-    this.rantConstructor = function (input) {
-        var result = input, re;
+    this.rantConstructor = function (inputStream) {
+        var outputStream = inputStream, re;
         var regex = /\<(.*?)\>/g;
-        var matches, token;
-        var replacement = [], i = 0, tags={};
+        var matches, token, indexPos;
+        var replacement, i = 0, tags={};
+        var repetitions=1;
+        var separator=" ";
+        var stringCase=this.getCase(inputStream);
 
-        var stringCase=this.getCase(input);
-
-        // TAG matches (anything inside bracket notation)
-        // From the Wiki https://github.com/TheBerkin/Rant/wiki
-        // Tags are instructions that can be placed anywhere inside a pattern.
-        // They change various aspects of how the pattern is interpreted past that point.
-        // Tags are defined inside of square brackets ([ ]).
-        // There are several types of tags: functions, metapatterns, replacers, list functions, and subroutines.
-
-        result = input, matches, token, replacement = [], i= 0, regex = /(\[.*?\])/g;
-        tags.valid=["rep","case"];
-        while (matches = regex.exec(input)) {
-            input = input.replace(matches[0], '');
-
-            // [rep:4] - repeat 4 times (loop)
+        outputStream = inputStream.toLowerCase(), regex = /(\[.*?\])/g;
+        while (matches = regex.exec(inputStream)) {
             // [rep:4][sep:\s]{\8,x}
             re = new RegExp("\\w+", "g");
             token = matches[1].match(re);
-
-
-        }
-
-
-
-
-        // lexer matches (anything inside arrow notation)
-        result = input, matches, token, replacement = [], i = 0, regex = /\<(.*?)\>/g;
-        while (matches = regex.exec(input)) {
-            //var input = "noun long animal";
-            // We accept a number of keywords, and they all correlate to the entries in the DIC files
-            // First, get the DIC token
-            re = new RegExp("\\w+", "g");
-            token = matches[1].match(re);
-            // Match against valid keywords in valid_tokens
-            if (dic.tokens.indexOf(token[0]) != -1) {
-                // Now we're ready to pass the token to the parser. It should
-                // include the token and any modifiers and subs
-                result = lexer(this, matches, result);
+            if(token[0] === "sep"){
+                separator=token[1];
+                //separator=matches[0].match(/[^[\](sep:)]+(?=])/)[0];
+            }
+            if(token[0] === "rep"){
+                repetitions=token[1];
             }
         }
-        return this.capitalize(result,stringCase);
+
+        // remove the brackets
+        while (matches = regex.exec(inputStream)) {
+            inputStream = inputStream.replace(/(\[.*?\])/g, '');
+        }
+
+        // instructions in the brackets will only be applied to tokens matched in curly braces
+        regex = /(\{.*?\})/;
+        var res="";
+        var curlymatch;
+
+        while (curlymatch = regex.exec(inputStream)) {
+            replacement=this.curlyLexer(inputStream,curlymatch[1],repetitions,separator);
+            inputStream = inputStream.replace(curlymatch[1],replacement);
+        }
+
+        // lexer matches (anything inside arrow notation)
+        outputStream = this.lexer(inputStream);
+
+        return this.capitalize(this.lexer(inputStream), stringCase);
     };
 }
 
@@ -215,93 +210,129 @@ function SimpleRant() {
 if ('undefined' != typeof module) {
     module.exports.SimpleRant = SimpleRant;
 }
-var lexer = function (rant, matches, input) {
-    var result, modifier= 0, re=new RegExp("\\w+","g");
-    var token = matches[1].match(re)[0];
-    var matched=matches[1].match(re);
-
+SimpleRant.prototype.replaceToken = function (matches, input, matchIndex) {
+    var result, modifier = 0, re = new RegExp("\\w+", "g");
+    var token = matches[matchIndex].match(re)[0];
+    var indexPos = matches.index;
+    var matched = matches[matchIndex].match(re);
     // matched[0] contains the token. It can be noun, verb, adj etc.
     // we already know it's valid, because this function doesn't get
     // called unless it is.
-
-
     // Let's check if there's any qualifiers or modifiers
-    if(token.length>1){
-        // yes, there are. There are two classes. Filters and subs. Let's see what we got
-        var mysubs=myfilters=[];
-        var dictionary=[];
-        if(matched.length>1){
-            matched.forEach(function(entry,idx) {
-                if(idx>0){
-                    if("undefined" != typeof dic[token].filters){
-                        if(dic[token].filters.indexOf(entry)>-1){
-                            //console.log("valid filter: "+entry);
+    if (token.length > 1) {
+        // There are two types. Filters and subs. Let's see what we got
+        var mysubs = myfilters = [];
+        var dictionary = [];
+        if (matched.length > 1) {
+            matched.forEach(function (entry, idx) {
+                if (idx > 0) {
+                    if ("undefined" != typeof dic[token].filters) {
+                        if (dic[token].filters.indexOf(entry) > -1) {
                             // Filters are categories of the token, so <adj emotion> will
                             // set filters valid for emotion for the token adj
                             myfilters.push(entry);
                         }
                     }
-                    if("undefined" != typeof dic[token].subs){
-                        if(dic[token].subs.indexOf(entry)>-1){
+                    if ("undefined" != typeof dic[token].subs) {
+                        if (dic[token].subs.indexOf(entry) > -1) {
                             // Subs are grammatical instructions
                             modifier = dic[token].subs.indexOf(entry);
-                            //console.log("valid sub: "+entry);
                         }
                     }
                 }
                 // So.. now we got the token, the filters and the subs. Let's do some magic
             });
         }
-
     }
-    if(myfilters.length<=0){
-        //console.log(token);
-        //console.log(dic[token]);
-        if("undefined" != typeof dic[token].all){
-            dictionary=dictionary.concat(dic[token].all);
+    if (myfilters.length <= 0) {
+        if ("undefined" != typeof dic[token].all) {
+            dictionary = dictionary.concat(dic[token].all);
         }
     } else {
-        myfilters.forEach(function(e){
-            dictionary=dictionary.concat(dic[token][e]);
+        myfilters.forEach(function (e) {
+            dictionary = dictionary.concat(dic[token][e]);
         });
     }
 
-
-
-    if(modifier===0){
-        matched.forEach(function(e){
-            if(e.toLowerCase() === "modifier"){
-                modifier=1;
+    if (modifier === 0) {
+        matched.forEach(function (e) {
+            if (e.toLowerCase() === "modifier") {
+                modifier = 1;
             }
         });
     }
 
-    var rand, re, i, newToken, replacement = [];
-    re = new RegExp( matches[0], 'g');
-    if(null !== input.match(re)) i = input.match(re).length;
-    while (i > 0) {
-        rand = Math.floor(Math.random()*dictionary.length);
-        if(dictionary[rand].match(/\//) <=0){
-            newToken=dictionary[rand];
-        } else {
-            newToken=dictionary[rand].split("/")[modifier];
-        }
-        replacement.push(newToken);
-        i--;
-    }
-
-    //console.log("using dictionary ");
-    var rand=Math.floor(Math.random()*dictionary.length);
-    //console.dir(dictionary[rand]);
-
+    var rand, newToken, replacement = [];
     re = new RegExp(matches[0], 'g');
-    input = input.replace(re, function () {
-        return replacement[i++];
-    });
 
-    return input;
+    rand = Math.floor(Math.random() * dictionary.length);
+    if (dictionary[rand].match(/\//) <= 0) {
+        newToken = dictionary[rand];
+    } else {
+        newToken = dictionary[rand].split("/")[modifier];
+    }
+    replacement.push(newToken);
+
+    rand = Math.floor(Math.random() * dictionary.length);
+    return replacement[0];
 };
 
+
+SimpleRant.prototype.lexer = function (input) {
+    var tempRes="";
+    var result = input, matches, token, replacement = [],regex = /\<(.*?)\>/g;
+    while (matches = regex.exec(input)) {
+        //console.log(matches);
+        // We accept a number of keywords, and they all correlate to the entries in the DIC files
+        // First, get the DIC token
+        re = new RegExp("\\w+", "g");
+        token = matches[1].match(re);
+        // Match against valid keywords in valid_tokens
+        if (dic.tokens.indexOf(token[0]) != -1) {
+            // Now we're ready to pass the token to the parser. It should
+            // include the token and any modifiers and subs
+            // result = lexer(this, matches, result);
+
+            tempRes = this.replaceToken( matches, result, 1);
+
+            result = result.replace(matches[0], function () {
+                return tempRes;
+            });
+        }
+    }
+    return result;
+};
+
+SimpleRant.prototype.curlyLexer = function (input, group, repetitions, separator) {
+    var tempRes="", matchIndex=1;
+    var result = input, matches=[], token, replacement = [],regex;
+    if("undefined"===group){
+        regex = /<(.*?)>/g;
+    } else {
+        matchIndex=0;
+        group=group.replace("}","");group=group.replace("{","");
+        regex = /<(.*?)>/g;
+    }
+
+    var newGroup='';
+    i =0; while (i < repetitions) {
+        while (matches = regex.exec(group)) {
+            var groupCopy=group;
+            re = new RegExp("\\w+", "g");
+            token = matches[1].match(re);
+            if (dic.tokens.indexOf(token[0]) != -1) {
+                //groupCopy +=  this.replaceToken( matches, result, 1);
+                if (separator === "n") groupCopy += separator.replace("n", "\n");
+                else if (separator === "s") groupCopy += separator.replace("s", " ");
+                else groupCopy += separator;
+            }
+        }
+        newGroup+=groupCopy;
+
+        i++;
+    }
+    return newGroup;
+};
 
 
 String.prototype.toTitleCase = function() {
@@ -310,8 +341,7 @@ String.prototype.toTitleCase = function() {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 
-    // Certain minor words should be left lowercase unless
-    // they are the first or last words in the string
+    // Certain minor words should be left lowercase unless  they are the first or last words in the string
     lowers = ['A', 'An', 'The', 'And', 'But', 'Or', 'For', 'Nor', 'As', 'At',
         'By', 'For', 'From', 'In', 'Into', 'Near', 'Of', 'On', 'Onto', 'To', 'With'];
     for (i = 0, j = lowers.length; i < j; i++)
@@ -321,7 +351,7 @@ String.prototype.toTitleCase = function() {
             });
 
     // Certain words should be left uppercase
-    uppers = ['Id', 'Tv'];
+    uppers = ['Id', 'Tv', 'Lsd'];
     for (i = 0, j = uppers.length; i < j; i++)
         str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'),
             uppers[i].toUpperCase());
@@ -339,7 +369,6 @@ String.prototype.toSentenceCase = function() {
         return str.toUpperCase();
     });
 };
-
 SimpleRant.prototype.getCase = function (tokenStream) {
     var _case = 0;
     var cases = ["default", "none", "lower", "upper", "title", "word", "first", "sentence"];
@@ -358,9 +387,6 @@ SimpleRant.prototype.getCase = function (tokenStream) {
     }
 };
 
-
-
-
 SimpleRant.prototype.capitalize = function (s,_case) {
     if(_case==="upper")
         return s.toUpperCase();
@@ -376,8 +402,8 @@ SimpleRant.prototype.capitalize = function (s,_case) {
         return s;
     else
         return s[0].toUpperCase() + s.slice(1); //default && first
-
 };
+
 var dic={};
 
 dic.tokens=["preposition","firstname","abstract", "activity", "adj", "adv", "color", "conj", "country", "emo", "em", "x", "face", "firstname", "greet", "surname", "noun", "sound", "title", "place", "prefix", "prepos", "pron", "quality", "rel", "sconj", "substance", "timeadv", "timenoun", "unit", "verbimg", "say", "verb", "vocal", "preposition", "yn"];
