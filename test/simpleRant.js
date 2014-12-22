@@ -323,41 +323,36 @@ SimpleRant.prototype.braceParser = function (input, group, reps, sep) {
     i = 0;
     var replaceGroup='';
     while (matches = regex.exec(group)) {
-        //console.log("test");
         var groupCopy = group;
         while (i < repetitions) {
         if(matches[0]==="\\C"){  replaceGroup+=this.randomString(1); }
             i++;
         }
 
-        //groupCopy=groupCopy.replace("\\C", replaceGroup.map(function(e){
-        //    return e;
-        //}));
         groupCopy=groupCopy.replace("\\C", replaceGroup );
-        if (separator.toLowerCase() === "n") groupCopy += separator.replace("n", "\n");
-        else if (separator.toLowerCase()  === "s") groupCopy += separator.replace("s", " ");
-        else groupCopy += separator;
+        if("undefined" != typeof separator){
+            if (separator.toLowerCase() === "n") groupCopy += separator.replace("n", "\n");
+            else if (separator.toLowerCase()  === "s") groupCopy += separator.replace("s", " ");
+            else groupCopy += separator;
+        }
         return groupCopy;
 
     }
-
-
 
     // Check for token patterns
     regex = /<(.*?)>/g;
     i = 0;
     while (i < repetitions) {
         while (matches = regex.exec(group)) {
-            //console.log("length");
-            //console.log(matches.length);
-
             groupCopy = group;
             re = new RegExp("\\w+", "g");
             token = matches[1].match(re);
             if (dic.tokens.indexOf(token[0]) != -1) {
-                if (separator === "n") groupCopy += separator.replace("n", "\n");
-                else if (separator === "s") groupCopy += separator.replace("s", " ");
-                else groupCopy += separator;
+                if("undefined" != typeof separator){
+                    if (separator === "n") groupCopy += separator.replace("n", "\n");
+                    else if (separator === "s") groupCopy += separator.replace("s", " ");
+                    else groupCopy += separator;
+                }
             }
         }
         newGroup += "undefined" == typeof groupCopy ? "" : groupCopy;
