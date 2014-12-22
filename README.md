@@ -41,6 +41,14 @@ Functions in the development plan
 
 New language features
 
+Testing. Currently, this is the result of the coverage report:
+
+    Statements   : 56.14% ( 96/171 )
+    Branches     : 5.26% ( 3/57 )
+    Functions    : 6.67% ( 2/30 )
+    Lines        : 100% ( 4/4 )
+
+I'd like to up the numbers
 
 ## New in version 0.8.5
 
