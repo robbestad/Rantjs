@@ -166,8 +166,8 @@ function SimpleRant() {
         var regex = /\<(.*?)\>/g;
         var matches, token, indexPos;
         var replacement, i = 0, tags={};
-        var repetitions=1;
-        var separator=" ";
+        var repetitions=[];
+        var separator=[];
         var stringCase=this.getCase(inputStream);
 
         outputStream = inputStream.toLowerCase(), regex = /(\[.*?\])/g;
@@ -176,13 +176,15 @@ function SimpleRant() {
             re = new RegExp("\\w+", "g");
             token = matches[1].match(re);
             if(token[0] === "sep"){
-                separator=token[1];
+                separator.push(token[1]);
                 //separator=matches[0].match(/[^[\](sep:)]+(?=])/)[0];
             }
             if(token[0] === "rep"){
-                repetitions=token[1];
+                repetitions.push(token[1]);
             }
         }
+        repetitions.reverse();
+        separator.reverse();
 
         // remove the brackets
         while (matches = regex.exec(inputStream)) {
@@ -210,6 +212,7 @@ function SimpleRant() {
 if ('undefined' != typeof module) {
     module.exports.SimpleRant = SimpleRant;
 }
+
 SimpleRant.prototype.replaceToken = function (matches, input, matchIndex) {
     var result, modifier = 0, re = new RegExp("\\w+", "g");
     var token = matches[matchIndex].match(re)[0];
@@ -303,33 +306,66 @@ SimpleRant.prototype.lexer = function (input) {
     return result;
 };
 
-SimpleRant.prototype.braceParser = function (input, group, repetitions, separator) {
+SimpleRant.prototype.braceParser = function (input, group, reps, sep) {
     var tempRes = "", matchIndex = 1;
     var result = input, matches = [], token, replacement = [], regex;
     matchIndex = 0;
     group = group.replace("}", "");
     group = group.replace("{", "");
-    regex = /<(.*?)>/g;
-
+    var repetitions=reps.pop();
+    var separator=sep.pop();
     var newGroup = '';
+
+
+    // Check for shorthand codes
+    //[rep:10][sep:\N]{\C}
+    regex = /\\\w+/g;
+    i = 0;
+    var replaceGroup='';
+    while (matches = regex.exec(group)) {
+        console.log("test");
+        var groupCopy = group;
+        while (i < repetitions) {
+        if(matches[0]==="\\C"){  replaceGroup+=this.randomString(1); }
+            i++;
+        }
+
+        //groupCopy=groupCopy.replace("\\C", replaceGroup.map(function(e){
+        //    return e;
+        //}));
+        groupCopy=groupCopy.replace("\\C", replaceGroup );
+        if (separator.toLowerCase() === "n") groupCopy += separator.replace("n", "\n");
+        else if (separator.toLowerCase()  === "s") groupCopy += separator.replace("s", " ");
+        else groupCopy += separator;
+        return groupCopy;
+
+    }
+
+
+
+    // Check for token patterns
+    regex = /<(.*?)>/g;
     i = 0;
     while (i < repetitions) {
         while (matches = regex.exec(group)) {
-            var groupCopy = group;
+            console.log("length");
+            //console.log(matches.length);
+
+            groupCopy = group;
             re = new RegExp("\\w+", "g");
             token = matches[1].match(re);
             if (dic.tokens.indexOf(token[0]) != -1) {
-                //groupCopy +=  this.replaceToken( matches, result, 1);
                 if (separator === "n") groupCopy += separator.replace("n", "\n");
                 else if (separator === "s") groupCopy += separator.replace("s", " ");
                 else groupCopy += separator;
             }
         }
-        newGroup += groupCopy;
+        newGroup += "undefined" == typeof groupCopy ? "" : groupCopy;
 
         i++;
     }
-    return newGroup;
+    //console.log(group);
+    return "undefined" != typeof newGroup ? newGroup : group;
 };
 
 
@@ -367,6 +403,8 @@ String.prototype.toSentenceCase = function() {
         return str.toUpperCase();
     });
 };
+
+
 SimpleRant.prototype.getCase = function (tokenStream) {
     var _case = 0;
     var cases = ["default", "none", "lower", "upper", "title", "word", "first", "sentence"];
@@ -400,4 +438,16 @@ SimpleRant.prototype.capitalize = function (s,_case) {
         return s;
     else
         return s[0].toUpperCase() + s.slice(1); //default && first
+};
+
+
+SimpleRant.prototype.randomString = function (l, chars) {
+    chars = chars || 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    //chars = chars || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var rndString = '';
+    for (var i = 0; i < l; i++) {
+        var rndPos = Math.floor(Math.random() * chars.length);
+        rndString += chars.substring(rndPos, rndPos + 1);
+    }
+    return rndString;
 };

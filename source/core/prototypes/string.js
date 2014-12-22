@@ -32,3 +32,4 @@ String.prototype.toSentenceCase = function() {
         return str.toUpperCase();
     });
 };
+

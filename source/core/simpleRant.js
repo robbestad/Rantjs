@@ -4,8 +4,8 @@ function SimpleRant() {
         var regex = /\<(.*?)\>/g;
         var matches, token, indexPos;
         var replacement, i = 0, tags={};
-        var repetitions=1;
-        var separator=" ";
+        var repetitions=[];
+        var separator=[];
         var stringCase=this.getCase(inputStream);
 
         outputStream = inputStream.toLowerCase(), regex = /(\[.*?\])/g;
@@ -14,13 +14,15 @@ function SimpleRant() {
             re = new RegExp("\\w+", "g");
             token = matches[1].match(re);
             if(token[0] === "sep"){
-                separator=token[1];
+                separator.push(token[1]);
                 //separator=matches[0].match(/[^[\](sep:)]+(?=])/)[0];
             }
             if(token[0] === "rep"){
-                repetitions=token[1];
+                repetitions.push(token[1]);
             }
         }
+        repetitions.reverse();
+        separator.reverse();
 
         // remove the brackets
         while (matches = regex.exec(inputStream)) {

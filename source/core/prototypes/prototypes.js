@@ -32,3 +32,15 @@ SimpleRant.prototype.capitalize = function (s,_case) {
     else
         return s[0].toUpperCase() + s.slice(1); //default && first
 };
+
+
+SimpleRant.prototype.randomString = function (l, chars) {
+    chars = chars || 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    //chars = chars || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var rndString = '';
+    for (var i = 0; i < l; i++) {
+        var rndPos = Math.floor(Math.random() * chars.length);
+        rndString += chars.substring(rndPos, rndPos + 1);
+    }
+    return rndString;
+};
