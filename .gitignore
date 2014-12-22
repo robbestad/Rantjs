@@ -1,2 +1,4 @@
 del
+resources/out
+build
 node_modules
