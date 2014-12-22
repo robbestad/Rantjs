@@ -2,6 +2,19 @@ var assert = require("assert");
 //var should = require("should");
 var rant = require("./simpleRant");
 
+
+describe('Repeatertest', function () {
+    it('should return a repeated sentence', function () {
+        var r = new rant.SimpleRant();
+        var regex = /(\{.*?\})/;
+        var res="";
+        var inputStream="[rep:3]{<noun hole>}";
+        var curlymatch = regex.exec(inputStream);
+        result=r.curlyLexer(inputStream,curlymatch[1],3,"s");
+        assert.equal(result,'<noun hole> <noun hole> <noun hole> ');
+    })
+});
+
 describe('Get Sentence', function () {
     it('should return a sentence when calling several keywords', function () {
         var r = new rant.SimpleRant();
