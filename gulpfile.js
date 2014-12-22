@@ -19,8 +19,9 @@ var gulp = require("gulp"),
             gulp.src('./source/arrayMethods.js'),
             gulp.src('./source/core/simpleRant.js'),
             gulp.src('./source/parser/**/*'),
-            gulp.src('./source/prototypes/string.js'),
-            gulp.src('./source/prototypes/prototypes.js')
+            gulp.src('./source/core/prototypes/lexer.js'),
+            gulp.src('./source/core/prototypes/string.js'),
+            gulp.src('./source/core/prototypes/prototypes.js')
         )
             .pipe(concat('./build/simpleRant.core.js'))
             .pipe(gulp.dest('./'))
@@ -112,27 +113,22 @@ var gulp = require("gulp"),
         'npm run-script coverage'
     ]));
 
-    gulp.task('mocha', ["concat:test"], function () {
+    gulp.task('mocha', function () {
         return gulp.src('./test/test.js', {read: false})
             .pipe(mocha({ui:'bdd',reporter: 'nyan'})
         );
     });
 
-    var del    = require('del');
+    var del = require('del');
     gulp.task('delete', function(callback) {
-        del(["./resources/out/**/*"], callback);
+        del(["./resources/out/**/*","./test/simpleRant.js"], callback);
     });
 
-    var runSequence = require('run-sequence');
-    gulp.task('test', function(callback) {
-        runSequence('delete',
-            [
-                "compile:dev",
-                'mocha'
-            ],
-            callback);
+    gulp.task('test', ['concat:test'], function () {
+        return gulp.src('./test/test.js', {read: false})
+            .pipe(mocha({ui:'bdd',reporter: 'nyan'})
+        );
     });
-
 
     gulp.task('compile:dist', function(callback) {
         runSequence(
@@ -145,7 +141,8 @@ var gulp = require("gulp"),
     gulp.task('compile:dev', function(callback) {
         runSequence(
             [
-                "concat:js","concat:dic",
+                "concat:js",
+                "concat:dic",
                 "concat:test"
             ],
             callback);
