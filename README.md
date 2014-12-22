@@ -20,13 +20,40 @@ Easy way to choose alternative dictionaries
 
 Indefinite article (a/an) automation
 
-Automatic capitalization
-
 Overwriting (targets)
 
 Looping (repeaters)
 
 Conditionals
+
+## Contributions
+
+Contributions are welcome. Feel free to submit an issue/pull request. The following areas are
+of particular interest:
+
+Documentation (wiki/code)
+
+Fixing bugs
+
+Optimization
+
+Functions in the development plan
+
+New language features
+
+
+## New in version 0.8.5
+
+  Added support for [case]-tag.
+
+  Usage:
+
+    [case:upper]<firstname male>
+
+  Variants:
+
+    [case:none|default|word|upper|lower|case|sentence]
+
 
 
 [1]: https://github.com/TheBerkin/Rant
