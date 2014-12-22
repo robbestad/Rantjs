@@ -50,6 +50,20 @@ Testing. Currently, this is the result of the coverage report:
 
 I'd like to up the numbers
 
+## New in version 0.8.6
+
+  Added support for [rep:x]
+
+  Usage:
+
+    [case:title][sep:\n][rep:3]{I like <noun animal plural> but not <noun animal plural>}
+
+    // I Like Ogres but not Turtles
+    // I Like Bulls but not Horses
+    // I Like Poodles but not Owls
+
+   Note: [sep:\n] dictates newlines. Alternatively, you can specify \s for space.
+
 ## New in version 0.8.5
 
   Added support for [case]-tag.
