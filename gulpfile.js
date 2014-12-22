@@ -100,7 +100,7 @@ var gulp = require("gulp"),
         .on('error', handleErrors);
     });
 
-    gulp.task("shellsass", shell.task([
+    gulp.task("compile:sass", shell.task([
         'sass style.scss dist/style.css'
     ]));
 
@@ -130,30 +130,14 @@ var gulp = require("gulp"),
         );
     });
 
-    gulp.task('compile:dist', function(callback) {
-        runSequence(
-            [
-                "concat:js","concat:dic",
-                "minify:core","minify:dic"
-            ],
-            callback);
-    });
-    gulp.task('compile:dev', function(callback) {
-        runSequence(
-            [
-                "concat:js",
-                "concat:dic",
-                "concat:test"
-            ],
-            callback);
-    });
-
+    gulp.task('compile:dist', ["concat:js","concat:dic","minify:core","minify:dic"]);
+    gulp.task('compile:dev', ["concat:js", "concat:dic", "concat:test"]);
 
     gulp.task("watcher", function(){
         gulp.watch('./test/test.js',["test"]);
         gulp.watch(['./source/core/*','./source/parser/*'],["compile:dev","test"]);
         gulp.watch(["resources/**/*"], ["parse"]);
-        gulp.watch(["./style.scss"], ["shellsass"]);
+        gulp.watch(["./style.scss"], ["compile:sass"]);
         gulp.watch(["./index.js"], ["compile:dist"]);
     });
 
@@ -164,6 +148,6 @@ var gulp = require("gulp"),
     });
 
 
-    gulp.task("default", ["compile:dist","shellsass","watcher"]);
+    gulp.task("default", ["compile:dist","compile:sass","watcher"]);
 
-    gulp.task("serve", ["compile:dist","shellsass","watcher","nodemon"]);
+    gulp.task("serve", ["compile:dist","compile:sass","watcher","nodemon"]);
