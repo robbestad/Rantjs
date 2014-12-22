@@ -10,7 +10,7 @@ describe('Repeatertest', function () {
         var res="";
         var inputStream="[rep:3]{<noun hole>}";
         var curlymatch = regex.exec(inputStream);
-        result=r.curlyLexer(inputStream,curlymatch[1],3,"s");
+        result=r.braceParser(inputStream,curlymatch[1],3,"s");
         assert.equal(result,'<noun hole> <noun hole> <noun hole> ');
     })
 });

@@ -33,14 +33,14 @@ function SimpleRant() {
         var curlymatch;
 
         while (curlymatch = regex.exec(inputStream)) {
-            replacement=this.curlyLexer(inputStream,curlymatch[1],repetitions,separator);
+            replacement=this.braceParser(inputStream,curlymatch[1],repetitions,separator);
             inputStream = inputStream.replace(curlymatch[1],replacement);
         }
 
         // lexer matches (anything inside arrow notation)
         outputStream = this.lexer(inputStream);
 
-        return this.capitalize(this.lexer(inputStream), stringCase);
+        return this.capitalize(outputStream, stringCase);
     };
 }
 

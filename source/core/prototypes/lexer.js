@@ -91,21 +91,19 @@ SimpleRant.prototype.lexer = function (input) {
     return result;
 };
 
-SimpleRant.prototype.curlyLexer = function (input, group, repetitions, separator) {
-    var tempRes="", matchIndex=1;
-    var result = input, matches=[], token, replacement = [],regex;
-    if("undefined"===group){
-        regex = /<(.*?)>/g;
-    } else {
-        matchIndex=0;
-        group=group.replace("}","");group=group.replace("{","");
-        regex = /<(.*?)>/g;
-    }
+SimpleRant.prototype.braceParser = function (input, group, repetitions, separator) {
+    var tempRes = "", matchIndex = 1;
+    var result = input, matches = [], token, replacement = [], regex;
+    matchIndex = 0;
+    group = group.replace("}", "");
+    group = group.replace("{", "");
+    regex = /<(.*?)>/g;
 
-    var newGroup='';
-    i =0; while (i < repetitions) {
+    var newGroup = '';
+    i = 0;
+    while (i < repetitions) {
         while (matches = regex.exec(group)) {
-            var groupCopy=group;
+            var groupCopy = group;
             re = new RegExp("\\w+", "g");
             token = matches[1].match(re);
             if (dic.tokens.indexOf(token[0]) != -1) {
@@ -115,7 +113,7 @@ SimpleRant.prototype.curlyLexer = function (input, group, repetitions, separator
                 else groupCopy += separator;
             }
         }
-        newGroup+=groupCopy;
+        newGroup += groupCopy;
 
         i++;
     }
