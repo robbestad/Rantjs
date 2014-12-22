@@ -150,7 +150,8 @@ ul li{
   font-size:0.9rem;
 
   :hover{
-  display:inline-block;
+    cursor: pointer;
+    display:inline-block;
     background-color: white;
   }
 }

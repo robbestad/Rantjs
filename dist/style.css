@@ -106,6 +106,7 @@ ul li {
   display: block;
   font-size: 0.9rem; }
   ul li :hover {
+    cursor: pointer;
     display: inline-block;
     background-color: white; }
 
