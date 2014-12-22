@@ -323,7 +323,7 @@ SimpleRant.prototype.braceParser = function (input, group, reps, sep) {
     i = 0;
     var replaceGroup='';
     while (matches = regex.exec(group)) {
-        console.log("test");
+        //console.log("test");
         var groupCopy = group;
         while (i < repetitions) {
         if(matches[0]==="\\C"){  replaceGroup+=this.randomString(1); }
@@ -348,7 +348,7 @@ SimpleRant.prototype.braceParser = function (input, group, reps, sep) {
     i = 0;
     while (i < repetitions) {
         while (matches = regex.exec(group)) {
-            console.log("length");
+            //console.log("length");
             //console.log(matches.length);
 
             groupCopy = group;
