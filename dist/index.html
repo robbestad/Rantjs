@@ -115,62 +115,39 @@ My favorite colors: [rep:2]{&lt;color&gt;}
 </code></pre>
 
 <h2>Supported tokens</h2>
-<p>Here's a list of currently supported tokens</p>
-<pre class="highlight"><code class="language-xml">
-  &lt;preposition&gt;
-  &lt;firstname&gt;
-  &lt;activity&gt;
-  &lt;adj&gt;
-  &lt;adv&gt;
-  &lt;amount&gt;
-  &lt;color&gt;
-  &lt;conj&gt;
-  &lt;country&gt;
-  &lt;emo&gt;
-  &lt;em&gt;
-  &lt;face&gt;
-  &lt;greet&gt;
-  &lt;surname&gt;
-  &lt;noun&gt;
-  &lt;sound&gt;
-  &lt;title&gt;
-  &lt;place&gt;
-  &lt;prefix&gt;
-  &lt;prepos&gt;
-  &lt;pron&gt;
-  &lt;quality&gt;
-  &lt;rel&gt;
-  &lt;sconj&gt;
-  &lt;substance&gt;
-  &lt;timeadv&gt;
-  &lt;timenoun&gt;
-  &lt;unit&gt;
-  &lt;verbimg&gt;
-  &lt;say&gt;
-  &lt;verb&gt;
-  &lt;vocal&gt;
-  &lt;yn&gt;
+<p>Here's a list of the currently supported tokens</p>
+<pre class="highlight"><code class="language-xml">&lt;preposition&gt; &lt;firstname&gt; &lt;activity&gt; &lt;adj&gt;
+&lt;adv&gt; &lt;amount&gt; &lt;color&gt; &lt;conj&gt;
+&lt;country&gt; &lt;emo&gt; &lt;em&gt; &lt;face&gt;
+&lt;greet&gt; &lt;surname&gt; &lt;noun&gt; &lt;sound&gt;
+&lt;title&gt; &lt;place&gt; &lt;prefix&gt; &lt;prepos&gt;
+&lt;pron&gt; &lt;quality&gt; &lt;rel&gt; &lt;sconj&gt;
+&lt;substance&gt; &lt;timeadv&gt; &lt;timenoun&gt; &lt;unit&gt;
+&lt;verbimg&gt; &lt;say&gt; &lt;verb&gt; &lt;vocal&gt; &lt;yn&gt;</code></pre>
+    <p>
 
-  Many of the tokens has filter.
-  Eg:
-  &lt;activity video&gt;,  &lt;country oceania&gt;, &lt;firstname male&gt;
-  or &lt;noun ball&gt; and many more. As you type, the subgroups will show up.
-  You can separate the token with the filter using space or dash, so &lt;activity video&gt;
-  and &lt;activity-video&gt; are both valid.
+    <h2>Supported Filtesr</h2>
+    Many of the tokens have filters. The filters will show up as hints when you type in text in the inpux box above.
+    <pre class="highlight"><code class="language-xml">&lt;activity video&gt;,  &lt;country oceania&gt;, &lt;firstname male&gt;,
+&lt;noun ball&gt; and many more. You can use space or dash
+to separate tokens and filters so &lt;activity video&gt; and &lt;activity-video&gt;
+are both valid.</code></pre>
+</p>
 
-  Additional attributes:
-  Tokens such as &lt;noun&gt;, &lt;adv&gt;, &lt;place&gt; (and more)
-  can have a plural attribute
-  Eg:
-  &lt;noun plural&gt;, &lt;adv plural&gt;, &lt;place plural&gt;
+    <p>
+    <h2>Plural and conjugation</h2>
 
-  Verbs has: simple, ing, ed, s, er, pp, noun
+    Tokens such as &lt;noun&gt;, &lt;adv&gt;, &lt;place&gt; (and more)
+    can have a plural attribute. Eg:
+    <pre class="highlight"><code class="language-xml">&lt;noun plural&gt;, &lt;adv plural&gt;, &lt;place plural&gt;</code></pre>
+</p>
+  Verbs can be conjugated by adding: simple, ing, ed, s, er, pp, noun
   Eg:
-  &lt;verb ing&gt; &lt;verb ed&gt;
-  &lt;verb s&gt; &lt;verb er&gt;
-  &lt;verb violent er&gt;
-  etc...
-</code></pre>
+    <pre class="highlight"><code class="language-xml">&lt;verb ing&gt; &lt;verb ed&gt;
+&lt;verb s&gt; &lt;verb er&gt;
+&lt;verb violent er&gt;
+etc...</code></pre>
+
 
   </article>
 
@@ -201,9 +178,7 @@ Turns out it was nothing, though. Probably just a &lt;noun animal&gt;. You find 
 
   <li><span class="run-example">&lt;firstname male&gt; likes to &lt;verb-transitive&gt; &lt;noun.plural&gt; with &lt;pron poss male&gt; pet &lt;noun-animal&gt; on &lt;timenoun dayofweek plural&gt;.</span></li>
   <li><span class="run-example">A random string: [rep:8][sep:\N]{\C}</span></li>
-  <li><span class="run-example">I need &lt;amount&gt; &lt;adj&gt; &lt;noun.plural&gt; filled with &lt;adj&gt; &lt;noun plural&gt;.</span></li>
   <li><span class="run-example">The &lt;adj&gt; &lt;noun&gt; &lt;adv&gt; &lt;verb.ed&gt; the &lt;adj&gt; &lt;noun&gt; whilst &lt;adv&gt; being &lt;verb ed&gt;.</span></li>
-  <li><span class="run-example">&lt;title&gt;, help!</span></li>
   <li><span class="run-example">The &lt;adj emotion&gt; doctor &lt;verb walk ed&gt; the cat</span></li>
   <li><span class="run-example">I like my &lt;noun-shape&gt;-shaped &lt;noun-body.plural&gt;</span></li>
     
