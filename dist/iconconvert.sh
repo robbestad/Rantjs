@@ -8,14 +8,14 @@ convert appicon.png -resize 114x114 touch-icon-iphone-retina.png
 convert appicon.png -resize 114x114 apple-touch-icon-114x114.png
 convert appicon.png -resize 57x57 touch-icon-iphone.png
 convert appicon.png -resize 152x152 apple-touch-icon.png
-convert appicon.png -resize 16x16 favicon.ico
+#convert appicon.png -resize 16x16 favicon.ico
 convert appicon.png -resize 57x57 apple-touch-icon-57x57.png
 convert appicon.png -resize 60x60 apple-touch-icon-60x60.png
 convert appicon.png -resize 72x72 apple-touch-icon-72x72.png
 convert appicon.png -resize 76x76 apple-touch-icon-76x76.png
 convert appicon.png -resize 152x152 apple-touch-icon-precomposed.png
 convert appicon.png -resize 160x160 favicon-160x160.png
-convert appicon.png -resize 16x16 favicon-16x16.png
+#convert appicon.png -resize 16x16 favicon-16x16.png
 convert appicon.png -resize 196x196 favicon-196x196.png
 convert appicon.png -resize 32x32 favicon-32x32.png
 convert appicon.png -resize 96x96 favicon-96x96.png
