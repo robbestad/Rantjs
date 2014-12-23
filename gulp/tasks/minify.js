@@ -1,12 +1,13 @@
 var gulp = require("gulp"),
     maps = require("gulp-sourcemaps"),
+    uglify = require("gulp-uglify"),
 
     concat = require("gulp-concat");
 
 gulp.task("minify:core", ["concat:js", "minify:dic"], function(){
     gulp.src(["./build/simpleRant.core.js"])
         //.pipe(maps.init())
-        //.pipe(uglify())
+        .pipe(uglify())
         //.pipe(maps.write())
         .pipe(gulp.dest("dist"));
 });
@@ -14,7 +15,7 @@ gulp.task("minify:core", ["concat:js", "minify:dic"], function(){
 gulp.task("minify:dic", ["concat:dic"], function(){
     gulp.src(["./build/simpleRant.dic.js"])
         //.pipe(maps.init())
-        //.pipe(uglify())
+        .pipe(uglify())
         //.pipe(maps.write())
         .pipe(gulp.dest("dist"));
 });
