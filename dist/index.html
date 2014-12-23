@@ -92,9 +92,11 @@
     <h1>Make a sentence</h1>
 
     <p>
+      <div class="menu-container">
       <label for="input">Input</label>
       <textarea name="input" id="input" class="input"
                 spellcheck="false">The &lt;adj&gt; &lt;noun nsfw&gt; &lt;adv&gt; &lt;verb.ed&gt; the &lt;adj sexy&gt; &lt;noun insect&gt;.</textarea>
+      </div>
     </p>
 
     <p>
@@ -237,9 +239,9 @@ My favorite colors: [rep:2]{&lt;color&gt;}
   </p>  
 
   <h4>Examples</h4>
-  <ul>
+  <ul class="examples">
     <li><span class="run-example">[case:title][sep:n][rep:3]{I like &lt;noun animal plural&gt; but not &lt;noun animal plural&gt;}</span></li>
-    <li><span class="run-example">The &lt;adj&gt; &lt;noun nsfw&gt; &lt;adv&gt; &lt;verb.ed&gt; the &lt;adj sexy&gt; &lt;noun insect&gt;.</span></li>
+    <li><span class="run-example">The &lt;adj nsfw&gt; &lt;noun nsfw&gt; &lt;adv sexy&gt; &lt;verb ed&gt; the &lt;adj nsfw&gt; &lt;noun insect&gt;.</span></li>
 
     <li><span class="run-example">&lt;firstname male&gt; likes to &lt;verb nsfw&gt; &lt;noun nsfw&gt; with &lt;pron poss male&gt; pet &lt;noun-animal&gt;.
     </span></li>
@@ -291,54 +293,8 @@ My favorite colors: [rep:2]{&lt;color&gt;}
 <script src="simpleRant.core.js" type="text/javascript"></script>
 <script src="simpleRant.dic.js" type="text/javascript"></script>
 
-<script src="jquery.min.js"></script>
-<script src="zeroclip/jquery.zclip.min.js"></script>
-
-<script type="text/javascript">
-  document.getElementById('submit').addEventListener('click', function() {
-    rant = new SimpleRant;
-    if('' == document.getElementById("input").value) return;
-
-    var result = rant.rantConstructor(document.getElementById("input").value);
-    document.getElementById("output").value = result;
-  }, false);
-
-
-
-  function htmlDecode(value){
-        return $('<div/>').html(value).text();
-  }
-  $(document).ready(function(){
-
-    $(".run-example").click(function(){
-      document.getElementById("input").value = "";
-      document.getElementById("output").value = "";
-      document.getElementById("input").value = htmlDecode(this.innerHTML);
-      $("#submit").click();
-
-    });
-
-    $("#submit").click(function(){
-      $('#output').removeClass('light');
-      $('#output').addClass('purple');
-    });
-
-    $("#copy-button").zclip({
-      path: "zeroclip/ZeroClipboard.swf",
-      copy:function(){return $('textarea#output').val();},
-      beforeCopy:function(){
-      },
-      afterCopy:function(){
-        $('#output').css('color','white');
-        $('#output').removeClass('purple');
-        $('#output').addClass('light');
-      }
-    });
-  });
-</script>
-  <script src="highlight.js"></script>
-
-<script type="text/javascript" src="//d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js" data-token="2ef1bd42d2644d739243c75acf57af60"></script>
+<script src="dist.min.js"></script>
+  <script type="text/javascript" src="//d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js" data-token="2ef1bd42d2644d739243c75acf57af60"></script>
 </body>
 
 </html>

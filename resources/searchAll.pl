@@ -16,13 +16,19 @@ my @files = readdir(DH);
 closedir(DH);
 
 my $allVars = "";
+#print `rm $dirname/../ext/words.js`;
+print `touch $dirname/../ext/words.js`;
+print `echo var availableTags=[ > $dirname/../ext/words.js`;
+
 foreach my $file (@files) {
     next if ( $file =~ /^\.$/ ); # skip . and ..
     next if ( $file =~ /^\.git$/ ); # skip .git
     next if ( $file =~ /README+(.*)$/ ); # skip README
     next if ( $file =~ /^\.\.$/ );
     $file =~ s/\s/\\ /g;
-    print `node $dirname/parse.js ./RantVocab/$file `;
+    print `node $dirname/searchWords.js ./RantVocab/$file >> $dirname/../ext/words.js`;
 }
-print `perl $dirname/parseTokens.pl > $dirname/../source/dic/tokens.js`;
-print `cat $dirname/out/*.js > $dirname/../source/dic/dic.js`;
+print `echo ]\\; >> $dirname/../ext/words.js`;
+
+#print `perl $dirname/parseTokens.pl > $dirname/../source/dic/tokens.js`;
+#print `cat $dirname/out/*.js > $dirname/../source/dic/dic.js`;
