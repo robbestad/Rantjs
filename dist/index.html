@@ -157,24 +157,21 @@ My favorite colors: [rep:2]{&lt;color&gt;}
   &lt;vocal&gt;
   &lt;yn&gt;
 
-  Many of the tokens has subgroups. Examples:
+  Many of the tokens has subgroups.
+  Eg:
   &lt;activity video&gt;,  &lt;country oceania&gt;, &lt;firstname male&gt;
   or &lt;noun ball&gt; and many more. As you type, the subgroups will show up.
 
   Additional attributes:
-  Tokens such as &lt;noun&gt;, &lt;adv&gt;,
-  &lt;place&gt; (and more) can have a 
-  &lt;em&gt;plural&lt;/em&gt; attribute
-  &lt;noun plural&gt;, &lt;adv plural&gt;, 
-  &lt;place plural&gt;
+  Tokens such as &lt;noun&gt;, &lt;adv&gt;, &lt;place&gt; (and more)
+  can have a plural attribute
+  Eg:
+  &lt;noun plural&gt;, &lt;adv plural&gt;, &lt;place plural&gt;
 
   Verbs has: simple, ing, ed, s, er, pp, noun
-
-  So...: 
-  &lt;verb ing&gt; 
-  &lt;verb ed&gt; 
-  &lt;verb s&gt; 
-  &lt;verb er&gt; 
+  Eg:
+  &lt;verb ing&gt; &lt;verb ed&gt;
+  &lt;verb s&gt; &lt;verb er&gt;
   &lt;verb violent er&gt;
   etc...
 </code></pre>
@@ -226,6 +223,11 @@ It's nothing. Just a &lt;noun animal&gt;, you think. A couple of &lt;noun tool p
     <p>
       Rantjs is created and maintained by
       <a href="http://www.robbestad.com">Sven A Robbestad</a>
+    </p>
+
+    <p>A note about NSFW words. These are not included in the default dictionary, so if you for instance type
+      &lt;noun&gt; you will not get any NSFW nouns. You must explicitly ask for an NSFW word by
+      typing &lt;noun nsfw&gt;.
     </p>
   </aside>
 
