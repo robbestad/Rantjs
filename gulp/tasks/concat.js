@@ -5,7 +5,7 @@ var gulp = require("gulp"),
 
 gulp.task("concat:js", function(){
     return streamqueue({ objectMode: true },
-        gulp.src('./source/arrayMethods.js'),
+        //gulp.src('./source/arrayMethods.js'),
         gulp.src('./source/core/simpleRant.js'),
         gulp.src('./source/parser/**/*'),
         gulp.src('./source/core/prototypes/lexer.js'),

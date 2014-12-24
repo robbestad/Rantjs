@@ -1,7 +1,6 @@
 var gulp = require("gulp"),
     maps = require("gulp-sourcemaps"),
     uglify = require("gulp-uglify"),
-
     concat = require("gulp-concat");
 
 gulp.task("minify:core", ["concat:js", "minify:dic"], function(){
