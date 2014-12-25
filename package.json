@@ -4,7 +4,7 @@
   "description": "A naive implementation of Rant, the procedural text generator",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_PATH=./source/core ./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- -R spec",
+    "test": "NODE_PATH=./source/core ./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- -R spec  --reporter nyan",
     "coverage": "NODE_PATH=./source/core ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec",
     "start": "node server"
   },

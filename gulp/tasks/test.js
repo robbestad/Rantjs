@@ -4,9 +4,9 @@ var gulp = require("gulp"),
     concat = require("gulp-concat");
 
 gulp.task("coverage", shell.task([
-    'npm run-script coverage'
+    'npm run coverage'
 ]));
 
 gulp.task("test",  shell.task([
-    'NODE_PATH=./source/core ./node_modules/.bin/mocha test/test.js --reporter nyan'
+    'npm test'
 ]));
