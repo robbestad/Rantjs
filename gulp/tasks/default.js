@@ -6,8 +6,6 @@ var gulp = require("gulp"),
 gulp.task("default",["build:dist","browserify","watcher"]);
 gulp.task("serve", ["build:dist","browserify", "watcher", "nodemon"]);
 
-//gulp.task("serve", ["compile:dist","compile:sass","watcher","nodemon"]);
-
 gulp.task("watcher", function(){
     gulp.watch('./test/test.js',["test"]);
     gulp.watch(['./source/**/*'],["test"]);
