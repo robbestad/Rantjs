@@ -51,12 +51,12 @@ New language features
 
 Testing. Currently, this is the result of the coverage report:
 
-    Statements   : 56.14% ( 96/171 )
-    Branches     : 5.26% ( 3/57 )
-    Functions    : 6.67% ( 2/30 )
-    Lines        : 100% ( 4/4 )
+    Statements   : 96.44% ( 461/478 )
+    Branches     : 67.65% ( 46/68 )
+    Functions    : 100% ( 18/18 )
+    Lines        : 97.24% ( 458/471 )
 
-I'd like to up the numbers
+Ideally, it should be 100% on everything
 
 ## New in version 0.9.1
 
