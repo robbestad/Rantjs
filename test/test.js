@@ -1,12 +1,63 @@
 var assert = require("assert");
 var rant= require("../source/core/index");
 
+describe('Get Upper', function () {
+    it('should return upper', function () {
+        var result =  require("../source/core/getCase")('[case:upper]');
+        assert(result,assert.equal("upper",result));
+    })
+});
+describe('Get Lower', function () {
+    it('should return lower', function () {
+        var result =  require("../source/core/getCase")('[case:lower]');
+        assert(result,assert.equal("lower",result));
+    })
+});
+describe('Get Titlecase', function () {
+    it('should return title case', function () {
+        var result =  require("../source/core/getCase")('[case:title]');
+        assert(result,assert.equal("title",result));
+    })
+});
+describe('Get Word Case', function () {
+    it('should return word case', function () {
+        var result =  require("../source/core/getCase")('[case:word]');
+        assert(result,assert.equal("word",result));
+    })
+});
+describe('Get First Case', function () {
+    it('should return first case', function () {
+        var result =  require("../source/core/getCase")('[case:first]');
+        assert(result,assert.equal("first",result));
+    })
+});
+describe('Get Sentence Case', function () {
+    it('should return Sentence case', function () {
+        var result =  require("../source/core/getCase")('[case:sentence]');
+        assert(result,assert.equal("sentence",result));
+    })
+});
+
+describe('Get Sentence Cased Sentence', function () {
+    it('should return Sentence case', function () {
+        var result =  require("../source/core/capitalize")('this is a test','upper');
+        assert(result,assert.equal("THIS IS A TEST",result));
+    })
+});
+
+describe('Get a concept', function () {
+    it('should return a concept', function () {
+        var dic =  require("../source/core/en_US");
+        assert(dic().abstract.concept,assert.notEqual(0,dic().abstract.concept.length));
+    })
+});
+
+
 describe('Repeatertest', function () {
     it('should return a repeated sentence', function () {
         result=rant("[sep:s][rep:3]{my <noun hole> is leaking}");
         var regex = /leaking/g;
         var spaces = regex.exec(result);
-        console.log(spaces);
         assert(spaces,assert.notEqual(-1,spaces.index));
     })
 });
