@@ -1,4 +1,5 @@
 del
+simple-rant.iml
 coverage
 npm
 resources/out
