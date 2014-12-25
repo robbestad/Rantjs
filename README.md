@@ -12,6 +12,14 @@ For implementation details, please visit the [npmjs page][3]
 
 [Click here for a writeup on my blog][4]
 
+## Usage
+
+    var rant = require("rantjs");
+    var sentence=rant('<firstname male> likes to <verb-transitive> <noun.plural> with <pron poss male> pet <noun-animal> on <timenoun dayofweek plural>.');
+
+    console.log(sentence); // 'Sean likes to chop parrots with his pet cat on Saturdays.'
+
+
 ## Development Plan
 
 Easy way to choose alternative dictionaries
