@@ -58,6 +58,28 @@ Testing. Currently, this is the result of the coverage report:
 
 I'd like to up the numbers
 
+## New in version 0.9.1
+
+  Rewrote Rantjs for CommonJS. 
+  
+  Removed several gulp tasks (concat, minify)
+ 
+  Refactored the tests
+ 
+  Renamed the app internally
+ 
+  New usage syntax (not compatible with 0.8.x)
+ 
+  You can now call Rantjs directly from require:
+  
+    var sentence=require("rantjs")("<firstname male> likes to <verb-transitive> 
+    <noun.plural> with <pron poss male> pet <noun-animal> on <timenoun dayofweek plural>.");
+ 
+  Added randomization:
+  
+    require("rantjs")("A random string: [rep:8][sep:\N]{\C}");
+    //A random string: XUACJGOGN
+
 ## New in version 0.8.6
 
   Added support for [rep:x]
