@@ -32,6 +32,7 @@
     "gulp-concat": "^2.4.2",
     "gulp-csso": "^0.2.9",
     "gulp-jasmine": "^1.0.1",
+    "gulp-minify-html": "^0.1.8",
     "gulp-mocha": "^2.0.0",
     "gulp-nodemon": "^1.0.4",
     "gulp-notify": "^2.0.1",
