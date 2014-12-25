@@ -1,4 +1,5 @@
 del
+coverage
 npm
 resources/out
 build
