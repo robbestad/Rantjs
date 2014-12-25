@@ -13,8 +13,8 @@ gulp.task("build:dist", function(){
         "./ext/highlight.js"
     ])
         .pipe(concat('dist.min.js'))
-        //.pipe(maps.init())
+        .pipe(maps.init())
         .pipe(uglify())
-        //.pipe(maps.write())
+        .pipe(maps.write())
         .pipe(gulp.dest("dist"));
 });

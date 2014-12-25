@@ -4,8 +4,8 @@
   "description": "A naive implementation of Rant, the procedural text generator",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha",
-    "coverage": "./node_modules/.bin/istanbul cover npm test",
+    "test": "NODE_PATH=./source/core ./node_modules/.bin/mocha test/test.js",
+    "coverage": "NODE_PATH=./source/core ./node_modules/.bin/istanbul cover npm test",
     "start": "node server"
   },
   "author": "Sven Anders Robbestad <anders@robbestad.com>",
@@ -22,17 +22,21 @@
     "require-dir": "^0.1.0"
   },
   "devDependencies": {
+    "browserify": "^7.1.0",
     "compression": "^1.2.1",
     "debug": "^2.1.0",
     "del": "^1.1.0",
     "express": "^4.10.4",
     "gulp-autoprefixer": "^2.0.0",
+    "gulp-browserify": "^0.5.0",
     "gulp-concat": "^2.4.2",
     "gulp-csso": "^0.2.9",
+    "gulp-jasmine": "^1.0.1",
     "gulp-mocha": "^2.0.0",
     "gulp-nodemon": "^1.0.4",
     "gulp-notify": "^2.0.1",
     "gulp-sass": "^1.1.0",
+    "gulp-streamify": "0.0.5",
     "gulp-watch": "~1.2.1",
     "istanbul": "^0.3.4",
     "karma": "^0.12.28",
@@ -44,6 +48,9 @@
     "requirejs": "^2.1.15",
     "run-sequence": "^1.0.2",
     "should": "^4.3.0",
-    "streamqueue": "^0.1.1"
+    "streamqueue": "^0.1.1",
+    "tape": "^3.0.3",
+    "vinyl-source-stream": "^1.0.0",
+    "vinyl-transform": "^1.0.0"
   }
 }

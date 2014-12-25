@@ -5,7 +5,7 @@ var gulp = require("gulp"),
     concat = require("gulp-concat");
 
 gulp.task("build:npm", ["minify:core"], function(){
-    gulp.src(['./build/simpleRant.core.js','./build/simpleRant.dic.js'])
+    gulp.src(['./build/rant.core.js','./build/rant.dic.js'])
         .pipe(concat('index.js'))
         .pipe(uglify({
             mangle:true,

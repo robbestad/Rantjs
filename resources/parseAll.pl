@@ -24,5 +24,11 @@ foreach my $file (@files) {
     $file =~ s/\s/\\ /g;
     print `node $dirname/parse.js ./RantVocab/$file `;
 }
-print `perl $dirname/parseTokens.pl > $dirname/../source/dic/tokens.js`;
-print `cat $dirname/out/*.js > $dirname/../source/dic/dic.js`;
+print `echo "var en_US = function () { "> $dirname/../source/core/en_US.js`;
+print `perl $dirname/parseTokens.pl >> $dirname/../source/core/en_US.js`;
+print `cat $dirname/../source/dic/custom.js >> $dirname/../source/core/en_US.js`;
+print `cat $dirname/out/*.js >> $dirname/../source/core/en_US.js`;
+print `echo "return dic; ">> $dirname/../source/core/en_US.js`;
+print `echo "}; ">> $dirname/../source/core/en_US.js`;
+print `echo "module.exports=en_US; ">> $dirname/../source/core/en_US.js`;
+
