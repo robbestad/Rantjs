@@ -84,11 +84,16 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
             match=line.match(re);
             if(null !== match){
                 e=line.replace(re,'');
+                //todo better to keep track of last number with a word
+                //console.log("---: "+e.replace(/-/g,''));
+
                 if("undefined" != typeof tokenword[lineNr-1]){
                     keywords[lineNr-1]=e.replace(/-/g,'');
+                    //console.log(tokenword[lineNr-1]);
                 } else
                 if("undefined" != typeof tokenword[lineNr-2]) {
                     keywords[lineNr-2]=e.replace(/-/g,'');
+                    //console.log(tokenword[lineNr-2]);
                 }
             }
 
