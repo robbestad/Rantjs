@@ -69,7 +69,6 @@ function rant(inputStream) {
     var res = "";
     var curlymatch;
 
-    console.log(inputStream);
     while (curlymatch = regex.exec(inputStream)) {
         replacement = require("./braceParser")(inputStream, curlymatch[1], repetitions, separator);
         inputStream = inputStream.replace(curlymatch[1], replacement);
