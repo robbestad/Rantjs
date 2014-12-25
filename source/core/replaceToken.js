@@ -14,17 +14,17 @@ var replaceToken = function (matches, input, matchIndex) {
         if (matched.length > 1) {
             matched.forEach(function (entry, idx) {
                 if (idx > 0) {
-                    if ("undefined" != typeof require("en_US")()[token].filters) {
-                        if (require("en_US")()[token].filters.indexOf(entry) > -1) {
+                    if ("undefined" != typeof require("./en_US")()[token].filters) {
+                        if (require("./en_US")()[token].filters.indexOf(entry) > -1) {
                             // Filters are categories of the token, so <adj emotion> will
                             // set filters valid for emotion for the token adj
                             myfilters.push(entry);
                         }
                     }
-                    if ("undefined" != typeof require("en_US")()[token].subs) {
-                        if (require("en_US")()[token].subs.indexOf(entry) > -1) {
+                    if ("undefined" != typeof require("./en_US")()[token].subs) {
+                        if (require("./en_US")()[token].subs.indexOf(entry) > -1) {
                             // Subs are grammatical instructions
-                            modifier = require("en_US")()[token].subs.indexOf(entry);
+                            modifier = require("./en_US")()[token].subs.indexOf(entry);
                         }
                     }
                 }
@@ -33,12 +33,12 @@ var replaceToken = function (matches, input, matchIndex) {
         }
     }
     if (myfilters.length <= 0) {
-        if ("undefined" != typeof require("en_US")()[token].all) {
-            dictionary = dictionary.concat(require("en_US")()[token].all);
+        if ("undefined" != typeof require("./en_US")()[token].all) {
+            dictionary = dictionary.concat(require("./en_US")()[token].all);
         }
     } else {
         myfilters.forEach(function (e) {
-            dictionary = dictionary.concat(require("en_US")()[token][e]);
+            dictionary = dictionary.concat(require("./en_US")()[token][e]);
         });
     }
 

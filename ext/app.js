@@ -1,12 +1,9 @@
 document.getElementById('submit').addEventListener('click', function() {
     var rant= require("rant");
     if('' == document.getElementById("input").value) return;
-
     var result = rant(document.getElementById("input").value);
     document.getElementById("output").value = result;
   }, false);
-
-
 
   function htmlDecode(value){
         return $('<div/>').html(value).text();

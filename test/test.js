@@ -1,5 +1,5 @@
 var assert = require("assert");
-var rant= require("../source/core/rant");
+var rant= require("../source/core/index");
 
 describe('Repeatertest', function () {
     it('should return a repeated sentence', function () {
@@ -10,7 +10,6 @@ describe('Repeatertest', function () {
         assert(spaces,assert.notEqual(-1,spaces.index));
     })
 });
-
 
 describe('Get Sentence', function () {
     it('should return a sentence when calling several keywords', function () {
@@ -36,7 +35,6 @@ describe('Get Transitive Verb', function () {
         assert(result,assert.hasContent);
     })
 });
-
 
 describe('Get Verb.ed', function () {
     it('should return a verb.ed', function () {

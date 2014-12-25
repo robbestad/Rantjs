@@ -42,7 +42,7 @@ function rant(inputStream) {
     var replacement, i = 0, tags = {};
     var repetitions = [];
     var separator = [];
-    var stringCase = require("getCase")(inputStream);
+    var stringCase = require("./getCase")(inputStream);
     outputStream = inputStream.toLowerCase(), regex = /(\[.*?\])/g;
     while (matches = regex.exec(inputStream)) {
         // [rep:4][sep:\s]{\8,x}
@@ -71,14 +71,14 @@ function rant(inputStream) {
 
     console.log(inputStream);
     while (curlymatch = regex.exec(inputStream)) {
-        replacement = require("braceParser")(inputStream, curlymatch[1], repetitions, separator);
+        replacement = require("./braceParser")(inputStream, curlymatch[1], repetitions, separator);
         inputStream = inputStream.replace(curlymatch[1], replacement);
     }
 
     // lexer matches (anything inside arrow notation)
-    outputStream = require("lexer")(inputStream);
+    outputStream = require("./lexer")(inputStream);
 
-    return require("capitalize")(outputStream, stringCase);
+    return require("./capitalize")(outputStream, stringCase);
 }
 
 module.exports = rant;

@@ -18,7 +18,7 @@ var braceParser = function (input, group, reps, sep) {
     while (matches = regex.exec(group)) {
         var groupCopy = group;
         while (i < repetitions) {
-            if(matches[0]==="\\C"){  replaceGroup+=require("randomString")(1); }
+            if(matches[0]==="\\C"){  replaceGroup+=require("./randomString")(1); }
             i++;
         }
 

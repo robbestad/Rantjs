@@ -46,7 +46,7 @@ gulp.task('browserify', function () {
             .require(filename, { expose: 'rant'})
             .bundle();
     });
-    return gulp.src('./source/core/rant.js')
+    return gulp.src('./source/core/index.js')
         .pipe(browserified)
         .pipe(uglify())
         .pipe(rename('rant.min.js'))
