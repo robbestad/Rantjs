@@ -1,4 +1,5 @@
 del
+npm
 resources/out
 build
 node_modules
