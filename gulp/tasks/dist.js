@@ -3,7 +3,7 @@ var gulp = require("gulp"),
     uglify = require("gulp-uglify"),
     concat = require("gulp-concat");
 
-gulp.task("build:dist", function(){
+gulp.task("build:dist", ["minify-html"], function(){
     gulp.src([
         "./ext/jquery.js",
         "./ext/jquery-ui.min.js",
