@@ -1,6 +1,14 @@
 var assert = require("assert");
 var rant= require("../source/core/index");
 
+describe('Test repeated NSFW', function () {
+    it('should return upper', function () {
+        var result =  rant('[rep:8]{<adj nsfw>}')
+            .replace(new RegExp("<.*>","g"),"");
+        assert(result,assert.hasContent);
+    })
+});
+
 describe('Get Upper', function () {
     it('should return upper', function () {
         var result =  require("../source/core/getCase")('[case:upper]');
