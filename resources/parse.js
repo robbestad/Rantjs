@@ -103,6 +103,7 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
             re=new RegExp("\\#?class add ","g");
             match=line.match(re);
             if(null !== match){
+                line = line.replace("?","");
                 e=line.replace(re,'');
                 addedClasses.push(e.replace(/-/g,''));
             }
@@ -110,6 +111,8 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
             re=new RegExp("\\#?class remove ","g");
             match=line.match(re);
             if(null !== match){
+                line = line.replace("?","");
+
                 var index = addedClasses.indexOf(line.replace(re,''));
                 if (index > -1) {
                     addedClasses.splice(index, 1);
