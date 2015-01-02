@@ -86,13 +86,17 @@ var s = fs.createReadStream(__dirname+"/"+process.argv[2])
                 e=line.replace(re,'');
                 //todo better to keep track of last number with a word
                 //console.log("---: "+e.replace(/-/g,''));
+                var prefix="";
+                //addedClasses.sort().map(function(e){
+                //    prefix+=e+"_";
+                //});
 
                 if("undefined" != typeof tokenword[lineNr-1]){
-                    keywords[lineNr-1]=e.replace(/-/g,'');
+                    keywords[lineNr-1]=prefix+e.replace(/-/g,'');
                     //console.log(tokenword[lineNr-1]);
                 } else
                 if("undefined" != typeof tokenword[lineNr-2]) {
-                    keywords[lineNr-2]=e.replace(/-/g,'');
+                    keywords[lineNr-2]=prefix+e.replace(/-/g,'');
                     //console.log(tokenword[lineNr-2]);
                 }
             }

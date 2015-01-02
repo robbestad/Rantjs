@@ -4,7 +4,6 @@ var lexer = function (input) {
     var tempRes="";
     var result = input, matches, token, replacement = [],regex = /\<(.*?)\>/g;
     while (matches = regex.exec(input)) {
-        //console.log(matches);
         // We accept a number of keywords, and they all correlate to the entries in the DIC files
         // First, get the DIC token
         re = new RegExp("\\w+", "g");
@@ -16,7 +15,6 @@ var lexer = function (input) {
             // result = lexer(this, matches, result);
 
             tempRes = require("./replaceToken")( matches, result, 1);
-
             result = result.replace(matches[0], function () {
                 return tempRes;
             });

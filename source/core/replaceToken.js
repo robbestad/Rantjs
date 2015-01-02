@@ -3,7 +3,7 @@ var replaceToken = function (matches, input, matchIndex) {
     var token = matches[matchIndex].match(re)[0];
     var indexPos = matches.index;
     var matched = matches[matchIndex].match(re);
-    // matched[0] contains the token. It can be noun, verb, adj etc.
+    // matches[0] contains the token. It can be noun, verb, adj etc.
     // we already know it's valid, because this function doesn't get
     // called unless it is.
     // Let's check if there's any qualifiers or modifiers
@@ -37,9 +37,11 @@ var replaceToken = function (matches, input, matchIndex) {
             dictionary = dictionary.concat(require("./en_US")()[token].all);
         }
     } else {
-        myfilters.forEach(function (e) {
-            dictionary = dictionary.concat(require("./en_US")()[token][e]);
-        });
+        dictionary = dictionary.concat(require("./en_US")()[token][myfilters.pop()]);
+
+        //myfilters.forEach(function (e) {
+        //    dictionary = dictionary.concat(require("./en_US")()[token][e]);
+        //});
     }
 
     if (modifier === 0) {
