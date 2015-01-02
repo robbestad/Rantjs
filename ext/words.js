@@ -1,7 +1,7 @@
 var availableTags=[
 "<abstract>","<abstract concept>","<abstract social>",
 "<activity>","<activity game>","<activity sport>","<activity video>",
-"<adj>","<adj appearance>","<adj emotion>","<adj nationality>","<adj weather>",
+"<adj>","<adj appearance>","<adj emotion>","<adj nationality>","<adj weather>","<adj defeat>","<adj victory>",
 "<adv>","<adv emotion>","<adv sexy>",
 "<color>","<color primary>","<color secondary>",
 "<conj>",
