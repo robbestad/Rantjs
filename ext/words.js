@@ -29,7 +29,7 @@ var availableTags=[
 "<unit>","<unit energy>","<unit factor>","<unit large>","<unit potential>","<unit power>","<unit capacitance>","<unit current>","<unit small>","<unit length>","<unit volume>","<unit weight>",
 "<verbimg>",
 "<say>",
-"<verb>","<verb intransitive>","<verb eat>","<verb transitive>","<verb pose>","<verb like>","<verb dislike>","<verb climb>","<verb up>","<verb down>","<verb motion>","<verb insert>","<verb political>","<verb move>","<verb legal>","<verb liquid>","<verb violent>","<verb walk>",
+"<verb>","<verb intransitive>","<verb eat>","<verb transitive>","<verb pose>","<verb like>","<verb dislike>","<verb climb>","<verb up>","<verb down>","<verb motion>","<verb insert>","<verb political>","<verb move>","<verb legal>","<verb liquid>","<verb violent>","<verb death>","<verb walk>",
 "<vocal>",
 "<preposition>",
 "<yn>","<yn no>","<yn yes>",
