@@ -13,6 +13,7 @@ var availableTags=[
 "<firstname>","<firstname female>","<firstname male>","<firstname male?>","<firstname female?>",
 "<greet>",
 "<surname>",
+"<nonsense>",
 "<noun>","<noun animal>","<noun dog>","<noun insect>","<noun bird>","<noun penguin>","<noun article>","<noun clothes>","<noun ball>","<noun round>","<noun food>","<noun body>","<noun long>","<noun hole>","<noun container>","<noun weapon>","<noun drug>","<noun fruit>","<noun furniture>","<noun surface>","<noun job>","<noun liquid>","<noun tool>","<noun person>","<noun plant>","<noun shape>","<noun vehicle>","<noun sex>","<noun nsfw>",
 "<sound>",
 "<title>",

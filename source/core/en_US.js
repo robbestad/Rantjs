@@ -1,7 +1,7 @@
 var en_US = function () { 
 var dic={};
 
-dic.tokens=["preposition","firstname","abstract", "activity", "adj", "adv", "color", "conj", "country", "emo", "em", "x", "face", "firstname", "greet", "surname", "noun", "sound", "title", "place", "prefix", "prepos", "pron", "quality", "rel", "sconj", "substance", "timeadv", "timenoun", "unit", "verbimg", "say", "verb", "vocal", "preposition", "yn"];
+dic.tokens=["preposition","firstname","abstract", "activity", "adj", "adv", "color", "conj", "country", "emo", "em", "x", "face", "firstname", "greet", "surname", "nonsense", "noun", "sound", "title", "place", "prefix", "prepos", "pron", "quality", "rel", "sconj", "substance", "timeadv", "timenoun", "unit", "verbimg", "say", "verb", "vocal", "preposition", "yn"];
 dic.amount = amount={};
 var amount_all  = ["a few", "a bunch of", "some", "many more"];
 dic.amount.all = amount_all;
@@ -108,6 +108,11 @@ dic.greet=greet;
 dic.greet.all=["ahoy","aloha","good afternoon","good day","good evening","good morning","good night","greetings","guten Tag","hello","hey","hey buddy","hola","how's it going","how's it hanging","konichi wa","salutations","sup","what's happening","what's new","what's up","whazzup","yo"].concat();
 dic.greet.subs=["default"];
 dic.greet.filters=[];
+var nonsense={};
+dic.nonsense=nonsense;
+dic.nonsense.all=["zap/zappity/zapple","zop/zoppity/zopple","zip/zippity/zipple","zoop/zoopity/zoople","zoob/zoobity/zooble","bap/bappity/bapple","bop/boppity/bopple","bip/bippity/bipple","boop/boopity/boople","boob/boobity/booble"].concat();
+dic.nonsense.subs=["normal","ity","le"];
+dic.nonsense.filters=[];
 var noun={};
 dic.noun=noun;
 dic.noun.animal=["beagle/beagles","bulldog/bulldogs","dog/dogs","poodle/poodles","rottweiler/rottweilers","beetle/beetles","cricket/crickets","grasshopper/grasshoppers","locust/locusts","bird/birds","seagull/seagulls","hawk/hawks","vulture/vultures","woodpecker/woodpeckers","crow/crows","raven/ravens","chickadee/chickadees","chicken/chickens","finch/finches","rooster/roosters","turkey/turkeys","hummingbird/hummingbirds","bluebird/blurbirds","goldfinch/goldfinches","eagle/eagles","owl/owls","parrot/parrots","peacock/peacocks","dove/doves","flamingo/flamingos","pigeon/pigeons","pelican/pelicans","grouse/grouse","swan/swans","goose/geese","magpie/magpies","penguin/penguins","erect-crested penguin/erect-crested penguins","emperor penguin/emperor penguins","king penguin/king penguins","gentoo penguin/gentoo penguins","adelie penguin/adelie penguins","rockhopper penguin/rockhopper penguins","macaroni penguin/macaroni penguins","yellow-eyed penguin/yellow-eyed penguins","fairy penguin/fairy penguins","African penguin/African penguins","Magellanic penguin/Magellanic penguins","chinstrap penguin/chinstrap penguins","Humboldt penguin/Humboldt penguins","anaconda/anacondas","ant/ants","baboon/baboons","bass/basses","bat/bats","blowfish/blowfish","bull/bulls","butler/butlers","cat/cats","chihuahua/chihuahuas","cockroach/cockroaches","deer/deer","demon/demons","devil/devils","donkey/donkeys","fish/fishes","frog/frogs","goat/goats","gorilla/gorillas","hedgehog/hedgehogs","horse/horses","hyena/hyenas","jaguar/jaguars","landlord/landlords","leech/leeches","lemur/lemurs","lion/lions","lizard/lizards","llama/llamas","mammoth/mammoths","mayor/mayors","moose/moose","newt/newts","octopus/octopi","ogre/ogres","otter/otters","pony/ponies","porcupine/porcupines","quokka/quokkas","rat/rats","skunk/skunks","sphinx/sphinxes","squid/squids","squirrel/squirrels","tadpole/tadpoles","tiger/tigers","titan/titans","toad/toads","turtle/turtles","tyrannosaurus rex/tyrannosaurus rexes","velociraptor/velociraptors","viking/vikings","weasel/weasels","wolf/wolves","xerus/xeruses","yak/yaks","yeti/yetis","zebra/zebras","bitch/bitches"];
@@ -297,7 +302,7 @@ dic.vocal.subs=["default"];
 dic.vocal.filters=[];
 var x={};
 dic.x=x;
-dic.x.all=["ahhhhh mahh gahh","alas","aw shucks","awesome","beautiful","Bingo","boy oh boy oh boy","bravo","by golly","damn","dear dear","dear me","disgraceful","epic","ermahgerd","excellent","finish him","gasp","geez","good heavens","good lord","hella good","holy cow","holy moley","hurrah","I'll be damned","I'm gonna faint","jolly good","K.O.","LOL","mine eyes are deceiving me","my leg","my my","my oh my","no way","oh boy","oh dear","oh glorious day","oh gog","oh hell yes","oh joy","oh my","oh my goodness","oh wow","oho","omgomgomg","rats","ROFL","run for your lives","this can't be","this is delicious","this is the end","trololol","what","what in the world","what the hell","whoa","wicked","woot","wow","WTF"].concat();
+dic.x.all=["ahhhhh mahh gahh","alas","aw shucks","awesome","beautiful","Bingo","boy oh boy oh boy","bravo","by golly","damn","dear dear","dear me","disgraceful","epic","ermahgerd","excellent","finish him","gasp","geez","good heavens","good lord","hella good","holy cow","holy moley","hurrah","I'll be damned","I'm gonna faint","jolly good","K.O.","LOL","mine eyes are deceiving me","my leg","my my","my oh my","no way","oh boy","oh dear","oh glorious day","oh gog","oh hell yes","oh joy","oh my","oh my goodness","oh wow","oho","omgomgomg","rats","ROFL","run for your lives","thanks, Obama","this can't be","this is delicious","this is the end","trololol","what","what in the world","what the hell","whoa","wicked","woot","wow","WTF"].concat();
 dic.x.subs=["default"];
 dic.x.filters=[];
 var yn={};
