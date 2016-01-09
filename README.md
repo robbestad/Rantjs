@@ -111,4 +111,4 @@ Ideally, it should be 100% on everything
 [1]: https://github.com/TheBerkin/Rant
 [2]: https://rantjs.herokuapp.com/
 [3]: https://www.npmjs.com/package/rantjs
-[4]: http://www.robbestad.com/2014/12/procedurally-generated-text-with-rantjs.html
+[4]: http://www.robbestad.com/blog/procedurally-generated-text-with-rantjs
