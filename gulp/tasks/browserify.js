@@ -1,54 +1,42 @@
-//var gulp = require("gulp"),
-//    //source = require('vinyl-source-stream'),
-//    browserify = require('gulp-browserify');
-
-//gulp.task('bundle', function(){
-//    var args = xtend(watchify.args, { debug: true })
-//    var b = watchify(browserify(args))
-//    b.on('update', bundle)
-//
-//    function bundle() {
-//        return b.bundle()
-//            .on('error', function(e) {
-//                gutil.beep()
-//                gutil.log( gutil.colors.red('Bundle error: ',e.message) )
-//            })
-//            .pipe(source('bundle.js'))
-//            .pipe(gulp.dest('./dist'))
-//            .pipe(livereload())
-//    }
-//    return bundle()
-//})
-
-
 var gulp = require('gulp');
-    browserify = require('browserify'),
-    transform = require('vinyl-transform');
-var jasmine     = require('gulp-jasmine');
+var browserify = require('browserify');
 var uglify      = require('gulp-uglify');
 var source      = require('vinyl-source-stream'); // makes browserify bundle compatible with gulp
 var rename   = require('gulp-rename');
-
-
-//// Concatenate, Browserify & Minify JS
-//gulp.task('browserify', function() {
-//    return browserify('./source/core/rant.js', { paths: ['./source/core/'], expose: 'rant'}).bundle()
-//        .pipe(source('rant.js'))
-//        .pipe(streamify(uglify()))
-//        .pipe(gulp.dest('./dist/'));
-//});
+var through = require('through2');
+var gutil = require('gulp-util');
+var buffer = require('vinyl-buffer');
+var sourcemaps = require('gulp-sourcemaps');
+var globby = require('globby');
 
 
 gulp.task('browserify', function () {
+  var bundledStream = through();
 
-    var browserified = transform(function(filename) {
-        return browserify(filename, {paths: ['./source/core/']})
-            .require(filename, { expose: 'rant'})
-            .bundle();
-    });
-    return gulp.src('./source/core/index.js')
-        .pipe(browserified)
-        .pipe(uglify())
-        .pipe(rename('rant.min.js'))
-        .pipe(gulp.dest('./dist')); // currently this recipe will output to ./dist/x.js. you may use a rename plugin to output it with a different filename for eg. bundle.js
+   bundledStream
+   .pipe(source('./source/core/index.js'))
+   .pipe(buffer())
+   .pipe(uglify())
+   .on('error', gutil.log)
+   .pipe(sourcemaps.write('./'))
+   .pipe(rename('rant.min.js'))
+   .pipe(gulp.dest('./dist'));
+
+   globby(['./source/core/*.js'], function(err, entries) {
+     // ensure any errors from globby are handled
+     if (err) {
+       bundledStream.emit('error', err);
+       return;
+     }
+
+     // create the Browserify instance.
+     var b = browserify({
+       entries: entries,
+       debug: true,
+       expose: 'rant'
+     });
+
+     b.bundle().pipe(bundledStream);
+   });
+  return bundledStream;
 });
