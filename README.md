@@ -26,6 +26,7 @@ git clone https://github.com/svenanders/Rantjs && cd Rantjs
 npm i
 gulp serve
 ```
+Then open http://localhost:8000
 
 ## Development Plan
 
