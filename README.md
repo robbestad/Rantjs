@@ -19,6 +19,13 @@ For implementation details, please visit the [npmjs page][3]
 
     console.log(sentence); // 'Sean likes to chop parrots with his pet cat on Saturdays.'
 
+## Install
+
+```bash
+git clone https://github.com/svenanders/Rantjs && cd Rantjs
+npm i
+gulp serve
+```
 
 ## Development Plan
 
