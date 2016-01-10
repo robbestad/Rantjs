@@ -19,6 +19,8 @@ my $allVars = "";
 foreach my $file (@files) {
     next if ( $file =~ /^\.$/ ); # skip . and ..
     next if ( $file =~ /^\.git$/ ); # skip .git
+    next if ( $file =~ /^\.gitignore$/ ); # skip .gitignore
+    next if ( $file =~ /^\.gitattributes$/ ); # skip .gitattributes
     next if ( $file =~ /README+(.*)$/ ); # skip README
     next if ( $file =~ /^\.\.$/ );
     $file =~ s/\s/\\ /g;

@@ -1,4 +1,5 @@
 del
+.sass-cache
 simple-rant.iml
 coverage
 npm
