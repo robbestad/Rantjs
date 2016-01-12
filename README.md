@@ -28,6 +28,15 @@ gulp serve
 ```
 Then open http://localhost:8000
 
+To build the dictionary:
+```bash
+cd Rantjs
+git submodule update --init --recursive
+cd resources
+perl parseAll.pl
+```
+
+
 ## Development Plan
 
 Easy way to choose alternative dictionaries
