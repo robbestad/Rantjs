@@ -34,8 +34,9 @@ cd Rantjs
 git submodule update --init --recursive
 cd resources
 perl parseAll.pl
+gulp
+npm test
 ```
-
 
 ## Development Plan
 
