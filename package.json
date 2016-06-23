@@ -6,6 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- -R spec  --reporter nyan",
     "coverage": "NODE_PATH=./source/core ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec",
+    "example": "cross-env shjs scripts/buildexample.js",
     "start": "node server"
   },
   "author": "Sven Anders Robbestad <anders@robbestad.com>",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "browserify": "^7.1.0",
     "compression": "^1.2.1",
+    "cross-env": "^1.0.8",
     "debug": "^2.1.0",
     "del": "^1.1.0",
     "express": "^4.10.4",
@@ -48,6 +50,7 @@
     "mocha-lcov-reporter": "0.0.1",
     "requirejs": "^2.1.15",
     "run-sequence": "^1.0.2",
+    "shelljs": "^0.7.0",
     "should": "^4.3.0",
     "streamqueue": "^0.1.1",
     "tape": "^3.0.3",
