@@ -1,5 +1,6 @@
 
-var braceParser = function (input, group, reps, sep) {
+var braceParser = function (input, group, reps, sep, dic) {
+    dic = dic || require("./en_US");
     var tempRes = "", matchIndex = 1;
     var result = input, matches = [], token, replacement = [], regex;
     matchIndex = 0;
@@ -40,7 +41,7 @@ var braceParser = function (input, group, reps, sep) {
             groupCopy = group;
             re = new RegExp("\\w+", "g");
             token = matches[1].match(re);
-            if (require("./en_US")().tokens.indexOf(token[0]) != -1) {
+            if (dic().tokens.indexOf(token[0]) != -1) {
                 if("undefined" != typeof separator){
                     if (separator === "n") groupCopy += separator.replace("n", "\n");
                     else if (separator === "s") groupCopy += separator.replace("s", " ");

@@ -35,7 +35,8 @@ String.prototype.toSentenceCase = function() {
 
 
 
-function rant(inputStream) {
+function rant(inputStream, dic) {
+    dic = dic || require('./en_US');
     var outputStream = inputStream, re;
     var regex = /\<(.*?)\>/g;
     var matches, token, indexPos;
@@ -70,13 +71,12 @@ function rant(inputStream) {
     var curlymatch;
 
     while (curlymatch = regex.exec(inputStream)) {
-        replacement = require("./braceParser")(inputStream, curlymatch[1], repetitions, separator);
+        replacement = require("./braceParser")(inputStream, curlymatch[1], repetitions, separator, dic);
         inputStream = inputStream.replace(curlymatch[1], replacement);
     }
 
     // lexer matches (anything inside arrow notation)
-    outputStream = require("./lexer")(inputStream);
-
+    outputStream = require("./lexer")(inputStream, dic);
     return require("./capitalize")(outputStream, stringCase);
 }
 

@@ -3,8 +3,8 @@ var gulp = require("gulp"),
     config = require("../../config").nodemon.development,
     watch = require('gulp-watch');
 
-gulp.task("default",["build:dist","browserify","watcher"]);
-gulp.task("serve", ["build:dist","browserify", "watcher", "nodemon"]);
+gulp.task("default",["build:example","browserify","watcher"]);
+gulp.task("serve", ["build:example","browserify", "watcher", "nodemon"]);
 
 gulp.task("watcher", function(){
     gulp.watch('./test/test.js',["test"]);

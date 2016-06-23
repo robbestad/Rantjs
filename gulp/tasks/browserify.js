@@ -16,5 +16,5 @@ gulp.task('browserify', function () {
         .pipe(browserified)
         .pipe(uglify())
         .pipe(rename('rant.min.js'))
-        .pipe(gulp.dest('./dist')); 
+        .pipe(gulp.dest('./dist'));
 });

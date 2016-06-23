@@ -3,16 +3,11 @@ var gulp = require("gulp"),
     uglify = require("gulp-uglify"),
     concat = require("gulp-concat");
 
-gulp.task("build:dist", ["minify-html"], function(){
+gulp.task("build:words:dist", ["minify-html"], function(){
     gulp.src([
-        "./ext/jquery.js",
-        "./ext/jquery-ui.min.js",
-        "./ext/jquery.zclip.min.js",
-        "./ext/words.js",
-        "./ext/app.js",
-        "./ext/highlight.js"
+        "./ext/words.js"
     ])
-        .pipe(concat('dist.min.js'))
+        .pipe(concat('words.min.js'))
         .pipe(maps.init())
         .pipe(uglify())
         .pipe(maps.write())

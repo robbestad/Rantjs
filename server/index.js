@@ -8,15 +8,14 @@ var path = require('path');
 var compress = require('compression')();
 app.use(compress);
 
-app.use(express.static(path.join(__dirname, '/../dist')));
+app.use(express.static(path.join(__dirname, '/../example')));
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/../dist/index.html');
+    res.sendFile(__dirname + '/../example/index.html');
 });
 
 app.get('/*', function (req, res) {
-   //console.log(req.path);
-    res.sendFile(__dirname + '/../dist' + req.path);
+    res.sendFile(__dirname + '/../example' + req.path);
 });
 
 // START THE SERVER

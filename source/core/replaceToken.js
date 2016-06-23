@@ -1,4 +1,5 @@
-var replaceToken = function (matches, input, matchIndex) {
+var replaceToken = function (matches, input, matchIndex, dic) {
+    dic = dic || require('./en_US');
     var result, modifier = 0, re = new RegExp("\\w+", "g");
     var token = matches[matchIndex].match(re)[0];
     var indexPos = matches.index;
@@ -14,17 +15,17 @@ var replaceToken = function (matches, input, matchIndex) {
         if (matched.length > 1) {
             matched.forEach(function (entry, idx) {
                 if (idx > 0) {
-                    if ("undefined" != typeof require("./en_US")()[token].filters) {
-                        if (require("./en_US")()[token].filters.indexOf(entry) > -1) {
+                    if ("undefined" != typeof dic()[token].filters) {
+                        if (dic()[token].filters.indexOf(entry) > -1) {
                             // Filters are categories of the token, so <adj emotion> will
                             // set filters valid for emotion for the token adj
                             myfilters.push(entry);
                         }
                     }
-                    if ("undefined" != typeof require("./en_US")()[token].subs) {
-                        if (require("./en_US")()[token].subs.indexOf(entry) > -1) {
+                    if ("undefined" != typeof dic()[token].subs) {
+                        if (dic()[token].subs.indexOf(entry) > -1) {
                             // Subs are grammatical instructions
-                            modifier = require("./en_US")()[token].subs.indexOf(entry);
+                            modifier = dic()[token].subs.indexOf(entry);
                         }
                     }
                 }
@@ -33,14 +34,14 @@ var replaceToken = function (matches, input, matchIndex) {
         }
     }
     if (myfilters.length <= 0) {
-        if ("undefined" != typeof require("./en_US")()[token].all) {
-            dictionary = dictionary.concat(require("./en_US")()[token].all);
+        if ("undefined" != typeof dic()[token].all) {
+            dictionary = dictionary.concat(dic()[token].all);
         }
     } else {
-        dictionary = dictionary.concat(require("./en_US")()[token][myfilters.pop()]);
+        dictionary = dictionary.concat(dic()[token][myfilters.pop()]);
 
         //myfilters.forEach(function (e) {
-        //    dictionary = dictionary.concat(require("./en_US")()[token][e]);
+        //    dictionary = dictionary.concat(dic()[token][e]);
         //});
     }
 

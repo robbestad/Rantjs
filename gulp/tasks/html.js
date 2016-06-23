@@ -7,5 +7,5 @@ gulp.task('minify-html', function() {
 
     gulp.src('./static/*.html')
         .pipe(minifyHTML(opts))
-        .pipe(gulp.dest('./dist/'))
+        .pipe(gulp.dest('./example/'))
 });

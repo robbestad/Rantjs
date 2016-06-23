@@ -1,7 +1,18 @@
+var sample_DIC = function () {
+  var dic = {};
+  dic.tokens = [];
+
+  dic.sample = sample = {};
+  var sample_all = ["smiled", "frowned", "grimaced", "grinned evilly", "grinned cheekily", "sneered", "puckered", "smirked", "snarled", "snickered", "pouted"];
+  dic.sample.all = sample_all;
+  dic.tokens.push("sample");
+  return dic;
+};
+
 document.getElementById('submit').addEventListener('click', function() {
     var rant= require("rant");
     if('' == document.getElementById("input").value) return;
-    var result = rant(document.getElementById("input").value);
+    var result = rant(document.getElementById("input").value, sample_DIC);
     document.getElementById("output").value = result;
   }, false);
 
@@ -43,7 +54,7 @@ document.getElementById('submit').addEventListener('click', function() {
       function split(val) {
         return val.split(' ');
       }
-    
+
       function extractLast(term) {
         return split(term).pop();
       }
