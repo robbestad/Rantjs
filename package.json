@@ -1,7 +1,7 @@
 {
   "name": "rantjs",
-  "version": "0.9.2",
-  "description": "A naive implementation of Rant, the procedural text generator",
+  "version": "0.9.8",
+  "description": "A procedural text generator for JavaScript",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- -R spec  --reporter nyan",
