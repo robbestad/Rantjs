@@ -1,6 +1,6 @@
 # Rantjs
 
-An implementation of [Rant][1] by TheBerkin
+Rantjs is a procedural text generator. The goal is to augment human creativity with the boundless potential of randomness. Inspired by [Rant][1].
 
 <img src="http://res.cloudinary.com/sven-anders-robbestad/image/upload/c_scale,w_350/v1418975366/rantjs_0.8.4.png">
 
@@ -22,21 +22,12 @@ For implementation details, please visit the [npmjs page][3]
 ## Install
 
 ```bash
-git clone https://github.com/svenanders/Rantjs && cd Rantjs
+git clone https://github.com/svenanders/rantjs && cd rantjs
 npm i
 gulp serve
 ```
 Then open http://localhost:8000
 
-To build the dictionary:
-```bash
-cd Rantjs
-git submodule update --init --recursive
-cd resources
-perl parseAll.pl
-gulp
-npm test
-```
 
 ## Development Plan
 
@@ -75,6 +66,16 @@ Testing. Currently, this is the result of the coverage report:
     Lines        : 97.24% ( 458/471 )
 
 Ideally, it should be 100% on everything
+
+## New in version 0.9.2
+
+  Added option for custom dictionaries. Note that this replaces the built-in dictionary.
+  
+    var yourCustomDic = {}
+    ...
+    rant('your text', yourCustomDic);
+     
+A sample dictionary file can be found in the ./src folder. Also take a look at the built-in english dicionary in the same folder for reference.
 
 ## New in version 0.9.1
 
