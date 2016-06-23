@@ -1,6 +1,6 @@
 {
   "name": "rantjs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A procedural text generator for JavaScript",
   "main": "index.js",
   "keywords": [
@@ -22,13 +22,13 @@
     "start": "gulp serve"
   },
   "author": {
-    "name" : "Sven Anders Robbestad",
-    "email" : "anders@robbestad.com",
-    "url" : "http://www.robbestad.com/"
+    "name": "Sven Anders Robbestad",
+    "email": "anders@robbestad.com",
+    "url": "http://www.robbestad.com/"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/svenanders/rantjs.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/svenanders/rantjs.git"
   },
   "license": "ISC",
   "dependencies": {
