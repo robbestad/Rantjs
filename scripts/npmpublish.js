@@ -11,6 +11,5 @@ cp("dist/rant.js", "npmpublish/index.js");
 cp("dist/rant.js", "npmpublish/index.js");
 cp("README.md", "npmpublish/");
 cp("package.npm", "npmpublish/package.json");
-exec("cd npmpublish");
-
+echo("Copied npm files. Now enter npmpublish, make sure the version is correct and then publish");
 
