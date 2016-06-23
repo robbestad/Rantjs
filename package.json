@@ -1,15 +1,30 @@
 {
   "name": "rantjs",
-  "version": "0.9.8",
+  "version": "1.0.0",
   "description": "A procedural text generator for JavaScript",
   "main": "index.js",
+  "keywords": [
+    "generator",
+    "procedural",
+    "text",
+    "sentences"
+  ],
+  "homepage": "http://www.robbestad.com/blog/procedurally-generated-text-with-rantjs",
   "scripts": {
     "test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- -R spec  --reporter nyan",
     "coverage": "NODE_PATH=./source/core ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec",
-    "example": "cross-env shjs scripts/buildexample.js",
-    "start": "node server"
+    "update:example": "cross-env shjs scripts/buildexample.js",
+    "start": "gulp serve"
   },
-  "author": "Sven Anders Robbestad <anders@robbestad.com>",
+  "author": {
+    "name" : "Sven Anders Robbestad",
+    "email" : "anders@robbestad.com",
+    "url" : "http://www.robbestad.com/"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/svenanders/rantjs.git"
+  },
   "license": "ISC",
   "dependencies": {
     "compression": "^1.2.2",

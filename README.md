@@ -6,11 +6,13 @@ Rantjs is a procedural text generator. The goal is to augment human creativity w
 
 The project is available via npm (do _npm install rantjs_). 
 
-For implementation details, please visit the [npmjs page][3]
 
-[Click here for an interactive demo][2]
+## Demo and more information
 
-[Click here for a writeup on my blog][4]
+Interactive demo available [here][5]
+
+Click [here][4] for a writeup on my blog
+
 
 ## Usage
 
@@ -18,6 +20,8 @@ For implementation details, please visit the [npmjs page][3]
     var sentence=rant('<firstname male> likes to <verb-transitive> <noun.plural> with <pron poss male> pet <noun-animal> on <timenoun dayofweek plural>.');
 
     console.log(sentence); // 'Sean likes to chop parrots with his pet cat on Saturdays.'
+
+For implementation details, please visit the [npmjs page][3]
 
 ## Install
 
@@ -67,7 +71,7 @@ Testing. Currently, this is the result of the coverage report:
 
 Ideally, it should be 100% on everything
 
-## New in version 0.9.2
+## New in version 1.0.0
 
   Added option for custom dictionaries. Note that this replaces the built-in dictionary.
   
@@ -76,6 +80,16 @@ Ideally, it should be 100% on everything
     rant('your text', yourCustomDic);
      
 A sample dictionary file can be found in the ./src folder. Also take a look at the built-in english dicionary in the same folder for reference.
+
+## New in version 0.9.x
+
+  0.9.7 - Added nonsense verbs from Rantionary
+  
+  0.9.5 - Added verbs for success and defeat
+  
+  0.9.4 - Added Death (<verb death>)
+  
+  0.9.3 - Added climb (<verb climb up|down>)
 
 ## New in version 0.9.1
 
@@ -128,6 +142,6 @@ A sample dictionary file can be found in the ./src folder. Also take a look at t
 
 
 [1]: https://github.com/TheBerkin/Rant
-[2]: https://rantjs.herokuapp.com/
 [3]: https://www.npmjs.com/package/rantjs
 [4]: http://www.robbestad.com/blog/procedurally-generated-text-with-rantjs
+[5]: http://rantjs.surge.sh/

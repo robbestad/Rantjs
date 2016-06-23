@@ -12,7 +12,7 @@ var sample_DIC = function () {
 document.getElementById('submit').addEventListener('click', function() {
     var rant= require("rant");
     if('' == document.getElementById("input").value) return;
-    var result = rant(document.getElementById("input").value, sample_DIC);
+    var result = rant(document.getElementById("input").value);
     document.getElementById("output").value = result;
   }, false);
 
