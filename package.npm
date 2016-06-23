@@ -1,0 +1,27 @@
+{
+  "name": "rantjs",
+  "version": "1.0.5",
+  "description": "A procedural text generator for JavaScript",
+  "main": "index.js",
+  "keywords": [
+    "rant",
+    "procedural",
+    "text",
+    "generator",
+    "javascript",
+    "random",
+    "text",
+    "sentences"
+  ],
+  "homepage": "http://www.robbestad.com/blog/procedurally-generated-text-with-rantjs",
+  "author": {
+    "name" : "Sven Anders Robbestad",
+    "email" : "anders@robbestad.com",
+    "url" : "http://www.robbestad.com/"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/svenanders/rantjs.git"
+  },
+  "license": "ISC"
+}

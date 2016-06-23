@@ -1,4 +1,5 @@
 del
+npmpublish
 .sass-cache
 simple-rant.iml
 coverage
