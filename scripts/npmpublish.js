@@ -12,4 +12,5 @@ cp("dist/rant.js", "npmpublish/index.js");
 cp("README.md", "npmpublish/");
 cp("package.npm", "npmpublish/package.json");
 echo("Copied npm files. Now enter npmpublish, make sure the version is correct and then publish");
+echo("Also remember to tag the release and then push with git push --follow-tags origin master");
 
