@@ -1,4 +1,5 @@
 del
+.sass-cache
 npmpublish
 .sass-cache
 simple-rant.iml
