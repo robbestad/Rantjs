@@ -1,6 +1,7 @@
 export interface Entry {
   forms: string[];
   classes: string[];
+  pron?: string[];
 }
 
 export interface Table {

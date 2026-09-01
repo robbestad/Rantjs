@@ -1,5 +1,5 @@
 import { parse } from "./parse/parser.ts";
-import { interpret, type InterpretContext } from "./interpret.ts";
+import { interpret } from "./interpret.ts";
 import { createRng, type Rng } from "./rng.ts";
 import {
   fromLegacy,
@@ -8,6 +8,7 @@ import {
   type Dictionary,
 } from "./dictionary/types.ts";
 import { enUS } from "./dictionaries/en-US.ts";
+import { createContext } from "./runtime.ts";
 
 export interface RantOptions {
   seed?: number | string;
@@ -17,6 +18,7 @@ export interface RantOptions {
 
 export interface RantInstance {
   run(pattern: string, options?: RantOptions): string;
+  channels: Record<string, string>;
 }
 
 function resolveDictionary(value: Dictionary | undefined): Dictionary {
@@ -37,39 +39,26 @@ function optionsFromSecond(
   return {};
 }
 
-function makeContext(
-  options: RantOptions,
-  rng: Rng,
-  carriers?: Map<string, string>,
-): InterpretContext {
-  return {
-    rng,
-    dictionary: resolveDictionary(options.dictionary),
-    nsfw: options.nsfw ?? false,
-    carriers: carriers ?? new Map(),
-    caseMode: "default",
-  };
-}
-
 export function createRant(options: RantOptions = {}): RantInstance {
   const defaultRng = createRng(options.seed);
   const baseDict = resolveDictionary(options.dictionary);
   const baseNsfw = options.nsfw ?? false;
-
-  return {
+  const instance: RantInstance = {
+    channels: {},
     run(pattern: string, runOptions: RantOptions = {}): string {
-      const rng =
+      const rng: Rng =
         runOptions.seed !== undefined ? createRng(runOptions.seed) : defaultRng;
-      const ctx = makeContext(
-        {
-          dictionary: runOptions.dictionary ?? baseDict,
-          nsfw: runOptions.nsfw ?? baseNsfw,
-        },
+      const ctx = createContext(
         rng,
+        runOptions.dictionary ?? baseDict,
+        runOptions.nsfw ?? baseNsfw,
       );
-      return interpret(parse(pattern), ctx);
+      const out = interpret(parse(pattern), ctx);
+      instance.channels = ctx.channels;
+      return out;
     },
   };
+  return instance;
 }
 
 export function rant(

@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.1.0
+
+Rant 3 generator kit so official-style samples can run.
+
+- Fix `npx rantjs` (CLI always runs; no more silent no-op)
+- Weighted blocks `(20)common|(1)rare`
+- `[n:min;max]`, `[numfmt:verbal|roman|hex]`, `[rs]`, `[rn]`
+- Synchronizers `[x:name;locked|deck|forward|no-repeat]`
+- Unique / rhyme carriers (`::!id`, `::&id`) plus `::=id`
+- Channels, `[protect]`, `[chance]`, `[len]`, `[quote]`
+- Query builders, replacers, subroutines (initial)
+- Rant 3 aliases: `name`→firstname, `pl`→plural, `pro`→pron
+
 ## 2.0.0
 
 Rantjs is rewritten in TypeScript. The pattern dialect is the same; the engine, package, and demo are new.

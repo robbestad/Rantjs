@@ -34,7 +34,9 @@ describe("parser", () => {
         type: "query",
         table: "firstname",
         args: ["male"],
+        exclude: [],
         carrier: "hero",
+        carrierKind: "match",
         raw: "firstname male :: hero",
       },
     ]);
@@ -67,31 +69,31 @@ describe("parser", () => {
     expect(nodes[0]).toMatchObject({ type: "block" });
     if (nodes[0]?.type !== "block") throw new Error("expected block");
     expect(nodes[0].alternatives).toHaveLength(3);
+    expect(nodes[0].alternatives[0]?.nodes[0]).toMatchObject({ type: "query" });
   });
 
   it("parses plain text in a block (issue #4)", () => {
     const nodes = parse("{Example text}");
     expect(nodes[0]).toMatchObject({ type: "block" });
     if (nodes[0]?.type !== "block") throw new Error("expected block");
-    expect(nodes[0].alternatives[0]).toEqual([
-      { type: "text", value: "Example text" },
-    ]);
+    expect(nodes[0].alternatives[0]).toEqual({
+      weight: null,
+      nodes: [{ type: "text", value: "Example text" }],
+    });
   });
 
   it("parses nested blocks", () => {
     const nodes = parse("{a {b|c} d}");
     expect(nodes[0]?.type).toBe("block");
     if (nodes[0]?.type !== "block") throw new Error("expected block");
-    const inner = nodes[0].alternatives[0]?.find((n) => n.type === "block");
+    const inner = nodes[0].alternatives[0]?.nodes.find((n) => n.type === "block");
     expect(inner).toBeTruthy();
   });
 
   it("parses tags with separator escapes", () => {
     const nodes = parse("[rep:3][sep:\\n][case:title]");
-    expect(nodes).toEqual([
-      { type: "tag", name: "rep", arg: "3" },
-      { type: "tag", name: "sep", arg: "\n" },
-      { type: "tag", name: "case", arg: "title" },
-    ]);
+    expect(nodes[0]).toMatchObject({ type: "tag", name: "rep", arg: "3" });
+    expect(nodes[1]).toMatchObject({ type: "tag", name: "sep", arg: "\n" });
+    expect(nodes[2]).toMatchObject({ type: "tag", name: "case", arg: "title" });
   });
 });

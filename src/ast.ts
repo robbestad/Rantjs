@@ -8,6 +8,8 @@ export type CaseMode =
   | "lower"
   | "sentence";
 
+export type CarrierKind = "match" | "unique" | "rhyme";
+
 export type Node =
   | TextNode
   | QueryNode
@@ -24,7 +26,9 @@ export interface QueryNode {
   type: "query";
   table: string;
   args: string[];
+  exclude: string[];
   carrier?: string;
+  carrierKind?: CarrierKind;
   raw: string;
 }
 
@@ -32,11 +36,17 @@ export interface TagNode {
   type: "tag";
   name: string;
   arg: string;
+  args: Node[][];
+}
+
+export interface BlockAlt {
+  weight: Node[] | null;
+  nodes: Node[];
 }
 
 export interface BlockNode {
   type: "block";
-  alternatives: Node[][];
+  alternatives: BlockAlt[];
 }
 
 export interface EscapeNode {

@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { main } from "../src/cli.ts";
+import { spawnSync } from "node:child_process";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { main } from "../src/cli-main.ts";
+
+const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 describe("cli", () => {
   it("prints help", () => {
@@ -15,6 +20,16 @@ describe("cli", () => {
     } finally {
       process.stdout.write = orig;
     }
+  });
+
+  it("prints when spawned as a process (npx-style)", () => {
+    const r = spawnSync(
+      "npx",
+      ["tsx", "src/cli.ts", "--seed", "1", "[case:none]{ok}"],
+      { encoding: "utf8", cwd: root },
+    );
+    expect(r.status).toBe(0);
+    expect(r.stdout.trim()).toBe("ok");
   });
 
   it("generates a seeded pattern", () => {

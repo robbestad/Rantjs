@@ -1,6 +1,6 @@
 {
   "name": "rantjs",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A procedural text generator for JavaScript",
   "license": "ISC",
   "author": {
@@ -41,7 +41,7 @@
     }
   },
   "bin": {
-    "rantjs": "./dist/cli.js"
+    "rantjs": "dist/cli.js"
   },
   "unpkg": "./dist/rant.min.js",
   "jsdelivr": "./dist/rant.min.js",

@@ -2,18 +2,15 @@ import { describe, expect, it } from "vitest";
 import { parse } from "../src/parse/parser.ts";
 import { interpret } from "../src/interpret.ts";
 import { createRng } from "../src/rng.ts";
+import { createContext } from "../src/runtime.ts";
 import type { Dictionary } from "../src/dictionary/types.ts";
 
 const emptyDict: Dictionary = { tables: {} };
 
 function run(pattern: string, seed = 1): string {
-  return interpret(parse(pattern), {
-    rng: createRng(seed),
-    dictionary: emptyDict,
-    nsfw: false,
-    carriers: new Map(),
-    caseMode: "none",
-  });
+  const ctx = createContext(createRng(seed), emptyDict, false);
+  ctx.caseMode = "none";
+  return interpret(parse(pattern), ctx);
 }
 
 describe("blocks and repeaters", () => {
@@ -90,5 +87,27 @@ describe("articles", () => {
 describe("conditionals and carriers without a dictionary", () => {
   it("takes the else branch when a carrier is missing", () => {
     expect(run("[case:none][if:hero]{yes}{no}")).toBe("no");
+  });
+});
+
+describe("Rant 3 numbers and weights", () => {
+  it("picks weighted block items", () => {
+    expect(run("{(1000)yes|(0)no}")).toBe("yes");
+  });
+
+  it("emits a random integer in range", () => {
+    const n = Number(run("[n:2;2]"));
+    expect(n).toBe(2);
+  });
+
+  it("verbalizes [rn] with [rs]", () => {
+    expect(
+      run("[case:none][numfmt:verbal][rs:3;.]{[rn]}"),
+    ).toBe("one.two.three");
+  });
+
+  it("locks two blocks together", () => {
+    const out = run("[x:s;locked]{A|B}[x:s;locked]{A|B}");
+    expect(out === "AA" || out === "BB").toBe(true);
   });
 });

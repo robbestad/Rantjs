@@ -93,7 +93,15 @@ export function compileDic(source: string, fallbackName = "unknown"): Table {
 
     if (line.startsWith("|") && lastEntry) {
       const meta = line.replace(/^\|\s?/, "");
-      if (/^pron\b/i.test(meta) || /^weight\b/i.test(meta)) continue;
+      if (/^pron\b/i.test(meta)) {
+        lastEntry.pron = meta
+          .replace(/^pron\s+/i, "")
+          .split("/")
+          .map((p) => p.trim())
+          .filter(Boolean);
+        continue;
+      }
+      if (/^weight\b/i.test(meta)) continue;
       const classMatch = meta.match(/^class\s+(.+)$/i);
       if (classMatch) {
         const extra = classMatch[1]!.split(/\s+/).map(normalizeClass).filter(Boolean);

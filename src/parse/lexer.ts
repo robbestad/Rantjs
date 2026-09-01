@@ -46,14 +46,52 @@ export function tokenize(input: string): Token[] {
     return out;
   };
 
+  const readTag = (): string => {
+    let out = "";
+    let depth = 1;
+    let inTick = false;
+    while (i < input.length && depth > 0) {
+      const ch = input[i]!;
+      if (ch === "\\" && i + 1 < input.length) {
+        out += ch + input[i + 1];
+        i += 2;
+        continue;
+      }
+      if (ch === "`") {
+        inTick = !inTick;
+        out += ch;
+        i += 1;
+        continue;
+      }
+      if (!inTick) {
+        if (ch === "[") depth += 1;
+        else if (ch === "]") {
+          depth -= 1;
+          i += 1;
+          if (depth === 0) return out;
+          out += ch;
+          continue;
+        }
+      }
+      out += ch;
+      i += 1;
+    }
+    return out;
+  };
+
   while (i < input.length) {
     const ch = input[i]!;
+    if (ch === "#" && !text.endsWith("\\")) {
+      flushText();
+      while (i < input.length && input[i] !== "\n") i += 1;
+      continue;
+    }
     if (ch === "\\" && i + 1 < input.length) {
       const next = input[i + 1]!;
       i += 2;
-      if (next === "C") {
+      if (next === "C" || next === "d") {
         flushText();
-        tokens.push({ kind: "escape", code: "C" });
+        tokens.push({ kind: "escape", code: next });
       } else {
         text += unescapeChar(next);
       }
@@ -68,7 +106,7 @@ export function tokenize(input: string): Token[] {
     if (ch === "[") {
       flushText();
       i += 1;
-      tokens.push({ kind: "tag", value: readUntil("]") });
+      tokens.push({ kind: "tag", value: readTag() });
       continue;
     }
     if (ch === "{") {
