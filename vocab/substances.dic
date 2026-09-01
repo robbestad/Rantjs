@@ -1,0 +1,84 @@
+#version 2
+#name substance
+#subs default
+
+#class add liquid
+  > acid
+    | pron "{-sVd
+  > beer
+    | pron b"Irr
+  > blood
+    | pron bl"Vd
+  > earwax
+    | pron "Irr-w%{ks
+  > extra-virgin olive oil
+    | pron "A-lIv "OIl
+  > gasoline
+    | pron g"{-sV-l%in
+  > grease
+    | pron gr"is
+  > ink
+    | pron "INk
+  > ketchup
+    | pron k"E-tSVp
+  > lava
+    | pron l"A-vV
+  > lemonade
+    | pron l"E-mV-n"eId
+  > liquid nitrogen
+    | pron l"I-kwId n"aI-trV-dZVn
+  > magma
+    | pron m"{g-mV
+  > mayonnaise
+    | pron m"eI-V-n%eIz
+  > molten iron
+    | pron m"oUl-tVn "aI-3`n
+  > mustard
+    | pron m"V-st3`d
+  > oil
+    | pron "OIl
+  > olive oil
+    | pron "A-lIv "OIl
+  > orange juice
+    | pron "O-rIndZ dZ"us
+  > paint
+    | pron p"eInt
+  > plasma
+    | pron pl"{z-mV
+  > sap
+    | pron s"{p
+  > soy sauce
+    | pron s"OI s"Os
+  > sweat
+    | pron sw"Et
+  > tears
+    | pron t"Irrz
+  > tomato sauce
+    | pron tV-m"A-t%oU s"Os
+  > vinegar
+    | pron v"I-nV-g3`
+  > vodka
+    | pron v"Ad-kV
+  > vomit
+    | pron v"A-mVt
+  > water
+    | pron w"O-t3`
+  > wine
+    | pron w"aIn
+#class remove liquid
+
+> antimatter
+> corn
+  | pron k"Orrn
+> dark matter
+  | pron d"Arrk m"{-t3`
+> flour
+  | pron fl"^rr
+> oatmeal
+  | pron "oUt-m%il
+> sand
+  | pron s"{nd
+> snow
+  | pron sn"oU
+> spaghetti
+  | pron spV-g"E-ti

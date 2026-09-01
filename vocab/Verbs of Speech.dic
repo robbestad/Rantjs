@@ -1,0 +1,51 @@
+#version 2
+#name say
+#subs simple ing ed s er pp noun
+
+> announce/announcing/announced/announces/announcer/announced/announcing
+  | pron V-n"aUns/V-n"aUn-sIN/V-n"aUnst/V-n"aUn-sIz/V-n"aUn-s3`/V-n"aUnst/V-n"aUn-sIN
+> bawl/bawling/bawled/bawls/bawler/bawled/bawling
+> beep/beeping/beeped/beeps/beeper/beeped/beeping
+> breathe/breathing/breathed/breathes/breather/breathed/breathing
+  | pron br"iD/br"i-DIN/br"iDd/br"iDz/br"i-D3`/br"iDd/br"i-DIN
+> burp/burping/burped/burps/burper/burped/burping
+> cackle/cackling/cackled/cackles/cackler/cackled/cackling
+> call/calling/called/calls/caller/called/calling
+  | pron k"Ol/k"O-lIN/k"Old/k"Olz/k"O-l3`/k"Old/k"O-lIN
+> croak/croaking/croaked/croaks/croaker/croaked/croaking
+> cry/crying/cried/cries/cryer/cried/crying
+  | pron kr"aI/kr"aI-IN/kr"aId/kr"aIz/kr"aI-3`/kr"aId/kr"aI-IN
+> declare/declaring/declared/declares/declarer/declared/declaration
+> ejaculate/ejaculating/ejaculated/ejaculates/ejaculator/ejaculated/ejaculation
+> exclaim/exclaiming/exclaimed/exclaims/exclaimer/exclaimed/exclamation
+> grunt/grunting/grunted/grunts/grunter/grunted/grunting
+> hiss/hissing/hissed/hisses/hisser/hissed/hissing
+> hoot/hooting/hooted/hoots/hooter/hooted/hooting
+> laugh/laughing/laughed/laughs/laugher/laughed/laughter
+  | pron l"{f/l"{-fIN/l"{ft/l"{fs/l"A-k3`/l"{ft/l"{f-t3`
+> moan/moaning/moaned/moans/moaner/moaned/moaning
+> mumble/mumbling/mumbled/mumbles/mumbler/mumbled/mumbling
+> mutter/muttering/muttered/mutters/mutterer/muttered/muttering
+> roar/roaring/roared/roars/roarer/roared/roaring
+> say/saying/said/says/sayer/said/saying
+  | pron s"eI/s"eI-IN/s"Ed/s"Iz/s"eI-3`/s"Ed/s"eI-IN
+> scream/screaming/screamed/screams/screamer/screamed/screaming
+  | pron skr"im/skr"i-mIN/skr"imd/skr"imz/skr"i-m3`/skr"imd/skr"i-mIN
+> screech/screeching/screeched/screeches/screecher/screeched/screeching
+> shoot/shooting/shot/shoots/shooter/shot/shooting
+  | pron S"ut/S"u-tIN/S"At/S"uts/S"u-t3`/S"At/S"u-tIN
+> shout/shouting/shouted/shouts/shouter/shouted/shouting
+> shriek/shrieking/shrieked/shrieks/shrieker/shrieked/shrieking
+> snap/snapping/snapped/snaps/snapper/snapped/snapping
+  | pron sn"{p/sn"{-pIN/sn"{pt/sn"{ps/sn"{-p3`/sn"{pt/sn"{-pIN
+> snicker/snickering/snickered/snickers/snickerer/snickered/snickering
+> snort/snorting/snorted/snorts/snorter/snorted/snorting
+> spit/spitting/spat/spits/spitter/spat/spitting
+> squeal/squealing/squealed/squeals/squealer/squealed/squealing
+> squelch/squelching/squelched/squelches/squelcher/squelched/squelching
+> swear/swearing/swore/swears/swearer/sworn/swearing
+> wail/wailing/wailed/wails/wailer/wailed/wailing
+> whimper/whimpering/whimpered/whimpers/whimperer/whimpered/whimpering
+> whine/whining/whined/whines/whiner/whined/whining
+> whisper/whispering/whispered/whispers/whisperer/whispered/whispering
+> yell/yelling/yelled/yells/yeller/yelled/yelling

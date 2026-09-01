@@ -1,0 +1,86 @@
+#version 2
+#name timenoun
+#subs singular plural
+
+#class add dayofweek
+  > Friday/Fridays
+  > Monday/Mondays
+  > Saturday/Saturdays
+  > Sunday/Sundays
+  > Thursday/Thursdays
+  > Tuesday/Tuesdays
+  > Wednesday/Wednesdays
+#class remove dayofweek
+
+#class add holiday
+  > Black Friday/Black Fridays
+  > Boxing Day/Boxing Days
+  > Christmas/Christmasses
+  > Easter/Easters
+  > Father's Day/Father's Days
+  > Groundhog Day/Groundhog Days
+  > Halloween/Halloweens
+  > Hanukkah/Hanukkahs
+  > Kwanzaa/Kwanzaas
+  > Labor Day/Labor Days
+  > Labor Day/Labor Days
+  > Mother's Day/Mother's Days
+  > New Year's Day/New Year's Days
+  > New Year's Eve/New Year's Eves
+  > Thanksgiving/Thanksgivings
+  > Valentine's Day/Valentine's Days
+#class remove holiday
+
+#class add month
+  > April/Aprils
+  > August/Augusts
+  > December/Decembers
+  > February/Februaries
+  > January/Januaries
+  > July/Julies
+  > June/Junes
+  > March/Marches
+  > May/Mays
+  > November/Novembers
+  > October/Octobers
+  > September/Septembers
+#class remove month
+
+#class add timeofday
+  > afternoon/afternoons
+    | pron %{f-t3`-n"un/%{f-t3`-n"unz
+  > dawn/dawns
+    | pron d"On/d"Onz
+  > day/days
+    | pron d"eI/d"eIz
+  > dusk/dusks
+  > evening/evenings
+    | pron "iv-nIN/"iv-nINz
+  > midnight/midnights
+  > morning/mornings
+    | pron m"Orr-nIN/m"Orr-nINz
+  > night/nights
+    | pron n"aIt/n"aIts
+  > noon/noons
+    | pron n"un/n"unz
+#class remove timeofday
+
+#class add unit
+  > century/centuries
+    | pron s"En-tS3`-i/s"En-tS3`-iz
+  > day/days
+    | pron d"eI/d"eIz
+  > hour/hours
+    | pron "^rr/"^rrz
+  > millisecond/milliseconds
+    | pron m"I-lI-s%E-kVnd/m"I-lI-s%E-kVndz
+  > minute/minutes
+    | pron maI-nj"ut/m"I-nVts
+  > month/months
+    | pron m"VnT/m"VnTs
+  > second/seconds
+    | pron s"E-kVn/s"E-kVnz
+  > year/years
+    | pron j"Irr/j3`z
+#class remove unit
+

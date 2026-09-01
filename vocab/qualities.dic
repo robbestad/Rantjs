@@ -1,0 +1,41 @@
+#version 2
+#name quality
+#subs property more less est
+
+#class add human
+  > age/older/younger/oldest
+    | pron "eIdZ/"oUl-d3`/j"VN-g3`/"oUl-dVst
+  > ethnicity/more ethnic/less ethnic/most ethnic
+    | pron ET-n"I-sI-ti/m"Orr "ET-nIk/l"Es "ET-nIk/m"oUs "ET-nIk
+  > gender/sexier/more gender neutral/sexiest
+    | pron dZ"En-d3`/s"Ek-si-3`/m"Orr dZ"En-d3` n"u-trVl/s"Ek-si-Vst
+  > honesty/more thuthful/less truthful/most truthful
+    | pron "A-nV-sti/m"Orr/l"Es tr"uT-fVl/m"oUs tr"uT-fVl
+  > race/racier/less racier/raciest
+#class remove human
+
+#class add physical
+  > color/more colorful/duller/most colorful
+    | pron k"O-l3`/m"Orr k"V-l3`-fVl/d"V-l3`/m"oUs k"V-l3`-fVl
+  > force/harder/softer/hardest
+    | pron f"Orrs/h"Arr-d3`/s"Of-t3`/h"Arr-dVst
+  > girth/girthier/less girthy/girthiest
+  > height/taller/shorter/tallest
+    | pron h"aIt/t"O-l3`/S"Orr-t3`/t"O-lIst
+  > length/longer/shorter/longest
+    | pron l"ENT/l"ON-g3`/S"Orr-t3`/l"ON-gIst
+  > luminosity/brighter/darker/brightest
+  > power level/more powerful/weaker/most powerful
+    | pron p"aU-3` l"E-vVl/m"Orr p"aU-3`-fVl/w"i-k3`/m"oUs p"aU-3`-fVl
+  > size/bigger/smaller/biggest
+    | pron s"aIz/b"I-g3`/sm"O-l3`/b"I-gVst
+  > speed/faster/slower/fastest
+    | pron sp"id/f"{-st3`/sl"oU-3`/f"{-stVst
+  > weight/heavier/lighter/heaviest
+    | pron w"eIt/h"E-vi-3`/l"aI-t3`/h"E-vi-Vst
+  > wetness/wetter/drier/wettest
+    | pron w"Et-nVs/w"E-t3`/dr"aI-3`/w"E-tVst
+  > width/wider/skinnier/widest
+    | pron w"IdT/w"aI-d3`/sk"I-ni-3`/w"aI-dVst
+#class remove physical
+

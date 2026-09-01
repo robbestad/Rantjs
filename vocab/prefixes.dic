@@ -1,0 +1,83 @@
+#version 2
+#name prefix
+#subs default
+
+#class add position
+  > endo
+    | pron "En-doU
+  > extra
+    | pron "Ek-strV
+  > intra
+    | pron "In-trV
+  > mid
+    | pron m"Id
+  > over
+    | pron "oU-v3`
+  > post
+    | pron p"oUst
+  > pre
+    | pron pr"i
+  > under
+    | pron "Vn-d3`
+#class remove position
+
+#class add quantity
+  > bi
+    | pron b"aI
+  > mono
+    | pron m"oU-noU
+  > octo
+  > penta
+    | pron p"En-tV
+  > quad
+    | pron kw"Ad
+  > tri
+    | pron tr"aI
+#class remove quantity
+
+> a
+  | pron "eI
+> anti
+  | pron "{n-taI
+> auto
+  | pron "O-toU
+> circum
+> contra
+  | pron k"An-trV
+> exo
+> fore
+  | pron f"Orr
+> homo
+  | pron h"oU-moU
+> hyper
+  | pron h"aI-p3`
+> in
+  | pron "In
+> mega
+  | pron m"E-gV
+> mini
+  | pron m"I-ni
+> mis
+  | pron m"Is
+> non
+  | pron n"An
+> omni
+  | pron "Am-ni
+> pseudo
+  | pron s"u-doU
+> psycho
+  | pron s"aI-koU
+> pyro
+  | pron p"aI-roU
+> semi
+  | pron s"E-maI
+> sub
+  | pron s"Vb
+> super
+  | pron s"u-p3`
+> trans
+  | pron tr"{nz
+> un
+  | pron j"u-"En
+> uni
+  | pron j"u-ni

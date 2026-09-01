@@ -1,0 +1,45 @@
+#version 2
+#name greet
+#subs default
+
+> ahoy
+> aloha
+  | pron V-l"oU-hA
+> good afternoon
+  | pron gId %{f-t3`-n"un
+> good day
+  | pron gId d"eI
+> good evening
+  | pron gId "iv-nIN
+> good morning
+  | pron gId m"Orr-nIN
+> good night
+  | pron gId n"aIt
+> greetings
+  | pron gr"i-tINz
+> guten Tag
+> hello
+  | pron hE-l"oU
+> hey
+  | pron h"eI
+> hey buddy
+  | pron h"eI b"V-di
+> hola
+> how's it going
+  | pron h"aUz It g"oU-In
+> how's it hanging
+  | pron h"aUz It h"{-NgIN
+> konichi wa
+  | pron w"A
+> salutations
+> sup
+  | pron s"Vp
+> what's happening
+  | pron hw"Vts h"{p-nIN
+> what's new
+  | pron hw"Vts nj"u
+> what's up
+  | pron hw"Vts "Vp
+> whazzup
+> yo
+  | pron j"oU

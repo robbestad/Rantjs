@@ -1,0 +1,18 @@
+#version 2
+#name conj
+#subs default
+
+> and
+  | pron Vnd
+> but
+  | pron b"Vt
+> for
+  | pron fr3`
+> nor
+  | pron n"Orr
+> or
+  | pron 3`
+> so
+  | pron s"oU
+> yet
+  | pron j"Et

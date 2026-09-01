@@ -1,0 +1,77 @@
+#version 2
+#name rel
+#subs singular plural
+
+#class add female
+  > aunt/aunts
+    | pron "Ont/"Onts
+  > daddy/daddies
+    | pron d"{-di/d"{-diz
+  > daughter/daughters
+    | pron d"O-t3`/d"O-t3`z
+  > girl/girls
+    | pron g"3`l/g"3`lz
+  > girlfriend/girlfriends
+    | pron g"3`l-fr%End/g"3`l-fr%Endz
+  > granddaughter/granddaughters
+    | pron gr"{n-d%O-t3`/gr"{n-d%O-t3`z
+  > grandma/grandmas
+    | pron gr"{nd-mA/gr"{-m%Az
+  > mommy/mommies
+    | pron m"A-mi/m"A-miz
+  > mother/mothers
+    | pron m"V-D3`/m"V-D3`z
+  > sister/sisters
+    | pron s"I-st3`/s"I-st3`z
+  > stepmother/stepmothers
+  > wife/wives
+    | pron w"aIf/w"aIvz
+  > woman/women
+    | pron w"U-mVn/w"I-mVn
+#class remove female
+
+#class add male
+  > boy/boys
+    | pron b"OI/b"OIz
+  > boyfriend/boyfriends
+    | pron b"OI-fr%End/b"OI-fr%Enz
+  > brother/brothers
+    | pron br"V-D3`/br"V-D3`z
+  > father/fathers
+    | pron f"A-D3`/f"A-D3`z
+  > godfather/godfathers
+  > grandpa/grandpas
+  > grandson/grandsons
+    | pron gr"{n-s%Vn/gr"{n-s%Vnz
+  > husband/husbands
+    | pron h"Vz-bVnd/h"Vz-bVndz
+  > man/men
+    | pron m"{n/m"En
+  > son/sons
+    | pron s"Vn/s"Vnz
+  > stepfather/stepfathers
+  > uncle/uncles
+    | pron "VN-kVl/"VN-kVlz
+#class remove male
+
+#class add neutral
+  > baby/babies
+    | pron b"eI-bi/b"eI-biz
+  > boss/bosses
+    | pron b"Os/b"O-sIz
+  > buddy/buddies
+    | pron b"V-di/b"V-diz
+  > child/children
+    | pron tS"aIld/tS"Il-drVn
+  > colleague/colleagues
+    | pron k"A-lig/k"A-ligz
+  > cousin/cousins
+    | pron k"V-zVn/k"V-zVnz
+  > fella/fellas
+    | pron f"E-lV/f"E-lVs
+  > friend/friends
+    | pron fr"End/fr"Enz
+  > master/masters
+    | pron m"{-st3`/m"{-st3`z
+#class remove neutral
+

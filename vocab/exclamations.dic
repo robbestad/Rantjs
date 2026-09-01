@@ -1,0 +1,115 @@
+#version 2
+#name x
+#subs default
+
+> ahhhhh mahh gahh
+> alas
+  | pron V-l"{s
+> aw shucks
+  | pron "O S"Vks
+> awesome
+  | pron "O-sVm
+> beautiful
+  | pron bj"u-tV-fVl
+> Bingo
+> boy oh boy oh boy
+  | pron b"OI "oU b"OI "oU b"OI
+> bravo
+  | pron br"A-voU
+> by golly
+  | pron b"aI g"A-li
+> damn
+  | pron d"{m
+> dear dear
+  | pron d"Irr d"Irr
+> dear me
+  | pron d"Irr m"i
+> disgraceful
+  | pron dIs-gr"eIs-fVl
+> epic
+  | pron "E-pIk
+> ermahgerd
+> excellent
+  | pron "Ek-sV-lVnt
+> finish him
+  | pron f"I-nIS Im
+> gasp
+  | pron g"{sp
+> geez
+  | pron dZ"iz
+> good heavens
+  | pron gId h"E-vVnz
+> good lord
+  | pron gId l"Orrd
+> hella good
+  | pron gId
+> holy cow
+  | pron h"oU-li k"aU
+> holy moley
+  | pron h"oU-li
+> hurrah
+  | pron hU-r"A
+> I'll be damned
+  | pron bi d"{md
+> I'm gonna faint
+  | pron g"A-nV f"eInt
+> jolly good
+  | pron dZ"A-li gId
+> K.O.
+> LOL
+> mine eyes are deceiving me
+  | pron m"aIn "aIz 3` dI-s"i-vIN m"i
+> my leg
+  | pron m"aI l"Eg
+> my my
+  | pron m"aI m"aI
+> my oh my
+  | pron m"aI "oU m"aI
+> no way
+  | pron n"oU w"eI
+> oh boy
+  | pron "oU b"OI
+> oh dear
+  | pron "oU d"Irr
+> oh glorious day
+  | pron "oU gl"O-ri-Vs d"eI
+> oh gog
+  | pron "oU
+> oh hell yes
+  | pron "oU h"El j"Es
+> oh joy
+  | pron "oU dZ"OI
+> oh my
+  | pron "oU m"aI
+> oh my goodness
+  | pron "oU m"aI g"Ud-nIs
+> oh wow
+  | pron "oU w"aU
+> oho
+> omgomgomg
+> rats
+  | pron r"{ts
+> ROFL
+> run for your lives
+  | pron r"Vn fr3` j"Urr l"aIvz
+> this can't be
+  | pron DIs k"{nt bi
+> this is delicious
+  | pron DIs Iz dI-l"I-SVs
+> this is the end
+  | pron DIs Iz Di "End
+> trololol
+> what
+  | pron hw"Vt
+> what in the world
+  | pron hw"Vt "In Di w"3`ld
+> what the hell
+  | pron hw"Vt Di h"El
+> whoa
+  | pron h"oU
+> wicked
+  | pron w"I-kVd
+> woot
+> wow
+  | pron w"aU
+> WTF

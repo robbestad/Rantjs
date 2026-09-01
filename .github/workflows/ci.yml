@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main, v2]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm install
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+        if: matrix.node == 22
+      - name: Smoke Node import
+        if: matrix.node == 22
+        run: node -e "import('./dist/index.js').then(m => { const s = m.rant('<yn yes>'); if (!s) throw new Error('empty'); console.log(s); })"
+      - name: Pack check
+        if: matrix.node == 22
+        run: |
+          npm pack --dry-run
+          node dist/cli.js --seed 1 '{ok|ok}'

@@ -1,0 +1,56 @@
+#version 2
+#name sound
+#subs singular plural
+
+> bang/bangs
+  | pron b"{N/b"{Nz
+> beep/beeps
+  | pron b"ip/b"ips
+> boom/booms
+  | pron b"um/b"umz
+> clang/clangs
+> crack/cracks
+  | pron kr"{k/kr"{ks
+> crash/crashes
+  | pron kr"{S/kr"{-SIz
+> flap/flaps
+  | pron fl"{p/fl"{ps
+> flutter/flutters
+  | pron fl"V-t3`/fl"V-t3`z
+> foom/fooms
+> note/notes
+  | pron n"oUt/n"oUts
+> pop/pops
+  | pron p"Ap/p"Aps
+> pound/pounds
+  | pron p"aUnd/p"aUnz
+> rap/raps
+  | pron r"{p/r"{ps
+> roar/roars
+  | pron r"Orr/r"Orrz
+> rumble/rumbles
+  | pron r"Vm-bVl/r"Vm-bVlz
+> scrape/scrapes
+  | pron skr"eIp/skr"eIps
+> screech/screeches
+  | pron skr"itS/skr"i-tSIz
+> shatter/shatters
+  | pron S"{-t3`/S"{-t3`z
+> shudder/shudders
+  | pron S"V-d3`/S"V-d3`z
+> slap/slaps
+  | pron sl"{p/sl"{ps
+> squeal/squeals
+  | pron skw"il/skw"ilz
+> squelch/squelches
+> swoosh/swooshes
+> tap/taps
+  | pron t"{p/t"{ps
+> thump/thumps
+  | pron T"Vmp/T"Vmps
+> tick/ticks
+  | pron t"Ik/t"Iks
+> toot/toots
+  | pron t"ut/t"Uts
+> wail/wails
+  | pron w"eIl/w"eIlz
