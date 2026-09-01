@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [18, 20, 22]
+        # Vitest 4 / Vite 8 import util.styleText (Node 20.12+). Node 18 is EOL.
+        node: [20, 22, 24]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -21,12 +22,12 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
-        if: matrix.node == 22
+        if: matrix.node == 24
       - name: Smoke Node import
-        if: matrix.node == 22
+        if: matrix.node == 24
         run: node -e "import('./dist/index.js').then(m => { const s = m.rant('<yn yes>'); if (!s) throw new Error('empty'); console.log(s); })"
       - name: Pack check
-        if: matrix.node == 22
+        if: matrix.node == 24
         run: |
           npm pack --dry-run
           node dist/cli.js --seed 1 '{ok|ok}'

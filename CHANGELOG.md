@@ -12,6 +12,7 @@ Rant 3 generator kit so official-style samples can run.
 - Channels, `[protect]`, `[chance]`, `[len]`, `[quote]`
 - Query builders, replacers, subroutines (initial)
 - Rant 3 aliases: `name`→firstname, `pl`→plural, `pro`→pron
+- Node 20+ (Vitest 4 / Vite 8 need `util.styleText`; Node 18 is EOL)
 
 ## 2.0.0
 

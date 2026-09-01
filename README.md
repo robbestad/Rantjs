@@ -135,7 +135,7 @@ The playground is `npm run demo`. The live demo is at [rantjs.vercel.app](https:
 
 ## Migrating from 1.x
 
-- Node 18+.
+- Node 20+.
 - `import { rant } from "rantjs"` (or `require("rantjs").rant`).
 - `window.rant` is only set by the IIFE browser file, not by `require("rantjs")`.
 - `String.prototype` is no longer patched.
