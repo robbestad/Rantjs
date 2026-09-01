@@ -1,0 +1,297 @@
+#version 2
+#name country
+#subs default
+
+#class add africa
+  > Democratic Republic of the Congo
+    | pron Vv Di
+  > Egypt
+  > Ghana
+  > Kenya
+  > Libya
+  > Madagascar
+  > Morocco
+  > Niger
+  > Nigeria
+  > Republic of the Congo
+    | pron Vv Di
+  > Rwanda
+  > Somalia
+  > South Africa
+  > Sudan
+#class remove africa
+
+#class add asia
+  > Afghanistan
+    | class middle-east
+  > Cambodia
+  > China
+  > Hong Kong
+  > India
+  > Indonesia
+    | class oceania
+  > Japan
+  > Kyrgyzstan
+  > Malaysia
+  > Mongolia
+  > Nepal
+  > North Korea
+  > Singapore
+  > South Korea
+  > Taiwan
+  > Thailand
+#class remove asia
+
+#class add central-america
+  > Costa Rica
+  > Guatemala
+  > Haiti
+  > Honduras
+  > Nicaragua
+  > Panama
+#class remove central-america
+
+#class add europe
+  > Albania
+  > Austria
+  > Belgium
+  > Bulgaria
+  > Denmark
+  > Finland
+  > France
+  > Germany
+  > Greece
+  > Hungary
+  > Ireland
+  > Italy
+  > Latvia
+  > Lithuania
+  > Luxembourg
+  > Netherlands
+  > Norway
+  > Poland
+  > Portugal
+  > Romania
+  > Russia
+    | class asia eurasia
+  > Slovakia
+  > Slovenia
+  > Spain
+  > Sweden
+  > Switzerland
+  > Turkey
+  > United Kingdom
+#class remove europe
+
+#class add middle-east
+  > Iran
+  > Iraq
+  > Israel
+  > Pakistan
+  > Saudi Arabia
+  > Syria
+  > United Arab Emirates
+#class remove middle-east
+
+#class add oceania
+  > Australia
+  > Guam
+  > New Zealand
+  > Papua New Guinea
+  > Philippines
+  > Samoa
+  > Solomon Islands
+#class remove oceania
+
+#class add south-america
+  > Argentina
+  > Brazil
+  > Chile
+  > Colombia
+  > Peru
+#class remove south-america
+
+> Algeria
+> American Samoa
+> Andorra
+> Angola
+> Anguilla
+> Antarctica
+> Antigua and Barbuda
+  | pron Vnd
+> Armenia
+> Aruba
+> Ashmore and Cartier Islands
+  | pron Vnd
+> Azerbaijan
+> Bahrain
+> Bangladesh
+> Barbados
+> Bassas da India
+  | pron d"i-"eI
+> Belarus
+> Belize
+> Benin
+> Bermuda
+> Bhutan
+> Bolivia
+> Bosnia and Herzegovina
+  | pron Vnd
+> Botswana
+> Bouvet Island
+> British Indian Ocean Territory
+> British Virgin Islands
+> Brunei
+> Burkina Faso
+> Burma
+> Burundi
+> Cameroon
+> Cape Verde
+> Cayman Islands
+> Central African Republic
+> Chad
+> Christmas Island
+> Clipperton Island
+> Cocos Islands
+> Comoros
+> Cook Islands
+> Coral Sea Islands
+> Cote d'Ivoire
+> Croatia
+> Czech Republic
+> Dhekelia
+> Djibouti
+> Dominican Republic
+> Ecuador
+> El Salvador
+> Equatorial Guinea
+> Eritrea
+> Estonia
+> Ethiopia
+> Europa Island
+> Falkland Islands
+> Faroe Islands
+> Federated States of Micronesia
+  | pron Vv
+> Fiji
+> French Guiana
+> French Polynesia
+> French Southern and Antarctic Lands
+  | pron Vnd
+> Gabon
+> Gaza Strip
+> Georgia
+> Gibraltar
+> Glorioso Islands
+> Greenland
+> Grenada
+> Guadeloupe
+> Guernsey
+> Guinea
+> Guinea-Bissau
+> Guyana
+> Heard Island and McDonald Islands
+  | pron Vnd
+> Holy See
+> Iceland
+> Isle of Man
+  | pron Vv
+> Jan Mayen
+> Jersey
+> Jordan
+> Juan de Nova Island
+  | pron dV
+> Kazakhstan
+> Kiribati
+> Kuwait
+> Laos
+> Lebanon
+> Lesotho
+> Liberia
+> Liechtenstein
+> Macau
+> Macedonia
+> Malawi
+> Maldives
+> Mali
+> Malta
+> Marshall Islands
+> Martinique
+> Mauritania
+> Mauritius
+> Mayotte
+> Moldova
+> Monaco
+> Montserrat
+> Mozambique
+> Namibia
+> Nauru
+> Navassa Island
+> Netherlands Antilles
+> New Caledonia
+> Niue
+> Norfolk Island
+> Northern Mariana Islands
+> Oman
+> Palau
+> Paracel Islands
+> Paraguay
+> Pitcairn Islands
+> Puerto Rico
+> Qatar
+> Reunion
+> Saint Helena
+> Saint Kitts and Nevis
+  | pron Vnd
+> Saint Lucia
+> Saint Pierre and Miquelon
+  | pron Vnd
+> Saint Vincent and the Grenadines
+  | pron Vnd Di
+> San Marino
+> Sao Tome and Principe
+  | pron Vnd
+> Senegal
+> Serbia and Montenegro
+  | pron Vnd
+> Seychelles
+> Sierra Leone
+> South Georgia and the South Sandwich Islands
+  | pron Vnd Di
+> Spratly Islands
+> Sri Lanka
+> Suriname
+> Svalbard
+> Swaziland
+> Tajikistan
+> Tanzania
+> The Bahamas
+> The Gambia
+> Timor-Leste
+> Togo
+> Tokelau
+> Tonga
+> Trinidad and Tobago
+  | pron Vnd
+> Tromelin Island
+> Tunisia
+> Turkmenistan
+> Turks and Caicos Islands
+  | pron Vnd
+> Tuvalu
+> Uganda
+> Ukraine
+> Uruguay
+> Uzbekistan
+> Vanuatu
+> Venezuela
+> Vietnam
+> Virgin Islands
+> Wake Island
+> Wallis and Futuna
+  | pron Vnd
+> West Bank
+> Western Sahara
+> Yemen
+> Zambia
+> Zimbabwe

@@ -1,0 +1,40 @@
+#version 2
+#name activity
+#subs default
+
+#class add game
+  #class add sport
+    > Baseball
+    > Basketball
+    > Football
+    > Golf
+    > Soccer
+    > Tennis
+  #class remove sport
+
+  #class add video
+    > Battlefield
+    > Call of Duty
+      | pron Vv
+    > Contra
+    > Counter-Strike
+    > Doom
+    > Half-Life
+    > Halo
+    > Hitman
+    > Left 4 Dead
+    > Morrowind
+    > Oblivion
+    > Pong
+    > Skyrim
+    > Sonic the Hedgehog
+      | pron Di
+    > Super Mario Bros.
+    > The Legend of Zelda
+      | pron Vv
+    > World of Warcraft
+      | pron Vv
+  #class remove video
+
+#class remove game
+

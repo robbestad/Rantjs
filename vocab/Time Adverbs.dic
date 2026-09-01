@@ -1,0 +1,135 @@
+#version 2
+#name timeadv
+#subs default
+
+#class add frequency
+  > again
+    | pron V-g"eIn
+  > all the time
+    | pron "Ol Di t"aIm
+  > barely
+    | pron b"err-li
+  > biweekly
+    | pron baI-w"ik-li
+  > centenially
+  > daily
+    | pron d"eI-li
+  > every night
+    | pron "E-vri n"aIt
+  > every now and then
+    | pron "E-vri n"aU Vnd D"En
+  > every Tuesday
+    | pron "E-vri
+  > for 10 weeks
+    | pron fr3` w"iks
+  > for 36 hours
+    | pron fr3` "^rrz
+  > frequently
+    | pron fr"i-kwVnt-li
+  > from now on
+    | pron f3`m n"aU "On
+  > hardly
+    | pron h"Arrd-li
+  > instantly
+    | pron "In-stVnt-li
+  > never
+    | pron n"E-v3`
+  > never again
+    | pron n"E-v3` V-g"eIn
+  > occasionally
+    | pron V-k"eI-ZVn-li
+  > often
+    | pron "Of-tVn
+  > on Mondays
+    | pron "On
+  > once a month
+    | pron w"Vns "eI m"VnT
+  > once a week
+    | pron w"Vns "eI w"ik
+  > once again
+    | pron w"Vns V-g"eIn
+  > once in a while
+    | pron w"Vns "In "eI hw"aIl
+  > perpetually
+    | pron p3`-p"E-tSu-V-li
+  > profusely
+    | pron prV-fj"us-li
+  > repeatedly
+    | pron rI-p"i-tId-li
+  > several times
+    | pron s"E-v3`-Vl t"aImz
+  > sometimes
+    | pron s"Vm-t%aImz
+  > this time
+    | pron DIs t"aIm
+  > until further notice
+    | pron Vn-t"Il f"3`-D3` n"oU-tIs
+  > usually
+    | pron j"u-ZV-li
+  > yesterday
+    | pron j"E-st3`-di
+#class remove frequency
+
+#class add time
+  #class add past
+    > a day ago
+      | pron "eI d"eI V-g"oU
+    > a month ago
+      | pron "eI m"VnT V-g"oU
+    > a week ago
+      | pron "eI w"ik V-g"oU
+    > a year ago
+      | pron "eI j"Irr V-g"oU
+    > an hour ago
+      | pron Vn "^rr V-g"oU
+    > billions of years ago
+      | pron b"I-ljVnz Vv j3`z V-g"oU
+    > just 5 minutes ago
+      | pron dZIst m"I-nVts V-g"oU
+    > millions of years ago
+      | pron m"I-ljVnz Vv j3`z V-g"oU
+    > trillions of years ago
+      | pron tr"I-ljVnz Vv j3`z V-g"oU
+  #class remove past
+
+  #class add present
+    > now
+      | pron n"aU
+    > presently
+      | pron pr"E-zVnt-li
+    > today
+      | pron tu-d"eI
+    > tonight
+      | pron tu-n"aIt
+  #class remove present
+
+  > 1 day later
+    | pron d"eI l"eI-t3`
+  > 1 hour later
+    | pron "^rr l"eI-t3`
+  > 1 month later
+    | pron m"VnT l"eI-t3`
+  > 1 week later
+    | pron w"ik l"eI-t3`
+  > 10 years later
+    | pron j3`z l"eI-t3`
+  > 5 minutes later
+    | pron m"I-nVts l"eI-t3`
+  > 5 years later
+    | pron j3`z l"eI-t3`
+  > 6 months later
+    | pron m"VnTs l"eI-t3`
+  > a year later
+    | pron "eI j"Irr l"eI-t3`
+  > at sunrise
+    | pron "{t s"Vn-r%aIz
+  > at sunset
+    | pron "{t s"Vn-s%Et
+  > at the full moon
+    | pron "{t Di f"Ul m"un
+  > later
+    | pron l"eI-t3`
+  > recently
+    | pron r"i-sVn-li
+#class remove time
+

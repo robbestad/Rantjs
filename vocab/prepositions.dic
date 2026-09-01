@@ -1,0 +1,122 @@
+#version 2
+#name prepos
+#subs default
+
+#class add space
+  > aboard
+    | pron V-b"Orrd
+  > about
+    | pron V-b"aUt
+  > above
+    | pron V-b"Vv
+  > across
+    | pron V-kr"Os
+  > against
+    | pron V-g"Enst
+  > along
+    | pron V-l"ON
+  > amid
+    | pron V-m"Id
+  > among
+    | pron V-m"VN
+  > around
+    | pron 3`-"aUn
+  > as
+    | pron "Ez
+  > at
+    | pron "{t
+  > behind
+    | pron bI-h"aInd
+  > below
+    | pron bi-l"oU
+  > beneath
+    | pron bI-n"iT
+  > beside
+    | pron bI-s"aId
+  > besides
+    | pron bI-s"aIdz
+  > between
+    | pron bi-tw"in
+  > beyond
+    | pron bI-"Ond
+  > by
+    | pron b"aI
+  > down
+    | pron d"aUn
+  > from
+    | pron f3`m
+  > in
+    | pron "In
+  > inside
+    | pron "In-s%aId
+  > into
+    | pron In-tV
+  > near
+    | pron n"Irr
+  > of
+    | pron Vv
+  > off
+    | pron "Of
+  > on
+    | pron "On
+  > onto
+    | pron "On-tu
+  > opposite
+    | pron "Ap-zVt
+  > outside
+    | pron "aUt-s"aId
+  > over
+    | pron "oU-v3`
+  > past
+    | pron p"{st
+  > round
+    | pron r"aUnd
+  > through
+    | pron Tr"u
+  > to
+    | pron tV
+  > toward
+    | pron t"Orrd
+  > towards
+    | pron t"Orrdz
+  > under
+    | pron "Vn-d3`
+  > underneath
+    | pron %Vn-d3`-n"iT
+  > up
+    | pron "Vp
+  > upon
+    | pron V-p"An
+  > versus
+    | pron v"3`-sVz
+  > via
+    | pron v"i-V
+  > with
+    | pron wID
+  > within
+    | pron wI-T"In
+  > without
+    | pron wID-"aUt
+#class remove space
+
+#class add time
+  > after
+    | pron "{f-t3`
+  > before
+    | pron b%i-f"Orr
+  > despite
+    | pron dI-sp"aIt
+  > during
+    | pron d"3`-IN
+  > following
+    | pron f"A-loU-IN
+  > for
+    | pron fr3`
+  > regarding
+    | pron rI-g"Arr-dIN
+  > since
+    | pron s"Ins
+  > until
+    | pron Vn-t"Il
+#class remove time
+

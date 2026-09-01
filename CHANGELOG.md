@@ -1,0 +1,34 @@
+# Changelog
+
+## 2.0.0
+
+Rantjs is rewritten in TypeScript. The pattern dialect is the same; the engine, package, and demo are new.
+
+### Added
+- Seeded generation (`{ seed }` or `createRant({ seed })`)
+- Real blocks: plain text, `{a|b|c}` choice, nesting, default one evaluation
+- Indefinite article `[a]`
+- Query carriers (`<firstname male :: hero>`, `<::hero>`)
+- Conditionals `[if:carrier]{then}{else}`
+- Dual ESM/CJS package with types
+- Browser IIFE at `dist/rant.js` / `dist/rant.min.js` (no `window` access in Node)
+- CLI: `npx rantjs '<pattern>'`
+- `.dic` compiler for Rantionary
+- Vite playground
+
+### Fixed
+- Node usage crashed on `window.rant` (#12)
+- Blocks ignored plain text, alternatives, and missing `[rep]` (#4)
+- Dictionary parser could not build current Rantionary (#9)
+- Prototype pollution (`String.prototype`)
+- Dictionary rebuilt and mutated on every call
+
+### Breaking
+- Node 18+
+- No `window.rant` in the Node/ESM build
+- No Gulp demo server
+- Default dictionary is recompiled from Rantionary, so some words differ
+- Bower is not supported; use npm or a CDN
+
+### Removed
+- Gulp, Browserify, Karma, Istanbul, Perl parsers, jQuery demo, ZeroClipboard

@@ -1,0 +1,104 @@
+#version 2
+#name sconj
+#subs default
+
+> after
+  | pron "{f-t3`
+> although
+  | pron %Ol-D"oU
+> as
+  | pron "Ez
+> as if
+  | pron "Ez If
+> as long as
+  | pron "Ez l"ON "Ez
+> as much as
+  | pron "Ez m"VtS "Ez
+> as soon as
+  | pron "Ez s"un "Ez
+> as though
+  | pron "Ez D"oU
+> because
+  | pron bI-k"Vz
+> before
+  | pron b%i-f"Orr
+> even
+  | pron "i-vIn
+> even if
+  | pron "i-vIn If
+> even though
+  | pron "i-vIn D"oU
+> if
+  | pron If
+> if only
+  | pron If "oUn-li
+> if then
+  | pron If D"En
+> if when
+  | pron If hw"In
+> in order that
+  | pron "In "Orr-d3` DVt
+> inasmuch
+  | pron In-"{s-mVk
+> just as
+  | pron dZIst "Ez
+> lest
+  | pron l"Est
+> now
+  | pron n"aU
+> now since
+  | pron n"aU s"Ins
+> now that
+  | pron n"aU DVt
+> now when
+  | pron n"aU hw"In
+> once
+  | pron w"Vns
+> provided
+  | pron prV-v"aI-dId
+> provided that
+  | pron prV-v"aI-dId DVt
+> rather than
+  | pron r"V-D3` DVn
+> since
+  | pron s"Ins
+> so that
+  | pron s"oU DVt
+> supposing
+  | pron sV-p"oU-zIN
+> than
+  | pron DVn
+> that
+  | pron DVt
+> though
+  | pron D"oU
+> til
+  | pron t"Il
+> unless
+  | pron Vn-l"Es
+> until
+  | pron Vn-t"Il
+> when
+  | pron hw"In
+> whenever
+  | pron hwE-n"E-v3`
+> where
+  | pron hw"err
+> where if
+  | pron hw"err If
+> whereas
+  | pron hwE-r"{z
+> wherever
+  | pron hwE-r"E-v3`
+> whether
+  | pron hw"E-D3`
+> which
+  | pron hw"ItS
+> while
+  | pron hw"aIl
+> who
+  | pron h"u
+> whoever
+  | pron hu-"E-v3`
+> why
+  | pron hw"aI

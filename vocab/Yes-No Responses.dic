@@ -1,0 +1,75 @@
+#version 2
+#name yn
+#subs default
+
+#class add no
+  > absolutely not
+    | pron %{b-sV-l"ut-li n"At
+  > certainly not
+    | pron s"3`-tVn-li n"At
+  > definitely not
+    | pron d"E-fV-nVt-li n"At
+  > hell no
+    | pron h"El n"oU
+  > impossible
+    | pron Im-p"A-sV-bVl
+  > most certainly not
+    | pron m"oUs s"3`-tVn-li n"At
+  > negative
+    | pron n"E-gV-tIv
+  > no
+    | pron n"oU
+  > no way
+    | pron n"oU w"eI
+  > nooooo
+  > nope
+    | pron n"oUp
+  > not at all
+    | pron n"At "{t "Ol
+  > obviously not
+    | pron "Ab-vi-Vs-li n"At
+  > oh no
+    | pron "oU n"oU
+  > that can't be
+    | pron DVt k"{nt bi
+  > there's no way
+    | pron D"errz n"oU w"eI
+#class remove no
+
+#class add yes
+  > absolutely
+    | pron %{b-sV-l"ut-li
+  > affirmative
+    | pron V-f"3`-mV-tIv
+  > certainly
+    | pron s"3`-tVn-li
+  > definitely
+    | pron d"E-fV-nVt-li
+  > hell yes
+    | pron h"El j"Es
+  > I couldn't agree more
+    | pron k"U-dVn V-gr"i m"Orr
+  > indeed
+    | pron In-d"id
+  > obviously
+    | pron "Ab-vi-Vs-li
+  > oh yes
+    | pron "oU j"Es
+  > undeniably
+    | pron %Vn-dI-n"aI-V-bli
+  > undoubtedly
+    | pron Vn-d"aU-tId-li
+  > without a doubt
+    | pron wID-"aUt "eI d"aUt
+  > ya
+    | pron j"A
+  > yayaya
+  > yep
+    | pron j"Ep
+  > yeppers
+  > yes
+    | pron j"Es
+  > yes/yes
+    | pron j"Es/j"Es
+#class remove yes
+

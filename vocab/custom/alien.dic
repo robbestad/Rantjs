@@ -1,0 +1,10 @@
+#version 2
+#name alien
+#subs singular plural
+
+#class add race
+  > Badoon/Badoons
+  > Brood/The Broods
+  > Celestials/The Celestials
+  > Kree/The Kree
+#class remove race

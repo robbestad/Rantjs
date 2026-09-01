@@ -1,147 +1,144 @@
 # Rantjs
 
-Rantjs is a procedural text generator. The goal is to augment human creativity with the boundless potential of randomness. Inspired by [Rant][1].
+Procedural text for JavaScript. Write a pattern, get a sentence.
 
-<img src="http://res.cloudinary.com/sven-anders-robbestad/image/upload/c_scale,w_350/v1418975366/rantjs_0.8.4.png">
+Inspired by [Rant](https://github.com/TheBerkin/rant3). This is the Rantjs dialect (`<noun>`, `[rep:3]{...}`), not a Rant 4 VM.
 
-The project is available via npm (do _npm install rantjs_). 
+```js
+import { rant } from "rantjs";
 
+const sentence = rant(
+  "<firstname male> likes to <verb-transitive> <noun.plural> with <pron poss male> pet <noun-animal> on <timenoun dayofweek plural>.",
+);
 
-## Demo and more information
-
-Interactive demo available [here][5]
-
-Click [here][4] for a writeup on my blog
-
-
-## Usage
-
-    var rant = require("rantjs");
-    var sentence=rant('<firstname male> likes to <verb-transitive> <noun.plural> with <pron poss male> pet <noun-animal> on <timenoun dayofweek plural>.');
-
-    console.log(sentence); // 'Sean likes to chop parrots with his pet cat on Saturdays.'
-
-For implementation details, please visit the [npmjs page][3]
-
-## Install
+console.log(sentence);
+// 'Sean likes to chop parrots with his pet cat on Saturdays.'
+```
 
 ```bash
-git clone https://github.com/svenanders/rantjs && cd rantjs
-npm i
-gulp serve
+npm install rantjs
+npx rantjs --seed 42 '<firstname male> found [a] <noun-animal>.'
 ```
-Then open http://localhost:8000
 
+## Patterns
 
-## Development Plan
+**Queries** pull a random dictionary entry. Filters and inflections can be separated with a space, dash, or dot:
 
-Easy way to choose alternative dictionaries
+```
+<firstname male>
+<noun-animal plural>
+<verb.ed>
+<pron poss male>
+<yn yes>
+```
 
-Indefinite article (a/an) automation
+**Blocks** choose an alternative. A block with no repeater runs once. `|` splits options. Nested braces work.
 
-Overwriting (targets)
+```
+{heads|tails}
+{Example text}
+[rep:3][sep:\s]{click|clack}
+```
 
-~~Capitalisation~~
+**Tags**
 
-~~Looping (repeaters)~~
+| Tag | Effect |
+| --- | --- |
+| `[case:none\|default\|first\|word\|title\|upper\|lower\|sentence]` | Casing for the finished string |
+| `[rep:n]` | Repeat the next block `n` times |
+| `[sep:\s\|\n\|literal]` | Join those repetitions |
+| `[a]` | Insert *a* or *an* before the next word |
+| `[if:name]{then}{else}` | Branch on whether carrier `name` is set |
 
-Conditionals
+**Carriers** remember a result so a character stays the same person:
 
-## Contributions
+```
+<firstname male :: hero> saw <::hero> in the <place>.
+```
 
-Contributions are welcome. Feel free to submit an issue/pull request. The following areas are
-of particular interest:
+**Escapes:** `\C` is a random A–Z letter.
 
-Documentation (wiki/code)
+NSFW entries are omitted unless the query asks (`<noun nsfw>`) or you pass `{ nsfw: true }`.
 
-Fixing bugs
+## API
 
-Optimization
+```ts
+import { rant, createRant, enUS } from "rantjs";
 
-Functions in the development plan
+rant(pattern);
+rant(pattern, { seed: 42 });
+rant(pattern, { seed: "chapter-1", nsfw: false, dictionary: enUS });
+rant(pattern, customDictionary); // 1.x-compatible second argument
 
-New language features
+const r = createRant({ seed: 42 });
+r.run(pattern);
+r.run(pattern, { seed: 99 });
+```
 
-Testing. Currently, this is the result of the coverage report:
+Custom dictionary shape:
 
-    Statements   : 96.44% ( 461/478 )
-    Branches     : 67.65% ( 46/68 )
-    Functions    : 100% ( 18/18 )
-    Lines        : 97.24% ( 458/471 )
+```ts
+const pets = {
+  tables: {
+    pet: {
+      name: "pet",
+      subs: ["default", "plural"],
+      entries: [{ forms: ["capybara", "capybaras"], classes: ["animal"] }],
+    },
+  },
+};
+```
 
-Ideally, it should be 100% on everything
+## Browser
 
-## New in version 1.0.0
+ESM:
 
-  Added option for custom dictionaries. Note that this replaces the built-in dictionary.
-  
-    var yourCustomDic = {}
-    ...
-    rant('your text', yourCustomDic);
-     
-A sample dictionary file can be found in the ./src folder. Also take a look at the built-in english dicionary in the same folder for reference.
+```html
+<script type="module">
+  import { rant } from "https://cdn.jsdelivr.net/npm/rantjs@2.0.0/+esm";
+  document.body.textContent = rant("<greet> <firstname>.");
+</script>
+```
 
-## New in version 0.9.x
+Script tag (cdnjs / jsDelivr):
 
-  0.9.7 - Added nonsense verbs from Rantionary
-  
-  0.9.5 - Added verbs for success and defeat
-  
-  0.9.4 - Added Death (<verb death>)
-  
-  0.9.3 - Added climb (<verb climb up|down>)
+```html
+<script src="https://cdn.jsdelivr.net/npm/rantjs@2.0.0/dist/rant.min.js"></script>
+<script>
+  document.body.textContent = rant("<greet> <firstname>.");
+</script>
+```
 
-## New in version 0.9.1
+The IIFE build assigns `rant` on `globalThis`. The Node/ESM build does not touch `window`.
 
-  Rewrote Rantjs for CommonJS. 
-  
-  Removed several gulp tasks (concat, minify)
- 
-  Refactored the tests
- 
-  Renamed the app internally
- 
-  New usage syntax (not compatible with 0.8.x)
- 
-  You can now call Rantjs directly from require:
-  
-    var sentence=require("rantjs")("<firstname male> likes to <verb-transitive> 
-    <noun.plural> with <pron poss male> pet <noun-animal> on <timenoun dayofweek plural>.");
- 
-  Added randomization:
-  
-    require("rantjs")("A random string: [rep:8][sep:\N]{\C}");
-    //A random string: XUACJGOGN
+## CLI
 
-## New in version 0.8.6
+```bash
+rantjs '<pattern>'
+rantjs --seed 7 -f story.rant
+rantjs --nsfw '<adj nsfw> <noun>'
+```
 
-  Added support for [rep:x]
+## Development
 
-  Usage:
+```bash
+npm install
+npm test
+npm run demo          # playground at http://localhost:5173
+```
 
-    [case:title][sep:\n][rep:3]{I like <noun animal plural> but not <noun animal plural>}
+Dictionary sources live in `vocab/` (Rantionary plus a few custom tables). `npm run build:dict` compiles them into `src/dictionaries/en-US.ts`.
 
-    // I Like Ogres but not Turtles
-    // I Like Bulls but not Horses
-    // I Like Poodles but not Owls
+The playground is `npm run demo`. After GitHub Pages is enabled it will live at `https://robbestad.github.io/Rantjs/`.
 
-   Note: [sep:\n] dictates newlines. Alternatively, you can specify \s for space.
+## Migrating from 1.x
 
-## New in version 0.8.5
+- Node 18+.
+- `import { rant } from "rantjs"` (or `require("rantjs").rant`).
+- `window.rant` is only set by the IIFE browser file, not by `require("rantjs")`.
+- `String.prototype` is no longer patched.
+- Some dictionary words changed; the query syntax did not.
 
-  Added support for [case]-tag.
+## License
 
-  Usage:
-
-    [case:upper]<firstname male>
-
-  Variants:
-
-    [case:none|default|word|upper|lower|case|sentence]
-
-
-
-[1]: https://github.com/TheBerkin/Rant
-[3]: https://www.npmjs.com/package/rantjs
-[4]: http://www.robbestad.com/blog/procedurally-generated-text-with-rantjs
-[5]: http://rantjs.surge.sh/
+ISC

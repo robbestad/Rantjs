@@ -1,0 +1,100 @@
+#version 2
+#name emo
+#subs default
+
+> anger
+  | pron "{N-g3`
+> anticipation
+  | pron {n-tI-sV-p"eI-SVn
+> awe
+  | pron "O
+> bewilderment
+  | pron bI-w"Il-d3`-mVnt
+> bliss
+  | pron bl"Is
+> boredom
+  | pron b"Orr-dVm
+> confusion
+  | pron kVn-fj"u-ZVn
+> contempt
+  | pron kVn-t"Empt
+> contentment
+  | pron kVn-t"Ent-mVnt
+> despair
+  | pron dI-sp"err
+> disappointment
+  | pron d%Is-V-p"OInt-mVnt
+> ecstasy
+  | pron "Ek-stV-si
+> envy
+  | pron "En-vi
+> excitement
+  | pron Ik-s"aIt-mVnt
+> fright
+  | pron fr"aIt
+> fury
+  | pron fj"U-ri
+> gratitude
+  | pron gr"{-tV-t%ud
+> guilt
+  | pron g"Ilt
+> happiness
+  | pron h"{-pi-nVs
+> hatred
+  | pron h"eI-trVd
+> horror
+  | pron h"O-r3`
+> humility
+  | pron hju-m"I-lI-ti
+> hunger
+  | pron h"VN-g3`
+> interest
+  | pron "In-t3`-Ist
+> irritation
+  | pron %I-rI-t"eI-SVn
+> joy
+  | pron dZ"OI
+> longing
+  | pron l"O-NIN
+> love
+  | pron l"Vv
+> lust
+  | pron l"Vst
+> madness
+  | pron m"{d-nVs
+> melancholy
+  | pron m"E-lVn-k%A-li
+> optimism
+  | pron "Ap-tV-m%I-zVm
+> pain
+  | pron p"eIn
+> passion
+  | pron p"{-SVn
+> pity
+  | pron p"I-ti
+> pleasure
+  | pron pl"E-Z3`
+> pride
+  | pron pr"aId
+> rage
+  | pron r"eIdZ
+> remorse
+  | pron rI-m"Orrs
+> sadness
+  | pron s"{d-nVs
+> satisfaction
+  | pron s%{-tIs-f"{k-SVn
+> shame
+  | pron S"eIm
+> shock
+  | pron S"Ak
+> smugness
+  | pron sm"Vg-nVs
+> sorrow
+  | pron s"A-roU
+> surprise
+  | pron sV-pr"aIz
+> terror
+  | pron t"E-r3`
+> torment
+  | pron tOrr-m"Ent

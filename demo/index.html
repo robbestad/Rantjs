@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23b5441f' width='32' height='32'/%3E%3Ctext x='16' y='22' text-anchor='middle' fill='%23f4efe4' font-size='16' font-family='serif'%3ER%3C/text%3E%3C/svg%3E" />
+    <title>Rantjs — procedural text</title>
+    <meta
+      name="description"
+      content="Rantjs is a procedural text generator for JavaScript. Write a pattern, get a sentence."
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="mast">
+        <div>
+          <p class="eyebrow">Procedural text for JavaScript</p>
+          <h1>Rant<em>js</em></h1>
+        </div>
+        <nav>
+          <a href="https://github.com/robbestad/Rantjs">GitHub</a>
+          <a href="https://www.npmjs.com/package/rantjs">npm</a>
+        </nav>
+      </header>
+
+      <section class="stage">
+        <label for="pattern">Pattern</label>
+        <textarea id="pattern" spellcheck="false"></textarea>
+        <div class="toolbar">
+          <button type="button" id="run">Run pattern</button>
+          <label class="seed">
+            Seed
+            <input id="seed" type="text" inputmode="numeric" placeholder="optional" />
+          </label>
+          <button type="button" id="reseed" class="ghost">New seed</button>
+          <button type="button" id="copy" class="ghost">Copy output</button>
+        </div>
+        <label for="output">Output</label>
+        <textarea id="output" readonly spellcheck="false"></textarea>
+        <p id="status" class="status" hidden></p>
+      </section>
+
+      <section>
+        <h2>Examples</h2>
+        <div class="chips" id="examples"></div>
+      </section>
+
+      <section class="grid">
+        <article>
+          <h2>Queries</h2>
+          <p>
+            Angle brackets pull a random word from the dictionary. Filters and
+            inflections can be written with a space, dash, or dot.
+          </p>
+          <pre>&lt;firstname male&gt;
+&lt;noun-animal plural&gt;
+&lt;verb.ed&gt;
+&lt;pron poss male&gt;</pre>
+        </article>
+        <article>
+          <h2>Blocks</h2>
+          <p>
+            Curly braces choose an alternative. Repeaters and separators apply
+            to the next block. A block with no repeater runs once.
+          </p>
+          <pre>{heads|tails}
+[rep:3][sep:\s]{click|clack}
+{plain text works now}</pre>
+        </article>
+        <article>
+          <h2>Carriers &amp; articles</h2>
+          <p>
+            Name a result so you can reuse it. <code>[a]</code> inserts
+            <em>a</em> or <em>an</em> in front of the next word.
+          </p>
+          <pre>&lt;firstname male :: hero&gt; saw &lt;::hero&gt;
+[a] &lt;noun animal&gt;</pre>
+        </article>
+      </section>
+
+      <footer>
+        <p>
+          Rantjs 2.0 — inspired by
+          <a href="https://github.com/TheBerkin/rant3">Rant</a>. Dictionary
+          compiled from Rantionary.
+        </p>
+      </footer>
+    </div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

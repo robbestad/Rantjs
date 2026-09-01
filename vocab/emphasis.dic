@@ -1,0 +1,31 @@
+#version 2
+#name em
+#subs default
+
+> absolutely
+  | pron %{b-sV-l"ut-li
+> extremely
+  | pron Ik-str"im-li
+> incredibly
+  | pron In-kr"E-dV-bli
+> majorly
+> most
+  | pron m"oUs
+> oh so
+  | pron "oU s"oU
+> positively
+  | pron p"A-zV-tIv-li
+> quite
+  | pron kw"aIt
+> rather
+  | pron r"V-D3`
+> really
+  | pron r"i-li
+> super
+  | pron s"u-p3`
+> thoroughly
+  | pron T"3`-oU-li
+> unbelievably
+  | pron %Vn-bV-l"i-vV-bli
+> very
+  | pron v"E-ri

@@ -1,0 +1,26 @@
+#version 2
+#name vocal
+#subs default
+
+> aargh
+> ahem
+> ahhhh
+> boo hoo
+  | pron b"u h"u
+> eeeeeeee
+> eeek
+> ha ha ha
+  | pron "eI-tS"eI "eI-tS"eI "eI-tS"eI
+> mmmmmm
+> muahahaha
+> oof
+> oooh
+  | pron "u
+> ouch
+  | pron "aUtS
+> ugh
+  | pron "Vg
+> uhhhm
+> wow
+  | pron w"aU
+> yikes
