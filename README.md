@@ -2,6 +2,8 @@
 
 Procedural text for JavaScript. Write a pattern, get a sentence.
 
+[Live demo](https://rantjs.vercel.app)
+
 Inspired by [Rant](https://github.com/TheBerkin/rant3). This is the Rantjs dialect (`<noun>`, `[rep:3]{...}`), not a Rant 4 VM.
 
 ```js
@@ -129,7 +131,7 @@ npm run demo          # playground at http://localhost:5173
 
 Dictionary sources live in `vocab/` (Rantionary plus a few custom tables). `npm run build:dict` compiles them into `src/dictionaries/en-US.ts`.
 
-The playground is `npm run demo`. After GitHub Pages is enabled it will live at `https://robbestad.github.io/Rantjs/`.
+The playground is `npm run demo`. The live demo is at [rantjs.vercel.app](https://rantjs.vercel.app).
 
 ## Migrating from 1.x
 

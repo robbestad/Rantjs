@@ -1,0 +1,6 @@
+.playwright-mcp
+demo-desktop.png
+demo-mobile.png
+demo/dist
+dist
+.env*

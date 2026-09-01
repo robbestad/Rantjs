@@ -1,6 +1,7 @@
 node_modules
 coverage
 demo/dist
+.vercel
 .DS_Store
 *.local
 .sass-cache
@@ -17,3 +18,4 @@ dist/index.js
 dist/index.cjs
 dist/index.d.ts
 dist/index.d.cts
+.env*
