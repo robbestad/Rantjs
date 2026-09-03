@@ -226,7 +226,7 @@ export const App = create<Record<string, never>, DemoState>({
           </p>
           <a
             className="svenjs-credit"
-            href="https://svenjs.vercel.app/"
+            href="https://svenjs.xyz/"
             rel="noopener noreferrer"
           >
             <img
