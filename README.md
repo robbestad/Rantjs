@@ -4,6 +4,8 @@
 
 [Live demo](https://rantjs.vercel.app) · [Short story generator](https://rantjs-storydemo.vercel.app) · Inspired by [Rant](https://github.com/TheBerkin/rant3). This is the Rantjs dialect (`<noun>`, `[rep:3]{...}`), not a Rant 4 VM.
 
+rantjs 3.0 is frozen. The next language is **[Skald](https://github.com/robbestad/skald-lang)** (`skald-lang` on npm): the same pattern shape, a Rust+WASM VM, dictionary entries as values, rhyme, channels, and `explain()`. Seeds are not portable.
+
 ```js
 import { rant } from "rantjs";
 
@@ -238,7 +240,7 @@ npm run demo          # playground at http://localhost:5173
 
 Dictionary sources live in `vocab/` (Rantionary plus a few custom tables). `npm run build:dict` compiles them into `src/dictionaries/en-US.ts`.
 
-The playground is a [SvenJS 3.2.1](https://svenjs.vercel.app/) app (`npm run demo`). The live demo is at [rantjs.vercel.app](https://rantjs.vercel.app). A longer seeded example is the [short story generator](https://rantjs-storydemo.vercel.app).
+The playground is a [SvenJS 3.2.1](https://svenjs.vercel.app/) app (`npm run demo`). The live demo is at [rantjs.vercel.app](https://rantjs.vercel.app). A longer seeded example is the [short story generator](https://rantjs-storydemo.vercel.app) (Dickens, Shakespeare, Tarantino, and others).
 
 [![SvenJS](demo/svenjs-mark.svg)](https://svenjs.vercel.app/)
 
