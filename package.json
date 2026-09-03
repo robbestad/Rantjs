@@ -1,7 +1,7 @@
 {
   "name": "rantjs",
   "version": "2.1.0",
-  "description": "A procedural text generator for JavaScript",
+  "description": "Write a pattern, get a sentence. Seeded procedural text for JavaScript.",
   "license": "ISC",
   "author": {
     "name": "Sven Anders Robbestad",
@@ -12,17 +12,22 @@
     "type": "git",
     "url": "git+https://github.com/robbestad/Rantjs.git"
   },
-  "homepage": "https://github.com/robbestad/Rantjs",
+  "homepage": "https://rantjs.vercel.app",
   "bugs": {
     "url": "https://github.com/robbestad/Rantjs/issues"
   },
   "keywords": [
     "rant",
-    "procedural",
-    "text",
-    "generator",
+    "procedural-generation",
+    "procedural-text",
+    "text-generation",
+    "seeded",
+    "dictionary",
     "javascript",
-    "random",
+    "typescript",
+    "cli",
+    "npc",
+    "flavor-text",
     "sentences"
   ],
   "type": "module",
@@ -61,13 +66,14 @@
     "build:dict": "tsx scripts/compile-dictionaries.ts",
     "test": "npm run build:dict && vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p demo/tsconfig.json",
     "demo": "npm run build:dict && vite --config demo/vite.config.ts",
     "demo:build": "npm run build:dict && vite build --config demo/vite.config.ts",
     "prepublishOnly": "npm run test && npm run build"
   },
   "devDependencies": {
     "@types/node": "^26.4.0",
+    "svenjs": "^3.2.1",
     "tsup": "^8.5.1",
     "tsx": "^4.23.13",
     "typescript": "~5.6.3",

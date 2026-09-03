@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 326 326" role="img" aria-label="SvenJS">
+  <rect width="326" height="326" rx="72" fill="#312725"/>
+  <g fill="#e07a3d" transform="translate(0 4)">
+    <polygon points="127,73 258,73 204,130 78,129"/>
+    <polygon points="78,129 121,129 172,184 131,184"/>
+    <polygon points="154,139 198,139 249,195 205,195"/>
+    <polygon points="116,193 249,195 199,250 66,250"/>
+  </g>
+</svg>

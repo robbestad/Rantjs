@@ -175,6 +175,18 @@ button.ghost {
   padding: 12px 14px;
 }
 
+.chips button.active {
+  border-color: var(--accent);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.hint {
+  margin: -8px 0 16px;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -204,8 +216,58 @@ footer {
   margin-top: 48px;
   border-top: 1px solid var(--rule);
   padding-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   font-family: ui-sans-serif, system-ui, sans-serif;
   color: var(--muted);
+}
+
+footer p {
+  margin: 0;
+}
+
+.svenjs-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--field);
+  border: 1px solid var(--rule);
+  padding: 6px 14px 6px 6px;
+}
+
+.svenjs-credit:hover {
+  border-color: var(--accent);
+}
+
+.svenjs-mark {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+.svenjs-credit-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.15;
+}
+
+.svenjs-credit-kicker {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.svenjs-credit-name {
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 @media (max-width: 640px) {
