@@ -33,9 +33,24 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 24px;
-  align-items: end;
+  align-items: center;
   border-bottom: 1px solid var(--rule);
   padding-bottom: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.brand-mark {
+  display: block;
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  flex-shrink: 0;
 }
 
 .eyebrow {
@@ -283,6 +298,12 @@ footer p {
   .mast {
     flex-direction: column;
     align-items: start;
+  }
+
+  .brand-mark {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
   }
 
   .toolbar {

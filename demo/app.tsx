@@ -1,5 +1,6 @@
 import { create } from "svenjs";
 import { explain } from "rantjs";
+import rantjsMark from "./rantjs-mark.svg";
 import svenjsMark from "./svenjs-mark.svg";
 
 const EXAMPLES = [
@@ -96,11 +97,20 @@ export const App = create<Record<string, never>, DemoState>({
     return (
       <div className="page">
         <header className="mast">
-          <div>
-            <p className="eyebrow">Procedural text for JavaScript</p>
-            <h1>
-              Rant<em>js</em>
-            </h1>
+          <div className="brand">
+            <img
+              className="brand-mark"
+              src={rantjsMark}
+              width="72"
+              height="72"
+              alt=""
+            />
+            <div>
+              <p className="eyebrow">Write a pattern, get a sentence</p>
+              <h1>
+                Rant<em>js</em>
+              </h1>
+            </div>
           </div>
           <nav>
             <a href="https://github.com/robbestad/Rantjs">GitHub</a>

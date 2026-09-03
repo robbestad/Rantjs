@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 326 326" role="img" aria-label="Rantjs">
+  <rect width="326" height="326" rx="72" fill="#b5441f"/>
+  <path fill="#f4efe4" d="M128 84 L76 163 L128 242 L160 242 L108 163 L160 84 Z"/>
+  <path fill="#f4efe4" d="M198 84 L250 163 L198 242 L166 242 L218 163 L166 84 Z"/>
+  <circle cx="163" cy="163" r="22" fill="#f4efe4"/>
+</svg>
