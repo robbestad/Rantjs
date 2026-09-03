@@ -110,4 +110,12 @@ describe("Rant 3 numbers and weights", () => {
     const out = run("[x:s;locked]{A|B}[x:s;locked]{A|B}");
     expect(out === "AA" || out === "BB").toBe(true);
   });
+
+  it("skips a block when chance is zero", () => {
+    expect(run("[chance:0]{secret}ok")).toBe("ok");
+  });
+
+  it("protects inner attrs from leaking", () => {
+    expect(run("[rep:3][protect:-]{a}")).toBe("-aaa");
+  });
 });

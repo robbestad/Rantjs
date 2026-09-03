@@ -6,6 +6,7 @@ import type {
   TagNode,
   Token,
 } from "../ast.ts";
+import { resolveArgName, resolveTableName } from "../aliases.ts";
 import { tokenize } from "./lexer.ts";
 
 class ParseError extends Error {
@@ -72,17 +73,6 @@ function splitAtDepth(input: string, sep: string): string[] {
   return parts;
 }
 
-const TABLE_ALIASES: Record<string, string> = {
-  name: "firstname",
-  pro: "pron",
-  with: "preposition",
-};
-
-const ARG_ALIASES: Record<string, string> = {
-  pl: "plural",
-  dposs: "poss",
-};
-
 export function parseQueryInner(inner: string): QueryNode {
   const carrierIdx = inner.indexOf("::");
   let body = inner;
@@ -92,7 +82,7 @@ export function parseQueryInner(inner: string): QueryNode {
     body = inner.slice(0, carrierIdx);
     const rest = inner.slice(carrierIdx + 2).trim();
     if (rest.startsWith("&")) {
-      carrierKind = "rhyme";
+      carrierKind = "match";
       carrier = rest.slice(1).trim();
     } else if (rest.startsWith("!")) {
       carrierKind = "unique";
@@ -117,10 +107,10 @@ export function parseQueryInner(inner: string): QueryNode {
       continue;
     }
     if (!table) {
-      table = TABLE_ALIASES[word] ?? word;
+      table = resolveTableName(word);
       continue;
     }
-    args.push(ARG_ALIASES[word] ?? word);
+    args.push(resolveArgName(word));
   }
   return {
     type: "query",

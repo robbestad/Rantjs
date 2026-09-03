@@ -8,7 +8,7 @@ export type CaseMode =
   | "lower"
   | "sentence";
 
-export type CarrierKind = "match" | "unique" | "rhyme";
+export type CarrierKind = "match" | "unique";
 
 export type Node =
   | TextNode

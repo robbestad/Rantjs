@@ -1,9 +1,6 @@
+import { TABLE_ALIASES } from "../aliases.ts";
+import { buildTableIndex } from "./index-table.ts";
 import type { Dictionary, Entry, Table } from "./types.ts";
-
-const NAME_ALIASES: Record<string, string> = {
-  name: "firstname",
-  with: "preposition",
-};
 
 export interface CompileOptions {
   aliases?: Record<string, string>;
@@ -85,7 +82,7 @@ export function compileDic(source: string, fallbackName = "unknown"): Table {
       if (!word || word === "|") continue;
       lastEntry = {
         forms: word.split("/").map((f) => f.trim()),
-        classes: activeClasses().map(normalizeClass).map((c) => c.toLowerCase()),
+        classes: activeClasses().map(normalizeClass),
       };
       entries.push(lastEntry);
       continue;
@@ -93,35 +90,34 @@ export function compileDic(source: string, fallbackName = "unknown"): Table {
 
     if (line.startsWith("|") && lastEntry) {
       const meta = line.replace(/^\|\s?/, "");
-      if (/^pron\b/i.test(meta)) {
-        lastEntry.pron = meta
-          .replace(/^pron\s+/i, "")
-          .split("/")
-          .map((p) => p.trim())
-          .filter(Boolean);
-        continue;
-      }
+      if (/^pron\b/i.test(meta)) continue;
       if (/^weight\b/i.test(meta)) continue;
       const classMatch = meta.match(/^class\s+(.+)$/i);
       if (classMatch) {
         const extra = classMatch[1]!.split(/\s+/).map(normalizeClass).filter(Boolean);
         for (const c of extra) {
-          const lower = c.toLowerCase();
-          if (!lastEntry.classes.includes(lower)) lastEntry.classes.push(lower);
+          if (!lastEntry.classes.includes(c)) lastEntry.classes.push(c);
         }
       }
     }
   }
 
-  const resolved = NAME_ALIASES[name] ?? name;
-  return { name: resolved, subs: subs.map((s) => s.toLowerCase()), entries };
+  const resolved = TABLE_ALIASES[name] ?? name;
+  const { byClass, hasNsfw } = buildTableIndex(entries);
+  return {
+    name: resolved,
+    subs: subs.map((s) => s.toLowerCase()),
+    entries,
+    byClass,
+    hasNsfw,
+  };
 }
 
 export function compileDictionaries(
   files: { name: string; source: string }[],
   options: CompileOptions = {},
 ): Dictionary {
-  const aliases = { ...NAME_ALIASES, ...options.aliases };
+  const aliases = { ...TABLE_ALIASES, ...options.aliases };
   const tables: Record<string, Table> = {};
   for (const file of files) {
     const fallback = file.name.replace(/\.dic$/i, "").replace(/\s+/g, "_").toLowerCase();
@@ -135,9 +131,11 @@ export function compileDictionaries(
     } else {
       tables[aliased] = table;
     }
-    if (table.name !== aliased && !(table.name in tables)) {
-      tables[table.name] = tables[aliased]!;
-    }
+  }
+  for (const table of Object.values(tables)) {
+    const { byClass, hasNsfw } = buildTableIndex(table.entries);
+    table.byClass = byClass;
+    table.hasNsfw = hasNsfw;
   }
   return { tables };
 }

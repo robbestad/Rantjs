@@ -18,4 +18,14 @@ dist/index.js
 dist/index.cjs
 dist/index.d.ts
 dist/index.d.cts
+dist/engine.js
+dist/engine.cjs
+dist/engine.d.ts
+dist/engine.d.cts
+dist/dic.js
+dist/dic.cjs
+dist/dic.d.ts
+dist/dic.d.cts
+dist/types-*.d.ts
+dist/types-*.d.cts
 .env*

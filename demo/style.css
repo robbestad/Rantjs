@@ -187,6 +187,15 @@ button.ghost {
   color: var(--muted);
 }
 
+.picks {
+  margin: -8px 0 16px;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
+  word-break: break-word;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

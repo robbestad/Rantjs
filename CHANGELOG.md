@@ -1,5 +1,33 @@
 # Changelog
 
+## 3.0.0
+
+Smaller dialect, faster queries, patterns as values.
+
+### Added
+- `compile(pattern)` — parse once, `run()` many times
+- `explain(pattern)` — text plus the dictionary picks that produced it
+- `createRant().compile(pattern)`
+- Class indexes on compiled tables (`byClass`)
+- `import { rant } from "rantjs/engine"` — interpreter without English
+- `import { compileDic } from "rantjs/dic"`
+
+### Changed
+- Unknown tags throw
+- Shipped dictionary drops pronunciation strings (they only served rhyme)
+- `{ nsfw: true }` still admits `nsfw`-class entries; the shipped English tables have none
+- Default case path and query matching are unchanged for the documented dialect
+
+### Removed
+- Channels, subroutines, query builders, replacers, targets, `[capsinfer]`, rhyme carriers (`::&id`)
+- 1.x legacy dictionary objects as the second argument to `rant()`
+- `createRant().channels`
+- Root exports of `parse`, `compileDic`, `createRng`
+- Unminified `dist/rant.js` (use `rant.min.js`)
+
+### Measure
+Run `npm run bench` after `npm run build`.
+
 ## 2.1.0
 
 Rant 3 generator kit so official-style samples can run.

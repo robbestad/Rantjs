@@ -1,5 +1,5 @@
 import { create } from "svenjs";
-import { rant } from "rantjs";
+import { explain } from "rantjs";
 import svenjsMark from "./svenjs-mark.svg";
 
 const EXAMPLES = [
@@ -16,6 +16,7 @@ type DemoState = {
   pattern: string;
   seed: string;
   output: string;
+  picks: string;
   status: string;
 };
 
@@ -26,15 +27,23 @@ function parseSeed(value: string): number | string | undefined {
   return trimmed;
 }
 
-function evaluate(pattern: string, seed: string): Pick<DemoState, "output" | "status"> {
+function evaluate(
+  pattern: string,
+  seed: string,
+): Pick<DemoState, "output" | "picks" | "status"> {
   if (!pattern.trim()) {
-    return { output: "", status: "Write a pattern first." };
+    return { output: "", picks: "", status: "Write a pattern first." };
   }
   try {
-    return { output: rant(pattern, { seed: parseSeed(seed) }), status: "" };
+    const { text, picks } = explain(pattern, { seed: parseSeed(seed) });
+    const summary = picks
+      .map((p) => (p.carrier ? `${p.table} (${p.carrier})=${p.value}` : `${p.table}=${p.value}`))
+      .join(" · ");
+    return { output: text, picks: summary, status: "" };
   } catch (err) {
     return {
       output: "",
+      picks: "",
       status: err instanceof Error ? err.message : String(err),
     };
   }
@@ -82,7 +91,7 @@ export const App = create<Record<string, never>, DemoState>({
     }
   },
   render() {
-    const { pattern, seed, output, status } = this.state;
+    const { pattern, seed, output, picks, status } = this.state;
 
     return (
       <div className="page">
@@ -162,6 +171,7 @@ export const App = create<Record<string, never>, DemoState>({
               this._output = el;
             }}
           />
+          {picks ? <p className="picks">{picks}</p> : null}
           {status ? (
             <p className="status" role="status" aria-live="polite">
               {status}
@@ -220,7 +230,7 @@ export const App = create<Record<string, never>, DemoState>({
 
         <footer>
           <p>
-            Rantjs 2.1 — inspired by{" "}
+            Rantjs 3.0 — inspired by{" "}
             <a href="https://github.com/TheBerkin/rant3">Rant</a>. Dictionary
             compiled from Rantionary.
           </p>

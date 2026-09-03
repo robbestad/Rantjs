@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
-import { rant } from "./rant.ts";
+import { rant } from "./index.ts";
 
-export const VERSION = "2.1.0";
+export const VERSION = "3.0.0";
 
 function printHelp(): void {
   process.stdout.write(`Usage: rantjs [options] <pattern>

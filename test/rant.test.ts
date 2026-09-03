@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createRant, rant } from "../src/index.ts";
+import { compile, createRant, explain, rant } from "../src/index.ts";
 
 describe("rant()", () => {
   it("returns a non-empty sentence for the classic example", () => {
@@ -77,12 +77,79 @@ describe("rant()", () => {
     expect(out).toBe("capybara");
   });
 
-  it("accepts a 1.x-shaped custom dictionary", () => {
-    const out = rant("[case:none]<pet>", {
-      tokens: ["pet"],
-      pet: { all: ["wombat"], subs: ["default"] },
-    } as never);
-    expect(out).toBe("wombat");
+  it("omits nsfw entries unless the flag is set", () => {
+    const dict = {
+      tables: {
+        pet: {
+          name: "pet",
+          subs: ["default"],
+          entries: [
+            { forms: ["capybara"], classes: [] },
+            { forms: ["forbidden"], classes: ["nsfw"] },
+          ],
+        },
+      },
+    };
+    for (let i = 0; i < 20; i++) {
+      expect(rant("[case:none]<pet>", { seed: i, dictionary: dict })).toBe(
+        "capybara",
+      );
+    }
+    const wild = new Set(
+      Array.from({ length: 40 }, (_, i) =>
+        rant("[case:none]<pet>", { seed: i, dictionary: dict, nsfw: true }),
+      ),
+    );
+    expect(wild.has("forbidden")).toBe(true);
+  });
+
+  it("throws on an unknown tag", () => {
+    expect(() => rant("[nope]hi", { seed: 1 })).toThrow(/Unknown tag/);
+  });
+
+  it("does not repeat unique carrier forms", () => {
+    const out = rant(
+      "[case:none]<yn yes ::!a> <yn yes ::!a> <yn yes ::!a>",
+      { seed: 4 },
+    );
+    const words = out.split(/\s+/);
+    expect(new Set(words).size).toBe(words.length);
+  });
+});
+
+describe("compile and explain", () => {
+  it("compile().run matches rant() for a seed", () => {
+    const pattern =
+      "<firstname male> likes to <verb-transitive> <noun.plural>.";
+    const a = rant(pattern, { seed: 42 });
+    const b = compile(pattern).run({ seed: 42 });
+    expect(b).toBe(a);
+  });
+
+  it("keeps seeded goldens stable", () => {
+    expect(
+      rant(
+        "<firstname male> likes to <verb-transitive> <noun.plural> with <pron poss male> pet <noun-animal> on <timenoun dayofweek plural>.",
+        { seed: 42 },
+      ),
+    ).toBe("Elias likes to crush fans with his pet bat on Sundays.");
+    expect(
+      rant(
+        "[case:none]<firstname male :: hero> walked into the <place> with <pron poss male> <noun-animal>. <::hero> did not knock.",
+        { seed: 42 },
+      ),
+    ).toBe("Elias walked into the alley with his peacock. Elias did not knock.");
+  });
+
+  it("explain lists dictionary picks", () => {
+    const { text, picks } = explain(
+      "[case:none]<firstname male :: hero> and <::hero>",
+      { seed: 11 },
+    );
+    expect(text.split(" and ")[0]).toBe(text.split(" and ")[1]);
+    expect(picks.length).toBeGreaterThanOrEqual(1);
+    expect(picks[0]?.table).toBe("firstname");
+    expect(picks[0]?.carrier).toBe("hero");
   });
 });
 

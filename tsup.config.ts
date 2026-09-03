@@ -2,7 +2,11 @@ import { defineConfig } from "tsup";
 
 export default defineConfig([
   {
-    entry: { index: "src/index.ts" },
+    entry: {
+      index: "src/index.ts",
+      engine: "src/engine.ts",
+      dic: "src/dic.ts",
+    },
     format: ["esm", "cjs"],
     dts: true,
     splitting: false,
@@ -21,22 +25,6 @@ export default defineConfig([
     banner: { js: "#!/usr/bin/env node" },
   },
   {
-    entry: { rant: "src/browser.ts" },
-    format: ["iife"],
-    globalName: "rant",
-    minify: false,
-    sourcemap: true,
-    platform: "browser",
-    target: "es2018",
-    clean: false,
-    footer: {
-      js: "if (typeof rant !== 'undefined' && rant.default) { rant = rant.default; }",
-    },
-    outExtension() {
-      return { js: ".js" };
-    },
-  },
-  {
     entry: { "rant.min": "src/browser.ts" },
     format: ["iife"],
     globalName: "rant",
@@ -53,4 +41,3 @@ export default defineConfig([
     },
   },
 ]);
-

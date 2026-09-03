@@ -6,13 +6,17 @@ import { runTag } from "./functions.ts";
 import {
   capture,
   defaultAttrs,
+  finish,
   write,
   type InterpretContext,
 } from "./runtime.ts";
 import { pickSynced } from "./sync.ts";
 
-const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const DIGITS = "0123456789";
+const LETTERS = [
+  "A","B","C","D","E","F","G","H","I","J","K","L","M",
+  "N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
+];
+const DIGITS = ["0","1","2","3","4","5","6","7","8","9"];
 
 function pickWeighted(block: BlockNode, ctx: InterpretContext): number {
   const n = block.alternatives.length;
@@ -64,8 +68,8 @@ function evalNode(node: Node, ctx: InterpretContext): void {
       write(ctx, node.value);
       return;
     case "escape":
-      if (node.code === "C") write(ctx, ctx.rng.pick(LETTERS.split("")));
-      else if (node.code === "d") write(ctx, ctx.rng.pick(DIGITS.split("")));
+      if (node.code === "C") write(ctx, ctx.rng.pick(LETTERS));
+      else if (node.code === "d") write(ctx, ctx.rng.pick(DIGITS));
       else write(ctx, node.code);
       return;
     case "query":
@@ -84,6 +88,16 @@ function isBlock(node: Node | undefined): node is BlockNode {
   return node?.type === "block";
 }
 
+function needsCapture(ctx: InterpretContext): boolean {
+  return (
+    ctx.pendingArticle ||
+    ctx.attrs.rep !== 1 ||
+    Boolean(ctx.attrs.sep) ||
+    ctx.attrs.chance < 100 ||
+    Boolean(ctx.attrs.sync)
+  );
+}
+
 export function evalSequence(nodes: Node[], ctx: InterpretContext): void {
   let i = 0;
   while (i < nodes.length) {
@@ -96,10 +110,7 @@ export function evalSequence(nodes: Node[], ctx: InterpretContext): void {
     }
 
     if (
-      (ctx.attrs.rep !== 1 ||
-        ctx.attrs.sep ||
-        ctx.pendingArticle ||
-        ctx.pendingIf !== undefined) &&
+      needsCapture(ctx) &&
       node.type === "text" &&
       /^\s*$/.test(node.value)
     ) {
@@ -134,19 +145,18 @@ export function evalSequence(nodes: Node[], ctx: InterpretContext): void {
       continue;
     }
 
-    const piece = capture(ctx, () => evalNode(node, ctx));
-    write(ctx, ctx.pendingArticle ? withArticle(piece) : piece);
-    ctx.pendingArticle = false;
+    if (ctx.pendingArticle) {
+      const piece = capture(ctx, () => evalNode(node, ctx));
+      write(ctx, withArticle(piece));
+      ctx.pendingArticle = false;
+    } else {
+      evalNode(node, ctx);
+    }
     i += 1;
   }
 }
 
 export function interpret(nodes: Node[], ctx: InterpretContext): string {
   evalSequence(nodes, ctx);
-  const raw = ctx.outputs.main ?? "";
-  ctx.channels = { ...ctx.outputs };
-  for (const [k, v] of Object.entries(ctx.channels)) {
-    ctx.channels[k] = applyCase(v, ctx.caseMode);
-  }
-  return ctx.channels.main ?? applyCase(raw, ctx.caseMode);
+  return applyCase(finish(ctx), ctx.caseMode);
 }

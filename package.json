@@ -1,6 +1,6 @@
 {
   "name": "rantjs",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Write a pattern, get a sentence. Seeded procedural text for JavaScript.",
   "license": "ISC",
   "author": {
@@ -43,6 +43,16 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./engine": {
+      "types": "./dist/engine.d.ts",
+      "import": "./dist/engine.js",
+      "require": "./dist/engine.cjs"
+    },
+    "./dic": {
+      "types": "./dist/dic.d.ts",
+      "import": "./dist/dic.js",
+      "require": "./dist/dic.cjs"
     }
   },
   "bin": {
@@ -55,9 +65,18 @@
     "dist/index.cjs",
     "dist/index.d.ts",
     "dist/index.d.cts",
+    "dist/engine.js",
+    "dist/engine.cjs",
+    "dist/engine.d.ts",
+    "dist/engine.d.cts",
+    "dist/dic.js",
+    "dist/dic.cjs",
+    "dist/dic.d.ts",
+    "dist/dic.d.cts",
     "dist/cli.js",
-    "dist/rant.js",
     "dist/rant.min.js",
+    "dist/*.d.ts",
+    "dist/*.d.cts",
     "LICENSE",
     "README.md"
   ],
@@ -66,6 +85,7 @@
     "build:dict": "tsx scripts/compile-dictionaries.ts",
     "test": "npm run build:dict && vitest run",
     "test:watch": "vitest",
+    "bench": "npm run build:dict && tsx scripts/bench.ts",
     "typecheck": "tsc --noEmit && tsc --noEmit -p demo/tsconfig.json",
     "demo": "npm run build:dict && vite --config demo/vite.config.ts",
     "demo:build": "npm run build:dict && vite build --config demo/vite.config.ts",

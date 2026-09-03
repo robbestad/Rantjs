@@ -1,32 +1,26 @@
+import { resolveTableName } from "./aliases.ts";
+import { buildTableIndex } from "./dictionary/index-table.ts";
+import type { Entry, Table } from "./dictionary/types.ts";
 import type { QueryNode } from "./ast.ts";
-import type { Dictionary, Entry, Table } from "./dictionary/types.ts";
+import type { QueryPick } from "./runtime.ts";
 import type { Rng } from "./rng.ts";
 
 export interface QueryRuntime {
-  dictionary: Dictionary;
+  dictionary: { tables: Record<string, Table> };
   rng: Rng;
   nsfw: boolean;
-  matchCarriers: Map<string, { value: string; classes: string[]; pron?: string }>;
+  matchCarriers: Map<string, string>;
   uniqueCarriers: Map<string, Set<string>>;
-  rhymeMode: string;
+  trace: QueryPick[] | null;
 }
 
-const QUERY_ALIASES: Record<string, string> = {
-  name: "firstname",
-  pro: "pron",
-  with: "preposition",
-};
-
-function tableOf(dictionary: Dictionary, name: string): Table | undefined {
+function tableOf(
+  dictionary: QueryRuntime["dictionary"],
+  name: string,
+): Table | undefined {
   if (!name) return undefined;
-  const mapped = QUERY_ALIASES[name] ?? name;
-  const direct = dictionary.tables[mapped] ?? dictionary.tables[name];
-  if (direct) return direct;
-  const lower = mapped.toLowerCase();
-  for (const [key, table] of Object.entries(dictionary.tables)) {
-    if (key.toLowerCase() === lower) return table;
-  }
-  return undefined;
+  const mapped = resolveTableName(name);
+  return dictionary.tables[mapped] ?? dictionary.tables[name];
 }
 
 function matchesClass(entry: Entry, cls: string): boolean {
@@ -48,20 +42,67 @@ function formOf(entry: Entry, index: number): string {
   return entry.forms[index] ?? entry.forms[0] ?? "";
 }
 
-function rhymeKey(pron: string | undefined): string | undefined {
-  if (!pron) return undefined;
-  const i = pron.indexOf('"');
-  const tail = (i >= 0 ? pron.slice(i) : pron).toLowerCase().replace(/[^a-z]/g, "");
-  return tail || undefined;
+function intersectSorted(a: number[], b: number[]): number[] {
+  const out: number[] = [];
+  let i = 0;
+  let j = 0;
+  while (i < a.length && j < b.length) {
+    const av = a[i]!;
+    const bv = b[j]!;
+    if (av === bv) {
+      out.push(av);
+      i += 1;
+      j += 1;
+    } else if (av < bv) i += 1;
+    else j += 1;
+  }
+  return out;
+}
+
+function indexOf(table: Table): { byClass: Record<string, number[]>; hasNsfw: boolean } {
+  if (table.byClass && table.hasNsfw !== undefined) {
+    return { byClass: table.byClass, hasNsfw: table.hasNsfw };
+  }
+  return buildTableIndex(table.entries);
+}
+
+function selectEntries(
+  table: Table,
+  classes: string[],
+  exclude: string[],
+  nsfw: boolean,
+): Entry[] {
+  const { byClass, hasNsfw } = indexOf(table);
+  const wantNsfw = nsfw || classes.includes("nsfw");
+  let idxs: number[] | undefined;
+
+  for (const cls of classes) {
+    if (cls === "nsfw") continue;
+    const bucket = byClass[cls];
+    if (!bucket || bucket.length === 0) return [];
+    idxs = idxs ? intersectSorted(idxs, bucket) : bucket;
+  }
+
+  let list: Entry[];
+  if (idxs) list = idxs.map((i) => table.entries[i]!);
+  else list = table.entries;
+
+  if (hasNsfw && !wantNsfw) {
+    list = list.filter((e) => !e.classes.includes("nsfw"));
+  }
+  for (const cls of exclude) {
+    list = list.filter((e) => !matchesClass(e, cls));
+  }
+  return list;
 }
 
 export function resolveQuery(query: QueryNode, ctx: QueryRuntime): string {
-  if (query.carrier && query.carrierKind !== "unique" && query.carrierKind !== "rhyme") {
+  if (query.carrier && query.carrierKind !== "unique") {
     const hit = ctx.matchCarriers.get(query.carrier);
-    if (hit) return hit.value;
+    if (hit) return hit;
   }
   if (query.carrier && !query.table && query.carrierKind !== "unique") {
-    return ctx.matchCarriers.get(query.carrier)?.value ?? "";
+    return ctx.matchCarriers.get(query.carrier) ?? "";
   }
 
   if (!query.table) {
@@ -74,40 +115,22 @@ export function resolveQuery(query: QueryNode, ctx: QueryRuntime): string {
   let formIndex = 0;
   const classes: string[] = [];
   for (const arg of query.args) {
-    const subIdx = table.subs.findIndex((s) => s === arg);
+    const subIdx = table.subs.indexOf(arg);
     if (subIdx >= 0) formIndex = subIdx;
     else classes.push(arg);
   }
 
-  const wantNsfw = ctx.nsfw || classes.includes("nsfw");
-  let entries = table.entries;
-  if (!wantNsfw) entries = entries.filter((e) => !e.classes.includes("nsfw"));
-  for (const cls of classes) {
-    if (cls === "nsfw") continue;
-    entries = entries.filter((e) => matchesClass(e, cls));
-  }
-  for (const cls of query.exclude) {
-    entries = entries.filter((e) => !matchesClass(e, cls));
-  }
+  let entries = selectEntries(table, classes, query.exclude, ctx.nsfw);
 
   if (query.carrier && query.carrierKind === "unique") {
     const used = ctx.uniqueCarriers.get(query.carrier) ?? new Set();
     entries = entries.filter((e) => !used.has(formOf(e, formIndex)));
   }
 
-  if (query.carrier && query.carrierKind === "rhyme") {
-    const prev = ctx.matchCarriers.get(query.carrier);
-    if (prev?.pron) {
-      const want = rhymeKey(prev.pron);
-      entries = entries.filter((e) => rhymeKey(e.pron?.[formIndex] ?? e.pron?.[0]) === want);
-    }
-  }
-
   if (entries.length === 0) return `<${query.raw}>`;
 
   const entry = ctx.rng.pick(entries);
   const value = formOf(entry, formIndex);
-  const pron = entry.pron?.[formIndex] ?? entry.pron?.[0];
 
   if (query.carrier) {
     if (query.carrierKind === "unique") {
@@ -115,8 +138,18 @@ export function resolveQuery(query: QueryNode, ctx: QueryRuntime): string {
       used.add(value);
       ctx.uniqueCarriers.set(query.carrier, used);
     } else {
-      ctx.matchCarriers.set(query.carrier, { value, classes: entry.classes, pron });
+      ctx.matchCarriers.set(query.carrier, value);
     }
   }
+
+  if (ctx.trace) {
+    ctx.trace.push({
+      table: table.name,
+      args: query.args,
+      value,
+      carrier: query.carrier,
+    });
+  }
+
   return value;
 }
