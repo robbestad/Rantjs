@@ -1,5 +1,5 @@
 import { create } from "svenjs";
-import { explain } from "rantjs";
+import { enUS, explain } from "rantjs";
 import rantjsMark from "./rantjs-mark.svg";
 import svenjsMark from "./svenjs-mark.svg";
 
@@ -36,7 +36,10 @@ function evaluate(
     return { output: "", picks: "", status: "Write a pattern first." };
   }
   try {
-    const { text, picks } = explain(pattern, { seed: parseSeed(seed) });
+    const { text, picks } = explain(pattern, {
+      seed: parseSeed(seed),
+      dictionary: enUS,
+    });
     const summary = picks
       .map((p) => (p.carrier ? `${p.table} (${p.carrier})=${p.value}` : `${p.table}=${p.value}`))
       .join(" · ");
@@ -115,6 +118,7 @@ export const App = create<Record<string, never>, DemoState>({
           <nav>
             <a href="https://github.com/robbestad/Rantjs">GitHub</a>
             <a href="https://www.npmjs.com/package/rantjs">npm</a>
+            <a href="https://rantjs-storydemo.vercel.app">Stories</a>
           </nav>
         </header>
 
@@ -242,7 +246,11 @@ export const App = create<Record<string, never>, DemoState>({
           <p>
             Rantjs 3.0 — inspired by{" "}
             <a href="https://github.com/TheBerkin/rant3">Rant</a>. Dictionary
-            compiled from Rantionary.
+            compiled from Rantionary. For a longer example, open the{" "}
+            <a href="https://rantjs-storydemo.vercel.app">
+              short story generator
+            </a>
+            .
           </p>
           <a
             className="svenjs-credit"
