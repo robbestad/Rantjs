@@ -244,9 +244,7 @@ export const App = create<Record<string, never>, DemoState>({
 
         <footer>
           <p>
-            Rantjs 3.0 — inspired by{" "}
-            <a href="https://github.com/TheBerkin/rant3">Rant</a>. Dictionary
-            compiled from Rantionary. For a longer example, open the{" "}
+            Rantjs 3.0. For a longer example, open the{" "}
             <a href="https://rantjs-storydemo.vercel.app">
               short story generator
             </a>
